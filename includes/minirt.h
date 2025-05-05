@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/05 16:50:55 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/05 17:00:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		end_mlx_loop(t_mlx_data *mlx);
 int		quit(t_mlx_data *mlx);
 int		debug_print_keycode(int keycode);
 int		handle_keypress(int keycode, t_mlx_data *mlx);
+int		handle_mouseclick(int button, int x, int y, t_mlx_data *mlx);
 
 
 
