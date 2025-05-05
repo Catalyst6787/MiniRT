@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/05 12:25:36 by lfaure           ###   ########.fr       */
+/*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
+/*   Updated: 2025/05/05 12:01:01 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#ifndef MINIRT_H
+# define MINIRT_H
 
-int	main(void)
-{
-	void *mlx = mlx_init();
-	void *mlx_win = mlx_new_window(mlx, 1920, 1080, "YOOOO");
-	mlx_pixel_put(mlx, mlx_win, 10, 10, 8029619);
-	mlx_loop(mlx);
-	(void)mlx_win;
-	return (0);
-}
+# include "libft.h"
+# include "mlx.h"
+
+#endif

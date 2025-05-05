@@ -1,9 +1,9 @@
-.SILENT:
+# .SILENT:
 
 NAME = miniRT
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./libft/includes -I ./minilibx-linux
+CFLAGS = -Wall -Wextra -Werror -I ./libft/includes -I ./minilibx-linux -I ./includes
 LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 RM = rm -f
@@ -56,5 +56,8 @@ re: fclean all
 
 valgrind: all
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
+
+norm: all
+	@norminette ./src ./includes ./libft
 
 .PHONY: all clean fclean re
