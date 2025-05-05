@@ -57,6 +57,9 @@ re: fclean all
 valgrind: all
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
 
+run: all
+	@./$(NAME)
+
 norm: all
 	@norminette ./src ./includes ./libft
 

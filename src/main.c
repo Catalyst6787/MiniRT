@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/05 15:52:48 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/05 15:55:17 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	main(void)
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, img.img, 0, 0);
 
 	mlx_loop(mlx.mlx);
-
-	mlx_clear_window(mlx.mlx, mlx.mlx_win);
-	mlx_destroy_image(mlx.mlx, mlx.img_st->img);
-	mlx.img_st->addr = NULL;
-	mlx_destroy_window(mlx.mlx, mlx.mlx_win);
-	mlx_destroy_display(mlx.mlx);
-	free(mlx.mlx);
+	quit(&mlx);
 	return (0);
 }
