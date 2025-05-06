@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 13:30:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/06 16:56:06 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 # define MINIRT_H
 
 # include "libft.h"
+# include "scene.h"
 # include "mlx.h"
 
-# define WIN_W 1920
-# define WIN_H 1080
+# include <math.h>
+
+# define WIN_W 800
+# define WIN_H 400
 # define Q 113
 # define W 119
 # define A 97
@@ -39,11 +42,6 @@ typedef struct s_mlx_data {
 	int			endian;
 	t_img_data	*img_st;
 }	t_mlx_data;
-
-
-// typedef struct s_camera_data {
-
-// }
 
 // INIT
 int		init_structure(t_mlx_data *mlx, t_img_data *img);
