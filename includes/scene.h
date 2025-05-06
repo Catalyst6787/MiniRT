@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 17:57:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/06 18:08:20 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_color {
 	double	g;
 	double	b;
 }	t_color;
+
+typedef struct s_ray {
+	t_vec	*orientation;
+	t_color	*color;
+	double	brightness;
+}	t_ray;
 
 typedef struct s_ambient
 {
