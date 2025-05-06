@@ -60,7 +60,7 @@ valgrind: all
 run: all
 	@./$(NAME)
 
-norm:0
+norm:
 	@norminette ./src ./includes ./libft
 
 .PHONY: all clean fclean re
