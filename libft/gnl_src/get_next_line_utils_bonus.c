@@ -6,25 +6,13 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/04/16 16:38:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/06 19:23:28 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_gnl_strjoin(char const *s1, char const *s2)
 {
 	size_t	totlen;
 	size_t	i;

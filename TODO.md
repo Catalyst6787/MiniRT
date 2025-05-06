@@ -11,5 +11,8 @@ Simple C ray tracer.
   - [ ] Cylinder
   - [ ] Wall
 
+- [ ] Parsing
+	- [] handle empty file
+
 ### Completed Column ✓
 - [x] Completed task title

@@ -6,14 +6,14 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:58:51 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/06 19:21:00 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
 // c is the choice of action to perform
-char	*get_stat(char *s1, int c, int fd)
+static char	*get_stat(char *s1, int c, int fd)
 {
 	static char	*stat[4096];
 
@@ -36,7 +36,7 @@ char	*get_stat(char *s1, int c, int fd)
 	return (stat[fd]);
 }
 
-char	*until_nl(char *line, int freeline)
+static char	*until_nl(char *line, int freeline)
 {
 	char			*tmp;
 	unsigned int	i;
@@ -58,7 +58,7 @@ char	*until_nl(char *line, int freeline)
 	return (NULL);
 }
 
-char	*after_nl(char *line)
+static char	*after_nl(char *line)
 {
 	unsigned int	i;
 
@@ -76,13 +76,13 @@ char	*after_nl(char *line)
 	return (NULL);
 }
 
-char	*get_next_line2(int chars_read, char *tmp, int fd)
+static char	*get_next_line2(int chars_read, char *tmp, int fd)
 {
 	if (chars_read == -1)
 		return (free(tmp), tmp = NULL, get_stat(NULL, 0, fd), NULL);
 	if (get_stat(NULL, 2, fd))
 	{
-		tmp = ft_strjoin(get_stat(NULL, 2, fd), "");
+		tmp = ft_gnl_strjoin(get_stat(NULL, 2, fd), "");
 		get_stat(NULL, 0, fd);
 	}
 	return (get_stat(NULL, 3, fd), tmp);
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	while (chars_read > 0)
 	{
 		buf[chars_read] = '\0';
-		tmp = ft_strjoin(get_stat(NULL, 2, fd), buf);
+		tmp = ft_gnl_strjoin(get_stat(NULL, 2, fd), buf);
 		if (checkline(tmp) == 2)
 			return (get_stat(after_nl(tmp), 1, fd), until_nl(tmp, 1));
 		else if (checkline(tmp) == 1)
@@ -121,7 +121,7 @@ int main(void)
 {
 	int fd;
 	fd = open("./files/variable_nls.txt", O_RDONLY);
-	
+
 	char* returnvalue;
 
 	int i = 0;
