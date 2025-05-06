@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 16:07:45 by lfaure           ###   ########.fr       */
+/*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
+/*   Updated: 2025/05/06 12:22:55 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	main(void)
+int	quit(t_mlx_data *mlx)
 {
-	t_mlx_data	mlx;
-	t_img_data	img;
-
-	if (init_structure(&mlx, &img))
-		return (perror("Structure initialisation failed"), 1);
-	if (init_events(&mlx))
-		return (perror("Event initialisation failed"), quit(&mlx), 1);
-
-	debug_aff_image(&mlx);
-	mlx_loop(mlx.mlx);
-
-	quit(&mlx);
-	return (0);
+	mlx_clear_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_image(mlx->mlx, mlx->img_st->img);
+	mlx->img_st->addr = NULL;
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	mlx_destroy_display(mlx->mlx);
+	free(mlx->mlx);
+	exit(0);
 }

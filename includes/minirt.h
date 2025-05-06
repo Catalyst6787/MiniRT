@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/05 17:00:25 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/06 13:30:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,29 @@ typedef struct s_mlx_data {
 	t_img_data	*img_st;
 }	t_mlx_data;
 
+
+// typedef struct s_camera_data {
+
+// }
+
+// INIT
+int		init_structure(t_mlx_data *mlx, t_img_data *img);
+int		init_events(t_mlx_data *mlx);
+
+// UTILS
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);
+
+// EVENTS
 int		end_mlx_loop(t_mlx_data *mlx);
-int		quit(t_mlx_data *mlx);
-int		debug_print_keycode(int keycode);
 int		handle_keypress(int keycode, t_mlx_data *mlx);
 int		handle_mouseclick(int button, int x, int y, t_mlx_data *mlx);
 
+// EXIT
+int		quit(t_mlx_data *mlx);
+
+// DEBUG
+int		debug_print_keycode(int keycode);
+void	debug_aff_image(t_mlx_data *mlx);
 
 
 #endif
