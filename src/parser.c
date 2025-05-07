@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:11:25 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 15:32:33 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:43:17 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	parse_fields(char **scene_arr, t_scene *scene)
 		else if (!ft_strncmp(scene_arr[i], "cy ", 3))
 			parse_cylinder(scene_arr[i], scene);
 		else
-			return (ft_printf("field: <%s> malformed. usage: <id> <...>"), 1);
+			return (ft_printf("field: <%s> is malformed. usage: <id> <...>\n",
+					scene_arr[i]), 1);
 		i++;
 	}
 	return (0);
