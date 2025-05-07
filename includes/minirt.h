@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 15:28:46 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:23:24 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@
 # define SPACE 32
 # define ESC 65307
 
-typedef struct s_img_data {
+typedef struct s_img_data
+{
 	void	*img;
 	char	*addr;
 }	t_img_data;
 
-typedef struct s_mlx_data {
+typedef struct s_mlx_data
+{
 	void		*mlx;
 	void		*mlx_win;
 	int			bits_per_pixel;
@@ -50,6 +52,7 @@ int		init_events(t_mlx_data *mlx);
 
 // PARSING
 int		parse(char *file_path, t_scene *scene);
+
 // PARSING TYPES
 int		parse_ambiant(char *line, t_scene *scene);
 int		parse_camera(char *line, t_scene *scene);
@@ -60,6 +63,12 @@ int		parse_cylinder(char *line, t_scene *scene);
 
 // UTILS
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);
+void	free_tab(char **arr);
+void	free_and_null(void	**ptr);
+
+//FILE UTILS
+int		check_file(char *file_path, int *fd);
+int		get_file_contents(int fd, char **file_contents);
 
 // EVENTS
 int		end_mlx_loop(t_mlx_data *mlx);

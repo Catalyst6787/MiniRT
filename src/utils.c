@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:44:30 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 15:53:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 16:06:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,19 @@ void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color)
 			"Tried to set pixel outside of window, quitting\n");
 		quit(mlx);
 	}
+}
+
+void	free_tab(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr && arr[i])
+		free(arr[i++]);
+}
+
+void	free_and_null(void	**ptr)
+{
+	free(*ptr);
+	ptr = NULL;
 }

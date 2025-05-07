@@ -3,16 +3,17 @@
 Simple C ray tracer.
 
 ### Column Name
-- [ ] Add error handling to init functions
-
 - [ ] Create Camera and iterate over pixels
 - [ ] Create scene and calculate intersections of rays and objects
   - [ ] Sphere
   - [ ] Cylinder
   - [ ] Wall
 
-- [ ] Parsing
-	- [] handle empty file
+- [] Parsing
+	- [X] handle empty file
+
+### end
+ - [ ] remove wildcard from Makefile
 
 ### Completed Column ✓
-- [x] Completed task title
+- [X] Add error handling to init functions
