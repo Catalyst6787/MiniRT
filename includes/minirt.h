@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 18:37:11 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 15:28:46 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ int		init_events(t_mlx_data *mlx);
 
 // PARSING
 int		parse(char *file_path, t_scene *scene);
+// PARSING TYPES
+int		parse_ambiant(char *line, t_scene *scene);
+int		parse_camera(char *line, t_scene *scene);
+int		parse_light(char *line, t_scene *scene);
+int		parse_sphere(char *line, t_scene *scene);
+int		parse_plane(char *line, t_scene *scene);
+int		parse_cylinder(char *line, t_scene *scene);
 
 // UTILS
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);
