@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:11:25 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 13:46:55 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 14:04:49 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ int	get_file_contents(int fd, char **file_contents)
 			tmp = *file_contents;
 		*file_contents = ft_strjoin(*file_contents, buf);
 		if (tmp)
-		{
 			free(tmp);
-			tmp = NULL;
-		}
+		tmp = NULL;
 		free(buf);
 		buf = get_next_line(fd);
 	}
@@ -62,15 +60,31 @@ int	parse(char *file_path, t_scene *scene)
 {
 	int		fd;
 	char	*file_contents;
+	char	**scene_arr;
+	int		i;
 
 	fd = 0;
 	file_contents = NULL;
+	i = 0;
 	if (check_file(file_path, &fd))
 		return (1);
 	if (get_file_contents(fd, &file_contents))
 		return (close(fd),
 			ft_printf("Error\nFile: <%s> is empty\n", file_path), 1);
-	ft_printf(file_contents);
+	scene_arr = ft_split(file_contents, '\n');
+	ft_printf("file contents:\n%s\n", file_contents);
+	while(scene_arr && scene_arr[i])
+	{
+		ft_printf("row%d: %s\n", i, scene_arr[i]);
+		i++;
+	}
+	i = 0;
+	while (scene_arr && scene_arr[i])
+	{
+		free(scene_arr[i]);
+		i++;
+	}
+	free(scene_arr);
 	close(fd);
 	free(file_contents);
 	return (0);

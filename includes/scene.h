@@ -6,32 +6,36 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 18:08:20 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/07 13:55:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-typedef struct s_vec {
+typedef struct s_vec
+{
 	double	x;
 	double	y;
 	double	z;
 }	t_vec;
 
-typedef struct s_position {
+typedef struct s_position
+{
 	double	x;
 	double	y;
 	double	z;
 }	t_position;
 
-typedef struct s_color {
+typedef struct s_color
+{
 	double	r;
 	double	g;
 	double	b;
 }	t_color;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	t_vec	*orientation;
 	t_color	*color;
 	double	brightness;
@@ -43,14 +47,15 @@ typedef struct s_ambient
 	t_color	*color;
 }	t_ambient;
 
-
-typedef struct s_camera {
+typedef struct s_camera
+{
 	t_position		*pos;
 	t_vec			*orientation;
 	unsigned int	fov;
 }	t_camera;
 
-typedef struct s_light {
+typedef struct s_light
+{
 	t_position	*pos;
 	double		brightness;
 	t_color		*color;
@@ -88,8 +93,5 @@ typedef struct scene
 	t_plane		**planes;
 	t_cylinder	**cylinders;
 }	t_scene;
-
-
-
 
 #endif
