@@ -3,7 +3,7 @@
 NAME = miniRT
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I ./libft/includes -I ./minilibx-linux -I ./includes -g # remove -g when done debbuging
+CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g # remove -g when done debbuging
 LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 RM = rm -f

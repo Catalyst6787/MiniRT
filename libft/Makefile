@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 16:03:02 by lfaure            #+#    #+#              #
-#    Updated: 2025/05/05 11:43:35 by lfaure           ###   ########.fr        #
+#    Updated: 2025/05/07 18:20:17 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PRINTF_PATH = ./printf_src
 HEADER = ./includes
 OBJ_PATH = ./obj
 
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -Wpedantic -pedantic-errors
 OPTION = -c -I $(HEADER)
 
 SRCS = \
