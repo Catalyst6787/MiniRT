@@ -1,13 +1,13 @@
 # --SCENE.RT--
 # light brightness ratio, RGB color 0-255
 A 0.2						255,255,255
-# xyz coordinates, 3d orientation vec, horizontal fov
+# xyz coordinates, 3d dir vec, horizontal fov
 C -50,0,20			0,0,1				70
 # xyz coordinates, light brightness ratio, RGB colors
 L -40,0,30			0.7						255,255,255
 # xyz coordinates, sphere diameter, RGB colors
 sp 0,0,20			20				255,0,0
-# xyz coordinates, 3d orientation vec, RGB colors
+# xyz coordinates, 3d dir vec, RGB colors
 pl 0,0,0			0,1.0,0				255,0,225
 # xyz coordinates, 3d orientatio vec, cylinder diameter, cylinder height, RGB colors
 cy 50.0,0.0,20.6	0,0,1.0				14.2				21.42			10,0,25

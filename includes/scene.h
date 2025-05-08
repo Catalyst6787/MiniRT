@@ -6,26 +6,19 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 16:58:36 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/08 13:06:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-typedef struct s_vec
+typedef struct s_vec3
 {
 	double	x;
 	double	y;
 	double	z;
-}	t_vec;
-
-typedef struct s_position
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_position;
+}	t_vec3;
 
 typedef struct s_color
 {
@@ -36,8 +29,8 @@ typedef struct s_color
 
 typedef struct s_ray
 {
-	t_vec	*origin;
-	t_vec	*orientation;
+	t_vec3	*origin;
+	t_vec3	*dir;
 	t_color	*color;
 	double	brightness;
 }	t_ray;
@@ -50,36 +43,36 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_position		*pos;
-	t_vec			*orientation;
+	t_vec3			*pos;
+	t_vec3			*dir;
 	unsigned int	fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_position	*pos;
+	t_vec3		*pos;
 	double		brightness;
 	t_color		*color;
 }	t_light;
 
 typedef struct s_sphere
 {
-	t_position	*pos;
+	t_vec3		*pos;
 	double		diameter;
 	t_color		*color;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_position	*pos;
-	t_vec		*orientation;
+	t_vec3		*pos;
+	t_vec3		*dir;
 	t_color		*color;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_position	*pos;
-	t_vec		*orientation;
+	t_vec3		*pos;
+	t_vec3		*dir;
 	double		diameter;
 	double		height;
 	t_color		*color;

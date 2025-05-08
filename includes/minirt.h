@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 16:23:24 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/08 14:18:21 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 
 # include <math.h>
 # include <fcntl.h>
+
+// DEBUG
+# include <assert.h>
 
 # define WIN_W 800
 # define WIN_H 400
