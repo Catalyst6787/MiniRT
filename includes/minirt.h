@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 14:18:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:03:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "libft.h"
 # include "scene.h"
 # include "mlx.h"
+# include "vec3.h"
+# include "ray.h"
 
 # include <math.h>
 # include <fcntl.h>

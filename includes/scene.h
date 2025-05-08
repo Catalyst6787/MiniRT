@@ -6,19 +6,12 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 13:06:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:27:19 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
-
-typedef struct s_vec3
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_vec3;
 
 typedef struct s_color
 {
@@ -26,14 +19,6 @@ typedef struct s_color
 	double	g;
 	double	b;
 }	t_color;
-
-typedef struct s_ray
-{
-	t_vec3	*origin;
-	t_vec3	*dir;
-	t_color	*color;
-	double	brightness;
-}	t_ray;
 
 typedef struct s_ambient
 {
