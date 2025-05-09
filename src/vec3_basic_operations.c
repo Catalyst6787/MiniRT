@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:07:12 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 14:27:14 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 15:40:49 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,3 @@ int	vec3_divide_inplace(t_vec3 *vec_value, const t_vec3 *to_divide_by)
 	vec_value->z /= to_divide_by->z;
 	return (0);
 }
-
-

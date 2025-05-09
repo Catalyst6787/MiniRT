@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:07:12 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 17:18:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:25:11 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ int	vec3_init(t_vec3 *vec3, const double x, const double y, const double z)
 	vec3->x = x;
 	vec3->y = y;
 	vec3->z = z;
+	return (0);
 }
 
 t_vec3	*vec3_dup_alloc(t_vec3 *to_dup)
 {
 	t_vec3	*vec3;
 
-	if (!vec3)
+	if (!to_dup)
 		return (ft_printf("vec3_dup_alloc. Error, passed NULL ptr.\n"), NULL);
 	vec3 = malloc(sizeof(t_vec3));
 	if (!vec3)
@@ -64,7 +65,9 @@ t_vec3	*vec3_dup_alloc(t_vec3 *to_dup)
 
 int	vec3_copy(t_vec3 *dest, t_vec3 *origin)
 {
-	if (!dest || !origin)
+	// assert(dest);
+	assert(origin);
+	if (!origin)
 		return (ft_printf("vec3_copy. Error, passed NULL ptr.\n"), 1);
 	dest->x = origin->x;
 	dest->y = origin->y;

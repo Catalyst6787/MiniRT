@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:58:35 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 14:25:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 15:02:14 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ double	vec3_exact_length(t_vec3 *vec3)
 	return (sqrt(vec3_length_squared(vec3)));
 }
 
-double	vec3_normalise_inplace(t_vec3 *vec3)
+void	vec3_normalise_inplace(t_vec3 *vec3)
 {
 	double	length;
 

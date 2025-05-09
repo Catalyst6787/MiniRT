@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:04:01 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 17:21:59 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:31:33 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_ray	*ray_new_alloc(t_vec3 *origin, t_vec3 *dir)
 	t_ray	*ray;
 
 	if (!origin || !dir)
-		return (ft_printf("ray_new_alloc. Error, passed NULL ptr.\n"), 1);
+		return (ft_printf("ray_new_alloc. Error, passed NULL ptr.\n"), NULL);
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (perror("Malloc error in ray_new_alloc()\n"), NULL);
@@ -42,7 +42,7 @@ t_ray	*ray_new_alloc(t_vec3 *origin, t_vec3 *dir)
 // will copy origin and dir
 int	ray_init(t_ray *ray, t_vec3 *origin, t_vec3 *dir)
 {
-	if (!ray)
+	if (!origin || !dir)
 		return (ft_printf("ray_init. Error, passed NULL ptr.\n"), 1);
 	vec3_copy(ray->origin, origin);
 	vec3_copy(ray->dir, dir);
@@ -53,12 +53,11 @@ t_ray	*ray_dup_alloc(t_ray *to_dup)
 {
 	t_ray	*ray;
 
-	if (!ray)
+	if (!to_dup)
 		return (ft_printf("ray_dup_alloc. Error, passed NULL ptr.\n"), NULL);
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (perror("Malloc error in ray_dup_alloc()\n"), NULL);
-	vec3_copy(ray->origin, to_dup->origin);
-	vec3_copy(ray->dir, to_dup->dir);
+	ray_init(ray, to_dup->origin, to_dup->dir);
 	return (ray);
 }

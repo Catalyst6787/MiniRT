@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 18:26:36 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:40:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int ac, char **av)
 	if (init_events(&mlx))
 		return (perror("Event initialisation failed"), quit(&mlx), 1);
 
-	debug_aff_image(&mlx);
+	// debug_aff_image(&mlx);
+	render_scene(&mlx, &scene);
 	mlx_loop(mlx.mlx);
 
 	quit(&mlx);

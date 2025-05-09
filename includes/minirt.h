@@ -6,17 +6,18 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 17:03:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/09 18:09:06 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include "vec3.h"
 # include "libft.h"
 # include "scene.h"
 # include "mlx.h"
-# include "vec3.h"
+
 # include "ray.h"
 
 # include <math.h>
@@ -27,6 +28,10 @@
 
 # define WIN_W 800
 # define WIN_H 400
+# define FOCAL_LEN 1.0
+# define VIEWPORT_H 2.0
+
+
 # define Q 113
 # define W 119
 # define A 97
@@ -87,5 +92,7 @@ int		quit(t_mlx_data *mlx);
 int		debug_print_keycode(int keycode);
 void	debug_aff_image(t_mlx_data *mlx);
 
+
+int		render_scene(t_mlx_data *mlx, t_scene *scene);
 
 #endif
