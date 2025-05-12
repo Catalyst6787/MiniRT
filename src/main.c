@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:53 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 17:42:29 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,16 @@ int	main(int ac, char **av)
 		return (perror("Structure initialisation failed"), 1);
 	if (init_events(&mlx))
 		return (perror("Event initialisation failed"), quit(&mlx), 1);
-	render_scene(&mlx, &scene);
-	mlx_loop(mlx.mlx);
 
+	clock_t t;
+	t = clock();
+
+	render_scene(&mlx, &scene);
+
+	t = clock() - t;
+	double time_taken = ((double)t) / CLOCKS_PER_SEC;
+	printf("rendered image in %f seconds\n", time_taken);
+	mlx_loop(mlx.mlx);
 	quit(&mlx);
 	return (0);
 }
