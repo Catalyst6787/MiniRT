@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 12:02:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:10:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define WIN_H 400
 # define FOCAL_LEN 1.0
 # define VIEWPORT_H 2.0
+# define DEBUG_PIXEL_I 10
+# define DEBUG_PIXEL_J 10
 
 
 # define Q 113
@@ -96,7 +98,7 @@ void	debug_aff_image(t_mlx_data *mlx);
 // RENDER
 int		render_scene(t_mlx_data *mlx, t_scene *scene);
 int		render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx);
-int		ray_color(const t_ray *r, t_vec3 *color);
+int		ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel);
 int		free_render(t_render *render);
 int		init_render(t_render *render);
 
@@ -107,6 +109,7 @@ int		set_pixel_center(t_vec3	*pixel_center,
 			int i, int j, t_render	*render);
 int		set_ray_direction(t_vec3 *ray_direction,
 			t_render *render, t_vec3 *pixel_center);
+int		is_debug_pixel(int i, int j);
 
 
 #endif

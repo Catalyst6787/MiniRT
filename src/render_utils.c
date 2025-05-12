@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 11:48:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 11:58:19 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:10:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,12 @@ int	set_ray_direction(t_vec3 *ray_direction,
 {
 	vec3_copy(ray_direction, pixel_center);
 	vec3_substract_inplace(ray_direction, render->camera_center);
+	return (0);
+}
+
+int	is_debug_pixel(int i, int j)
+{
+	if (i == DEBUG_PIXEL_I && j == DEBUG_PIXEL_J)
+		return (1);
 	return (0);
 }

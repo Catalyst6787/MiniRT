@@ -51,12 +51,38 @@ int	free_render(t_render *render)
 	return (0);
 }
 
-int	ray_color(const t_ray *r, t_vec3 *color)
+int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
 {
-	(void)r;
-	color->x = 1;
-	color->y = 1;
-	color->z = 1;
+	t_vec3	*unit_dir;
+	double	a;
+	t_vec3	*blue;
+
+
+	assert(r);
+	assert(r->dir);
+	assert(r->origin);
+	assert(color);
+
+	blue = vec3_new_alloc(0.5, 0.7, 1.0);
+	unit_dir = vec3_dup_alloc(r->dir);
+	a = 0.5 * (unit_dir->y + 1.0);
+	vec3_normalise_inplace(unit_dir);
+	if (is_debug_pixel)
+	{
+		ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
+		ft_printf("t_ray:\n	origin: ");
+		vec3_debug_print(r->origin);
+		ft_printf("t_ray:\n	direction: ");
+		vec3_debug_print(r->dir);
+	}
+	vec3_multiply_by_inplace(color, 1.0 - a);
+	vec3_multiply_by_inplace(blue, a);
+
+	vec3_add_inplace(color, blue);
+
+	free(unit_dir);
+	free(blue);
+	(void)is_debug_pixel;
 	return (0);
 }
 
@@ -69,13 +95,14 @@ int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx)
 	t_vec3	color;
 
 	ray = ray_default_alloc();
+	vec3_init(&color, 1, 1, 1);
 	vec3_init(&pixel_center, 0, 0, 0);
 	vec3_init(&ray_direction, 0, 0, 0);
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
 	ray_init(ray, render->camera_center, &ray_direction);
 
-	ray_color(ray, &color);
+	ray_color(ray, &color, is_debug_pixel(i, j));
 	my_mlx_pixel_put(mlx, i, j, get_color_as_int(&color));
 	free(ray->dir);
 	free(ray->origin);
@@ -98,7 +125,7 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 	init_render(render);
 	while (j < WIN_H)
 	{
-		ft_printf("Scanlines remaining: %d\n", WIN_H - j);
+		// ft_printf("Scanlines remaining: %d\n", WIN_H - j);
 		while (i < WIN_W)
 			render_pixel(i++, j, render, mlx);
 		i = 0;
