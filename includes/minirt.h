@@ -6,19 +6,23 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 16:06:13 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 17:09:21 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "vec3.h"
 # include "libft.h"
+
+# include "vec3.h"
+# include "ray.h"
+# include "sphere.h"
 # include "scene.h"
 # include "mlx.h"
 
-# include "ray.h"
+
+
 
 # include <math.h>
 # include <fcntl.h>

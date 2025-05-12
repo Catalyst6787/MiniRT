@@ -6,12 +6,14 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:56:45 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 15:34:03 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 17:08:28 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
+
+# include "minirt.h"
 
 typedef union s_vec3
 {

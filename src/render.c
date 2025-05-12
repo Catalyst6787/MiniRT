@@ -53,10 +53,13 @@ int	free_render(t_render *render)
 
 int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
 {
-	t_vec3	*unit_dir;
-	double	a;
-	t_vec3	*blue;
+	t_vec3		*unit_dir;
+	double		a;
+	t_vec3		*blue;
+	t_sphere	*sphere;
 
+	sphere = sphere_new_alloc(vec3_new_alloc(0, 0, -1),
+			0.5, vec3_new_alloc(1, 0, 0));
 
 	assert(r);
 	assert(r->dir);
@@ -80,8 +83,14 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
 
 	vec3_add_inplace(color, blue);
 
+	if (hit_sphere(sphere, r))
+		vec3_init(color, 1, 0, 0);
+
 	free(unit_dir);
 	free(blue);
+	free(sphere->pos);
+	free(sphere->color);
+	free(sphere);
 	(void)is_debug_pixel;
 	return (0);
 }

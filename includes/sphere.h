@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.h                                              :+:      :+:    :+:   */
+/*   sphere.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 17:02:57 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 17:07:57 by lfaure           ###   ########.fr       */
+/*   Created: 2025/05/12 16:51:40 by lfaure            #+#    #+#             */
+/*   Updated: 2025/05/12 17:15:29 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RAY_H
-# define RAY_H
+#ifndef SPHERE_H
+# define SPHERE_H
 
 # include "minirt.h"
 
-typedef struct s_ray
+typedef struct s_sphere
 {
-	t_vec3	*origin;
-	t_vec3	*dir;
-	// t_vec3	*color;
-	// double	brightness;
-}	t_ray;
+	t_vec3		*pos;
+	double		diameter;
+	t_vec3		*color;
+}	t_sphere;
 
-t_ray	*ray_default_alloc(void);
-t_ray	*ray_new_alloc(t_vec3 *origin, t_vec3 *dir);
-int		ray_init(t_ray *ray, t_vec3 *origin, t_vec3 *dir);
-t_ray	*ray_dup_alloc(t_ray *to_dup);
-t_vec3	*ray_position_at(t_ray *ray, const double t);
-
+int			hit_sphere(const t_sphere *sphere, const t_ray *ray);
+t_sphere	*sphere_new_alloc(t_vec3 *pos, double diameter, t_vec3 *color);
 
 #endif

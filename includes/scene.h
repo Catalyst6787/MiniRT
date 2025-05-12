@@ -6,12 +6,14 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 15:42:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 17:08:06 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
+
+# include "minirt.h"
 
 typedef struct s_ambient
 {
@@ -32,13 +34,6 @@ typedef struct s_light
 	double		brightness;
 	t_vec3		*color;
 }	t_light;
-
-typedef struct s_sphere
-{
-	t_vec3		*pos;
-	double		diameter;
-	t_vec3		*color;
-}	t_sphere;
 
 typedef struct s_plane
 {
