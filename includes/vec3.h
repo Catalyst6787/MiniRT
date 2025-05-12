@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:56:45 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/09 15:43:09 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 12:00:34 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ double	vec3_length_squared(t_vec3 *vec3);
 double	vec3_exact_length(t_vec3 *vec3);
 void	vec3_normalise_inplace(t_vec3 *vec3);
 double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v);
+
 
 #endif

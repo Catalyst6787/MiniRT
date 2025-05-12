@@ -6,11 +6,35 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:44:30 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 16:06:40 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 11:49:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	get_color_as_int(t_vec3 *color)
+{
+	int	red;
+	int	green;
+	int	blue;
+
+	red = (int)(color->x * 255.0);
+	green = (int)(color->y * 255.0);
+	blue = (int)(color->z * 255.0);
+	if (red > 255)
+		red = 255;
+	if (red < 0)
+		red = 0;
+	if (green > 255)
+		green = 255;
+	if (green < 0)
+		green = 0;
+	if (blue > 255)
+		blue = 255;
+	if (blue < 0)
+		blue = 0;
+	return ((red << 16) | (green << 8) | blue);
+}
 
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color)
 {

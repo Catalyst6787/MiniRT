@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/09 18:40:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 11:43:53 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	main(int ac, char **av)
 	t_img_data	img;
 	t_scene		scene;
 
+	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
+	ft_memset(&img, '\0', sizeof(t_img_data));
+	ft_memset(&scene, '\0', sizeof(t_scene));
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 	if (parse(av[1], &scene))
@@ -28,8 +31,6 @@ int	main(int ac, char **av)
 		return (perror("Structure initialisation failed"), 1);
 	if (init_events(&mlx))
 		return (perror("Event initialisation failed"), quit(&mlx), 1);
-
-	// debug_aff_image(&mlx);
 	render_scene(&mlx, &scene);
 	mlx_loop(mlx.mlx);
 

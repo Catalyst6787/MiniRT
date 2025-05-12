@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/09 18:09:06 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 12:02:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		parse_cylinder(char *line, t_scene *scene);
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);
 void	free_tab(char **arr);
 void	free_and_null(void	**ptr);
+int		get_color_as_int(t_vec3 *color);
 
 //FILE UTILS
 int		check_file(char *file_path, int *fd);
@@ -92,7 +93,20 @@ int		quit(t_mlx_data *mlx);
 int		debug_print_keycode(int keycode);
 void	debug_aff_image(t_mlx_data *mlx);
 
-
+// RENDER
 int		render_scene(t_mlx_data *mlx, t_scene *scene);
+int		render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx);
+int		ray_color(const t_ray *r, t_vec3 *color);
+int		free_render(t_render *render);
+int		init_render(t_render *render);
+
+// RENDER UTILS
+int		set_viewport_upper_left(t_render *render);
+int		set_pixel00_loc(t_render *render);
+int		set_pixel_center(t_vec3	*pixel_center,
+			int i, int j, t_render	*render);
+int		set_ray_direction(t_vec3 *ray_direction,
+			t_render *render, t_vec3 *pixel_center);
+
 
 #endif
