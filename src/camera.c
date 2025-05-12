@@ -68,6 +68,27 @@ int	init_render(t_render *render)
 	return (0);
 }
 
+int	free_render(t_render *render)
+{
+	if (!render)
+		return (ft_printf("Error. free_render: got passed null pointer"), 1);
+	free(render->camera_center);
+	render->camera_center = NULL;
+	free(render->viewport_u);
+	render->viewport_u = NULL;
+	free(render->viewport_v);
+	render->viewport_v = NULL;
+	free(render->pixel_delta_u);
+	render->pixel_delta_u = NULL;
+	free(render->pixel_delta_v);
+	render->pixel_delta_v = NULL;
+	free(render->viewport_upper_left);
+	render->viewport_upper_left = NULL;
+	free(render->pixel00_loc);
+	render->pixel00_loc = NULL;
+	return (0);
+}
+
 int	set_pixel_center(t_vec3	*pixel_center, int i, int j, t_render	*render)
 {
 	t_vec3	pixel_delta_u;
@@ -146,15 +167,17 @@ int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx)
 
 int	render_scene(t_mlx_data *mlx, t_scene *scene)
 {
-	(void)scene;
-	int			j = 0;
-	int			i = 0;
+	int			j;
+	int			i;
 	t_render	*render;
 
+	j = 0;
+	i = 0;
+	(void)scene;
 	render = malloc(sizeof(t_render));
 	if (!render)
 		return (perror("Malloc error in render_scene"), 1);
-	// ft_memset(render, '\0', sizeof(t_render));
+	ft_memset(render, '\0', sizeof(t_render));
 	init_render(render);
 	while (j < WIN_H)
 	{
@@ -168,5 +191,7 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 		j++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
+	free_render(render);
+	free_and_null((void **)&render);
 	return (0);
 }
