@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:44:30 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 11:49:25 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:35:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	get_color_as_int(t_vec3 *color)
 	int	green;
 	int	blue;
 
-	red = (int)(color->x * 255.0);
-	green = (int)(color->y * 255.0);
-	blue = (int)(color->z * 255.0);
+	red = (int)(color->r * 255.0);
+	green = (int)(color->g * 255.0);
+	blue = (int)(color->b * 255.0);
 	if (red > 255)
 		red = 255;
 	if (red < 0)

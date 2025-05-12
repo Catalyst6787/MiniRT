@@ -6,18 +6,27 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 16:56:45 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 15:01:52 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:34:03 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
 
-typedef struct s_vec3
+typedef union s_vec3
 {
-	double	x;
-	double	y;
-	double	z;
+	struct
+	{
+		double	x;
+		double	y;
+		double	z;
+	};
+	struct
+	{
+		double	r;
+		double	g;
+		double	b;
+	};
 }	t_vec3;
 
 // CREATE
@@ -48,6 +57,6 @@ void	vec3_normalise_inplace(t_vec3 *vec3);
 double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v);
 
 // UTILS
-int	vec3_debug_print(t_vec3 *vec3);
+int		vec3_debug_print(t_vec3 *vec3);
 
 #endif
