@@ -6,24 +6,17 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 15:37:19 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:42:08 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCENE_H
 # define SCENE_H
 
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}	t_color;
-
 typedef struct s_ambient
 {
 	double	brightness;
-	t_color	*color;
+	t_vec3	*color;
 }	t_ambient;
 
 typedef struct s_camera
@@ -37,21 +30,21 @@ typedef struct s_light
 {
 	t_vec3		*pos;
 	double		brightness;
-	t_color		*color;
+	t_vec3		*color;
 }	t_light;
 
 typedef struct s_sphere
 {
 	t_vec3		*pos;
 	double		diameter;
-	t_color		*color;
+	t_vec3		*color;
 }	t_sphere;
 
 typedef struct s_plane
 {
 	t_vec3		*pos;
 	t_vec3		*dir;
-	t_color		*color;
+	t_vec3		*color;
 }	t_plane;
 
 typedef struct s_cylinder
@@ -60,7 +53,7 @@ typedef struct s_cylinder
 	t_vec3		*dir;
 	double		diameter;
 	double		height;
-	t_color		*color;
+	t_vec3		*color;
 }	t_cylinder;
 
 typedef struct s_render

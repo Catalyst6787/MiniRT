@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 17:02:57 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/09 15:12:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:41:03 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ typedef struct s_ray
 {
 	t_vec3	*origin;
 	t_vec3	*dir;
-	// t_color	*color;
+	// t_vec3	*color;
 	// double	brightness;
 }	t_ray;
 
