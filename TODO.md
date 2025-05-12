@@ -14,6 +14,7 @@ Simple C ray tracer.
 
 ### end
  - [ ] remove wildcard from Makefile
+ - [ ] remove all asserts
 
 ### Completed Column ✓
 - [X] Add error handling to init functions

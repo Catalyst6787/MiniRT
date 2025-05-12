@@ -67,7 +67,7 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
 	unit_dir = vec3_dup_alloc(r->dir);
 	a = 0.5 * (unit_dir->y + 1.0);
 	vec3_normalise_inplace(unit_dir);
-	if (is_debug_pixel)
+	if (DEBUG && is_debug_pixel)
 	{
 		ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
 		ft_printf("t_ray:\n	origin: ");
@@ -125,7 +125,8 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 	init_render(render);
 	while (j < WIN_H)
 	{
-		// ft_printf("Scanlines remaining: %d\n", WIN_H - j);
+		if (DEBUG)
+			ft_printf("Scanlines remaining: %d\n", WIN_H - j);
 		while (i < WIN_W)
 			render_pixel(i++, j, render, mlx);
 		i = 0;
