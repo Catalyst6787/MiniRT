@@ -1,8 +1,7 @@
-- [ ] add error handling to init functions
 # MiniRT
 Simple C ray tracer.
 
-### Column Name
+### basic
 - [X] Create Camera and iterate over pixels
 - [ ] Create scene and calculate intersections of rays and objects
   - [ ] Sphere
@@ -16,6 +15,9 @@ Simple C ray tracer.
 
 - [] Parsing
 	- [X] handle empty file
+
+- [ ] add double_is_equal() using epsilon
+- [ ] add vec3_is_equal() aswell
 
 ### end
  - [ ] remove wildcard from Makefile
