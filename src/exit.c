@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 17:28:22 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 00:21:49 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ void	print_exit_info(char *str)
 	// 	ft_putstr_fd("--------------------------\n\n", STDERR_FILENO );
 }
 
-int	quit(t_mlx_data *mlx)
+int	quit(t_minirt *minirt, char *str)
 {
-	// print_exit_info(str);
-	mlx_clear_window(mlx->mlx, mlx->mlx_win);
-	mlx_destroy_image(mlx->mlx, mlx->img_st->img);
-	mlx->img_st->addr = NULL;
-	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-	mlx_destroy_display(mlx->mlx);
-	free(mlx->mlx);
+	print_exit_info(str);
+	mlx_clear_window(minirt->mlx->mlx, minirt->mlx->mlx_win);
+	mlx_destroy_image(minirt->mlx->mlx, minirt->mlx->img_st->img);
+	minirt->mlx->img_st->addr = NULL;
+	mlx_destroy_window(minirt->mlx->mlx, minirt->mlx->mlx_win);
+	// mlx_destroy_display(mlx->mlx);
+	free(minirt->mlx->mlx);
+	CLOSE_DEBUG_FD;
 	exit(0);
 }

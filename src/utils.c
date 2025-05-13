@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 14:44:30 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 15:35:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 00:31:45 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,19 @@ int	get_color_as_int(t_vec3 *color)
 	return ((red << 16) | (green << 8) | blue);
 }
 
-void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color)
+void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 {
 	char	*dst;
 
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
-		dst = mlx->img_st->addr + (y * mlx->line_length + x
-				* (mlx->bits_per_pixel / 8));
+		dst = minirt->mlx->img_st->addr + (y * minirt->mlx->line_length + x
+				* (minirt->mlx->bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 	else
 	{
-		ft_printf("Error! my_mlx_pixel_put: %s",
-			"Tried to set pixel outside of window, quitting\n");
-		quit(mlx);
+		quit(minirt, PIXEL_PUT_ERR);
 	}
 }
 

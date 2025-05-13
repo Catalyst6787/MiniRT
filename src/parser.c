@@ -1,7 +1,7 @@
 
 #include "minirt.h"
 
-void	count_element(t_minirt *minirt, t_scene *scene)
+void	count_elements(t_scene *scene)
 {
 	int	i;
 
@@ -38,7 +38,6 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 	c = 0;
 	p = 0;
 	cursor = 0;
-
 	while (scene->buffer[cursor])
 	{
 		while (scene->buffer[cursor]
@@ -53,6 +52,7 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 		if (scene->buffer[cursor] == 's')
 			if (scene->buffer[++cursor] == 'p')
 				s += parse_sphere(minirt, scene, scene->spheres[s], &cursor);
+		// printf("Debug 6\n");
 		if (scene->buffer[cursor] == 'p')
 			if (scene->buffer[++cursor] == 'l')
 				p += parse_plane(minirt, scene, scene->planes[p], &cursor);
@@ -60,6 +60,7 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 			if (scene->buffer[++cursor] == 'y')
 				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
 	}
+	printf("Debug 2\n");
 	// print_scene_data(minirt);
 	/* maybe add check in the set*/
 	/* should work if buffer_data checks correctly done*/
@@ -68,39 +69,39 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 void	close_fd_check(t_minirt *minirt, int fd)
 {
 	if (close(fd) == -1)
-		exit_program(minirt, CLOSING_FILE_ERR);
+		quit(minirt, CLOSING_FILE_ERR);
 }
 
 void	set_scene_buffer(t_minirt *minirt, char *file_path)
 {
-	char	buffer[BUFFER_SIZE];
+	char	buffer[BS];
 	int		fd;
 	int		file_len;
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		exit_program(minirt, FILE_OPEN_ERR);
-	file_len = read(fd, buffer, BUFFER_SIZE);
+		quit(minirt, FILE_OPEN_ERR);
+	file_len = read(fd, buffer, BS);
 	close_fd_check(minirt, fd);
 	if (file_len == -1)
-		exit_program(minirt, READ_ERR);
+		quit(minirt, READ_ERR);
 	minirt->scene->buffer = malloc(sizeof(char) * (file_len + 1));
 	if (!minirt->scene->buffer)
-		exit_program(minirt, MALLOC_ERR);
+		quit(minirt, MALLOC_ERR);
 	ft_strlcpy(minirt->scene->buffer, buffer, file_len);
 }
 
-void	alloc_elemens(t_minirt *minirt, t_scene *scene)
+void	alloc_elements(t_minirt *minirt, t_scene *scene)
 {
-	scene->spheres = malloc(sizeof(t_sphere) * scene->nb_sphere); 
+	scene->spheres = malloc(sizeof(t_sphere) * scene->nb_sphere);
 	if (!scene->spheres && scene->nb_sphere)    // 2nd condition here to difference malloc error from no element and tests
-		quit(minirt->mlx);    //change that to quit(minirt, MALLOC_ERR)
+		quit(minirt, MALLOC_ERR);
 	scene->planes = malloc(sizeof(t_plane) * scene->nb_plane);
 	if (!scene->planes && scene->nb_plane)
-		quit(minirt->mlx);    //change that to quit(minirt, MALLOC_ERR)
+		quit(minirt, MALLOC_ERR);
 	scene->cylinders = malloc(sizeof(t_cylinder) * scene->nb_cylinder);
 	if (!scene->cylinders && scene->nb_cylinder)
-	quit(minirt->mlx);      //change that to quit(minirt, MALLOC_ERR)
+		quit(minirt, MALLOC_ERR);
 }
 
 
@@ -108,9 +109,9 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	check_file_name(minirt, file_path);
 	set_scene_buffer(minirt, file_path);
-	// print_scene(minirt, 1);
+	print_scene(minirt, 1);
 	check_characters_validity(minirt);
-	count_elements(minirt, minirt->scene);
+	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
 	parse_data(minirt, minirt->scene); /* current 2 */
@@ -119,6 +120,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	print_scene_ok_message();
 	// fill_img_data(minirt);
 	print_scene_data(minirt);
+	printf("CP3\n");
 }
 
 

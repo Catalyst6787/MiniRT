@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:27:48 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 17:55:26 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 00:07:05 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_list
 
 double	ft_atof(char *str);
 int		ft_isspace(int c);
+int		ft_is_char_in_string(const char *s, char c);
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

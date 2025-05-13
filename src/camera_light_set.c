@@ -8,10 +8,12 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]))
 		i++;
+	printf("Debug 1\n");
 	scene->ambient->brightness = ato_buffer(&scene->buffer[i], &i, ' ', 'f');
-	scene->ambient->color->r = (int)ato_buffer(&scene->buffer[i], &i, ',', 'i');
-	scene->ambient->color->b = (int)ato_buffer(&scene->buffer[i], &i, ',', 'i');
-	scene->ambient->color->g = (int)ato_buffer(&scene->buffer[i], &i, '\n', 'i');
+	printf("Debug 2\n");
+	scene->ambient->color->r = ato_buffer(&scene->buffer[i], &i, ',', 'i');
+	scene->ambient->color->b = ato_buffer(&scene->buffer[i], &i, ',', 'i');
+	scene->ambient->color->g = ato_buffer(&scene->buffer[i], &i, '\n', 'i');
 	*cursor = i;
 	return (1);
 	//check
@@ -49,9 +51,9 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->light->pos->y = ato_buffer(&scene->buffer[i], &i, ',', 'f');
 	scene->light->pos->z = ato_buffer(&scene->buffer[i], &i, ' ', 'f');
 	scene->light->brightness = ato_buffer(&scene->buffer[i], &i, ' ', 'f');
-	scene->light->color->r = (int)ato_buffer(&scene->buffer[i], &i, ',', 'i');
-	scene->light->color->g = (int)ato_buffer(&scene->buffer[i], &i, ',', 'i');
-	scene->light->color->b = (int)ato_buffer(&scene->buffer[i], &i, '\n', 'i');
+	scene->light->color->r = ato_buffer(&scene->buffer[i], &i, ',', 'i');
+	scene->light->color->g = ato_buffer(&scene->buffer[i], &i, ',', 'i');
+	scene->light->color->b = ato_buffer(&scene->buffer[i], &i, '\n', 'i');
 	*cursor = i;
 	return (1);
 	//check

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:23:59 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 12:30:28 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 00:34:21 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	end_mlx_loop(t_mlx_data *mlx)
 {
-	mlx_loop_end(mlx->mlx);
+	(void) mlx;
+	// mlx_loop_end(mlx->mlx);
 	return (0);
 }
 

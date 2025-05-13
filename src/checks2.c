@@ -16,8 +16,8 @@ void	check_characters_validity(t_minirt *minirt)
 		{
 			while (scene[i] && ft_isspace(scene[i]))
 				i++;
-			if (!is_char_in_string(alpha_set, scene[i]))
-				exit_program(minirt, SCENE_WRONG_CHAR_ERR);
+			if (!ft_is_char_in_string(alpha_set, scene[i]))
+				quit(minirt, SCENE_WRONG_CHAR_ERR);
 		}
 		char_error_check(minirt, scene[i], alpha_set, sign_set);
 		/* check if too much letter contained in alpha set (for example 3 p andonly two l/s)*/

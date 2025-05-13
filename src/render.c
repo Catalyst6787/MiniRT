@@ -85,7 +85,7 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 }
 
 // STACK ALLOC to go faster, change to heap if overflow.
-int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphere)
+int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sphere)
 {
 	t_vec3	pixel_center;
 	t_vec3	ray_direction;
@@ -106,11 +106,11 @@ int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphe
 	ray_init(&ray, render->camera_center, &ray_direction);
 
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
-	my_mlx_pixel_put(mlx, i, j, get_color_as_int(&color));
+	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
 	return (0);
 }
 
-int	render_scene(t_mlx_data *mlx, t_scene *scene)
+int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 {
 	int			j;
 	int			i;
@@ -131,7 +131,7 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 		if (DEBUG)
 			ft_printf("Scanlines remaining: %d\n", WIN_H - j);
 		while (i < WIN_W)
-			render_pixel(i++, j, render, mlx, sphere);
+			render_pixel(i++, j, render, minirt, sphere);
 		i = 0;
 		j++;
 	}

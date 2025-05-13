@@ -23,8 +23,11 @@
 
 # define MLX_ERR "Error : mlx initialization failed\n"
 # define WINDOW_ERR "Error : mlx window initialization failed\n"
+# define WIN_SIZE_ERR "Window sizes less than 10x10 are unsupported\n"
+
 # define IMAGE_ERR "Error : mlx image initialization failed\n"
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
+# define PIXEL_PUT_ERR "Error! my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
 
 // # define NO_SPERE_WARNING
 // # define NO_PLANE_WARNING

@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"minirt.h": "c",
-		"errors.h": "c"
+		"errors.h": "c",
+		"mlx.h": "c",
+		"vec3.h": "c"
 	}
 }

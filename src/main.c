@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 18:08:14 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 00:45:34 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_mlx_data	mlx;
 	t_img_data	img;
 	t_scene		scene;
-	
+
 	t_minirt	minirt;
 
 	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
@@ -31,25 +31,23 @@ int	main(int ac, char **av)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 
 	parse_scene(&minirt, av[1]);
-	// if (parse(av[1], &scene))
-	// 	return (1);
 	if (WIN_H < 10 || WIN_W < 10)
-		return (ft_printf("Window sizes less than 10x10 are unsupported\n"), 1);
+		quit(&minirt, WIN_SIZE_ERR);
 	if (init_structure(&mlx, &img))
-		return (perror("Structure initialisation failed"), 1);
-	if (init_events(&mlx))
-		return (perror("Event initialisation failed"), quit(&mlx), 1);
+		quit(&minirt, MLX_ERR);
+	if (init_events(&mlx))  //?
+		quit(&minirt,"Event initialisation failed\n");
 
 	clock_t t;
 	t = clock();
 
-	render_scene(&mlx, &scene);
+	render_scene(&minirt, &mlx, &scene);
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
 	printf("rendered image in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
-	quit(&mlx);
 	CLOSE_DEBUG_FD;
+	quit(&minirt, "Quiting program\n");
 	return (0);
 }

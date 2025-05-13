@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:24:54 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 16:06:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 00:32:51 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	debug_print_keycode(int keycode)
 	return (0);
 }
 
-void	debug_aff_image(t_mlx_data *mlx)
+void	debug_aff_image(t_minirt *minirt, t_mlx_data *mlx)
 {
 	int		x;
 	int		y;
@@ -37,7 +37,7 @@ void	debug_aff_image(t_mlx_data *mlx)
 			green = (double)y / (WIN_H - 1);
 			blue = 0.0;
 			color = ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
-			my_mlx_pixel_put(mlx, x, y, color);
+			my_mlx_pixel_put(minirt, x, y, color);
 			x++;
 		}
 		x = 0;
