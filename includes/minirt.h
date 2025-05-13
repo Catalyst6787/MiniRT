@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 11:27:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/13 16:52:33 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,36 @@
 # include "sphere.h"
 # include "scene.h"
 # include "mlx.h"
+
+/* ADDED BY ALEX */
+
+
+# include "errors.h"
+# include <sys/errno.h>
+# include <stdbool.h>
+
+
+typedef struct s_minirt
+{
+	t_mlx_data	*mlx;
+	t_scene		*scene;
+	t_img_data	*img;
+}				t_minirt;
+
+
+# define BUFFER_SIZE 4096
+# define SPACE_SET = " 	\n"
+
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define BLUE "\033[34m"
+# define COLOR_RESET "\033[0m"
+
+
+
+
+
+/* ___________ */
 
 
 
@@ -62,12 +92,16 @@ typedef struct s_mlx_data
 	t_img_data	*img_st;
 }	t_mlx_data;
 
+
+
+
+
 // INIT
 int		init_structure(t_mlx_data *mlx, t_img_data *img);
 int		init_events(t_mlx_data *mlx);
 
 // PARSING
-int		parse(char *file_path, t_scene *scene);
+void	parse_scene(t_minirt *minirt, char *file_path);
 
 // PARSING TYPES
 int		parse_ambiant(char *line, t_scene *scene);
