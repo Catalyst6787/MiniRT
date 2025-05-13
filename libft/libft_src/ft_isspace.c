@@ -1,51 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/11 11:49:15 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/05/13 17:48:17 by alvan-de         ###   ########.fr       */
+/*   Created: 2024/10/01 11:45:43 by alvan-de          #+#    #+#             */
+/*   Updated: 2025/04/11 02:11:12 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_intlen(int n)
+int	ft_isspace(int c)
 {
-	int	i;
-
-	i = 0;
-	if (n <= 0)
-	{
-		n = -n;
-		i++;
-	}
-	while (n != 0)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i);
-}
-
-double	ft_atof(char *str)
-{
-	double	right;
-	double	result;
-	int		i;
-	int		len;
-
-	result = ft_atoi(str);
-	while (*str != '.')
-		str++;
-	str++;
-	right = ft_atoi(str);
-	len = ft_intlen((int)right);
-	i = -1;
-	while (++i < len)
-		right *= 0.1;
-	result += right;
-	return (result);
+	if ((9 <= c && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }

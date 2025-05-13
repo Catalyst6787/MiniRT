@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 16:03:56 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:08:14 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int	main(int ac, char **av)
 	printf("rendered image in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
 	quit(&mlx);
+	CLOSE_DEBUG_FD;
 	return (0);
 }

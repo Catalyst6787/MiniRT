@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 16:52:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:14:10 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,12 @@
 # include "errors.h"
 # include <sys/errno.h>
 # include <stdbool.h>
+# include "debug.h"
+# include <string.h>
 
 
-typedef struct s_minirt
-{
-	t_mlx_data	*mlx;
-	t_scene		*scene;
-	t_img_data	*img;
-}				t_minirt;
 
-
-# define BUFFER_SIZE 4096
+// # define BUFFER_SIZE 4096
 # define SPACE_SET = " 	\n"
 
 # define RED "\033[31m"
@@ -93,7 +88,13 @@ typedef struct s_mlx_data
 }	t_mlx_data;
 
 
-
+typedef struct s_minirt
+{
+	t_mlx_data	*mlx;
+	t_scene		*scene;
+	t_img_data	*img;
+	t_render	*render;
+}				t_minirt;
 
 
 // INIT
@@ -104,12 +105,31 @@ int		init_events(t_mlx_data *mlx);
 void	parse_scene(t_minirt *minirt, char *file_path);
 
 // PARSING TYPES
-int		parse_ambiant(char *line, t_scene *scene);
-int		parse_camera(char *line, t_scene *scene);
-int		parse_light(char *line, t_scene *scene);
-int		parse_sphere(char *line, t_scene *scene);
-int		parse_plane(char *line, t_scene *scene);
-int		parse_cylinder(char *line, t_scene *scene);
+
+int		parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int		parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
+int		parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int		parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor);
+int		parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor);
+int		parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
+
+
+void		check_file_name(t_minirt *minirt, char *file_path);
+void		check_data_validity(t_minirt *minirt);
+void		char_error_check(t_minirt *minirt,
+							char c,
+							const char *alpha_set,
+							const char *sign_set);
+void		single_elements_check(t_minirt *minirt, t_scene *scene);
+void		count_element(t_minirt *minirt, t_scene *scene);
+void		check_characters_validity(t_minirt *minirt);
+
+// int		parse_ambiant(char *line, t_scene *scene);
+// int		parse_camera(char *line, t_scene *scene);
+// int		parse_light(char *line, t_scene *scene);
+// int		parse_sphere(char *line, t_scene *scene);
+// int		parse_plane(char *line, t_scene *scene);
+// int		parse_cylinder(char *line, t_scene *scene);
 
 // UTILS
 void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);

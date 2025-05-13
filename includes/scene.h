@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 15:46:59 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:08:35 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_render
 	t_vec3	*pixel00_loc;
 }	t_render;
 
-typedef struct scene
+typedef struct s_scene
 {
 	t_ambient	*ambient;
 	t_camera	*camera;
@@ -74,12 +74,12 @@ typedef struct scene
 	t_plane		**planes;
 	t_cylinder	**cylinders;
 	char		*buffer;
-	int			amb_count;
-	int			cam_count;
-	int			light_count;
-	int			sph_count;
-	int			plan_count;
-	int			cyl_count;
+	int			nb_amb;
+	int			nb_cam;
+	int			nb_light;
+	int			nb_sphere;
+	int			nb_plane;
+	int			nb_cylinder;
 	
 }	t_scene;
 
