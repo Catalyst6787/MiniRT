@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 11:27:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/13 14:07:21 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		quit(t_mlx_data *mlx);
 // DEBUG
 int		debug_print_keycode(int keycode);
 void	debug_aff_image(t_mlx_data *mlx);
+void	debug_pixel(const t_ray *r);
 
 // RENDER
 int		render_scene(t_mlx_data *mlx, t_scene *scene);

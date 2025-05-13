@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:24:54 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 16:06:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/13 14:07:16 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ int	debug_print_keycode(int keycode)
 	return (0);
 }
 
+void	debug_pixel(const t_ray *r)
+{
+	ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
+	ft_printf("t_ray:\n	origin: ");
+	vec3_debug_print(r->origin);
+	ft_printf("t_ray:\n	direction: ");
+	vec3_debug_print(r->dir);
+}
+
 void	debug_aff_image(t_mlx_data *mlx)
 {
 	int		x;
@@ -25,7 +34,6 @@ void	debug_aff_image(t_mlx_data *mlx)
 	double	red;
 	double	green;
 	double	blue;
-	int		color;
 
 	x = 0;
 	y = 0;
@@ -36,8 +44,8 @@ void	debug_aff_image(t_mlx_data *mlx)
 			red = (double)x / (WIN_W - 1);
 			green = (double)y / (WIN_H - 1);
 			blue = 0.0;
-			color = ((int)(red * 255) << 16) | ((int)(green * 255) << 8) | (int)(blue * 255);
-			my_mlx_pixel_put(mlx, x, y, color);
+			my_mlx_pixel_put(mlx, x, y, ((int)(red * 255) << 16)
+				| ((int)(green * 255) << 8) | (int)(blue * 255));
 			x++;
 		}
 		x = 0;

@@ -61,24 +61,15 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	assert(r->dir);
 	assert(r->origin);
 	assert(color);
-
 	vec3_init(&blue, 0.5, 0.7, 1.0);
 	vec3_copy(&unit_dir, r->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
 	vec3_normalise_inplace(&unit_dir);
 	if (DEBUG && is_debug_pixel)
-	{
-		ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
-		ft_printf("t_ray:\n	origin: ");
-		vec3_debug_print(r->origin);
-		ft_printf("t_ray:\n	direction: ");
-		vec3_debug_print(r->dir);
-	}
+		debug_pixel(r);
 	vec3_multiply_by_inplace(color, 1.0 - a);
 	vec3_multiply_by_inplace(&blue, a);
-
 	vec3_add_inplace(color, &blue);
-
 	if (hit_sphere(sphere, r))
 		vec3_init(color, 1, 0, 0);
 	return (0);
@@ -104,7 +95,6 @@ int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphe
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
 	ray_init(&ray, render->camera_center, &ray_direction);
-
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(mlx, i, j, get_color_as_int(&color));
 	return (0);

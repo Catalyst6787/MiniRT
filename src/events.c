@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:23:59 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/08 12:30:28 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/13 13:30:02 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,5 @@ int	handle_mouseclick(int button, int x, int y, t_mlx_data *mlx)
 {
 	(void)mlx;
 	ft_printf("Mouseclick at: x=%d, y=%d, Button:%d\n", x, y, button);
-	// my_mlx_pixel_put(mlx, x, y, 8029619);
-	// mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
 	return (0);
 }
