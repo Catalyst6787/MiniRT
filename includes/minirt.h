@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 17:20:11 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/13 11:27:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	debug_aff_image(t_mlx_data *mlx);
 
 // RENDER
 int		render_scene(t_mlx_data *mlx, t_scene *scene);
-int		render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx);
-int		ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel);
+int		render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphere);
+int		ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
 int		free_render(t_render *render);
 int		init_render(t_render *render);
 

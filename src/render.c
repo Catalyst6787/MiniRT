@@ -51,25 +51,21 @@ int	free_render(t_render *render)
 	return (0);
 }
 
-int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
+int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere)
 {
-	t_vec3		*unit_dir;
+	t_vec3		unit_dir;
 	double		a;
-	t_vec3		*blue;
-	t_sphere	*sphere;
-
-	sphere = sphere_new_alloc(vec3_new_alloc(0, 0, -1),
-			0.5, vec3_new_alloc(1, 0, 0));
+	t_vec3		blue;
 
 	assert(r);
 	assert(r->dir);
 	assert(r->origin);
 	assert(color);
 
-	blue = vec3_new_alloc(0.5, 0.7, 1.0);
-	unit_dir = vec3_dup_alloc(r->dir);
-	a = 0.5 * (unit_dir->y + 1.0);
-	vec3_normalise_inplace(unit_dir);
+	vec3_init(&blue, 0.5, 0.7, 1.0);
+	vec3_copy(&unit_dir, r->dir);
+	a = 0.5 * (unit_dir.y + 1.0);
+	vec3_normalise_inplace(&unit_dir);
 	if (DEBUG && is_debug_pixel)
 	{
 		ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
@@ -79,43 +75,38 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel)
 		vec3_debug_print(r->dir);
 	}
 	vec3_multiply_by_inplace(color, 1.0 - a);
-	vec3_multiply_by_inplace(blue, a);
+	vec3_multiply_by_inplace(&blue, a);
 
-	vec3_add_inplace(color, blue);
+	vec3_add_inplace(color, &blue);
 
 	if (hit_sphere(sphere, r))
 		vec3_init(color, 1, 0, 0);
-
-	free(unit_dir);
-	free(blue);
-	free(sphere->pos);
-	free(sphere->color);
-	free(sphere);
-	(void)is_debug_pixel;
 	return (0);
 }
 
 // STACK ALLOC to go faster, change to heap if overflow.
-int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx)
+int	render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphere)
 {
 	t_vec3	pixel_center;
 	t_vec3	ray_direction;
-	t_ray	*ray;
+	t_ray	ray;
+	t_vec3	ray_or;
+	t_vec3	ray_dir;
 	t_vec3	color;
 
-	ray = ray_default_alloc();
+	vec3_init(&ray_or, 0, 0, 0);
+	vec3_init(&ray_dir, 0, 0, 0);
+	ray.origin = &ray_or;
+	ray.dir = &ray_dir;
 	vec3_init(&color, 1, 1, 1);
 	vec3_init(&pixel_center, 0, 0, 0);
 	vec3_init(&ray_direction, 0, 0, 0);
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
-	ray_init(ray, render->camera_center, &ray_direction);
+	ray_init(&ray, render->camera_center, &ray_direction);
 
-	ray_color(ray, &color, is_debug_pixel(i, j));
+	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(mlx, i, j, get_color_as_int(&color));
-	free(ray->dir);
-	free(ray->origin);
-	free(ray);
 	return (0);
 }
 
@@ -124,7 +115,10 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 	int			j;
 	int			i;
 	t_render	*render;
+	t_sphere	*sphere;
 
+	sphere = sphere_new_alloc(vec3_new_alloc(0, 0, -1),
+			0.5, vec3_new_alloc(1, 0, 0));
 	j = 0;
 	i = 0;
 	(void)scene;
@@ -137,12 +131,15 @@ int	render_scene(t_mlx_data *mlx, t_scene *scene)
 		if (DEBUG)
 			ft_printf("Scanlines remaining: %d\n", WIN_H - j);
 		while (i < WIN_W)
-			render_pixel(i++, j, render, mlx);
+			render_pixel(i++, j, render, mlx, sphere);
 		i = 0;
 		j++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
 	free_render(render);
 	free_and_null((void **)&render);
+	free(sphere->pos);
+	free(sphere->color);
+	free(sphere);
 	return (0);
 }
