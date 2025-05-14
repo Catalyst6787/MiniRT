@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 13:33:06 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 12:03:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
 	ft_memset(&img, '\0', sizeof(t_img_data));
 	ft_memset(&scene, '\0', sizeof(t_scene));
+
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 	if (parse(av[1], &scene))
