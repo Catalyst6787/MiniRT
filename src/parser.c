@@ -52,7 +52,6 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 		if (scene->buffer[cursor] == 's')
 			if (scene->buffer[++cursor] == 'p')
 				s += parse_sphere(minirt, scene, scene->spheres[s], &cursor);
-		// printf("Debug 6\n");
 		if (scene->buffer[cursor] == 'p')
 			if (scene->buffer[++cursor] == 'l')
 				p += parse_plane(minirt, scene, scene->planes[p], &cursor);
@@ -60,7 +59,6 @@ void	parse_data(t_minirt *minirt, t_scene *scene)  /* at this point all file-for
 			if (scene->buffer[++cursor] == 'y')
 				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
 	}
-	printf("Debug 2\n");
 	// print_scene_data(minirt);
 	/* maybe add check in the set*/
 	/* should work if buffer_data checks correctly done*/
@@ -93,15 +91,34 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 
 void	alloc_elements(t_minirt *minirt, t_scene *scene)
 {
-	scene->spheres = malloc(sizeof(t_sphere) * scene->nb_sphere);
+	int	i;
+
+	i = -1;
+	scene->ambient = malloc(sizeof(t_ambient));
+	scene->light = malloc(sizeof(t_light));
+	scene->camera = malloc(sizeof(t_camera));
+	scene->spheres = malloc(sizeof(t_sphere *) * (scene->nb_sphere + 1));
 	if (!scene->spheres && scene->nb_sphere)    // 2nd condition here to difference malloc error from no element and tests
 		quit(minirt, MALLOC_ERR);
-	scene->planes = malloc(sizeof(t_plane) * scene->nb_plane);
+	while (i < scene->nb_sphere)
+		scene->spheres[++i] = malloc(sizeof(t_sphere));
+	scene->spheres[i] = NULL;
+	i = -1;
+
+	scene->planes = malloc(sizeof(t_plane *) * (scene->nb_plane + 1));
 	if (!scene->planes && scene->nb_plane)
 		quit(minirt, MALLOC_ERR);
-	scene->cylinders = malloc(sizeof(t_cylinder) * scene->nb_cylinder);
+	while (i < scene->nb_plane)
+		scene->planes[++i] = malloc(sizeof(t_plane));
+	scene->planes[i] = NULL;
+	i = -1;
+
+	scene->cylinders = malloc(sizeof(t_cylinder *) * (scene->nb_cylinder + 1));
 	if (!scene->cylinders && scene->nb_cylinder)
 		quit(minirt, MALLOC_ERR);
+	while (i < scene->nb_cylinder)
+		scene->cylinders[++i] = malloc(sizeof(t_cylinder));
+	scene->cylinders[i] = NULL;
 }
 
 
@@ -115,12 +132,11 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
 	parse_data(minirt, minirt->scene); /* current 2 */
-	free(minirt->scene->buffer);
 	check_data_validity(minirt);
 	print_scene_ok_message();
 	// fill_img_data(minirt);
 	print_scene_data(minirt);
-	printf("CP3\n");
+	free(minirt->scene->buffer);
 }
 
 

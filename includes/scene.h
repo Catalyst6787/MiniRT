@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 19:08:35 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 12:12:26 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct s_ambient
 {
-	double	brightness;
-	t_vec3	*color;
+	double		brightness;
+	t_vec3		*color;
 }	t_ambient;
 
 typedef struct s_camera

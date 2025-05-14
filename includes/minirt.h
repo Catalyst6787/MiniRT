@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 00:49:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:06:31 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int			init_events(t_mlx_data *mlx);
 void		parse_scene(t_minirt *minirt, char *file_path);
 
 // PARSING TYPES
-double		ato_buffer(char *ptr, int *cursor, int delim, char type);
+double		ato_buffer(char *ptr, int *cursor, int delim);
 
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
@@ -122,7 +122,7 @@ void		char_error_check(t_minirt *minirt,
 							const char *alpha_set,
 							const char *sign_set);
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
-void		count_element(t_scene *scene);
+void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
 
 // int		parse_ambiant(char *line, t_scene *scene);

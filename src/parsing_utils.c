@@ -12,16 +12,13 @@ void	move_cursor(char *str, int *cursor, char c)
 	*cursor = i;
 }
 
-double	ato_buffer(char *ptr, int *cursor, int delim, char type)
+double	ato_buffer(char *ptr, int *cursor, int delim)
 {
 	int		i;
 	double	n;
 
 	i = *cursor;
-	if (type == 'i')
-		n = ft_atoi(ptr);
-	else
-		n = ft_atof(ptr);
+	n = ft_atof(ptr);
 	move_cursor(ptr, &i, delim);
 	*cursor = i;
 	return (n);
