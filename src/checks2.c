@@ -1,6 +1,20 @@
 
 #include "minirt.h"
 
+
+
+
+void	check_data_validity(t_minirt *minirt, t_scene *scene)
+{
+	(void)minirt;
+	if (scene->ambient->brightness < 0 || 1 < scene->ambient->brightness
+		|| scene->ambient->color->r < 0)
+		quit(minirt, WRONG_AMB_DATA);;
+
+	/* check if data if valid (for example a color value of 300 is not valid) */
+
+}
+
 void	check_characters_validity(t_minirt *minirt)
 {
 	const char	alpha_set[] = "ACLsplcy";

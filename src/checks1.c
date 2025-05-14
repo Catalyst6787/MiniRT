@@ -3,18 +3,19 @@
 
 void	check_file_name(t_minirt *minirt, char *file_path)
 {
+	int	i;
+
+	i = 0;
 	if (!ft_is_char_in_string(file_path, '.'))
-	{
 		quit(minirt, EXT_MISSING_ERR);
-	}
-	/* check extension */
-}
-
-void	check_data_validity(t_minirt *minirt)
-{
-	(void)minirt;
-	/* check if data if valid (for example a color value of 300 is not valid) */
-
+	while (file_path[i] && file_path[i] != '.')
+		i++;
+	if (file_path[++i] != 'r')
+		quit(minirt, WRONG_EXT_ERR);
+	if (file_path[++i] != 't')
+		quit(minirt, WRONG_EXT_ERR);
+	if (file_path[++i])
+		quit(minirt, WRONG_EXT_ERR);
 }
 
 void	char_error_check(t_minirt *minirt,

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 17:55:41 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:59:00 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ void	print_exit_info(char *str)
 	// if (DEBUG_MODE)
 	// 	ft_putstr_fd("--------------------------\n\n", STDERR_FILENO );
 }
-
-// void	free_vector_pos(t_vec3 *v)
-// {
-// 	free(v);
-	
-// }
 
 void	free_scene(t_scene *scene)
 {

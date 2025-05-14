@@ -1,17 +1,24 @@
 #include "minirt.h"
 
 
-
 # define FILE_OPEN_ERR "Error : couldn't open file\n"
 # define MALLOC_ERR "Malloc error.\n"
 # define EMPTY_FILE_ERR "Error : empty file\n"
 # define READ_ERR "Error reading the file\n"
 # define CLOSING_FILE_ERR "Error closing fd\n"
 # define EXT_MISSING_ERR "Error : file extension missing\n"
-# define WRONG_EXT_ERR "Error : wrong extenssion\n"
+# define WRONG_EXT_ERR "Error : wrong extension\n"
 
 # define CHAR_ERR "Error : wrong characters in scene\n"
 # define SCENE_WRONG_CHAR_ERR "Error : wrong alpha char encountered\n"
+
+# define WRONG_AMB_DATA "Error : wrong ambient light data\n"
+# define WRONG_CAM_DATA "Error : wrong camera data\n"
+# define WRONG_LIGHT_DATA "Error : wrong light data\n"
+# define WRONG_SPH_DATA "Error : wrong sphere data\n"
+# define WRONG_PLAN_DATA "Error : wrong plane data\n"
+# define WRONG_CYL_DATA "Error : wrong cylinder data\n"
+
 
 # define MISSING_AMB_ERR "Error : scene missing ambiant light\n"
 # define MISSING_CAM_ERR "Error : scene missing camera\n"
@@ -23,7 +30,7 @@
 
 # define MLX_ERR "Error : mlx initialization failed\n"
 # define WINDOW_ERR "Error : mlx window initialization failed\n"
-# define WIN_SIZE_ERR "Window sizes less than 10x10 are unsupported\n"
+# define WIN_SIZE_ERR "Error : Window sizes less than 10x10\n"
 
 # define IMAGE_ERR "Error : mlx image initialization failed\n"
 # define ADDR_ERR "Error : mlx addr initialization failed\n"

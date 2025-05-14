@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 15:52:46 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:52:00 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int
 
 
 void		check_file_name(t_minirt *minirt, char *file_path);
-void		check_data_validity(t_minirt *minirt);
+void		check_data_validity(t_minirt *minirt, t_scene *scene);
 void		char_error_check(t_minirt *minirt,
 							char c,
 							const char *alpha_set,

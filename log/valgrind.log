@@ -1,15 +1,15 @@
-==1747127== Memcheck, a memory error detector
-==1747127== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1747127== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==1747127== Command: ./miniRT assets/scenes/subject_example.rt
-==1747127== Parent PID: 1746569
-==1747127== 
-==1747127== 
-==1747127== HEAP SUMMARY:
-==1747127==     in use at exit: 0 bytes in 0 blocks
-==1747127==   total heap usage: 572 allocs, 572 frees, 249,076 bytes allocated
-==1747127== 
-==1747127== All heap blocks were freed -- no leaks are possible
-==1747127== 
-==1747127== For lists of detected and suppressed errors, rerun with: -s
-==1747127== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 1)
+==1753126== Memcheck, a memory error detector
+==1753126== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1753126== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1753126== Command: ./miniRT assets/scenes/subject_example.rt
+==1753126== Parent PID: 1752569
+==1753126== 
+==1753126== 
+==1753126== HEAP SUMMARY:
+==1753126==     in use at exit: 0 bytes in 0 blocks
+==1753126==   total heap usage: 573 allocs, 573 frees, 249,284 bytes allocated
+==1753126== 
+==1753126== All heap blocks were freed -- no leaks are possible
+==1753126== 
+==1753126== For lists of detected and suppressed errors, rerun with: -s
+==1753126== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 1)

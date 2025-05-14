@@ -116,27 +116,21 @@ void	alloc_elements(t_minirt *minirt, t_scene *scene)
 	if (!scene->spheres && scene->nb_sphere)    // 2nd condition here to difference malloc error from no element and tests
 		quit(minirt, MALLOC_ERR);
 	while (++i < scene->nb_sphere)
-	{
 		scene->spheres[i] = malloc(sizeof(t_sphere));
-	}
 	scene->spheres[i] = NULL;
 	i = -1;
 	scene->planes = malloc(sizeof(t_plane *) * (scene->nb_plane + 1));
 	if (!scene->planes && scene->nb_plane)
 		quit(minirt, MALLOC_ERR);
 	while (++i < scene->nb_plane)
-	{
 		scene->planes[i] = malloc(sizeof(t_plane));
-	}
 	scene->planes[i] = NULL;
 	i = -1;
 	scene->cylinders = malloc(sizeof(t_cylinder *) * (scene->nb_cylinder + 1));
 	if (!scene->cylinders && scene->nb_cylinder)
 		quit(minirt, MALLOC_ERR);
 	while (++i < scene->nb_cylinder)
-	{
 		scene->cylinders[i] = malloc(sizeof(t_cylinder));
-	}
 	scene->cylinders[i] = NULL;
 }
 
@@ -160,7 +154,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
 	parse_objects(minirt, minirt->scene); /* current 2 */
-	check_data_validity(minirt);
+	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();
 	print_scene_data(minirt);
 	free(minirt->scene->buffer);
