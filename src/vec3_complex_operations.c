@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:58:35 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 14:56:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 11:52:15 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
 	return ((vec3_u->x * vec3_v->x)
 		+ (vec3_u->y * vec3_v->y)
 		+ (vec3_u->z * vec3_v->z));
+}
+
+int	vec3_isequal(t_vec3 *vec3_a, t_vec3	*vec3_b)
+{
+	assert(vec3_a);
+	assert(vec3_b);
+	if (double_isequal(vec3_a->x, vec3_b->x)
+		&& double_isequal(vec3_a->y, vec3_b->y)
+		&& double_isequal(vec3_a->z, vec3_b->z))
+		return (1);
+	return (0);
 }

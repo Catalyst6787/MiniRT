@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 14:07:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/14 11:49:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
+
+# define EPSILON 1.0E-5
 
 # define Q 113
 # define W 119
@@ -115,6 +117,11 @@ int		set_pixel_center(t_vec3	*pixel_center,
 int		set_ray_direction(t_vec3 *ray_direction,
 			t_render *render, t_vec3 *pixel_center);
 int		is_debug_pixel(int i, int j);
+
+// DOUBLE UTILS
+
+double	double_abs(double d);
+int		double_isequal(double a, double b);
 
 
 #endif
