@@ -4,16 +4,15 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 	(void)minirt;
-	t_vec3	color;
 
+	scene->ambient->color = malloc(sizeof(t_vec3));
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]))
 		i++;
 	scene->ambient->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
-	color.r = ato_buffer(&scene->buffer[i], &i, ',');
-	color.b = ato_buffer(&scene->buffer[i], &i, ',');
-	color.g = ato_buffer(&scene->buffer[i], &i, '\n');
-	scene->ambient->color = &color;
+	scene->ambient->color->r = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->ambient->color->b = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->ambient->color->g = ato_buffer(&scene->buffer[i], &i, '\n');
 	*cursor = i;
 	return (1);
 	//check
@@ -23,22 +22,19 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 	(void)minirt;
-	t_vec3	*dir;
-	t_vec3	pos;
 
-	dir =  malloc(sizeof(t_vec3));
+	scene->camera->dir =  malloc(sizeof(t_vec3));
+	scene->camera->pos =  malloc(sizeof(t_vec3));
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
-	pos.x = ato_buffer(&scene->buffer[i], &i, ',');
-	pos.y = ato_buffer(&scene->buffer[i], &i, ',');
-	pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	dir->x = ato_buffer(&scene->buffer[i], &i, ',');
-	dir->y = ato_buffer(&scene->buffer[i], &i, ',');
-	dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->dir->x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->dir->y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
-	scene->camera->pos = &pos;
-	scene->camera->dir = dir;
 	*cursor = i;
 	return (1);
 	//check
@@ -48,21 +44,19 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 	(void)minirt;
-	t_vec3	pos;
-	t_vec3	color;
 
+	scene->light->pos = malloc(sizeof(t_vec3)); 
+	scene->light->color = malloc(sizeof(t_vec3)); 
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
-	pos.x = ato_buffer(&scene->buffer[i], &i, ',');
-	pos.y = ato_buffer(&scene->buffer[i], &i, ',');
-	pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->light->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->light->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->light->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->light->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
-	color.r = ato_buffer(&scene->buffer[i], &i, ',');
-	color.g = ato_buffer(&scene->buffer[i], &i, ',');
-	color.b = ato_buffer(&scene->buffer[i], &i, '\n');
-	scene->light->pos = &pos;
-	scene->light->color = &color;
+	scene->light->color->r = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->light->color->g = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->light->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
 	*cursor = i;
 	return (1);
 	//check

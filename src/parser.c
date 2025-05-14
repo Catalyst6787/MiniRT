@@ -14,14 +14,11 @@ void	count_elements(t_scene *scene)
 			scene->nb_cam++;
 		else if (scene->buffer[i] == 'L')
 			scene->nb_light++;
-		else if (scene->buffer[i] == 's')
-		{
-			if (scene->buffer[++i] == 'p')
+		else if (scene->buffer[i] == 's' && scene->buffer[++i] == 'p') // add check if buffer[i+1] != 'p'
 				scene->nb_sphere++;
-		}
-		else if (scene->buffer[i] == 'p' && scene->buffer[i + 1] == 'l')
+		else if (scene->buffer[i] == 'p' && scene->buffer[++i] == 'l')
 			scene->nb_plane++;
-		else if (scene->buffer[i] == 'c' && scene->buffer[i + 1] == 'y')
+		else if (scene->buffer[i] == 'c' && scene->buffer[++i] == 'y')
 			scene->nb_cylinder++;
 	}
 	/* warning but not error if not enough elements*/
@@ -104,7 +101,6 @@ void	alloc_elements(t_minirt *minirt, t_scene *scene)
 		scene->spheres[++i] = malloc(sizeof(t_sphere));
 	scene->spheres[i] = NULL;
 	i = -1;
-
 	scene->planes = malloc(sizeof(t_plane *) * (scene->nb_plane + 1));
 	if (!scene->planes && scene->nb_plane)
 		quit(minirt, MALLOC_ERR);
@@ -112,7 +108,6 @@ void	alloc_elements(t_minirt *minirt, t_scene *scene)
 		scene->planes[++i] = malloc(sizeof(t_plane));
 	scene->planes[i] = NULL;
 	i = -1;
-
 	scene->cylinders = malloc(sizeof(t_cylinder *) * (scene->nb_cylinder + 1));
 	if (!scene->cylinders && scene->nb_cylinder)
 		quit(minirt, MALLOC_ERR);
@@ -126,7 +121,6 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	check_file_name(minirt, file_path);
 	set_scene_buffer(minirt, file_path);
-	print_scene(minirt, 1);
 	check_characters_validity(minirt);
 	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
@@ -134,7 +128,6 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	parse_data(minirt, minirt->scene); /* current 2 */
 	check_data_validity(minirt);
 	print_scene_ok_message();
-	// fill_img_data(minirt);
 	print_scene_data(minirt);
 	free(minirt->scene->buffer);
 }
