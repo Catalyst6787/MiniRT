@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:23:59 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 10:58:43 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 22:19:22 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	end_mlx_loop(t_mlx_data *mlx)
 {
 	(void) mlx;
-	mlx_loop_end(mlx->mlx);
+	// mlx_loop_end(mlx->mlx);
 	return (0);
 }
 

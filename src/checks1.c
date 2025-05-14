@@ -18,23 +18,7 @@ void	check_file_name(t_minirt *minirt, char *file_path)
 		quit(minirt, WRONG_EXT_ERR);
 }
 
-void	char_error_check(t_minirt *minirt,
-							char c,
-							const char *alpha_set,
-							const char *sign_set)
-{
-	if (ft_isalpha(c)
-		&& !ft_is_char_in_string(alpha_set, c))
-	{
-		quit(minirt, CHAR_ERR);
-	}
-	else if (!ft_isalpha(c)
-		&& !ft_is_char_in_string(sign_set, c)
-		&& !ft_isdigit(c))
-	{
-		quit(minirt, CHAR_ERR);
-	}
-}
+
 
 void	single_elements_check(t_minirt *minirt, t_scene *scene)
 {

@@ -96,7 +96,7 @@ int	get_file_contents(int fd, char **file_contents)
 void	set_scene_buffer(t_minirt *minirt, char *file_path)
 {
 	int		fd;
-	
+
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);
@@ -115,7 +115,7 @@ void	alloc_elements(t_minirt *minirt, t_scene *scene)
 	scene->spheres = malloc(sizeof(t_sphere *) * (scene->nb_sphere + 1));
 	if (!scene->spheres && scene->nb_sphere)    // 2nd condition here to difference malloc error from no element and tests
 		quit(minirt, MALLOC_ERR);
-	while (++i < scene->nb_sphere)
+	while (++i < scene->nb_sphere)  // ADD MALLOC CHECKS
 		scene->spheres[i] = malloc(sizeof(t_sphere));
 	scene->spheres[i] = NULL;
 	i = -1;
@@ -153,10 +153,11 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
-	parse_objects(minirt, minirt->scene); /* current 2 */
+	parse_objects(minirt, minirt->scene);
+	print_scene_data(minirt);
 	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();
-	print_scene_data(minirt);
 	free(minirt->scene->buffer);
+	minirt->scene->buffer = NULL;
 }
 

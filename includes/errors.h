@@ -11,6 +11,7 @@
 
 # define CHAR_ERR "Error : wrong characters in scene\n"
 # define SCENE_WRONG_CHAR_ERR "Error : wrong alpha char encountered\n"
+# define CHAR_DOUBLE "Error : double character found in scene\n"
 
 # define WRONG_AMB_DATA "Error : wrong ambient light data\n"
 # define WRONG_CAM_DATA "Error : wrong camera data\n"
@@ -18,7 +19,6 @@
 # define WRONG_SPH_DATA "Error : wrong sphere data\n"
 # define WRONG_PLAN_DATA "Error : wrong plane data\n"
 # define WRONG_CYL_DATA "Error : wrong cylinder data\n"
-
 
 # define MISSING_AMB_ERR "Error : scene missing ambiant light\n"
 # define MISSING_CAM_ERR "Error : scene missing camera\n"
@@ -36,6 +36,6 @@
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
 # define PIXEL_PUT_ERR "Error! my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
 
-// # define NO_SPERE_WARNING
-// # define NO_PLANE_WARNING
-// # define NO_CYL_WARNING
+// # define NO_SPERE_WARNING "Warning : no sphere found in scene"
+// # define NO_PLANE_WARNING "Warning : no plane found in scene"
+// # define NO_CYL_WARNING "Warning : no cylinder found in scene"
