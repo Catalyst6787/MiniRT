@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 01:07:45 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/05/14 00:09:17 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:39:20 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,8 @@ int	ft_is_char_in_string(const char *s, char c)
 		if (s[i] == c)
 			return (1);
 	}
-	return (0);
+	if (s[i])
+		return (0);
+	else
+		return (1);
 }

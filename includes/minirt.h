@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 14:13:31 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:52:46 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void		free_and_null(void	**ptr);
 int			get_color_as_int(t_vec3 *color);
 
 //FILE UTILS
-int			get_file_contents(int fd, char **file_contents);
+// int			get_file_contents(int fd, char **file_contents);
 
 // EVENTS
 int			end_mlx_loop(t_mlx_data *mlx);
