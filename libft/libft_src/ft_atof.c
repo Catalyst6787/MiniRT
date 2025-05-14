@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:15 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/05/13 17:48:17 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:04:36 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ double	ft_atof(char *str)
 	int		i;
 	int		len;
 
-	result = ft_atoi(str);
+	result = (double)ft_atoi(str);
 	while (*str != '.')
 		str++;
 	str++;
-	right = ft_atoi(str);
+	right = (double)ft_atoi(str);
 	len = ft_intlen((int)right);
 	i = -1;
 	while (++i < len)

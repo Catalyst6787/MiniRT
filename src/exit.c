@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 00:21:49 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:38:38 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	quit(t_minirt *minirt, char *str)
 	mlx_destroy_image(minirt->mlx->mlx, minirt->mlx->img_st->img);
 	minirt->mlx->img_st->addr = NULL;
 	mlx_destroy_window(minirt->mlx->mlx, minirt->mlx->mlx_win);
-	// mlx_destroy_display(mlx->mlx);
+	mlx_destroy_display(minirt->mlx->mlx);
 	free(minirt->mlx->mlx);
 	CLOSE_DEBUG_FD;
 	exit(0);
