@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 18:52:00 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:59:59 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int			init_events(t_mlx_data *mlx);
 
 // PARSING
 void		parse_scene(t_minirt *minirt, char *file_path);
+void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
-// PARSING TYPES
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);

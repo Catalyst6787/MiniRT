@@ -6,11 +6,22 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 17:46:44 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/15 12:58:08 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	initialize_scene_ptr(t_scene *scene)
+{
+	scene->ambient = NULL;
+	scene->camera = NULL;
+	scene->light = NULL;
+	scene->planes = NULL;
+	scene->spheres = NULL;
+	scene->cylinders = NULL;
+	scene->buffer = NULL;
+}
 
 int	main(int ac, char **av)
 {
@@ -24,6 +35,7 @@ int	main(int ac, char **av)
 	ft_memset(&img, '\0', sizeof(t_img_data));
 	ft_memset(&scene, '\0', sizeof(t_scene));
 
+	initialize_scene_ptr(&scene);
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
 	minirt.img = &img;
@@ -31,7 +43,6 @@ int	main(int ac, char **av)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 
 	parse_scene(&minirt, av[1]);
-
 	
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);

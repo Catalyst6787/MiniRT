@@ -19,7 +19,6 @@ void	check_file_name(t_minirt *minirt, char *file_path)
 }
 
 
-
 void	single_elements_check(t_minirt *minirt, t_scene *scene)
 {
 	if (scene->nb_amb == 0)

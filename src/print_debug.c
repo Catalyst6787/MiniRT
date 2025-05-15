@@ -75,8 +75,8 @@ void	print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("	Diameter : %.2f\n", minirt->scene->cylinders[i]->diameter);
 		PRINT_DEBUG("	Height : %.2f\n", minirt->scene->cylinders[i]->height);
 		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->color->r, minirt->scene->cylinders[i]->color->g, minirt->scene->cylinders[i]->color->b);
-		PRINT_DEBUG("\n");
 	}
+	PRINT_DEBUG("\n");
 	// PRINT_DEBUG("	aspect_ratio = [%f]\n", minirt->aspect_ratio);
 	// PRINT_DEBUG("	img_width = [%d]\n", minirt->img_width);
 	// PRINT_DEBUG("	img_height = [%d]\n", minirt->img_height);

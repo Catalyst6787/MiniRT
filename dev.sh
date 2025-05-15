@@ -18,9 +18,9 @@ if [ $scene == 1 ]; then
 elif [ $scene == 2 ]; then
 	./miniRT assets/scenes/subject_disorder.rt
 elif [ $scene == 3 ]; then
-	echo scene slot 3 is empty
+	./miniRT assets/scenes/one_sphere.rt
 elif [ $scene == 4 ]; then
-	echo scene slot 4 is empty
+	./miniRT assets/scenes/several_cylinders.rt
 elif [ $scene == 5 ]; then
 	echo scene slot 5 is empty
 elif [ $scene == 6 ]; then
