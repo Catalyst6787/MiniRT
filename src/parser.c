@@ -1,76 +1,116 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 18:11:25 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/07 16:24:19 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
-static int	choose_parser(char *line, t_scene *scene)
-{
-	if (line[0] == '#')
-		return (0);
-	else if (!ft_strncmp(line, "A ", 2))
-		return (parse_ambiant(line, scene));
-	else if (!ft_strncmp(line, "C ", 2))
-		return (parse_camera(line, scene));
-	else if (!ft_strncmp(line, "L ", 2))
-		return (parse_light(line, scene));
-	else if (!ft_strncmp(line, "sp ", 3))
-		return (parse_sphere(line, scene));
-	else if (!ft_strncmp(line, "pl ", 3))
-		return (parse_plane(line, scene));
-	else if (!ft_strncmp(line, "cy ", 3))
-		return (parse_cylinder(line, scene));
-	else
-		return (ft_printf("field: <%s> is malformed. usage: <id> <...>\n",
-				line), 1);
-}
-
-static int	parse_fields(char **scene_arr, t_scene *scene)
+void	count_elements(t_scene *scene)
 {
 	int	i;
 
-	i = 0;
-	while (scene_arr[i])
+	i = -1;
+	while (scene->buffer[++i])
 	{
-		if (choose_parser(scene_arr[i], scene))
-			return (1);
-		i++;
+		if (scene->buffer[i] == 'A')
+			scene->nb_amb++;
+		else if (scene->buffer[i] == 'C')
+			scene->nb_cam++;
+		else if (scene->buffer[i] == 'L')
+			scene->nb_light++;
+		else if (scene->buffer[i] == 's' && scene->buffer[++i] == 'p')
+				scene->nb_sphere++;
+		else if (scene->buffer[i] == 'p' && scene->buffer[++i] == 'l')
+			scene->nb_plane++;
+		else if (scene->buffer[i] == 'c' && scene->buffer[++i] == 'y')
+			scene->nb_cylinder++;
 	}
+}
+
+void	parse_objects(t_minirt *minirt, t_scene *scene)
+{
+	int	cursor;
+	int	s;
+	int	c;
+	int p;
+
+	s = 0;
+	c = 0;
+	p = 0;
+	cursor = 0;
+	while (scene->buffer[cursor])
+	{
+		while (scene->buffer[cursor]
+				&& ft_isspace(scene->buffer[cursor]))
+			cursor++;
+		if (scene->buffer[cursor] == 'A')
+			parse_ambiant_light(minirt, scene, &cursor);
+		if (scene->buffer[cursor] == 'C')
+			parse_camera(minirt, scene, &cursor);
+		if (scene->buffer[cursor] == 'L')
+			parse_light(minirt, scene, &cursor);
+		if (scene->buffer[cursor] == 's')
+			if (scene->buffer[++cursor] == 'p')
+				s += parse_sphere(minirt, scene, scene->spheres[s], &cursor);
+		if (scene->buffer[cursor] == 'p')
+			if (scene->buffer[++cursor] == 'l')
+				p += parse_plane(minirt, scene, scene->planes[p], &cursor);
+		if (scene->buffer[cursor] == 'c')
+			if (scene->buffer[++cursor] == 'y')
+				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
+	}
+	/* should work if buffer_data checks correctly done*/
+}
+
+
+int	get_file_contents(int fd, char **file_contents)
+{
+	char	*buf;
+	char	*tmp;
+
+	buf = NULL;
+	tmp = NULL;
+	buf = get_next_line(fd);
+	while (buf)
+	{
+		if (*file_contents)
+			tmp = *file_contents;
+		*file_contents = ft_strjoin(*file_contents, buf);
+		if (tmp)
+			free(tmp);
+		tmp = NULL;
+		free(buf);
+		buf = get_next_line(fd);
+	}
+	if (!*file_contents)
+		return (1);
 	return (0);
 }
 
-int	parse(char *file_path, t_scene *scene)
+void	set_scene_buffer(t_minirt *minirt, char *file_path)
 {
 	int		fd;
-	int		err;
-	char	*file_contents;
-	char	**scene_arr;
 
-	fd = 0;
-	err = 0;
-	file_contents = NULL;
-	scene_arr = NULL;
-	if (check_file(file_path, &fd))
-		return (1);
-	if (get_file_contents(fd, &file_contents))
-		return (close(fd),
-			ft_printf("Error\nFile: <%s> is empty\n", file_path), 1);
-	scene_arr = ft_split(file_contents, '\n');
-	if (!scene_arr || !scene_arr[0])
-		return (close(fd), free(scene_arr), free(file_contents),
-			ft_printf("Error\nFile: <%s> is empty\n", file_path), 1);
-	err = parse_fields(scene_arr, scene);
-	free_tab(scene_arr);
-	free_and_null((void **)&scene_arr);
-	close(fd);
-	free(file_contents);
-	return (err);
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		quit(minirt, FILE_OPEN_ERR);
+	get_file_contents(fd, &minirt->scene->buffer);
+	if (close(fd) == -1)
+		quit(minirt, CLOSING_FILE_ERR);
 }
+
+
+
+void	parse_scene(t_minirt *minirt, char *file_path)
+{
+	PRINT_DEBUG("\n%s\n\n", file_path);
+	check_file_name(minirt, file_path);
+	set_scene_buffer(minirt, file_path);
+	check_characters_validity(minirt);
+	count_elements(minirt->scene);
+	single_elements_check(minirt, minirt->scene);
+	alloc_elements(minirt, minirt->scene);
+	parse_objects(minirt, minirt->scene);
+	print_scene_data(minirt);
+	check_data_validity(minirt, minirt->scene);
+	print_scene_ok_message();
+	free(minirt->scene->buffer);
+	minirt->scene->buffer = NULL;
+}
+

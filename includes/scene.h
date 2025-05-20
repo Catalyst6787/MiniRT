@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/13 14:19:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/20 13:22:37 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct s_ambient
 {
-	double	brightness;
-	t_vec3	*color;
+	double		brightness;
+	t_vec3		*color;
 }	t_ambient;
 
 typedef struct s_camera
@@ -65,7 +65,7 @@ typedef struct s_render
 	t_vec3	*pixel00_loc;
 }	t_render;
 
-typedef struct scene
+typedef struct s_scene
 {
 	t_ambient	*ambient;
 	t_camera	*camera;
@@ -73,6 +73,14 @@ typedef struct scene
 	t_sphere	**spheres;
 	t_plane		**planes;
 	t_cylinder	**cylinders;
+	char		*buffer;
+	int			nb_amb;
+	int			nb_cam;
+	int			nb_light;
+	int			nb_sphere;
+	int			nb_plane;
+	int			nb_cylinder;
+	
 }	t_scene;
 
 #endif
