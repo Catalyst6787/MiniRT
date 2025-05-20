@@ -22,7 +22,8 @@ typedef union s_vec3
 // CREATE
 t_vec3	*vec3_default_alloc(void);
 t_vec3	*vec3_new_alloc(const double x, const double y, const double z);
-int		vec3_init(t_vec3 *vec3, const double x, const double y, const double z);
+int		vec3_set(t_vec3 *vec3, const double x, const double y, const double z);
+t_vec3	vec3_new(const double x, const double y, const double z);
 t_vec3	*vec3_dup_alloc(t_vec3 *to_dup);
 int		vec3_copy(t_vec3 *dest, t_vec3 *origin);
 

@@ -27,14 +27,24 @@ t_vec3	*vec3_new_alloc(const double x, const double y, const double z)
 	return (vec3);
 }
 
-int	vec3_init(t_vec3 *vec3, const double x, const double y, const double z)
+int	vec3_set(t_vec3 *vec3, const double x, const double y, const double z)
 {
 	if (!vec3)
-		return (ft_printf("vec3_init. Error, passed NULL ptr.\n"), 1);
+		return (ft_printf("vec3_set. Error, passed NULL ptr.\n"), 1);
 	vec3->x = x;
 	vec3->y = y;
 	vec3->z = z;
 	return (0);
+}
+
+t_vec3	vec3_new(const double x, const double y, const double z)
+{
+	t_vec3	vec3;
+
+	vec3.x = x;
+	vec3.y = y;
+	vec3.z = z;
+	return (vec3);
 }
 
 t_vec3	*vec3_dup_alloc(t_vec3 *to_dup)
@@ -54,7 +64,6 @@ t_vec3	*vec3_dup_alloc(t_vec3 *to_dup)
 
 int	vec3_copy(t_vec3 *dest, t_vec3 *origin)
 {
-	// assert(dest);
 	assert(origin);
 	if (!origin)
 		return (ft_printf("vec3_copy. Error, passed NULL ptr.\n"), 1);

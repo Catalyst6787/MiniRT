@@ -57,7 +57,7 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	assert(r->dir);
 	assert(r->origin);
 	assert(color);
-	vec3_init(&blue, 0.5, 0.7, 1.0);
+	vec3_set(&blue, 0.5, 0.7, 1.0);
 	vec3_copy(&unit_dir, r->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
 	vec3_normalise_inplace(&unit_dir);
@@ -67,7 +67,7 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	vec3_multiply_by_inplace(&blue, a);
 	vec3_add_inplace(color, &blue);
 	if (hit_sphere(sphere, r))
-		vec3_init(color, 1, 0, 0);
+		vec3_set(color, 1, 0, 0);
 	return (0);
 }
 
@@ -81,13 +81,13 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	t_vec3	ray_dir;
 	t_vec3	color;
 
-	vec3_init(&ray_or, 0, 0, 0);
-	vec3_init(&ray_dir, 0, 0, 0);
+	vec3_set(&ray_or, 0, 0, 0);
+	vec3_set(&ray_dir, 0, 0, 0);
 	ray.origin = &ray_or;
 	ray.dir = &ray_dir;
-	vec3_init(&color, 1, 1, 1);
-	vec3_init(&pixel_center, 0, 0, 0);
-	vec3_init(&ray_direction, 0, 0, 0);
+	vec3_set(&color, 1, 1, 1);
+	vec3_set(&pixel_center, 0, 0, 0);
+	vec3_set(&ray_direction, 0, 0, 0);
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
 	ray_init(&ray, render->camera_center, &ray_direction);
@@ -100,32 +100,28 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 {
 	int			j;
 	int			i;
-	t_render	*render;
 	t_sphere	*sphere;
 
-	sphere = sphere_new_alloc(vec3_new_alloc(0, 0, -1),
-			0.5, vec3_new_alloc(1, 0, 0));
+	sphere = minirt->scene->spheres[0];
 	j = 0;
 	i = 0;
 	(void)scene;
-	render = ft_calloc(1, sizeof(t_render));
-	if (!render)
+	if (!minirt->render)
 		return (perror("Malloc error in render_scene"), 1);
-	init_render(render);
 	while (j < WIN_H)
 	{
 		if (DEBUG)
 			ft_printf("Scanlines remaining: %d\n", WIN_H - j);
 		while (i < WIN_W)
-			render_pixel(i++, j, render, minirt, sphere);
+			render_pixel(i++, j, minirt->render, minirt, sphere);
 		i = 0;
 		j++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
-	free_render(render);
-	free_and_null((void **)&render);
-	free(sphere->pos);
-	free(sphere->color);
-	free(sphere);
+	// free_render(render);
+	// free_and_null((void **)&render);
+	// free(sphere->pos);
+	// free(sphere->color);
+	// free(sphere);
 	return (0);
 }
