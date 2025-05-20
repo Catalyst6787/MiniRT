@@ -2,6 +2,7 @@
 # define VEC3_H
 
 # include "minirt.h"
+# include <stdbool.h>
 
 typedef union s_vec3
 {
@@ -10,6 +11,7 @@ typedef union s_vec3
 		double	x;
 		double	y;
 		double	z;
+		bool	w;
 	};
 	struct
 	{
@@ -39,6 +41,16 @@ int		vec3_add_by_inplace(t_vec3 *vec_value, const double to_add);
 int		vec3_multiply_by_inplace(t_vec3 *vec_value,
 			const double to_multiply_by);
 int		vec3_divide_by_inplace(t_vec3 *vec_value, const double to_divide_by);
+
+t_vec3	vec3_vec_addition(t_vec3 v1,t_vec3 v2);
+t_vec3	vec3_vec_substraction(t_vec3 v1,t_vec3 v2);
+t_vec3	vec3_int_addition(t_vec3 src, int n);
+t_vec3	vec3_int_subtraction(t_vec3 src, int n);
+t_vec3	vec3_int_multiplication(t_vec3 src, int n);
+t_vec3	vec3_int_division(t_vec3 src, int n);
+t_vec3	vec3_double_division(t_vec3 src, double n);
+t_vec3	get_vec3(double x, double y, double z);
+
 
 // COMPLEX OPS
 double	vec3_length_squared(t_vec3 *vec3);

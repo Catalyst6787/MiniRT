@@ -1,9 +1,3 @@
-
-
-
-
-
-
 # .SILENT:
 
 NAME = miniRT

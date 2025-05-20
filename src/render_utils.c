@@ -3,25 +3,53 @@
 
 int	set_viewport_upper_left(t_render *render)
 {
-	t_vec3	*focal_length_v;
-	t_vec3	*viewport_u_div2;
-	t_vec3	*viewport_v_div2;
+	t_vec3	focal_length_v;
+	t_vec3	viewport_u_div2;
+	t_vec3	viewport_v_div2;
+	t_vec3	upper_left;
 
-	render->viewport_upper_left = vec3_dup_alloc(render->camera_center);
-	focal_length_v = vec3_new_alloc(0, 0, render->focal_length);
-	vec3_substract_inplace(render->viewport_upper_left, focal_length_v);
-	viewport_u_div2 = vec3_dup_alloc(render->viewport_u);
-	vec3_divide_by_inplace(viewport_u_div2, 2);
-	vec3_substract_inplace(render->viewport_upper_left, viewport_u_div2);
-	viewport_v_div2 = vec3_dup_alloc(render->viewport_v);
-	vec3_divide_by_inplace(viewport_v_div2, 2);
-	vec3_substract_inplace(render->viewport_upper_left, viewport_v_div2);
-	free(focal_length_v);
-	focal_length_v = NULL;
-	free(viewport_u_div2);
-	viewport_u_div2 = NULL;
-	free(viewport_v_div2);
-	viewport_v_div2 = NULL;
+	
+	upper_left = get_vec3(0, 0, 0); 	//camera!!!!!!
+	// render->viewport_upper_left = vec3_dup_alloc(render->camera_center);
+
+
+	focal_length_v = get_vec3(0, 0, render->focal_length);
+	// focal_length_v = vec3_new_alloc(0, 0, render->focal_length);
+
+
+	upper_left = vec3_vec_substraction(upper_left, focal_length_v);
+	// vec3_substract_inplace(render->viewport_upper_left, focal_length_v);
+	
+	viewport_u_div2 = get_vec3(render->viewport_u->x, render->viewport_u->y, render->viewport_u->z);
+	// vec3_copy(viewport_u_div2, render->viewport_u);
+	// viewport_u_div2 = vec3_dup_alloc(render->viewport_u);
+
+	viewport_u_div2 = vec3_int_division(viewport_u_div2, 2);
+	// vec3_divide_by_inplace(viewport_u_div2, 2);
+
+	upper_left = vec3_vec_substraction(upper_left, viewport_u_div2);
+	// vec3_substract_inplace(render->viewport_upper_left, viewport_u_div2);
+
+	viewport_v_div2 = get_vec3(render->viewport_v->x, render->viewport_v->y, render->viewport_v->z);
+	// viewport_v_div2 = vec3_dup_alloc(render->viewport_v);
+
+	viewport_v_div2 = vec3_int_division(viewport_v_div2, 2);
+	// vec3_divide_by_inplace(viewport_v_div2, 2);
+
+	upper_left = vec3_vec_substraction(upper_left, viewport_v_div2);
+	// vec3_substract_inplace(render->viewport_upper_left, viewport_v_div2);
+
+	render->viewport_upper_left = vec3_dup_alloc(&upper_left);
+
+
+
+
+	// free(focal_length_v);
+	// focal_length_v = NULL;
+	// free(viewport_u_div2);
+	// viewport_u_div2 = NULL;
+	// free(viewport_v_div2);
+	// viewport_v_div2 = NULL;
 	return (0);
 }
 

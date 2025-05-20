@@ -23,7 +23,6 @@ int	vec3_add_by_inplace(t_vec3 *vec_value, const double to_add)
 
 int	vec3_multiply_by_inplace(t_vec3 *vec_value, const double to_multiply_by)
 {
-	assert(vec_value);
 	if (!vec_value)
 		return (ft_printf("vec3_multiply_by. Error, passed NULL pointer\n"), 1);
 	vec_value->x *= to_multiply_by;

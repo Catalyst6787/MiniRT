@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 15:25:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/20 18:49:57 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_structure(&mlx, &img))
 		quit(&minirt, MLX_ERR);
-	if (init_events(&mlx))  // ???
-		quit(&minirt,"Event initialisation failed\n");
+	init_events(&mlx);
 
 	clock_t t;
 	t = clock();

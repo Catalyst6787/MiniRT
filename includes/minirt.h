@@ -6,12 +6,7 @@
 # include "mlx.h"
 # include "vec3.h"
 # include "ray.h"
-# include "sphere.h"
 # include "scene.h"
-
-/* ADDED BY ALEX */
-
-
 # include "errors.h"
 # include <sys/errno.h>
 # include <stdbool.h>
@@ -124,11 +119,11 @@ int			handle_mouseclick(int button, int x, int y, t_mlx_data *mlx);
 int			quit(t_minirt *minirt, char *str);
 
 // DEBUG
-int		debug_print_keycode(int keycode);
-void	debug_aff_image(t_minirt *minirt);
-void	debug_pixel(const t_ray *r);
-void	print_scene_data(t_minirt *minirt);
-void	print_scene_ok_message(void);
+int			debug_print_keycode(int keycode);
+void		debug_aff_image(t_minirt *minirt);
+void		debug_pixel(const t_ray *r);
+void		print_scene_data(t_minirt *minirt);
+void		print_scene_ok_message(void);
 
 // RENDER
 int			render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene);
@@ -136,6 +131,11 @@ int			render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *s
 int			ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
 int			free_render(t_render *render);
 int			init_render(t_render *render);
+
+// SPHERE
+int			hit_sphere(const t_sphere *sphere, const t_ray *ray);
+t_sphere	*sphere_new_alloc(t_vec3 *pos, double diameter, t_vec3 *color);
+
 
 // RENDER UTILS
 int			set_viewport_upper_left(t_render *render);
