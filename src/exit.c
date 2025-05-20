@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:24:38 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:26:55 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,34 @@ void	free_scene(t_scene *scene)
 	}
 }
 
+void	free_mlx(t_mlx_data *mlx)
+{
+	if (mlx && mlx->mlx)
+	{
+		mlx_clear_window(mlx->mlx, mlx->mlx_win);
+		mlx_destroy_image(mlx->mlx, mlx->img_st->img);
+		mlx->img_st->addr = NULL;
+		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+		mlx_destroy_display(mlx->mlx);
+		free(mlx->mlx);
+		mlx->mlx = NULL;
+	}
+}
+
+
 int	quit(t_minirt *minirt, char *str)
 {
 	(void) minirt;
-	free_scene(minirt->scene);
+	if (minirt)
+	{
+		if (minirt->mlx)
+			free_mlx(minirt->mlx);
+		if (minirt->scene)
+			free_scene(minirt->scene);
+		if (minirt->render)
+			free_render(minirt->render);
+	}
 	print_exit_info(str);
-	mlx_clear_window(minirt->mlx->mlx, minirt->mlx->mlx_win);
-	mlx_destroy_image(minirt->mlx->mlx, minirt->mlx->img_st->img);
-	minirt->mlx->img_st->addr = NULL;
-	mlx_destroy_window(minirt->mlx->mlx, minirt->mlx->mlx_win);
-	mlx_destroy_display(minirt->mlx->mlx);
-	free(minirt->mlx->mlx);
 	CLOSE_DEBUG_FD;
 	exit(0);
 }

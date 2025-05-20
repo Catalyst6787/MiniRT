@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:00:16 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:20:43 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:25:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int	main(int ac, char **av)
 	t_mlx_data	mlx;
 	t_img_data	img;
 	t_scene		scene;
-
 	t_minirt	minirt;
 
 	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
 	ft_memset(&img, '\0', sizeof(t_img_data));
 	ft_memset(&scene, '\0', sizeof(t_scene));
-
-	initialize_scene_ptr(&scene);
+	ft_memset(&minirt, '\0', sizeof(t_minirt));
+	// initialize_scene_ptr(&scene);
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
-	minirt.img = &img;
+	minirt.mlx->img_st = &img;
+
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 
 	parse_scene(&minirt, av[1]);
-	
+
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_structure(&mlx, &img))

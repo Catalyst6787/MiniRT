@@ -1,4 +1,3 @@
-
 #ifndef SCENE_H
 # define SCENE_H
 
@@ -69,7 +68,6 @@ typedef struct s_scene
 	int			nb_sphere;
 	int			nb_plane;
 	int			nb_cylinder;
-	
 }	t_scene;
 
 #endif
