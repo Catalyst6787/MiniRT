@@ -9,6 +9,7 @@
 # define EXT_MISSING_ERR "Error : file extension missing\n"
 # define WRONG_EXT_ERR "Error : wrong extension\n"
 
+# define EMPTY_FILE "Error : empty file\n"
 # define CHAR_ERR "Error : wrong characters in scene\n"
 # define SCENE_WRONG_CHAR_ERR "Error : wrong alpha char encountered\n"
 # define CHAR_DOUBLE "Error : double character found in scene\n"

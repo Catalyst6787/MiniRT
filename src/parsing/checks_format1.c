@@ -68,6 +68,8 @@ void	check_characters_validity(t_minirt *minirt)
 	int	i;
 
 	i = -1;
+	if (!minirt->scene->buffer[0])
+		return ;
 	while (minirt->scene->buffer[++i])
 	{
 		if (minirt->scene->buffer[i] == '\n')

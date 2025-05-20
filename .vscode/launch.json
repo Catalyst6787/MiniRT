@@ -7,7 +7,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT",
 			// "args": ["assets/scenes/subject_disorder.rt"],
-			"args": ["assets/scenes/one_sphere.rt"],
+			"args": ["assets/scenes/invalid/empty.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

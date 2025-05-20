@@ -93,6 +93,8 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 	get_file_contents(fd, &minirt->scene->buffer);
 	if (close(fd) == -1)
 		quit(minirt, CLOSING_FILE_ERR);
+	if (!minirt->scene->buffer)
+		quit(minirt, EMPTY_FILE);
 }
 
 
@@ -100,8 +102,8 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	PRINT_DEBUG("\n%s\n\n", file_path);
-	check_file_name(minirt, file_path);
 	minirt->scene->buffer = NULL;
+	check_file_name(minirt, file_path);
 	set_scene_buffer(minirt, file_path);
 	check_characters_validity(minirt);
 	count_elements(minirt->scene);
