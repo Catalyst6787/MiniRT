@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 15:26:55 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:48:53 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	free_scene(t_scene *scene)
 		free(scene->camera->dir);
 		free(scene->camera);
 	}
+	if (scene->buffer)
+		free(scene->buffer);
 }
 
 void	free_mlx(t_mlx_data *mlx)

@@ -5,9 +5,9 @@
 ### C ###
 
 # Object files
-objects
+objects/
 libft/libft.a
-libft/obj
+libft/obj/
 minilibx-linux/obj
 mlx_macos/*.o
 minilibx-linux/libmlx.a
@@ -28,7 +28,7 @@ miniRT
 !.vscode/*.code-snippets
 
 # logs
-log
+log/
 
 # Local History for Visual Studio Code
 .history/
