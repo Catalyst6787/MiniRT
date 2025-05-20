@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 16:56:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:22:37 by alvan-de         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef SCENE_H
 # define SCENE_H
 
@@ -80,7 +68,6 @@ typedef struct s_scene
 	int			nb_sphere;
 	int			nb_plane;
 	int			nb_cylinder;
-	
 }	t_scene;
 
 #endif

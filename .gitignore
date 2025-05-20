@@ -27,6 +27,9 @@ miniRT
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+# logs
+log
+
 # Local History for Visual Studio Code
 .history/
 

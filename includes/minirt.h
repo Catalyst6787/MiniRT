@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:31:38 by alvan-de         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -39,14 +27,6 @@
 # define GREEN "\033[32m"
 # define BLUE "\033[34m"
 # define COLOR_RESET "\033[0m"
-
-
-
-
-
-/* ___________ */
-
-
 
 # include <time.h>
 # include <math.h>
@@ -94,7 +74,6 @@ typedef struct s_minirt
 {
 	t_mlx_data	*mlx;
 	t_scene		*scene;
-	t_img_data	*img;
 	t_render	*render;
 }				t_minirt;
 

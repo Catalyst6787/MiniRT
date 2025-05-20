@@ -101,6 +101,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	PRINT_DEBUG("\n%s\n\n", file_path);
 	check_file_name(minirt, file_path);
+	minirt->scene->buffer = NULL;
 	set_scene_buffer(minirt, file_path);
 	check_characters_validity(minirt);
 	count_elements(minirt->scene);
