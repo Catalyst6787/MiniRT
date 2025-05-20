@@ -1,3 +1,9 @@
+
+
+
+
+
+
 # .SILENT:
 
 NAME = miniRT
@@ -20,15 +26,33 @@ RM = rm -f
 
 
 LIBFT = ./libft/libft.a
-# MLX = ./minilibx-linux/libmlx.a
 
 SRC_DIR = ./src
 OBJ_DIR = ./objects
 
-SRC = $(wildcard $(SRC_DIR)/*.c)
-OBJ = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
+SRC					=	main.c \
+						parsing/parser.c parsing/parsing_scene_allocation.c parsing/parse_camera_light.c parsing/parse_shapes.c \
+						parsing/checks_data.c parsing/checks_format1.c parsing/checks_format2.c parsing/parsing_utils.c \
+						debug.c \
+						double_utils.c \
+						events.c \
+						exit.c \
+						get_debug_fd.c \
+						init.c \
+						print_debug.c \
+						ray_create.c \
+						ray_operations.c \
+						render.c \
+						render_utils.c \
+						sphere.c \
+						utils.c \
+						vec3_basic_operations_by.c vec3_basic_operations.c vec3_complex_operations.c \
+						vec3_create.c vec3_utils.c \
 
-# vpath %.c $(SRC_DIR):$(SRC_DIR)/parsing
+SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
+
+vpath %.c $(SRC_DIR):$(SRC_DIR)/parsing
+vpath %.c $(SRC_DIR):$(SRC_DIR)/vec3
 
 PURPLE = \033[0;34m
 RED = \033[0;31m
@@ -36,11 +60,19 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(SRC_OBJ) $(LIBFT) $(MLX)
 	@printf "$(PURPLE)Linking $(NAME)...$(RESET)\n"
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC_OBJ) $(LDFLAGS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/parsing/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/vec3/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 
