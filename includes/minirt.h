@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:21:28 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:31:38 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,10 @@ int			quit(t_minirt *minirt, char *str);
 
 // DEBUG
 int		debug_print_keycode(int keycode);
-void	debug_aff_image(t_mlx_data *mlx);
+void	debug_aff_image(t_minirt *minirt);
 void	debug_pixel(const t_ray *r);
+void	print_scene_data(t_minirt *minirt);
+void	print_scene_ok_message(void);
 
 // RENDER
 int			render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene);

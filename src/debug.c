@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 12:24:54 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 13:23:10 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/05/20 13:29:08 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	debug_pixel(const t_ray *r)
 	vec3_debug_print(r->dir);
 }
 
-void	debug_aff_image(t_mlx_data *mlx)
+void	debug_aff_image(t_minirt *minirt)
 {
 	int		x;
 	int		y;
@@ -44,14 +44,14 @@ void	debug_aff_image(t_mlx_data *mlx)
 			red = (double)x / (WIN_W - 1);
 			green = (double)y / (WIN_H - 1);
 			blue = 0.0;
-			my_mlx_pixel_put(mlx, x, y, ((int)(red * 255) << 16)
+			my_mlx_pixel_put(minirt, x, y, ((int)(red * 255) << 16)
 				| ((int)(green * 255) << 8) | (int)(blue * 255));
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
+	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 }
 
 // void	debug_aff_image(t_mlx_data *mlx)
