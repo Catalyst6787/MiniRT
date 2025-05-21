@@ -2,6 +2,9 @@
 # define SCENE_H
 
 # include "minirt.h"
+# include "sphere.h"
+# include "cylinder.h"
+# include "plane.h"
 
 typedef struct s_ambient
 {
@@ -23,43 +26,6 @@ typedef struct s_light
 	t_vec3		*color;
 }	t_light;
 
-typedef struct s_plane
-{
-	t_vec3		*pos;
-	t_vec3		*dir;
-	t_vec3		*color;
-}	t_plane;
-
-typedef struct s_sphere
-{
-	t_vec3		*pos;
-	double		diameter;
-	t_vec3		*color;
-}	t_sphere;
-
-
-typedef struct s_cylinder
-{
-	t_vec3		*pos;
-	t_vec3		*dir;
-	double		diameter;
-	double		height;
-	t_vec3		*color;
-}	t_cylinder;
-
-typedef struct s_render
-{
-	double	focal_length;
-	double	viewport_height;
-	double	viewport_width;
-	t_vec3	*camera_center;
-	t_vec3	*viewport_u;
-	t_vec3	*viewport_v;
-	t_vec3	*pixel_delta_u;
-	t_vec3	*pixel_delta_v;
-	t_vec3	*viewport_upper_left;
-	t_vec3	*pixel00_loc;
-}	t_render;
 
 typedef struct s_scene
 {

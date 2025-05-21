@@ -7,18 +7,15 @@ int	init_render(t_render *render)
 	render->viewport_height = VIEWPORT_H;
 	render->viewport_width = render->viewport_height
 		* ((double)(WIN_W) / (double)WIN_H);
-	render->camera_center = vec3_new_alloc(0, 0, 0);
-	render->viewport_u = vec3_new_alloc(render->viewport_width, 0, 0);
-	render->viewport_v = vec3_new_alloc(0, -render->viewport_height, 0);
-	render->pixel_delta_u = vec3_dup_alloc(render->viewport_u);
-	vec3_divide_by_inplace(render->pixel_delta_u, (double)WIN_W);
-	render->pixel_delta_v = vec3_dup_alloc(render->viewport_v);
-	vec3_divide_by_inplace(render->pixel_delta_v, (double)WIN_H);
+	render->camera_center = get_vec3(0, 0, 0);
+	render->viewport_u = get_vec3(render->viewport_width, 0, 0);
+	render->viewport_v = get_vec3(0, -render->viewport_height, 0);
+	render->pixel_delta_u = vec3_double_division(render->viewport_u, (double)(WIN_W));
+	render->pixel_delta_v = vec3_double_division(render->viewport_v, (double)(WIN_H));
 	set_viewport_upper_left(render);
 	set_pixel00_loc(render);
 	return (0);
 }
-
 
 int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere)
 {
@@ -26,10 +23,6 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	double		a;
 	t_vec3		blue;
 
-	assert(r);
-	assert(r->dir);
-	assert(r->origin);
-	assert(color);
 	set_vec3(&blue, 0.5, 0.7, 1.0);
 	copy_vec3(&unit_dir, r->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
@@ -63,7 +56,7 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	set_vec3(&ray_direction, 0, 0, 0);
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
-	ray_init(&ray, render->camera_center, &ray_direction);
+	ray_init(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
 	return (0);
@@ -78,7 +71,7 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 	t_sphere	*sphere;
 	(void)scene;
 
-	sphere = sphere_new_alloc(vec3_new_alloc(0, 0, -1), 0.5, vec3_new_alloc(1, 0, 0));
+	sphere = new_sphere(vec3_new_alloc(0, 0, -1), 0.5, vec3_new_alloc(1, 0, 0));
 	j = 0;
 	i = 0;
 	render = ft_calloc(1, sizeof(t_render));
@@ -95,8 +88,7 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 		j++;
 	}
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
-	free_render(render);
-	// free_and_null((void **)&render);
 	free_sphere(sphere);
+	free_and_null((void **)&render);
 	return (0);
 }
