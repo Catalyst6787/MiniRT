@@ -33,8 +33,8 @@ int	ray_init(t_ray *ray, t_vec3 *origin, t_vec3 *dir)
 {
 	if (!origin || !dir)
 		return (ft_printf("ray_init. Error, passed NULL ptr.\n"), 1);
-	vec3_copy(ray->origin, origin);
-	vec3_copy(ray->dir, dir);
+	copy_vec3(ray->origin, origin);
+	copy_vec3(ray->dir, dir);
 	return (0);
 }
 

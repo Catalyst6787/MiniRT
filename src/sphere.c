@@ -10,7 +10,7 @@ int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	double	discriminant;
 
 	ft_memset(&oc, 0, sizeof(t_vec3));
-	vec3_copy(&oc, sphere->pos);
+	copy_vec3(&oc, sphere->pos);
 	vec3_substract_inplace(&oc, ray->origin);
 	a = vec3_dot(ray->dir, ray->dir);
 	b = -2.0 * vec3_dot(ray->dir, &oc);
@@ -19,15 +19,15 @@ int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	return (discriminant >= 0);
 }
 
-t_sphere	*sphere_new_alloc(t_vec3 *pos, double diameter, t_vec3 *color)
+t_sphere	*new_sphere(t_vec3 *pos, double diameter, t_vec3 *color)
 {
 	t_sphere	*sphere;
 
-	if (!pos || !color)
-		return (ft_printf("sphere_new_alloc. Error, passed NULL ptr.\n"), NULL);
+	// if (!pos || !color)
+	// 	return (ft_printf("new_sphere. Error, passed NULL ptr.\n"), NULL);
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (!sphere)
-		return (perror("sphere_new_alloc. Error\n"), NULL);
+		return (perror("new_sphere. Error\n"), NULL);
 	sphere->pos = pos;
 	sphere->diameter = diameter;
 	sphere->color = color;

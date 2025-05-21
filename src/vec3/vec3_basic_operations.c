@@ -52,3 +52,4 @@ int	vec3_divide_inplace(t_vec3 *vec_value, const t_vec3 *to_divide_by)
 	vec_value->z /= to_divide_by->z;
 	return (0);
 }
+

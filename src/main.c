@@ -46,10 +46,7 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_structure(&mlx, &img))
 		quit(&minirt, MLX_ERR);
-	if (init_events(&mlx))
-		quit(&minirt, "Event initialisation failed\n");
-	if (init_render(minirt.render))
-		quit(&minirt, "Render initialisation failed\n");
+	init_events(&mlx);
 
 	start_render(&minirt);
 

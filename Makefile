@@ -1,9 +1,3 @@
-
-
-
-
-
-
 # .SILENT:
 
 NAME = miniRT
@@ -31,8 +25,8 @@ SRC_DIR = ./src
 OBJ_DIR = ./objects
 
 SRC					=	main.c \
-						parsing/parser.c parsing/parsing_scene_allocation.c parsing/parse_camera_light.c parsing/parse_shapes.c \
-						parsing/checks_data.c parsing/checks_format1.c parsing/checks_format2.c parsing/parsing_utils.c \
+						parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
+						checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
 						debug.c \
 						double_utils.c \
 						events.c \
@@ -41,18 +35,23 @@ SRC					=	main.c \
 						init.c \
 						print_debug.c \
 						ray_create.c \
+						ray_stack.c \
 						ray_operations.c \
 						render.c \
 						render_utils.c \
 						sphere.c \
 						utils.c \
+						free_utils.c \
 						vec3_basic_operations_by.c vec3_basic_operations.c vec3_complex_operations.c \
+						src/vec3/vec3_basic_op_alex.c \
 						vec3_create.c vec3_utils.c \
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
 vpath %.c $(SRC_DIR):$(SRC_DIR)/parsing
 vpath %.c $(SRC_DIR):$(SRC_DIR)/vec3
+vpath %.c $(SRC_DIR):$(SRC_DIR)/debug
+vpath %.c $(SRC_DIR):$(SRC_DIR)/rays
 
 PURPLE = \033[0;34m
 RED = \033[0;31m
@@ -75,6 +74,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/parsing/%.c | $(OBJ_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/vec3/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/debug/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/rays/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

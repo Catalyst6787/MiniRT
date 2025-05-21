@@ -97,8 +97,6 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 		quit(minirt, EMPTY_FILE);
 }
 
-
-
 void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	PRINT_DEBUG("\n%s\n\n", file_path);

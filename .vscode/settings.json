@@ -3,6 +3,8 @@
 		"minirt.h": "c",
 		"errors.h": "c",
 		"mlx.h": "c",
+		"scene.h": "c",
+		"render.h": "c",
 		"vec3.h": "c",
 		"errno.h": "c"
 	}
