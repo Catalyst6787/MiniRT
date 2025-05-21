@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/20 15:48:53 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
@@ -28,8 +17,6 @@ void	print_exit_info(char *str)
 	ft_putstr_fd(COLOR_RESET, STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
 	ft_putstr_fd("\n", STDERR_FILENO);
-	// if (DEBUG_MODE)
-	// 	ft_putstr_fd("--------------------------\n\n", STDERR_FILENO );
 }
 
 void	free_scene(t_scene *scene)
