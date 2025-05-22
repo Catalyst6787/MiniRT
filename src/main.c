@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	clock_t t;
 	t = clock();
 
-	render_scene(&minirt, &mlx, &scene);
+	render_scene(&minirt);
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;

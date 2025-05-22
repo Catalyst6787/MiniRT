@@ -63,15 +63,14 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 }
 
 
-int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
+int	render_scene(t_minirt *minirt)
 {
 	int			j;
 	int			i;
 	t_render	*render;
 	t_sphere	*sphere;
-	(void)scene;
 
-	sphere = new_sphere(vec3_new_alloc(0, 0, -1), 0.5, vec3_new_alloc(1, 0, 0));
+	sphere = minirt->scene->spheres[0];
 	j = 0;
 	i = 0;
 	render = ft_calloc(1, sizeof(t_render));
@@ -87,8 +86,7 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 			render_pixel(i++, j, render, minirt, sphere);
 		j++;
 	}
-	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
-	free_sphere(sphere);
+	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 	free_and_null((void **)&render);
 	return (0);
 }
