@@ -93,6 +93,8 @@ void	free_mlx(t_mlx_data *mlx)
 		mlx_destroy_display(mlx->mlx);
 		free(mlx->mlx);
 		mlx->mlx = NULL;
+		free(mlx->img_st);
+		mlx->img_st = NULL;
 	}
 }
 

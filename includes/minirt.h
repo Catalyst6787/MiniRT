@@ -83,7 +83,7 @@ typedef struct s_minirt
 
 /*                                 INIT                                  */
 
-int			init_structure(t_mlx_data *mlx, t_img_data *img);
+int			init_mlx(t_minirt *minirt);
 int			init_events(t_mlx_data *mlx);
 
 /*                                 PARSING                                  */

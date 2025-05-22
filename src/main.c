@@ -3,17 +3,14 @@
 int	main(int ac, char **av)
 {
 	t_mlx_data	mlx;
-	t_img_data	img;
 	t_scene		scene;
 	t_minirt	minirt;
 
-	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
-	ft_memset(&img, '\0', sizeof(t_img_data));
-	ft_memset(&scene, '\0', sizeof(t_scene));
 	ft_memset(&minirt, '\0', sizeof(t_minirt));
+	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
+	ft_memset(&scene, '\0', sizeof(t_scene));
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
-	minirt.mlx->img_st = &img;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
@@ -22,7 +19,7 @@ int	main(int ac, char **av)
 
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);
-	if (init_structure(&mlx, &img))
+	if (init_mlx(&minirt))
 		quit(&minirt, MLX_ERR);
 	init_events(&mlx);
 
