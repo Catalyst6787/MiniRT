@@ -1,5 +1,7 @@
 
 #include "minirt.h"
+#include "ray.h"
+#include "vec3.h"
 
 int	init_render(t_render *render)
 {
@@ -22,6 +24,8 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	t_vec3		unit_dir;
 	double		a;
 	t_vec3		blue;
+	double		t;
+	t_vec3		normal_vec;
 
 	blue = get_vec3(0.5, 0.7, 1.0);
 	unit_dir = vec3_dup(*r->dir);
@@ -32,8 +36,18 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	vec3_multiply_by_inplace(color, 1.0 - a);
 	vec3_multiply_by_inplace(&blue, a);
 	vec3_add_inplace(color, &blue);
-	if (hit_sphere(sphere, r))
-		set_vec3(color, 1, 0, 0);
+	t = (hit_sphere(sphere, r));
+	if (t > 0.0)
+	{
+		normal_vec = vec3_normalise(vec3_vec_substraction(ray_at(t, r), get_vec3(0, 0, -1)));
+		set_vec3(color, normal_vec.r + 1, normal_vec.g + 1, normal_vec.b + 1);
+		*color = vec3_double_multiplication(*color, 0.5);
+		return (0);
+	}
+	unit_dir = vec3_normalise(*r->dir);
+	a = 0.5 * (unit_dir.y + 1.0);
+	*color = vec3_vec_addition(get_vec3(1.0, 1.0, 1.0), vec3_double_multiplication(blue, a));
+	*color = vec3_double_multiplication(*color, 1.0 - a);
 	return (0);
 }
 

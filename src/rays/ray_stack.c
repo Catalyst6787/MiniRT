@@ -12,7 +12,7 @@ void	set_ray(t_ray *ray, t_vec3 pos, t_vec3 dir)
 }
 
 
-t_vec3	ray_at(double t, t_ray *ray)
+t_vec3	ray_at(double t, const t_ray *ray)
 {
 	t_vec3	v;
 

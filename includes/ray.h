@@ -13,7 +13,7 @@ typedef struct s_ray
 
 
 void	set_ray(t_ray *ray, t_vec3 pos, t_vec3 dir);
-t_vec3	ray_at(double t, t_ray *ray);
+t_vec3	ray_at(double t, const t_ray *ray);
 
 int		ray_init(t_ray *ray, t_vec3 *origin, t_vec3 *dir);
 t_ray	*ray_default_alloc(void);

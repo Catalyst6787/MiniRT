@@ -26,8 +26,8 @@
 # define BLUE "\033[34m"
 # define COLOR_RESET "\033[0m"
 
-# define WIN_W 800
-# define WIN_H 400
+# define WIN_W 1600
+# define WIN_H 800
 # define FOCAL_LEN 1.0
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10

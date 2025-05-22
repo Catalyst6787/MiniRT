@@ -55,7 +55,7 @@ t_vec3	get_vec3(double x, double y, double z);
 int		set_color(t_vec3 *v, double r, double g, double b);
 
 t_vec3	vec3_vec_addition(t_vec3 v1,t_vec3 v2);
-t_vec3	vec3_vec_substraction(t_vec3 v1,t_vec3 v2);
+t_vec3	vec3_vec_substraction(const t_vec3 v1,const t_vec3 v2);
 t_vec3	vec3_vec_multiplication(t_vec3 v1,t_vec3 v2);
 t_vec3	vec3_vec_division(t_vec3 v1,t_vec3 v2);
 t_vec3	vec3_int_addition(t_vec3 src, int n);

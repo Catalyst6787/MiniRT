@@ -1,4 +1,5 @@
 
+#include "libft.h"
 #include "minirt.h"
 
 void	print_exit_info(char *str)

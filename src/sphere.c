@@ -1,7 +1,8 @@
 
 #include "minirt.h"
+#include "vec3.h"
 
-int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
+double hit_sphere(const t_sphere *sphere, const t_ray *ray)
 {
 	t_vec3	oc;
 	double	a;
@@ -9,14 +10,17 @@ int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	double	c;
 	double	discriminant;
 
-	ft_memset(&oc, 0, sizeof(t_vec3));
-	copy_vec3(&oc, sphere->pos);
-	vec3_substract_inplace(&oc, ray->origin);
+	oc = vec3_vec_substraction(*sphere->pos, *ray->origin);
 	a = vec3_dot(ray->dir, ray->dir);
 	b = -2.0 * vec3_dot(ray->dir, &oc);
 	c = vec3_dot(&oc, &oc) - (sphere->diameter * sphere->diameter);
 	discriminant = (b * b) - (4 * a * c);
-	return (discriminant >= 0);
+
+	if (discriminant < 0)
+		return (-1.0);
+	else
+		return (-b - (sqrt(discriminant) / (2.0 * a)));
+	// return (discriminant >= 0);
 }
 
 t_sphere	*new_sphere(t_vec3 *pos, double diameter, t_vec3 *color)

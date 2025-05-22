@@ -54,7 +54,7 @@ t_vec3	vec3_vec_addition(t_vec3 v1, t_vec3 v2)
 	return (v);
 }
 
-t_vec3	vec3_vec_substraction(t_vec3 v1, t_vec3 v2)
+t_vec3	vec3_vec_substraction(const t_vec3 v1, const t_vec3 v2)
 {
 	t_vec3 v;
 
