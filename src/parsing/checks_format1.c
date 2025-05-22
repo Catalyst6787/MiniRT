@@ -61,6 +61,21 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 	}
 }
 
+void	check_file_not_empty(t_minirt *minirt)
+{
+	int i;
+
+	i = 0;
+	if (!minirt->scene->buffer || !minirt->scene->buffer[0])
+		quit(minirt, EMPTY_FILE);
+	while (minirt->scene->buffer[i] &&
+		(ft_isspace(minirt->scene->buffer[i])
+			|| minirt->scene->buffer[i] == '\n'))
+		i++;
+	if (!minirt->scene->buffer[i])
+		quit(minirt, SCENE_ONLY_WS_ERR);
+}
+
 void	check_characters_validity(t_minirt *minirt)
 {
 	const char	alpha_set[] = "ACLsplcy";

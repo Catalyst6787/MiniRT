@@ -40,3 +40,7 @@ log/
 # Ignore all local history of files
 .history
 .ionide
+
+## Clangd -- bear
+.cache
+compile_commands.json

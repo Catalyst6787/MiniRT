@@ -101,6 +101,7 @@ int			parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
 
 void		check_file_name(t_minirt *minirt, char *file_path);
+void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);
 void		char_error_check(t_minirt *minirt,
 							char c,
