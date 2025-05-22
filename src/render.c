@@ -70,13 +70,10 @@ int	render_scene(t_minirt *minirt)
 	t_render	*render;
 	t_sphere	*sphere;
 
+	render = minirt->render;
 	sphere = minirt->scene->spheres[0];
 	j = 0;
 	i = 0;
-	render = ft_calloc(1, sizeof(t_render));
-	if (!render)
-		return (perror("Malloc error in render_scene"), 1);
-	init_render(render);
 	while (j < WIN_H)
 	{
 		i = 0;
@@ -87,6 +84,5 @@ int	render_scene(t_minirt *minirt)
 		j++;
 	}
 	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
-	free_and_null((void **)&render);
 	return (0);
 }

@@ -2,15 +2,18 @@
 
 int	main(int ac, char **av)
 {
+	t_minirt	minirt;
 	t_mlx_data	mlx;
 	t_scene		scene;
-	t_minirt	minirt;
+	t_render	render;
 
 	ft_memset(&minirt, '\0', sizeof(t_minirt));
 	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
 	ft_memset(&scene, '\0', sizeof(t_scene));
+	ft_memset(&render, '\0', sizeof(t_render));
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
+	minirt.render = &render;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
@@ -21,6 +24,8 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_mlx(&minirt))
 		quit(&minirt, MLX_ERR);
+	if (init_render(minirt.render))
+		quit(&minirt, RENDER_INIT_ERR);
 	init_events(&mlx);
 
 	clock_t t;

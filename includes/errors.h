@@ -30,6 +30,7 @@
 # define TOO_MUCH_LIGHT_ERR "Error : more than one light source detected(delete later for bonuses)\n"
 
 # define MLX_ERR "Error : mlx initialization failed\n"
+# define RENDER_INIT_ERR "Error : render initialization failed\n"
 # define WINDOW_ERR "Error : mlx window initialization failed\n"
 # define WIN_SIZE_ERR "Error : Window sizes less than 10x10\n"
 
