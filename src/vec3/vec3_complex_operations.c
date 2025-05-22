@@ -27,6 +27,19 @@ void	vec3_normalise_inplace(t_vec3 *vec3)
 	vec3->z /= length;
 }
 
+t_vec3	vec3_normalise(t_vec3 vec3)
+{
+	t_vec3	normalised;
+	double	length;
+
+	length = vec3_exact_length(&vec3);
+	assert(length != 0);
+	normalised.x = vec3.x / length;
+	normalised.y = vec3.y / length;
+	normalised.z = vec3.z / length;
+	return (normalised);
+}
+
 // commutative
 double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
 {

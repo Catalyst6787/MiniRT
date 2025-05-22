@@ -12,11 +12,11 @@ int	set_vec3(t_vec3 *v, double x, double y, double z)
 	return (0);
 }
 
-int	set_color(t_vec3 *v, double x, double y, double z)
+int	set_color(t_vec3 *v, double r, double g, double b)
 {
-	v->r = x;
-	v->g = y;
-	v->b = z;
+	v->r = r;
+	v->g = g;
+	v->b = b;
 	return (0);
 }
 

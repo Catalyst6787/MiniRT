@@ -1,16 +1,5 @@
 #include "minirt.h"
 
-void	initialize_scene_ptr(t_scene *scene)
-{
-	scene->ambient = NULL;
-	scene->camera = NULL;
-	scene->light = NULL;
-	scene->planes = NULL;
-	scene->spheres = NULL;
-	scene->cylinders = NULL;
-	scene->buffer = NULL;
-}
-
 int	main(int ac, char **av)
 {
 	t_mlx_data	mlx;
@@ -22,7 +11,6 @@ int	main(int ac, char **av)
 	ft_memset(&img, '\0', sizeof(t_img_data));
 	ft_memset(&scene, '\0', sizeof(t_scene));
 	ft_memset(&minirt, '\0', sizeof(t_minirt));
-	// initialize_scene_ptr(&scene);
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
 	minirt.mlx->img_st = &img;

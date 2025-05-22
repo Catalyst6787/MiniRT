@@ -23,10 +23,10 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	double		a;
 	t_vec3		blue;
 
-	set_vec3(&blue, 0.5, 0.7, 1.0);
-	copy_vec3(&unit_dir, r->dir);
+	blue = get_vec3(0.5, 0.7, 1.0);
+	unit_dir = vec3_dup(*r->dir);
 	a = 0.5 * (unit_dir.y + 1.0);
-	vec3_normalise_inplace(&unit_dir);
+	unit_dir = vec3_normalise(unit_dir);
 	if (DEBUG && is_debug_pixel)
 		debug_pixel(r);
 	vec3_multiply_by_inplace(color, 1.0 - a);
