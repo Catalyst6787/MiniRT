@@ -67,8 +67,8 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 {
 	int			j;
 	int			i;
-	t_sphere	*sphere;
 	t_render	*render;
+	t_sphere	*sphere;
 	(void)scene;
 
 	sphere = new_sphere(vec3_new_alloc(0, 0, -1), 0.5, vec3_new_alloc(1, 0, 0));
@@ -77,6 +77,7 @@ int	render_scene(t_minirt *minirt, t_mlx_data *mlx, t_scene *scene)
 	render = ft_calloc(1, sizeof(t_render));
 	if (!render)
 		return (perror("Malloc error in render_scene"), 1);
+	init_render(render);
 	while (j < WIN_H)
 	{
 		i = 0;
