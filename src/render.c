@@ -21,34 +21,26 @@ int	init_render(t_render *render)
 
 int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere)
 {
-	t_vec3		unit_dir;
-	double		a;
-	t_vec3		blue;
-	double		t;
-	t_vec3		normal_vec;
+	(void)is_debug_pixel;
+	double	t;
+	double	a;
+	t_vec3	normal;
+	t_vec3	blue;
+	t_vec3	unit_direction;
 
 	blue = get_vec3(0.5, 0.7, 1.0);
-	unit_dir = vec3_dup(*r->dir);
-	a = 0.5 * (unit_dir.y + 1.0);
-	unit_dir = vec3_normalise(unit_dir);
-	if (DEBUG && is_debug_pixel)
-		debug_pixel(r);
-	vec3_multiply_by_inplace(color, 1.0 - a);
-	vec3_multiply_by_inplace(&blue, a);
-	vec3_add_inplace(color, &blue);
-	t = (hit_sphere(sphere, r));
+	t = hit_sphere(sphere, r);
 	if (t > 0.0)
 	{
-		normal_vec = vec3_normalise(vec3_vec_substraction(ray_at(t, r), *sphere->pos));
-		set_vec3(color, normal_vec.r + 1, normal_vec.g + 1, normal_vec.b + 1);
-		*color = vec3_double_multiplication(*color, 0.5);
+		normal = vec3_normalise(vec3_vec_substraction(ray_at(t, r), *sphere->pos));
+		*color = vec3_double_multiplication(get_vec3(normal.x + 1, normal.y + 1, normal.z + 1), 0.5);
 		return (0);
 	}
-	unit_dir = vec3_normalise(*r->dir);
-	a = 0.5 * (unit_dir.y + 1.0);
-	*color = vec3_vec_addition(get_vec3(1.0, 1.0, 1.0), vec3_double_multiplication(blue, a));
-	*color = vec3_double_multiplication(*color, 1.0 - a);
+	unit_direction = vec3_normalise(*r->dir);
+	a = 0.5 * (unit_direction.y + 1.0);
+	*color = vec3_vec_addition(vec3_double_multiplication(get_vec3(1, 1, 1), (1.0 - a)), vec3_double_multiplication(blue, a));
 	return (0);
+
 }
 
 // STACK ALLOC to go faster, change to heap if overflow.
@@ -92,7 +84,7 @@ int	render_scene(t_minirt *minirt)
 	{
 		i = 0;
 		if (DEBUG)
-			ft_printf("Scanlines remaining: %d\n", WIN_H - j);
+			ft_printf("Scanlines remaining: %d\normal", WIN_H - j);
 		while (i < WIN_W)
 			render_pixel(i++, j, render, minirt, sphere);
 		j++;
