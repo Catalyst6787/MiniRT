@@ -39,7 +39,7 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	t = (hit_sphere(sphere, r));
 	if (t > 0.0)
 	{
-		normal_vec = vec3_normalise(vec3_vec_substraction(ray_at(t, r), get_vec3(0, 0, -1)));
+		normal_vec = vec3_normalise(vec3_vec_substraction(ray_at(t, r), *sphere->pos));
 		set_vec3(color, normal_vec.r + 1, normal_vec.g + 1, normal_vec.b + 1);
 		*color = vec3_double_multiplication(*color, 0.5);
 		return (0);
