@@ -11,22 +11,22 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
-	if (keycode == UP && minirt->scene->camera->dir->y < 1.0)
+	if (keycode == UP && minirt->scene->camera->dir->y < 0.99)
 	{
 		ft_printf("[↑] pressed\n");
 		minirt->scene->camera->dir->y += 0.1;
 	}
-	else if (keycode == DOWN && minirt->scene->camera->dir->y > 0.0)
+	else if (keycode == DOWN && minirt->scene->camera->dir->y > -1.0)
 	{
 		ft_printf("[↓] pressed\n");
 		minirt->scene->camera->dir->y -= 0.1;
 	}
-	else if (keycode == LEFT  && minirt->scene->camera->dir->x > 0.0)
+	else if (keycode == LEFT  && minirt->scene->camera->dir->x > -1.0)
 	{
 		ft_printf("[←] pressed\n");
 		minirt->scene->camera->dir->x -= 0.1;
 	}
-	else if (keycode == RIGHT && minirt->scene->camera->dir->x < 1.0)
+	else if (keycode == RIGHT && minirt->scene->camera->dir->x < 0.99)
 	{
 		ft_printf("[→] pressed\n");
 		minirt->scene->camera->dir->x += 0.1;
