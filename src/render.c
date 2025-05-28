@@ -78,6 +78,8 @@ int	render_scene(t_minirt *minirt)
 	t_render	*render;
 	t_sphere	*sphere;
 
+	if (init_render(minirt))
+		quit(minirt, RENDER_INIT_ERR);
 	render = minirt->render;
 	sphere = minirt->scene->spheres[0];
 	j = 0;
