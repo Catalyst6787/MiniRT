@@ -4,10 +4,12 @@
 int	set_viewport_upper_left(t_minirt *minirt)
 {
 	t_vec3	focal_length_v;
+	t_vec3	viewport_center;
 
 	focal_length_v = vec3_double_multiplication(minirt->render->camera_dir, minirt->render->focal_length);
+	viewport_center = vec3_vec_addition(minirt->render->camera_center, focal_length_v);
 	minirt->render->viewport_upper_left = vec3_vec_addition(
-			focal_length_v,
+			viewport_center,
 			vec3_vec_substraction(
 				vec3_reverse(vec3_int_division(minirt->render->viewport_u, 2)),
 				vec3_int_division(minirt->render->viewport_v, 2)));

@@ -57,7 +57,7 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	t_vec3	ray_dir;
 	t_vec3	color;
 
-	set_vec3(&ray_or, 0, 0, 0);
+	ray_or = vec3_dup(minirt->render->camera_center);
 	set_vec3(&ray_dir, 0, 0, 0);
 	ray.origin = &ray_or;
 	ray.dir = &ray_dir;
