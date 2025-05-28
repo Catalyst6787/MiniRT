@@ -113,10 +113,10 @@ int			render_scene(t_minirt *minirt);
 int			render_pixel(int i, int j, t_render *render, t_minirt *minirt, t_sphere *sphere);
 int			ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
 int			free_render(t_render *render);
-int			init_render(t_render *render);
+int			init_render(t_minirt *minirt);
 
-int			set_viewport_upper_left(t_render *render);
-int			set_pixel00_loc(t_render *render);
+int			set_viewport_upper_left(t_minirt *minirt);
+int			set_pixel00_loc(t_minirt *minirt);
 int			set_pixel_center(t_vec3	*pixel_center,
 			int i, int j, t_render	*render);
 int			set_ray_direction(t_vec3 *ray_direction,

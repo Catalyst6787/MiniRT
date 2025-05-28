@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_mlx(&minirt))
 		quit(&minirt, MLX_ERR);
-	if (init_render(minirt.render))
+	if (init_render(&minirt))
 		quit(&minirt, RENDER_INIT_ERR);
 	init_events(&mlx);
 

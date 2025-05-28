@@ -1,36 +1,35 @@
 
 #include "minirt.h"
 
-int	set_viewport_upper_left(t_render *render)
+int	set_viewport_upper_left(t_minirt *minirt)
 {
 	t_vec3	focal_length_v;
 	t_vec3	viewport_u_div2;
 	t_vec3	viewport_v_div2;
 	t_vec3	upper_left;
 
-	
 	upper_left = get_vec3(0, 0, 0);
-	focal_length_v = get_vec3(0, 0, render->focal_length);
+	focal_length_v = get_vec3(0, 0, minirt->render->focal_length);
 	upper_left = vec3_vec_substraction(upper_left, focal_length_v);
-	viewport_u_div2 = get_vec3(render->viewport_u.x, render->viewport_u.y, render->viewport_u.z);
+	viewport_u_div2 = get_vec3(minirt->render->viewport_u.x, minirt->render->viewport_u.y, minirt->render->viewport_u.z);
 	viewport_u_div2 = vec3_int_division(viewport_u_div2, 2);
 	upper_left = vec3_vec_substraction(upper_left, viewport_u_div2);
-	viewport_v_div2 = get_vec3(render->viewport_v.x, render->viewport_v.y, render->viewport_v.z);
+	viewport_v_div2 = get_vec3(minirt->render->viewport_v.x, minirt->render->viewport_v.y, minirt->render->viewport_v.z);
 	viewport_v_div2 = vec3_int_division(viewport_v_div2, 2);
-	render->viewport_upper_left = vec3_vec_substraction(upper_left, viewport_v_div2);
+	minirt->render->viewport_upper_left = vec3_vec_substraction(upper_left, viewport_v_div2);
 
 	return (0);
 }
 
-int	set_pixel00_loc(t_render *render)
+int	set_pixel00_loc(t_minirt *minirt)
 {
 	t_vec3	pixel_delt_uv;
 
-	copy_vec3(&render->pixel00_loc, &render->viewport_upper_left);
-	copy_vec3(&pixel_delt_uv, &render->pixel_delta_u);
-	vec3_add_inplace(&pixel_delt_uv, &render->pixel_delta_v);
+	copy_vec3(&minirt->render->pixel00_loc, &minirt->render->viewport_upper_left);
+	copy_vec3(&pixel_delt_uv, &minirt->render->pixel_delta_u);
+	vec3_add_inplace(&pixel_delt_uv, &minirt->render->pixel_delta_v);
 	vec3_multiply_by_inplace(&pixel_delt_uv, 0.5);
-	vec3_add_inplace(&render->pixel00_loc, &pixel_delt_uv);
+	vec3_add_inplace(&minirt->render->pixel00_loc, &pixel_delt_uv);
 	return (0);
 }
 

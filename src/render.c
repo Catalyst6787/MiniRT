@@ -3,19 +3,19 @@
 #include "ray.h"
 #include "vec3.h"
 
-int	init_render(t_render *render)
+int	init_render(t_minirt *minirt)
 {
-	render->focal_length = FOCAL_LEN;
-	render->viewport_height = VIEWPORT_H;
-	render->viewport_width = render->viewport_height
+	minirt->render->focal_length = FOCAL_LEN;
+	minirt->render->viewport_height = VIEWPORT_H;
+	minirt->render->viewport_width = minirt->render->viewport_height
 		* ((double)(WIN_W) / (double)WIN_H);
-	render->camera_center = get_vec3(0, 0, 0);
-	render->viewport_u = get_vec3(render->viewport_width, 0, 0);
-	render->viewport_v = get_vec3(0, -render->viewport_height, 0);
-	render->pixel_delta_u = vec3_double_division(render->viewport_u, (double)(WIN_W));
-	render->pixel_delta_v = vec3_double_division(render->viewport_v, (double)(WIN_H));
-	set_viewport_upper_left(render);
-	set_pixel00_loc(render);
+	minirt->render->camera_center = get_vec3(0, 0, 0);
+	minirt->render->viewport_u = get_vec3(minirt->render->viewport_width, 0, 0);
+	minirt->render->viewport_v = get_vec3(0, -minirt->render->viewport_height, 0);
+	minirt->render->pixel_delta_u = vec3_double_division(minirt->render->viewport_u, (double)(WIN_W));
+	minirt->render->pixel_delta_v = vec3_double_division(minirt->render->viewport_v, (double)(WIN_H));
+	set_viewport_upper_left(minirt);
+	set_pixel00_loc(minirt);
 	return (0);
 }
 
