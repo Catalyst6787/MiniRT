@@ -16,12 +16,12 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 		ft_printf("[↑] pressed\n");
 		minirt->scene->camera->dir->y += 0.1;
 	}
-	else if (keycode == DOWN && minirt->scene->camera->dir->y > -1.0)
+	else if (keycode == DOWN && minirt->scene->camera->dir->y > -0.99)
 	{
 		ft_printf("[↓] pressed\n");
 		minirt->scene->camera->dir->y -= 0.1;
 	}
-	else if (keycode == LEFT  && minirt->scene->camera->dir->x > -1.0)
+	else if (keycode == LEFT  && minirt->scene->camera->dir->x > -0.99)
 	{
 		ft_printf("[←] pressed\n");
 		minirt->scene->camera->dir->x -= 0.1;
@@ -36,7 +36,7 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 		ft_printf("[+] pressed\n");
 		minirt->scene->camera->dir->z += 0.1;
 	}
-	else if (keycode == MINUS && minirt->scene->camera->dir->z > -1)
+	else if (keycode == MINUS && minirt->scene->camera->dir->z > -0.99)
 	{
 		ft_printf("[-] pressed\n");
 		minirt->scene->camera->dir->z -= 0.1;

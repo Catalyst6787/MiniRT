@@ -29,8 +29,11 @@ int	init_render(t_minirt *minirt)
 	minirt->render->viewport_v = vec3_double_multiplication(minirt->render->up, -minirt->render->viewport_height);
 	minirt->render->pixel_delta_u = vec3_double_division(minirt->render->viewport_u, (double)(WIN_W));
 	minirt->render->pixel_delta_v = vec3_double_division(minirt->render->viewport_v, (double)(WIN_H));
+	// printf("up : %.4f %.4f %.4f\n", minirt->render->.x, minirt->render->.y , minirt->render->.z);
+	
 	set_viewport_upper_left(minirt);
 	set_pixel00_loc(minirt);
+
 	return (0);
 }
 
@@ -68,12 +71,9 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	t_vec3	color;
 
 	ray_or = vec3_dup(minirt->render->camera_center);
-	set_vec3(&ray_dir, 0, 0, 0);
+	ray_dir = vec3_dup(minirt->render->camera_dir);
 	ray.origin = &ray_or;
 	ray.dir = &ray_dir;
-	set_color(&color, 1, 1, 1);
-	set_vec3(&pixel_center, 0, 0, 0);
-	set_vec3(&ray_direction, 0, 0, 0);
 	set_pixel_center(&pixel_center, i, j, render);
 	set_ray_direction(&ray_direction, render, &pixel_center);
 	ray_init(&ray, &render->camera_center, &ray_direction);

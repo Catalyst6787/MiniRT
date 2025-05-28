@@ -1,5 +1,11 @@
 #include "minirt.h"
 
+void	print_vector_data(t_vec3 *vec, char *vec_name)
+{
+	printf("%s - x y z : %.2f %.2f %.2f\n", vec_name, vec->x, vec->y, vec->z);
+}
+
+
 void	print_camera_data(t_minirt *minirt)
 {
 	printf("Camera :\n\n");

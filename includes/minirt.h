@@ -153,6 +153,7 @@ void		debug_aff_image(t_minirt *minirt);
 void		debug_pixel(const t_ray *r);
 void		print_scene_data(t_minirt *minirt);
 void		print_scene_ok_message(void);
+void		print_vector_data(t_vec3 *vec, char *vec_name);
 
 /*                                 DOUBLE UTILS                                  */
 
