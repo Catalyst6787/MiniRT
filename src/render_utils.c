@@ -4,19 +4,13 @@
 int	set_viewport_upper_left(t_minirt *minirt)
 {
 	t_vec3	focal_length_v;
-	t_vec3	viewport_u_div2;
-	t_vec3	viewport_v_div2;
-	t_vec3	upper_left;
 
-	upper_left = get_vec3(0, 0, 0);
-	focal_length_v = get_vec3(0, 0, minirt->render->focal_length);
-	upper_left = vec3_vec_substraction(upper_left, focal_length_v);
-	viewport_u_div2 = get_vec3(minirt->render->viewport_u.x, minirt->render->viewport_u.y, minirt->render->viewport_u.z);
-	viewport_u_div2 = vec3_int_division(viewport_u_div2, 2);
-	upper_left = vec3_vec_substraction(upper_left, viewport_u_div2);
-	viewport_v_div2 = get_vec3(minirt->render->viewport_v.x, minirt->render->viewport_v.y, minirt->render->viewport_v.z);
-	viewport_v_div2 = vec3_int_division(viewport_v_div2, 2);
-	minirt->render->viewport_upper_left = vec3_vec_substraction(upper_left, viewport_v_div2);
+	focal_length_v = vec3_double_multiplication(minirt->render->camera_dir, minirt->render->focal_length);
+	minirt->render->viewport_upper_left = vec3_vec_addition(
+			focal_length_v,
+			vec3_vec_substraction(
+				vec3_reverse(vec3_int_division(minirt->render->viewport_u, 2)),
+				vec3_int_division(minirt->render->viewport_v, 2)));
 
 	return (0);
 }

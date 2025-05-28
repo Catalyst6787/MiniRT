@@ -11,6 +11,11 @@ int	vec3_reverse_inplace(t_vec3 *vec_to_rev)
 	return (0);
 }
 
+t_vec3	vec3_reverse(t_vec3 vec)
+{
+	return (get_vec3(-vec.x, -vec.y, -vec.z));
+}
+
 int	vec3_substract_inplace(t_vec3 *vec_value, const t_vec3 *to_subtract)
 {
 	if (!vec_value || !to_subtract)

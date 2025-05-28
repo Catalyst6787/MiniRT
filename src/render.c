@@ -9,9 +9,13 @@ int	init_render(t_minirt *minirt)
 	minirt->render->viewport_height = VIEWPORT_H;
 	minirt->render->viewport_width = minirt->render->viewport_height
 		* ((double)(WIN_W) / (double)WIN_H);
-	minirt->render->camera_center = get_vec3(0, 0, 0);
-	minirt->render->viewport_u = get_vec3(minirt->render->viewport_width, 0, 0);
-	minirt->render->viewport_v = get_vec3(0, -minirt->render->viewport_height, 0);
+	minirt->render->camera_center = vec3_dup(*minirt->scene->camera->pos);
+	minirt->render->camera_dir = vec3_normalise(*minirt->scene->camera->dir);
+	minirt->render->world_up = get_vec3(0, 1, 0);
+	minirt->render->right = vec3_normalise(vec3_cross(minirt->render->camera_dir, minirt->render->world_up));
+	minirt->render->up = vec3_cross(minirt->render->right, minirt->render->camera_dir);
+	minirt->render->viewport_u = vec3_double_multiplication(minirt->render->right, minirt->render->viewport_width);
+	minirt->render->viewport_v = vec3_double_multiplication(minirt->render->up, -minirt->render->viewport_height);
 	minirt->render->pixel_delta_u = vec3_double_division(minirt->render->viewport_u, (double)(WIN_W));
 	minirt->render->pixel_delta_v = vec3_double_division(minirt->render->viewport_v, (double)(WIN_H));
 	set_viewport_upper_left(minirt);

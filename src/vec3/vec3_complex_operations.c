@@ -60,3 +60,10 @@ int	vec3_isequal(t_vec3 *vec3_a, t_vec3	*vec3_b)
 		return (1);
 	return (0);
 }
+
+t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
+{
+	return(get_vec3(a.y * b.z - a.z * b.y,
+					a.z * b.x - a.x * b.z,
+					a.x * b.y - a.y * b.x));
+}

@@ -40,6 +40,10 @@ typedef struct s_render
 	double	viewport_height;
 	double	viewport_width;
 	t_vec3	camera_center;
+	t_vec3	camera_dir;
+	t_vec3	world_up;
+	t_vec3	right;
+	t_vec3	up;
 	t_vec3	viewport_u;
 	t_vec3	viewport_v;
 	t_vec3	pixel_delta_u;
