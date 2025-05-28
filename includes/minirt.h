@@ -9,6 +9,7 @@
 # include "scene.h"
 # include "debug.h"
 # include "errors.h"
+# include "keycodes.h"
 
 
 # include <sys/errno.h>
@@ -36,13 +37,6 @@
 
 # define EPSILON 1.0E-5
 
-# define Q 113
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define SPACE 32
-# define ESC 65307
 
 typedef struct s_render
 {
@@ -84,7 +78,7 @@ typedef struct s_minirt
 /*                                 INIT                                  */
 
 int			init_mlx(t_minirt *minirt);
-int			init_events(t_mlx_data *mlx);
+int			init_events(t_minirt *minirt);
 
 /*                                 PARSING                                  */
 
@@ -137,8 +131,8 @@ int			get_color_as_int(t_vec3 *color);
 /*                                 EVENTS                                  */
 
 int			end_mlx_loop(t_mlx_data *mlx);
-int			handle_keypress(int keycode, t_mlx_data *mlx);
-int			handle_mouseclick(int button, int x, int y, t_mlx_data *mlx);
+int			handle_keypress(int keycode, t_minirt *minirt);
+int			handle_mouseclick(int button, int x, int y, t_minirt *minirt);
 
 /*                                 EXIT                                  */
 

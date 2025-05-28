@@ -2,11 +2,14 @@
 Simple C ray tracer.
 
 ### basic
+
+- []
+
 - [X] Create Camera and iterate over pixels
 - [ ] Create scene and calculate intersections of rays and objects
   - [ ] Sphere
     - [X] basic intersection
-	- [ ] only spheres in front of cam
+	- [X] only spheres in front of cam
 	- [ ] shading
 	- [ ] light level
 	- [ ] ray rebound
@@ -20,9 +23,9 @@ Simple C ray tracer.
 - [ ] add vec3_is_equal() aswell
 
 ### end
- - [ ] remove wildcard from Makefile
  - [ ] remove all asserts
  - [ ] remove time.h and timing in main
+ - [ ] remove PRINT_DEBUG
 
 ### Completed Column ✓
 - [X] Add error handling to init functions
