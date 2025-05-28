@@ -1,6 +1,10 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+// # ifndef __USE_MISC
+// #  define __USE_MISC 1
+// # endif
+
 # include "libft.h"
 
 # include "mlx.h"
@@ -17,6 +21,7 @@
 # include <stdbool.h>
 # include <string.h>
 # include <time.h>
+
 # include <math.h>
 # include <fcntl.h>
 # include <assert.h>
@@ -25,12 +30,13 @@
 
 # define WIN_W 800
 # define WIN_H 400
-# define FOCAL_LEN 1.0
+// # define FOCAL_LEN 1.0
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
+# define M_PI 3.14159265358979323846
 # define EPSILON 1.0E-5
 
 

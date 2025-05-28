@@ -2,11 +2,22 @@
 #include "minirt.h"
 #include "ray.h"
 #include "vec3.h"
+#include <math.h>
+
+int	set_focal_length(t_minirt *minirt)
+{
+	double	fov_y_rad;
+
+	fov_y_rad = minirt->scene->camera->fov * M_PI / 180;
+	minirt->render->focal_length = VIEWPORT_H / (2.0 * tan(fov_y_rad / 2.0));
+	return (0);
+}
 
 int	init_render(t_minirt *minirt)
 {
-	minirt->render->focal_length = FOCAL_LEN;
 	minirt->render->viewport_height = VIEWPORT_H;
+	// minirt->render->focal_length = FOCAL_LEN;
+	set_focal_length(minirt);
 	minirt->render->viewport_width = minirt->render->viewport_height
 		* ((double)(WIN_W) / (double)WIN_H);
 	minirt->render->camera_center = vec3_dup(*minirt->scene->camera->pos);
