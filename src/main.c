@@ -18,6 +18,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
 
+	if (start_all_tests())
+		quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt, av[1]);
 
 	if (WIN_H < 10 || WIN_W < 10)

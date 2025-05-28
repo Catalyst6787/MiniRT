@@ -45,6 +45,7 @@ SRC					=	main.c \
 						vec3_basic_operations_by.c vec3_basic_operations.c vec3_complex_operations.c \
 						src/vec3/vec3_basic_op_alex.c \
 						vec3_create.c vec3_utils.c \
+						tests.c \
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -52,6 +53,7 @@ vpath %.c $(SRC_DIR):$(SRC_DIR)/parsing
 vpath %.c $(SRC_DIR):$(SRC_DIR)/vec3
 vpath %.c $(SRC_DIR):$(SRC_DIR)/debug
 vpath %.c $(SRC_DIR):$(SRC_DIR)/rays
+vpath %.c $(SRC_DIR):$(SRC_DIR)/tests
 
 PURPLE = \033[0;34m
 RED = \033[0;31m
@@ -83,6 +85,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/rays/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR)/%.o: $(SRC_DIR)/tests/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

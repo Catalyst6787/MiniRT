@@ -68,7 +68,6 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	return (0);
 }
 
-
 int	render_scene(t_minirt *minirt)
 {
 	int			j;

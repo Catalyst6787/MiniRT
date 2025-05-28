@@ -9,6 +9,7 @@
 # include "scene.h"
 # include "debug.h"
 # include "errors.h"
+# include "colors.h"
 
 
 # include <sys/errno.h>
@@ -20,11 +21,6 @@
 # include <assert.h>
 
 # define SPACE_SET = " 	\n"
-
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define BLUE "\033[34m"
-# define COLOR_RESET "\033[0m"
 
 # define WIN_W 1600
 # define WIN_H 800
@@ -156,6 +152,9 @@ void		print_scene_ok_message(void);
 
 double		double_abs(double d);
 int			double_isequal(double a, double b);
+
+/*									TESTS									*/
+int		start_all_tests(void);
 
 
 #endif

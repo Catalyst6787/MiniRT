@@ -1,4 +1,7 @@
-#include "minirt.h"
+#ifndef ERRORS_H
+# define ERRORS_H
+
+# include "minirt.h"
 
 
 # define FILE_OPEN_ERR "Error : couldn't open file\n"
@@ -37,8 +40,12 @@
 
 # define IMAGE_ERR "Error : mlx image initialization failed\n"
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
-# define PIXEL_PUT_ERR "Error! my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
+# define PIXEL_PUT_ERR "Error : my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
 
 // # define NO_SPERE_WARNING "Warning : no sphere found in scene"
 // # define NO_PLANE_WARNING "Warning : no plane found in scene"
 // # define NO_CYL_WARNING "Warning : no cylinder found in scene"
+
+# define TESTS_ERR "Error : Test(s) failed\n"
+
+#endif
