@@ -9,6 +9,10 @@
 # define LEFT 65361
 # define RIGHT 65363
 
+# define PLUS 61
+# define MINUS 45
+
+
 # define A 97
 # define C 99
 # define D 100
