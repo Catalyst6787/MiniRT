@@ -44,7 +44,6 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	a = 0.5 * (unit_direction.y + 1.0);
 	*color = vec3_vec_addition(vec3_double_multiplication(get_vec3(1, 1, 1), (1.0 - a)), vec3_double_multiplication(blue, a));
 	return (0);
-
 }
 
 // STACK ALLOC to go faster, change to heap if overflow.
