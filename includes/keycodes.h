@@ -9,13 +9,14 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-# define Q 113
-# define W 119
 # define A 97
-# define S 115
+# define C 99
 # define D 100
 # define E 101
+# define Q 113
 # define R 114
+# define S 115
+# define W 119
 
 
 #endif

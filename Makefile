@@ -30,6 +30,7 @@ SRC					=	main.c \
 						debug.c \
 						double_utils.c \
 						events.c \
+						print_data.c \
 						exit.c \
 						get_debug_fd.c \
 						init.c \

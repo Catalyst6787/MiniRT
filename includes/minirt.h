@@ -133,6 +133,8 @@ int			get_color_as_int(t_vec3 *color);
 int			end_mlx_loop(t_mlx_data *mlx);
 int			handle_keypress(int keycode, t_minirt *minirt);
 int			handle_mouseclick(int button, int x, int y, t_minirt *minirt);
+void		event_print_debug(t_minirt *minirt);
+void		print_camera_data(t_minirt *minirt);
 
 /*                                 EXIT                                  */
 
@@ -152,7 +154,8 @@ double		double_abs(double d);
 int			double_isequal(double a, double b);
 
 /*									TESTS									*/
-int		start_all_tests(void);
+
+int			start_all_tests(void);
 
 
 #endif
