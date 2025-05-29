@@ -54,3 +54,17 @@ void	free_and_null(void	**ptr)
 	free(*ptr);
 	ptr = NULL;
 }
+
+void	print_err(char *file, int line, char *s)
+{
+	return ; // REMOVE FOR RAY TRACING CHALLENGE
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd("file: ", STDERR_FILENO);
+	ft_putstr_fd(file, STDERR_FILENO);
+	ft_putstr_fd(", line: ", STDERR_FILENO);
+	ft_putstr_fd(ft_itoa(line), STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd(s, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd(COLOR_RESET, STDERR_FILENO);
+}

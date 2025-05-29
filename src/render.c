@@ -24,7 +24,7 @@ int	init_render(t_minirt *minirt)
 		* ((double)(WIN_W) / (double)WIN_H);
 	render->camera_center = vec3_dup(*minirt->scene->camera->pos);
 	render->camera_dir = vec3_normalise(*minirt->scene->camera->dir);
-	render->world_up = get_vec3(0, 1, 0);
+	render->world_up = get_vec3(0, 1, 0, 0);
 	render->right = vec3_normalise(vec3_cross(render->camera_dir, render->world_up));
 	render->up = vec3_cross(render->right, render->camera_dir);
 	render->viewport_u = vec3_double_multiplication(render->right, render->viewport_width);
@@ -34,7 +34,7 @@ int	init_render(t_minirt *minirt)
 
 	set_viewport_upper_left(minirt);
 	set_pixel00_loc(minirt);
-	print_render_data(minirt->render);
+	// print_render_data(minirt->render);
 	return (0);
 }
 
@@ -47,17 +47,17 @@ int	ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *spher
 	t_vec3	blue;
 	t_vec3	unit_direction;
 
-	blue = get_vec3(0.5, 0.7, 1.0);
+	blue = get_vec3(0.5, 0.7, 1.0, 0);
 	t = hit_sphere(sphere, r);
 	if (t > 0.0)
 	{
 		normal = vec3_normalise(vec3_vec_substraction(ray_at(t, r), *sphere->pos));
-		*color = vec3_double_multiplication(get_vec3(normal.x + 1, normal.y + 1, normal.z + 1), 0.5);
+		*color = vec3_double_multiplication(get_vec3(normal.x + 1, normal.y + 1, normal.z + 1, 0), 0.5);
 		return (0);
 	}
 	unit_direction = vec3_normalise(*r->dir);
 	a = 0.5 * (unit_direction.y + 1.0);
-	*color = vec3_vec_addition(vec3_double_multiplication(get_vec3(1, 1, 1), (1.0 - a)), vec3_double_multiplication(blue, a));
+	*color = vec3_vec_addition(FILE, LINE, vec3_double_multiplication(get_vec3(1, 1, 1, 0), (1.0 - a)), vec3_double_multiplication(blue, a));
 	return (0);
 }
 
@@ -80,8 +80,8 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	set_ray(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
-	if (!i && !j)
-		print_render_pixel(pixel_center,ray_direction, ray,ray_or,ray_dir,color);
+	// if (!i && !j)
+	// 	print_render_pixel(pixel_center,ray_direction, ray,ray_or,ray_dir,color);
 	return (0);
 }
 

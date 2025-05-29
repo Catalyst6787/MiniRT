@@ -39,6 +39,8 @@
 # define M_PI 3.14159265358979323846
 # define EPSILON 1.0E-5
 
+# define FILE __FILE__
+# define LINE __LINE__
 
 typedef struct s_render
 {
@@ -130,6 +132,7 @@ void		my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color);
 void		free_tab(char **arr);
 void		free_and_null(void	**ptr);
 int			get_color_as_int(t_vec3 *color);
+void		print_err(char *file, int line, char *s);
 
 /*                                 EVENTS                                  */
 
