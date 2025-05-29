@@ -16,6 +16,7 @@ int	set_viewport_upper_left(t_minirt *minirt)
 
 	return (0);
 }
+
 // pixel00 = (viewport_upper_left + (0.5 * (pixel_delta_u + pixel_delta_v)))
 int	set_pixel00_loc(t_minirt *minirt)
 {
@@ -40,14 +41,6 @@ t_vec3	get_pixel_center(int i, int j, t_render	*render)
 				vec3_int_multiplication(render->pixel_delta_u, i),
 				vec3_int_multiplication(render->pixel_delta_v, j)),
 			render->pixel00_loc));
-}
-
-int	set_ray_direction(t_vec3 *ray_direction,
-	t_render *render, t_vec3 *pixel_center)
-{
-	copy_vec3(ray_direction, pixel_center);
-	vec3_substract_inplace(ray_direction, &render->camera_center);
-	return (0);
 }
 
 int	is_debug_pixel(int i, int j)

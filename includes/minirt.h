@@ -122,8 +122,6 @@ int			init_render(t_minirt *minirt);
 int			set_viewport_upper_left(t_minirt *minirt);
 int			set_pixel00_loc(t_minirt *minirt);
 t_vec3		get_pixel_center(int i, int j, t_render	*render);
-int			set_ray_direction(t_vec3 *ray_direction,
-			t_render *render, t_vec3 *pixel_center);
 int			is_debug_pixel(int i, int j);
 
 /*                                 UTILS                                  */

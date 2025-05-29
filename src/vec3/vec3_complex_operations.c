@@ -15,18 +15,6 @@ double	vec3_exact_length(t_vec3 *vec3)
 	return (sqrt(vec3_length_squared(vec3)));
 }
 
-void	vec3_normalise_inplace(t_vec3 *vec3)
-{
-	double	length;
-
-	assert(vec3);
-	length = vec3_exact_length(vec3);
-	assert(length != 0);
-	vec3->x /= length;
-	vec3->y /= length;
-	vec3->z /= length;
-}
-
 t_vec3	vec3_normalise(t_vec3 vec3)
 {
 	t_vec3	normalised;

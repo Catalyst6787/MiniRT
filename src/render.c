@@ -15,20 +15,22 @@ int	set_focal_length(t_minirt *minirt)
 
 int	init_render(t_minirt *minirt)
 {
-	minirt->render->viewport_height = VIEWPORT_H;
-	// minirt->render->focal_length = FOCAL_LEN;
+	t_render	*render;
+
+	render = minirt->render;
+	render->viewport_height = VIEWPORT_H;
 	set_focal_length(minirt);
-	minirt->render->viewport_width = minirt->render->viewport_height
+	render->viewport_width = render->viewport_height
 		* ((double)(WIN_W) / (double)WIN_H);
-	minirt->render->camera_center = vec3_dup(*minirt->scene->camera->pos);
-	minirt->render->camera_dir = vec3_normalise(*minirt->scene->camera->dir);
-	minirt->render->world_up = get_vec3(0, 1, 0);
-	minirt->render->right = vec3_normalise(vec3_cross(minirt->render->camera_dir, minirt->render->world_up));
-	minirt->render->up = vec3_cross(minirt->render->right, minirt->render->camera_dir);
-	minirt->render->viewport_u = vec3_double_multiplication(minirt->render->right, minirt->render->viewport_width);
-	minirt->render->viewport_v = vec3_double_multiplication(minirt->render->up, -minirt->render->viewport_height);
-	minirt->render->pixel_delta_u = vec3_double_division(minirt->render->viewport_u, (double)(WIN_W));
-	minirt->render->pixel_delta_v = vec3_double_division(minirt->render->viewport_v, (double)(WIN_H));
+	render->camera_center = vec3_dup(*minirt->scene->camera->pos);
+	render->camera_dir = vec3_normalise(*minirt->scene->camera->dir);
+	render->world_up = get_vec3(0, 1, 0);
+	render->right = vec3_normalise(vec3_cross(render->camera_dir, render->world_up));
+	render->up = vec3_cross(render->right, render->camera_dir);
+	render->viewport_u = vec3_double_multiplication(render->right, render->viewport_width);
+	render->viewport_v = vec3_double_multiplication(render->up, -render->viewport_height);
+	render->pixel_delta_u = vec3_double_division(render->viewport_u, (double)(WIN_W));
+	render->pixel_delta_v = vec3_double_division(render->viewport_v, (double)(WIN_H));
 
 	set_viewport_upper_left(minirt);
 	set_pixel00_loc(minirt);
@@ -74,9 +76,9 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	ray.origin = &ray_or;
 	ray.dir = &ray_dir;
 	pixel_center = get_pixel_center(i, j, render);
-	// vec3_vec_substraction(pixel_center, render->camera_center);
-	set_ray_direction(&ray_direction, render, &pixel_center);
-	ray_init(&ray, &render->camera_center, &ray_direction);
+	vec3_vec_substraction(pixel_center, render->camera_center);
+	ray_direction = vec3_vec_substraction(pixel_center, render->camera_center);
+	set_ray(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
 	if (!i && !j)
