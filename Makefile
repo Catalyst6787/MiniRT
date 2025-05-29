@@ -43,8 +43,7 @@ SRC					=	main.c \
 						sphere.c \
 						utils.c \
 						free_utils.c \
-						vec3_basic_operations.c vec3_complex_operations.c \
-						src/vec3/vec3_basic_op_alex.c \
+						vec3_basic_op.c vec3_complex_operations.c \
 						vec3_create.c vec3_utils.c \
 						tests.c \
 

@@ -1,6 +1,10 @@
 
 #include "minirt.h"
 
+t_vec3	vec3_reverse(t_vec3 vec)
+{
+	return (get_vec3(-vec.x, -vec.y, -vec.z));
+}
 
 /*************** SETERS | GETERS ****************/
 
