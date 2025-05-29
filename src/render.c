@@ -29,11 +29,10 @@ int	init_render(t_minirt *minirt)
 	minirt->render->viewport_v = vec3_double_multiplication(minirt->render->up, -minirt->render->viewport_height);
 	minirt->render->pixel_delta_u = vec3_double_division(minirt->render->viewport_u, (double)(WIN_W));
 	minirt->render->pixel_delta_v = vec3_double_division(minirt->render->viewport_v, (double)(WIN_H));
-	// printf("up : %.4f %.4f %.4f\n", minirt->render->.x, minirt->render->.y , minirt->render->.z);
 
 	set_viewport_upper_left(minirt);
 	set_pixel00_loc(minirt);
-
+	print_render_data(minirt->render);
 	return (0);
 }
 
@@ -80,6 +79,8 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	ray_init(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
 	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
+	if (!i && !j)
+		print_render_pixel(pixel_center,ray_direction, ray,ray_or,ray_dir,color);
 	return (0);
 }
 

@@ -1,6 +1,41 @@
 
 #include "minirt.h"
 
+void	print_render_data(t_render *render)
+{
+	(void)render;
+	PRINT_DEBUG("focal_length:				%.2f\n", render->focal_length);
+	PRINT_DEBUG("double	viewport_height:	%.2f\n", render->viewport_height);
+	PRINT_DEBUG("double	viewport_width:		%.2f\n", render->viewport_width);
+	PRINT_DEBUG("camera_center :				(%.3f, %.3f, %.3f)\n", render->camera_center.x, render->camera_center.y, render->camera_center.z);
+	PRINT_DEBUG("camera_dir :				(%.3f, %.3f, %.3f)\n", render->camera_dir.x, render->camera_dir.y, render->camera_dir.z);
+	PRINT_DEBUG("world_up :					(%.3f, %.3f, %.3f)\n", render->world_up.x, render->world_up.y, render->world_up.z);
+	PRINT_DEBUG("right :						(%.3f, %.3f, %.3f)\n", render->right.x, render->right.y, render->right.z);
+	PRINT_DEBUG("up :						(%.3f, %.3f, %.3f)\n", render->up.x, render->up.y, render->up.z);
+	PRINT_DEBUG("viewport_u :				(%.3f, %.3f, %.3f)\n", render->viewport_u.x, render->viewport_u.y, render->viewport_u.z);
+	PRINT_DEBUG("viewport_v :				(%.3f, %.3f, %.3f)\n", render->viewport_v.x, render->viewport_v.y, render->viewport_v.z);
+	PRINT_DEBUG("pixel_delta_u :				(%.3f, %.3f, %.3f)\n", render->pixel_delta_u.x, render->pixel_delta_u.y, render->pixel_delta_u.z);
+	PRINT_DEBUG("pixel_delta_v :				(%.3f, %.3f, %.3f)\n", render->pixel_delta_v.x, render->pixel_delta_v.y, render->pixel_delta_v.z);
+	PRINT_DEBUG("viewport_upper_left :		(%.3f, %.3f, %.3f)\n", render->viewport_upper_left.x, render->viewport_upper_left.y, render->viewport_upper_left.z);
+	PRINT_DEBUG("pixel00_loc:				(%.3f, %.3f, %.3f)\n", render->pixel00_loc.x, render->pixel00_loc.y, render->pixel00_loc.z);
+	PRINT_DEBUG("\n\n");
+}
+void	print_render_pixel(t_vec3	pixel_center,
+	t_vec3	ray_direction,
+	t_ray	ray,
+	t_vec3	ray_or,
+	t_vec3	ray_dir,
+	t_vec3	color)
+{
+	PRINT_DEBUG("Pixel center : (%.3f, %.3f, %.3f)\n", pixel_center.x, pixel_center.y, pixel_center.z);
+	PRINT_DEBUG("Ray direction : (%.3f, %.3f, %.3f)\n", ray_direction.x, ray_direction.y, ray_direction.z);
+	PRINT_DEBUG("ray : (%.3f, %.3f, %.3f)\n", ray.dir->x, ray.dir->y, ray.dir->z); 
+	PRINT_DEBUG("ray or : (%.3f, %.3f, %.3f)\n", ray_or.x, ray_or.y, ray_or.z);
+	PRINT_DEBUG("ray_dir : (%.3f, %.3f, %.3f)\n", ray_dir.x, ray_dir.y, ray_dir.z);
+	PRINT_DEBUG("color : (%.3f, %.3f, %.3f)\n", color.x, color.y, color.z);
+}
+
+
 void	print_scene(t_minirt *minirt, bool asterix)
 {
 	if (asterix == true)
