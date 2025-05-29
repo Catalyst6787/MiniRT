@@ -42,14 +42,6 @@ t_vec3	get_pixel_center(int i, int j, t_render	*render)
 			render->pixel00_loc));
 }
 
-int	set_ray_direction(t_vec3 *ray_direction,
-	t_render *render, t_vec3 *pixel_center)
-{
-	copy_vec3(ray_direction, pixel_center);
-	vec3_substract_inplace(ray_direction, &render->camera_center);
-	return (0);
-}
-
 int	is_debug_pixel(int i, int j)
 {
 	if (i == DEBUG_PIXEL_I && j == DEBUG_PIXEL_J)
