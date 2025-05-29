@@ -21,13 +21,6 @@ typedef union s_vec3
 	};
 }	t_vec3;
 
-/*                                 CREATE                                  */
-
-t_vec3	*vec3_default_alloc(void);
-t_vec3	*vec3_new_alloc(const double x, const double y, const double z);
-t_vec3	*vec3_dup_alloc(t_vec3 *to_dup);
-t_vec3	vec3_dup(t_vec3 to_dup);
-int		copy_vec3(t_vec3 *dest, t_vec3 *origin);
 
 /*                                 BASIC OPS                                  */
 
@@ -36,6 +29,7 @@ t_vec3	vec3_reverse(t_vec3 vec);
 int		set_vec3(t_vec3 *v, double x, double y, double z);
 int		copy_vec3(t_vec3 *dest, t_vec3 *src);
 t_vec3	get_vec3(double x, double y, double z);
+t_vec3	vec3_dup(t_vec3 to_dup);
 
 int		set_color(t_vec3 *v, double r, double g, double b);
 

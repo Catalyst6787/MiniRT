@@ -44,6 +44,16 @@ t_vec3	get_vec3(double x, double y, double z)
 	return (v);
 }
 
+t_vec3	vec3_dup(t_vec3 to_dup)
+{
+	t_vec3	vec3;
+
+	vec3.x = to_dup.x;
+	vec3.y = to_dup.y;
+	vec3.z = to_dup.z;
+	return (vec3);
+}
+
 
 /************** 2 VECORS OPERATIONS ****************/
 
