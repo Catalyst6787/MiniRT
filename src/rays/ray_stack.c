@@ -5,10 +5,10 @@
 // copy ray ?
 
 
-void	set_ray(t_ray *ray, t_vec3 pos, t_vec3 dir)
+void	set_ray(t_ray *ray, t_vec3 *pos, t_vec3 *dir)
 {
-	ray->origin = &pos;
-	ray->dir = &dir;
+	ray->origin = pos;
+	ray->dir = dir;
 }
 
 

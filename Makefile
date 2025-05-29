@@ -35,7 +35,6 @@ SRC					=	main.c \
 						get_debug_fd.c \
 						init.c \
 						print_debug.c \
-						ray_create.c \
 						ray_stack.c \
 						ray_operations.c \
 						render.c \

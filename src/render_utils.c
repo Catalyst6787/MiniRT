@@ -16,6 +16,7 @@ int	set_viewport_upper_left(t_minirt *minirt)
 
 	return (0);
 }
+
 // pixel00 = (viewport_upper_left + (0.5 * (pixel_delta_u + pixel_delta_v)))
 int	set_pixel00_loc(t_minirt *minirt)
 {
