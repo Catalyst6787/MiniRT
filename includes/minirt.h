@@ -31,7 +31,8 @@
 # define WIN_W 800
 # define WIN_H 400
 // # define FOCAL_LEN 1.0
-# define VIEWPORT_H 2.0
+// # define VIEWPORT_H 2.0
+# define VIEWPORT_H 6.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
@@ -155,8 +156,6 @@ void		print_render_data(t_render *render);
 void		print_render_pixel(t_vec3	pixel_center,
 			t_vec3	ray_direction,
 			t_ray	ray,
-			t_vec3	ray_or,
-			t_vec3	ray_dir,
 			t_vec3	color);
 
 /*                                 DOUBLE UTILS                                  */

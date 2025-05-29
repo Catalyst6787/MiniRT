@@ -23,16 +23,14 @@ void	print_render_data(t_render *render)
 void	print_render_pixel(t_vec3	pixel_center,
 	t_vec3	ray_direction,
 	t_ray	ray,
-	t_vec3	ray_or,
-	t_vec3	ray_dir,
 	t_vec3	color)
 {
-	PRINT_DEBUG("Pixel center : (%.3f, %.3f, %.3f)\n", pixel_center.x, pixel_center.y, pixel_center.z);
-	PRINT_DEBUG("Ray direction : (%.3f, %.3f, %.3f)\n", ray_direction.x, ray_direction.y, ray_direction.z);
-	PRINT_DEBUG("ray : (%.3f, %.3f, %.3f)\n", ray.dir->x, ray.dir->y, ray.dir->z); 
-	PRINT_DEBUG("ray or : (%.3f, %.3f, %.3f)\n", ray_or.x, ray_or.y, ray_or.z);
-	PRINT_DEBUG("ray_dir : (%.3f, %.3f, %.3f)\n", ray_dir.x, ray_dir.y, ray_dir.z);
-	PRINT_DEBUG("color : (%.3f, %.3f, %.3f)\n", color.x, color.y, color.z);
+	PRINT_DEBUG("Pixel center :				(%.3f, %.3f, %.3f)\n", pixel_center.x, pixel_center.y, pixel_center.z);
+	PRINT_DEBUG("Ray direction :				(%.3f, %.3f, %.3f)\n", ray_direction.x, ray_direction.y, ray_direction.z);
+	PRINT_DEBUG("ray dir :					(%.3f, %.3f, %.3f)\n", ray.dir->x, ray.dir->y, ray.dir->z); 
+	PRINT_DEBUG("ray origin :				(%.3f, %.3f, %.3f)\n", ray.origin->x, ray.origin->y, ray.origin->z); 
+	PRINT_DEBUG("color :						(%.3f, %.3f, %.3f)\n", color.x, color.y, color.z);
+	PRINT_DEBUG("\n\n");
 }
 
 
