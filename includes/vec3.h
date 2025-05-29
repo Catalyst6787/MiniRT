@@ -31,8 +31,9 @@ int		copy_vec3(t_vec3 *dest, t_vec3 *origin);
 
 /*                                 BASIC OPS                                  */
 
-int		vec3_reverse_inplace(t_vec3 *vec_to_rev);
+
 t_vec3	vec3_reverse(t_vec3 vec);
+int		vec3_reverse_inplace(t_vec3 *vec_to_rev);
 int		vec3_substract_inplace(t_vec3 *vec_value, const t_vec3 *to_subtract);
 int		vec3_add_inplace(t_vec3 *vec_value, const t_vec3 *to_add);
 int		vec3_multiply_inplace(t_vec3 *vec_value, const t_vec3 *to_multiply_by);

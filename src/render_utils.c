@@ -16,16 +16,20 @@ int	set_viewport_upper_left(t_minirt *minirt)
 
 	return (0);
 }
-
+// pixel00 = (viewport_upper_left + (0.5 * (pixel_delta_u + pixel_delta_v)))
 int	set_pixel00_loc(t_minirt *minirt)
 {
-	t_vec3	pixel_delt_uv;
+	minirt->render->pixel00_loc = vec3_vec_addition(
+			minirt->render->viewport_upper_left,
+			vec3_double_multiplication(
+				vec3_vec_addition(
+					minirt->render->pixel_delta_u,
+					minirt->render->pixel_delta_v
+					),
+				0.5
+				)
+			);
 
-	copy_vec3(&minirt->render->pixel00_loc, &minirt->render->viewport_upper_left);
-	copy_vec3(&pixel_delt_uv, &minirt->render->pixel_delta_u);
-	vec3_add_inplace(&pixel_delt_uv, &minirt->render->pixel_delta_v);
-	vec3_multiply_by_inplace(&pixel_delt_uv, 0.5);
-	vec3_add_inplace(&minirt->render->pixel00_loc, &pixel_delt_uv);
 	return (0);
 }
 
