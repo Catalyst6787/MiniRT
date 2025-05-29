@@ -39,15 +39,6 @@ int		vec3_add_inplace(t_vec3 *vec_value, const t_vec3 *to_add);
 int		vec3_multiply_inplace(t_vec3 *vec_value, const t_vec3 *to_multiply_by);
 int		vec3_divide_inplace(t_vec3 *vec_value, const t_vec3 *to_divide_by);
 
-/*                                 BASIC OPS BY                                  */
-
-int		vec3_substract_by_inplace(t_vec3 *vec_value, const double to_subtract);
-int		vec3_add_by_inplace(t_vec3 *vec_value, const double to_add);
-int		vec3_multiply_by_inplace(t_vec3 *vec_value,
-			const double to_multiply_by);
-int		vec3_divide_by_inplace(t_vec3 *vec_value, const double to_divide_by);
-
-
 /******************         AJOUTS ALEX            ******************/
 
 int		set_vec3(t_vec3 *v, double x, double y, double z);
