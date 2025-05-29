@@ -33,6 +33,8 @@ double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
 {
 	assert(vec3_u);
 	assert(vec3_v);
+	if (vec3_u->w || vec3_v->w)
+		print_err(FILE, LINE, "vec3_dot, tring to dot a point");
 	return ((vec3_u->x * vec3_v->x)
 		+ (vec3_u->y * vec3_v->y)
 		+ (vec3_u->z * vec3_v->z));
@@ -51,7 +53,10 @@ int	vec3_isequal(t_vec3 *vec3_a, t_vec3	*vec3_b)
 
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 {
-	return(get_vec3(a.y * b.z - a.z * b.y,
-					a.z * b.x - a.x * b.z,
-					a.x * b.y - a.y * b.x));
+	if (a.w || b.w)
+		print_err(FILE, LINE, "vec3_cross, trying to cross a point");
+	return (get_vec3(a.y * b.z - a.z * b.y,
+			a.z * b.x - a.x * b.z,
+			a.x * b.y - a.y * b.x,
+			a.w));
 }

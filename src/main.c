@@ -14,6 +14,8 @@ int	main(int ac, char **av)
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
 	minirt.render = &render;
+	minirt.render->camera_center.w = 1;
+	minirt.render->pixel00_loc.w = 1;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
