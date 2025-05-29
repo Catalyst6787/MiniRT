@@ -37,9 +37,7 @@ void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 		*(unsigned int *)dst = color;
 	}
 	else
-	{
 		quit(minirt, PIXEL_PUT_ERR);
-	}
 }
 
 void	free_tab(char **arr)

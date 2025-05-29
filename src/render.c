@@ -77,7 +77,6 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	ray.origin = &ray_or;
 	ray.dir = &ray_dir;
 	pixel_center = get_pixel_center(i, j, render);
-	vec3_vec_substraction(pixel_center, render->camera_center);
 	ray_direction = vec3_vec_substraction(pixel_center, render->camera_center);
 	set_ray(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
