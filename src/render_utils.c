@@ -33,19 +33,13 @@ int	set_pixel00_loc(t_minirt *minirt)
 	return (0);
 }
 
-int	set_pixel_center(t_vec3	*pixel_center, int i, int j, t_render	*render)
+t_vec3	get_pixel_center(int i, int j, t_render	*render)
 {
-	t_vec3	pixel_delta_u;
-	t_vec3	pixel_delta_v;
-
-	copy_vec3(&pixel_delta_u, &render->pixel_delta_u);
-	copy_vec3(&pixel_delta_v, &render->pixel_delta_v);
-	vec3_multiply_by_inplace(&pixel_delta_u, i);
-	vec3_multiply_by_inplace(&pixel_delta_v, j);
-	vec3_add_inplace(&pixel_delta_u, &pixel_delta_v);
-	copy_vec3(pixel_center, &render->pixel00_loc);
-	vec3_add_inplace(pixel_center, &pixel_delta_u);
-	return (0);
+	return (vec3_vec_addition(
+			vec3_vec_addition(
+				vec3_int_multiplication(render->pixel_delta_u, i),
+				vec3_int_multiplication(render->pixel_delta_v, j)),
+			render->pixel00_loc));
 }
 
 int	set_ray_direction(t_vec3 *ray_direction,
