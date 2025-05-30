@@ -11,8 +11,8 @@ int	set_viewport_upper_left(t_minirt *minirt)
 	minirt->render->viewport_upper_left = vec3_vec_addition(FILE, LINE,
 			viewport_center,
 			vec3_vec_substraction(
-				vec3_reverse(vec3_int_division(minirt->render->viewport_u, 2)),
-				vec3_int_division(minirt->render->viewport_v, 2)));
+				vec3_reverse(vec3_double_division(minirt->render->viewport_u, 2)),
+				vec3_double_division(minirt->render->viewport_v, 2)));
 
 	return (0);
 }
@@ -40,8 +40,8 @@ t_vec3	get_pixel_center(int i, int j, t_render	*render)
 	// print_vector_data(&render->pixel_delta_v, "pixel_delta_v");
 	return (vec3_vec_addition(FILE, LINE,
 			vec3_vec_addition(FILE, LINE,
-				vec3_int_multiplication(render->pixel_delta_u, i),
-				vec3_int_multiplication(render->pixel_delta_v, j)),
+				vec3_double_multiplication(render->pixel_delta_u, i),
+				vec3_double_multiplication(render->pixel_delta_v, j)),
 			render->pixel00_loc));
 }
 

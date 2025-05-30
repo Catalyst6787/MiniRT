@@ -40,13 +40,12 @@ double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
 		+ (vec3_u->z * vec3_v->z));
 }
 
-int	vec3_isequal(t_vec3 *vec3_a, t_vec3	*vec3_b)
+int	vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b)
 {
-	assert(vec3_a);
-	assert(vec3_b);
-	if (double_isequal(vec3_a->x, vec3_b->x)
-		&& double_isequal(vec3_a->y, vec3_b->y)
-		&& double_isequal(vec3_a->z, vec3_b->z))
+	if (double_isequal(vec3_a.x, vec3_b.x)
+		&& double_isequal(vec3_a.y, vec3_b.y)
+		&& double_isequal(vec3_a.z, vec3_b.z)
+		&& double_isequal(vec3_a.w, vec3_b.w))
 		return (1);
 	return (0);
 }
@@ -57,6 +56,5 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 		print_err(FILE, LINE, "vec3_cross, trying to cross a point");
 	return (get_vec3(a.y * b.z - a.z * b.y,
 			a.z * b.x - a.x * b.z,
-			a.x * b.y - a.y * b.x,
-			a.w));
+			a.x * b.y - a.y * b.x));
 }

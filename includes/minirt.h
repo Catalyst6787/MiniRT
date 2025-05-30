@@ -15,6 +15,7 @@
 # include "errors.h"
 # include "keycodes.h"
 # include "colors.h"
+# include "test.h"
 
 
 # include <sys/errno.h>
@@ -164,10 +165,6 @@ void		print_render_pixel(t_vec3	pixel_center,
 
 double		double_abs(double d);
 int			double_isequal(double a, double b);
-
-/*									TESTS									*/
-
-int			start_all_tests(void);
 
 
 #endif
