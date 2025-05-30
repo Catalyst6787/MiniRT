@@ -77,7 +77,7 @@ int	test_scalar_multiplication(void)
 {
 	t_vec3 a = get_vec3(1, -2, 3);
 	assert(vec3_isequal(vec3_double_multiplication(a, 3.5), get_vec3(3.5, -7, 10.5)));
-	assert(vec3_isequal(vec3_int_multiplication(a, 3), get_vec3(3, -6, 9)));
+	assert(vec3_isequal(vec3_double_multiplication(a, 3), get_vec3(3, -6, 9)));
 
 	t_vec3 b = get_point3(1, -2, 3);
 	assert(vec3_isequal(vec3_double_multiplication(b, 0.5), get_point3(0.5, -1, 1.5)));
@@ -89,7 +89,7 @@ int	test_tuple_division(void)
 	t_vec3 a = get_vec3(1, -2, 3);
 
 	assert(vec3_isequal(vec3_double_division(a, 2), get_vec3(0.5, -1, 1.5)));
-	assert(vec3_isequal(vec3_int_division(a, 2), get_vec3(0.5, -1, 1.5)));
+	assert(vec3_isequal(vec3_double_division(a, 2), get_vec3(0.5, -1, 1.5)));
 	return (0);
 }
 
