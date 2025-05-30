@@ -171,6 +171,7 @@ t_vec3	vec3_int_multiplication(t_vec3 src, int n)
 	v.x = src.x * n;
 	v.y = src.y * n;
 	v.z = src.z * n;
+	v.w = src.w;
 	return (v);
 
 }
@@ -184,6 +185,7 @@ t_vec3	vec3_int_division(t_vec3 src, int n)
 	v.x = src.x / n;
 	v.y = src.y / n;
 	v.z = src.z / n;
+	v.w = src.w;
 	return (v);
 }
 
@@ -220,6 +222,7 @@ t_vec3	vec3_double_multiplication(t_vec3 src, double n)
 	v.x = src.x * n;
 	v.y = src.y * n;
 	v.z = src.z * n;
+	v.w = src.w;
 	return (v);
 }
 
@@ -232,5 +235,6 @@ t_vec3	vec3_double_division(t_vec3 src, double n)
 	v.x = src.x / n;
 	v.y = src.y / n;
 	v.z = src.z / n;
+	v.w = src.w;
 	return (v);
 }

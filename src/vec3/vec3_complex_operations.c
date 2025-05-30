@@ -44,7 +44,8 @@ int	vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b)
 {
 	if (double_isequal(vec3_a.x, vec3_b.x)
 		&& double_isequal(vec3_a.y, vec3_b.y)
-		&& double_isequal(vec3_a.z, vec3_b.z))
+		&& double_isequal(vec3_a.z, vec3_b.z)
+		&& double_isequal(vec3_a.w, vec3_b.w))
 		return (1);
 	return (0);
 }
