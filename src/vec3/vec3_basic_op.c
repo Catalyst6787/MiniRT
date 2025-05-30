@@ -5,7 +5,7 @@ t_vec3	vec3_reverse(t_vec3 vec)
 {
 	if (vec.w)
 		print_err(FILE, LINE, "vec3_reverse, trying to reverse a point");
-	return (get_vec3(-vec.x, -vec.y, -vec.z, vec.w));
+	return (get_vec3(-vec.x, -vec.y, -vec.z));
 }
 
 /*************** SETERS | GETERS ****************/
@@ -36,25 +36,36 @@ int	set_color(t_vec3 *v, double r, double g, double b)
 	return (0);
 }
 
-int	copy_vec3(t_vec3 *dest, t_vec3 *src)
-{
-	if (!src)
-		return (ft_printf("vec3_copy. Error, passed NULL ptr.\n"), 1);
-	dest->x = src->x;
-	dest->y = src->y;
-	dest->z = src->z;
-	dest->w = src->w;
-	return (0);
-}
+// int	copy_vec3(t_vec3 *dest, t_vec3 *src)
+// {
+// 	if (!src)
+// 		return (ft_printf("vec3_copy. Error, passed NULL ptr.\n"), 1);
+// 	dest->x = src->x;
+// 	dest->y = src->y;
+// 	dest->z = src->z;
+// 	dest->w = src->w;
+// 	return (0);
+// }
 
-t_vec3	get_vec3(double x, double y, double z, int w)
+t_vec3	get_vec3(double x, double y, double z)
 {
 	t_vec3	v;
 
 	v.x = x;
 	v.y = y;
 	v.z = z;
-	v.w = w;
+	v.w = 0;
+	return (v);
+}
+
+t_vec3	get_point3(double x, double y, double z)
+{
+	t_vec3	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	v.w = 1;
 	return (v);
 }
 
@@ -97,6 +108,7 @@ t_vec3	vec3_vec_substraction(const t_vec3 v1, const t_vec3 v2)
 	v.x = v1.x - v2.x;
 	v.y = v1.y - v2.y;
 	v.z = v1.z - v2.z;
+	v.w = v1.w - v2.w;
 	return (v);
 }
 

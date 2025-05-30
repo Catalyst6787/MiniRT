@@ -57,6 +57,5 @@ t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 		print_err(FILE, LINE, "vec3_cross, trying to cross a point");
 	return (get_vec3(a.y * b.z - a.z * b.y,
 			a.z * b.x - a.x * b.z,
-			a.x * b.y - a.y * b.x,
-			a.w));
+			a.x * b.y - a.y * b.x));
 }
