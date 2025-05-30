@@ -8,6 +8,7 @@
 		"vec3.h": "c",
 		"errno.h": "c",
 		"math.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"libft.h": "c"
 	}
 }

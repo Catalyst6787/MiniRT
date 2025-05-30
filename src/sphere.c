@@ -18,7 +18,9 @@ double	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	if (discriminant < 0)
 		return (-1.0);
 	else
+	{
 		return ((-b - sqrt(discriminant)) / (2.0 * a));
+	}
 }
 
 t_sphere	*new_sphere(t_vec3 *pos, double diameter, t_vec3 *color)

@@ -31,8 +31,7 @@
 # define WIN_W 800
 # define WIN_H 400
 // # define FOCAL_LEN 1.0
-// # define VIEWPORT_H 2.0
-# define VIEWPORT_H 6.0
+# define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
