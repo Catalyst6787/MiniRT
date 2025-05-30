@@ -54,7 +54,7 @@ double	vec3_length_squared(t_vec3 *vec3);
 double	vec3_exact_length(t_vec3 *vec3);
 t_vec3	vec3_normalise(t_vec3 vec3);
 double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v);
-int		vec3_isequal(t_vec3 *vec3_a, t_vec3	*vec3_b);
+int		vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b);
 t_vec3	vec3_cross(t_vec3 vec3_a, t_vec3 vec3_b);
 
 /*                                 UTILS                                  */
