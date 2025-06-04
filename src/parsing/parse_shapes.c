@@ -14,10 +14,12 @@ int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor
 	sphere->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	sphere->pos->w = 1;
 	sphere->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	sphere->color->r = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->color->g = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
+	sphere->color->w = 0;
 	*cursor = i;
 	return (1);
 	//check
@@ -38,9 +40,11 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	plane->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	plane->pos->w = 1;
 	plane->dir->x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir->y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	plane->dir->w = 0;
 	plane->color->r = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->color->g = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
@@ -64,14 +68,17 @@ int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *
 	cylinder->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	cylinder->pos->w = 1;
 	cylinder->dir->x = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->dir->y = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	cylinder->dir->w = 0;
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->height = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->color->r = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->color->g = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
+	cylinder->color->w = 0;
 	*cursor = i;
 	return (1);
 	//check

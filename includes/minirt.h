@@ -155,6 +155,7 @@ void		debug_pixel(const t_ray *r);
 void		print_scene_data(t_minirt *minirt);
 void		print_scene_ok_message(void);
 void		print_vector_data(t_vec3 *vec, char *vec_name);
+void		print_vec_stack(t_vec3 vec, char *vec_name);
 void		print_render_data(t_render *render);
 void		print_render_pixel(t_vec3	pixel_center,
 			t_vec3	ray_direction,
