@@ -25,6 +25,7 @@ t_vec3	vec3_normalise(t_vec3 vec3)
 	normalised.x = vec3.x / length;
 	normalised.y = vec3.y / length;
 	normalised.z = vec3.z / length;
+	normalised.w = vec3.w;
 	return (normalised);
 }
 

@@ -5,6 +5,10 @@ void	print_vector_data(t_vec3 *vec, char *vec_name)
 	printf("%s - x y z w : %.2f %.2f %.2f %d\n", vec_name, vec->x, vec->y, vec->z, vec->w);
 }
 
+void	print_vec_stack(t_vec3 vec, char *vec_name)
+{
+	printf("%s - x y z w : %.2f %.2f %.2f %d\n", vec_name, vec.x, vec.y, vec.z, vec.w);
+}
 
 void	print_camera_data(t_minirt *minirt)
 {

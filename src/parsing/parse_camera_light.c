@@ -36,9 +36,11 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->camera->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->pos->w = 1;
 	scene->camera->dir->x = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->dir->y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->dir->w = 0;
 	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
 	*cursor = i;
 	return (1);
@@ -50,10 +52,10 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	int	i;
 	(void)minirt;
 
-	scene->light->pos = malloc(sizeof(t_vec3)); 
+	scene->light->pos = malloc(sizeof(t_vec3));
 	if (!scene->light->pos)
 		quit(minirt, MALLOC_ERR);
-	scene->light->color = malloc(sizeof(t_vec3)); 
+	scene->light->color = malloc(sizeof(t_vec3));
 	if (!scene->light->color)
 		quit(minirt, MALLOC_ERR);
 	i = *cursor + 1;
@@ -62,6 +64,7 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->light->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->light->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->light->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->light->pos->w = 1;
 	scene->light->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->light->color->r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	scene->light->color->g = ato_buffer(&scene->buffer[i], &i, ',') / 255;

@@ -11,7 +11,7 @@ typedef union s_vec3
 		double	x;
 		double	y;
 		double	z;
-		bool	w;
+		int		w;
 	};
 	struct
 	{

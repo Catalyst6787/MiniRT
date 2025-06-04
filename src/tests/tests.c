@@ -84,12 +84,44 @@ int	test_scalar_multiplication(void)
 	return (0);
 }
 
-int	test_tuple_division(void)
+int	test_scalar_division(void)
 {
 	t_vec3 a = get_vec3(1, -2, 3);
 
 	assert(vec3_isequal(vec3_double_division(a, 2), get_vec3(0.5, -1, 1.5)));
 	assert(vec3_isequal(vec3_double_division(a, 2), get_vec3(0.5, -1, 1.5)));
+	return (0);
+}
+
+int	test_vec_magnitude(void)
+{
+	t_vec3 v = get_vec3(1, 0, 0);
+	double magnitude = vec3_exact_length(&v);
+	assert(magnitude == 1);
+	v = get_vec3(0, 1, 0);
+	magnitude = vec3_exact_length(&v);
+	assert(magnitude == 1);
+	magnitude = vec3_exact_length(&v);
+	assert(magnitude == 1);
+	v = get_vec3(1, 2, 3);
+	magnitude = vec3_exact_length(&v);
+	assert(magnitude == sqrt(14));
+	v = get_vec3(-1, -2, -3);
+	magnitude = vec3_exact_length(&v);
+	assert(magnitude == sqrt(14));
+	return (0);
+}
+
+int	test_vec_normalize(void)
+{
+	t_vec3 v;
+	v = get_vec3(4, 0, 0);
+	v = vec3_normalise(v);
+	print_vec_stack(v, "normalised vector");
+	assert(vec3_isequal(v, get_vec3(1, 0, 0)));
+	v = get_vec3(1, 2, 3);
+	v = vec3_normalise(v);
+	assert(vec3_isequal(v, get_vec3(0.26726, 0.53452, 0.80178)));
 	return (0);
 }
 
@@ -109,8 +141,12 @@ int	start_all_tests(void)
 	printf("test_revert_vec passed!\n");
 	test_scalar_multiplication();
 	printf("test_scalar_multiplication passed!\n");
-	test_tuple_division();
-	printf("test_tuple_division passed!");
+	test_scalar_division();
+	printf("test_scalar_division passed!\n");
+	test_vec_magnitude();
+	printf("test_vec_magnitude passed\n");
+	test_vec_normalize();
+	printf("test_vec_normalize passed\n");
 	printf("\n%s", COLOR_RESET);
 	return (0);
 }
