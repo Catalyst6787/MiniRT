@@ -78,7 +78,7 @@ int	render_pixel(int i, int j, t_render	*render, t_minirt *minirt, t_sphere *sph
 	ray_direction = vec3_vec_substraction(pixel_center, render->camera_center);
 	set_ray(&ray, &render->camera_center, &ray_direction);
 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
-	my_mlx_pixel_put(minirt, i, j, get_color_as_int(&color));
+	my_mlx_pixel_put(minirt, i, j, color_to_int(&color));
 	// if (!i && !j)
 	// 	print_render_pixel(pixel_center,ray_direction, ray,ray_or,ray_dir,color);
 	return (0);

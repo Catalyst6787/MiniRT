@@ -41,6 +41,7 @@ SRC					=	main.c \
 						render_utils.c \
 						sphere.c \
 						utils.c \
+						color_operations.c \
 						free_utils.c \
 						vec3_basic_op.c vec3_complex_operations.c \
 						vec3_utils.c \
@@ -53,6 +54,7 @@ vpath %.c $(SRC_DIR):$(SRC_DIR)/vec3
 vpath %.c $(SRC_DIR):$(SRC_DIR)/debug
 vpath %.c $(SRC_DIR):$(SRC_DIR)/rays
 vpath %.c $(SRC_DIR):$(SRC_DIR)/tests
+vpath %.c $(SRC_DIR):$(SRC_DIR)/colors
 
 PURPLE = \033[0;34m
 RED = \033[0;31m
@@ -85,6 +87,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/rays/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/tests/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/colors/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 

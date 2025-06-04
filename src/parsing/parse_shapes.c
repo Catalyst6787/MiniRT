@@ -15,9 +15,9 @@ int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor
 	sphere->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
 	sphere->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
-	sphere->color->r = ato_buffer(&scene->buffer[i], &i, ',');
-	sphere->color->g = ato_buffer(&scene->buffer[i], &i, ',');
-	sphere->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
+	sphere->color->r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color->g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color->b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check
@@ -41,9 +41,9 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	plane->dir->x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir->y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
-	plane->color->r = ato_buffer(&scene->buffer[i], &i, ',');
-	plane->color->g = ato_buffer(&scene->buffer[i], &i, ',');
-	plane->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
+	plane->color->r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	plane->color->g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	plane->color->b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check
@@ -69,9 +69,9 @@ int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *
 	cylinder->dir->z = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->height = ato_buffer(&scene->buffer[i], &i, ' ');
-	cylinder->color->r = ato_buffer(&scene->buffer[i], &i, ',');
-	cylinder->color->g = ato_buffer(&scene->buffer[i], &i, ',');
-	cylinder->color->b = ato_buffer(&scene->buffer[i], &i, '\n');
+	cylinder->color->r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cylinder->color->g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cylinder->color->b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check

@@ -1,5 +1,3 @@
-
-
 #include "minirt.h"
 
 int	vec3_debug_print(t_vec3 *vec3)

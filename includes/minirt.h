@@ -132,7 +132,8 @@ int			is_debug_pixel(int i, int j);
 void		my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color);
 void		free_tab(char **arr);
 void		free_and_null(void	**ptr);
-int			get_color_as_int(t_vec3 *color);
+int			color_to_int(t_vec3 *color);
+t_vec3		int_to_color(int int_color);
 void		print_err(char *file, int line, char *s);
 
 /*                                 EVENTS                                  */

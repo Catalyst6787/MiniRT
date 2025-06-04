@@ -1,6 +1,12 @@
 #ifndef COLORS_H
 # define COLORS_H
 
+//int colors
+
+
+
+
+
 //Regular text
 # define BLK "\033[0;30m"
 # define RED "\033[0;31m"
