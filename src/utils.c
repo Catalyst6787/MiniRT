@@ -44,3 +44,17 @@ void	print_err(char *file, int line, char *s)
 	ft_putstr_fd("\n", STDERR_FILENO);
 	ft_putstr_fd(COLOR_RESET, STDERR_FILENO);
 }
+
+int	get_max_int(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	return (b);
+}
+
+int	get_min_int(int a, int b)
+{
+	if (a <= b)
+		return (a);
+	return (b);
+}

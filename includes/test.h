@@ -12,4 +12,6 @@ int	test_scalar_multiplication(void);
 int	test_scalar_division(void);
 int	test_vec_normalize(void);
 
+void	test_color_mult(t_vec3 *color, int i, int j);
+
 #endif

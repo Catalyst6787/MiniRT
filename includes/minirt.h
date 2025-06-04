@@ -16,6 +16,7 @@
 # include "keycodes.h"
 # include "colors.h"
 # include "test.h"
+# include "matrix.h"
 
 
 # include <sys/errno.h>
@@ -127,14 +128,21 @@ int			set_pixel00_loc(t_minirt *minirt);
 t_vec3		get_pixel_center(int i, int j, t_render	*render);
 int			is_debug_pixel(int i, int j);
 
+/*                             COLOR UTILS                                  */
+
+t_vec3		color_int_multiplication(t_vec3 c0, int n);
+t_vec3		color_color_multiplication(t_vec3 c1, t_vec3 c2);
+int			color_to_int(t_vec3 *color);
+t_vec3		int_to_color(int int_color);
+
 /*                                 UTILS                                  */
 
 void		my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color);
 void		free_tab(char **arr);
 void		free_and_null(void	**ptr);
-int			color_to_int(t_vec3 *color);
-t_vec3		int_to_color(int int_color);
 void		print_err(char *file, int line, char *s);
+int			get_max_int(int a, int b);
+int			get_min_int(int a, int b);
 
 /*                                 EVENTS                                  */
 
