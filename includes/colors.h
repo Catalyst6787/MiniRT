@@ -1,11 +1,10 @@
 #ifndef COLORS_H
 # define COLORS_H
 
-//int colors
-
-
-
-
+t_vec3	color_int_multiplication(t_vec3 c0, int n);
+t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2);
+int		color_to_int(t_vec3 *color);
+t_vec3	int_to_color(int int_color);
 
 //Regular text
 # define BLK "\033[0;30m"
