@@ -1,20 +1,14 @@
 #include "minirt.h"
 
-typedef	struct s_matrix
-{
-	int		cols;
-	int		rows;
-	double	**matrix;
-}			t_matrix;
 
-int	get_max_int(int a, int b)
+int	test_get_max_int(int a, int b)
 {
 	if (a >= b)
 		return (a);
 	return (b);
 }
 
-int	get_min_int(int a, int b)
+int	test_get_min_int(int a, int b)
 {
 	if (a <= b)
 		return (a);
@@ -22,7 +16,7 @@ int	get_min_int(int a, int b)
 }
 
 
-void	fill_matrice1(double **m1)
+void	test_fill_matrice1(double **m1)
 {
 	m1[0][0] = 1;
 	m1[0][1] = 2;
@@ -42,7 +36,7 @@ void	fill_matrice1(double **m1)
 	m1[3][3] = 1;
 }
 
-void	fill_matrice2(double **m2)
+void	test_fill_matrice2(double **m2)
 {
 	m2[0][0] = 1;
 	m2[1][0] = 2;
@@ -50,7 +44,7 @@ void	fill_matrice2(double **m2)
 	m2[3][0] = 1;
 }
 
-void	print_matrice(t_matrix matrice)
+void	test_print_matrice(t_matrix matrice)
 {
 	int	i;
 	int	j;
@@ -73,7 +67,7 @@ void	print_matrice(t_matrix matrice)
 	printf("\n");
 }
 
-void	free_matrice(t_matrix *matrix)
+void	test_free_matrice(t_matrix *matrix)
 {
 	int i = 0;
 	
@@ -85,7 +79,7 @@ void	free_matrice(t_matrix *matrix)
 	free(matrix->matrix);
 }
 
-t_matrix	new_matrix(int rows, int cols)
+t_matrix	test_new_matrix(int rows, int cols)
 {
 	t_matrix new_matrix;
 	int	i;
@@ -110,7 +104,7 @@ t_matrix	new_matrix(int rows, int cols)
 }
 
 
-double	get_cell(t_matrix m1, t_matrix m2, int row, int col)
+double	test_get_cell(t_matrix m1, t_matrix m2, int row, int col)
 {
 	double	sum;
 	int		i;
@@ -132,22 +126,22 @@ double	get_cell(t_matrix m1, t_matrix m2, int row, int col)
 	return (sum);
 }
 
-t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
+t_matrix	test_multiply_matrix(t_matrix m1, t_matrix m2)
 {
 	t_matrix	m3;
 	int			i;
 	int			j;
 
 
-	m3 = new_matrix(get_min_int(m1.rows, m2.rows), 
-					get_min_int(m1.cols, m2.cols));
+	m3 = test_new_matrix(test_get_min_int(m1.rows, m2.rows), 
+					test_get_min_int(m1.cols, m2.cols));
 	i = 0;
 	while (i < m3.rows)
 	{
 		j = 0;
 		while (j < m3.cols)
 		{
-			m3.matrix[i][j] = get_cell(m1, m2, i, j);
+			m3.matrix[i][j] = test_get_cell(m1, m2, i, j);
 			printf("\n\n\n");
 			j++;
 		}
@@ -171,15 +165,15 @@ t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 // 	// 	{2.0, 4.0, 8.0, 16.0},
 // 	// 	{4.0, 8.0, 16.0, 32.0},
 // 	// };
-// 	t_matrix	m1 = new_matrix(4, 4);
-// 	t_matrix	m2 = new_matrix(4, 1);
+// 	t_matrix	m1 = test_new_matrix(4, 4);
+// 	t_matrix	m2 = test_new_matrix(4, 1);
 
 	
-// 	fill_matrice1(m1.matrix);
-// 	fill_matrice2(m2.matrix);
+// 	ftest_fill_matrice1(m1.matrix);
+// 	test_fill_matrice2(m2.matrix);
 	
 // 	t_matrix	m3 = multiply_matrix(m1, m2);
-// 	print_matrice(m1);
-// 	print_matrice(m2);
-// 	print_matrice(m3);
+// 	test_print_matrice(m1);
+// 	test_print_matrice(m2);
+// 	test_print_matrice(m3);
 // }

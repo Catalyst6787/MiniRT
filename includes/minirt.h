@@ -16,7 +16,7 @@
 # include "keycodes.h"
 # include "colors.h"
 # include "test.h"
-# include "matrix.h"
+# include "matrice.h"
 
 
 # include <sys/errno.h>
