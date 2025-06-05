@@ -51,6 +51,7 @@ int	vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b)
 	return (0);
 }
 
+// order matters! vec3_cross(a, b) != vec3_cross(b, a).
 t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
 {
 	if (a.w || b.w)

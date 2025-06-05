@@ -2,23 +2,12 @@
 
 t_vec3	color_int_multiplication(t_vec3 c0, int n)
 {
-	t_vec3	col;
-
-	col.r = c0.r * n;
-	col.g = c0.g * n;
-	col.b = c0.b * n;
-	return (col);
+	return (vec3_double_multiplication(c0, n));
 }
 
 t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2)
 {
-	t_vec3	col;
-
-	
-	col.r = c1.r * c2.r;
-	col.g = c1.g * c2.g;
-	col.b = c1.b * c2.b;
-	return (col);
+	return (vec3_vec_multiplication(c1, c2));
 }
 
 int	color_to_int(t_vec3 *color)

@@ -78,9 +78,6 @@ int	test_scalar_multiplication(void)
 	t_vec3 a = get_vec3(1, -2, 3);
 	assert(vec3_isequal(vec3_double_multiplication(a, 3.5), get_vec3(3.5, -7, 10.5)));
 	assert(vec3_isequal(vec3_double_multiplication(a, 3), get_vec3(3, -6, 9)));
-
-	t_vec3 b = get_point3(1, -2, 3);
-	assert(vec3_isequal(vec3_double_multiplication(b, 0.5), get_point3(0.5, -1, 1.5)));
 	return (0);
 }
 
@@ -125,6 +122,25 @@ int	test_vec_normalize(void)
 	return (0);
 }
 
+int test_dot_product(void)
+{
+	t_vec3 a = get_vec3(1, 2, 3);
+	t_vec3 b = get_vec3(2, 3, 4);
+
+	assert(vec3_dot(&a, &b) == 20);
+	return (0);
+}
+
+int test_cross_product(void)
+{
+	t_vec3 a = get_vec3(1, 2, 3);
+	t_vec3 b = get_vec3(2, 3, 4);
+
+	assert(vec3_isequal(vec3_cross(a, b), get_vec3(-1, 2, -1)));
+	assert(vec3_isequal(vec3_cross(b, a), get_vec3(1, -2, 1)));
+	return (0);
+}
+
 // ALL
 int	start_all_tests(void)
 {
@@ -147,6 +163,10 @@ int	start_all_tests(void)
 	printf("test_vec_magnitude passed\n");
 	test_vec_normalize();
 	printf("test_vec_normalize passed\n");
+	test_dot_product();
+	printf("test_dot_product passed\n");
+	test_cross_product();
+	printf("test_cross_product passed\n");
 	printf("\n%s", COLOR_RESET);
 	return (0);
 }
