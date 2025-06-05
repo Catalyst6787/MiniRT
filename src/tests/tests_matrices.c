@@ -157,29 +157,29 @@ t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 }
 
 
-int main ()
-{
-	// double matrice1[4][4] = {
-		// 	{1.0, 2.0, 3.0, 4.0},
-		// 	{2.0, 3.0, 4.0, 5.0},
-		// 	{3.0, 4.0, 5.0, 6.0},
-		// 	{4.0, 5.0, 6.0, 7.0}
-		// };
-	// double matrice2[4][4] = {
-	// 	{0.0, 1.0, 2.0, 3.0},
-	// 	{1.0, 2.0, 4.0, 8.0},
-	// 	{2.0, 4.0, 8.0, 16.0},
-	// 	{4.0, 8.0, 16.0, 32.0},
-	// };
-	t_matrix	m1 = new_matrix(4, 4);
-	t_matrix	m2 = new_matrix(4, 1);
+// int main ()
+// {
+// 	// double matrice1[4][4] = {
+// 		// 	{1.0, 2.0, 3.0, 4.0},
+// 		// 	{2.0, 3.0, 4.0, 5.0},
+// 		// 	{3.0, 4.0, 5.0, 6.0},
+// 		// 	{4.0, 5.0, 6.0, 7.0}
+// 		// };
+// 	// double matrice2[4][4] = {
+// 	// 	{0.0, 1.0, 2.0, 3.0},
+// 	// 	{1.0, 2.0, 4.0, 8.0},
+// 	// 	{2.0, 4.0, 8.0, 16.0},
+// 	// 	{4.0, 8.0, 16.0, 32.0},
+// 	// };
+// 	t_matrix	m1 = new_matrix(4, 4);
+// 	t_matrix	m2 = new_matrix(4, 1);
 
 	
-	fill_matrice1(m1.matrix);
-	fill_matrice2(m2.matrix);
+// 	fill_matrice1(m1.matrix);
+// 	fill_matrice2(m2.matrix);
 	
-	t_matrix	m3 = multiply_matrix(m1, m2);
-	print_matrice(m1);
-	print_matrice(m2);
-	print_matrice(m3);
-}
+// 	t_matrix	m3 = multiply_matrix(m1, m2);
+// 	print_matrice(m1);
+// 	print_matrice(m2);
+// 	print_matrice(m3);
+// }

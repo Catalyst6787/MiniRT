@@ -53,7 +53,7 @@ t_vec3	vec3_dup(t_vec3 to_dup)
 }
 
 
-/************** 2 VECORS OPERATIONS ****************/
+/************** 2 VECTORS OPERATIONS ****************/
 
 
 t_vec3	vec3_vec_addition(char *file, int line, t_vec3 v1, t_vec3 v2)

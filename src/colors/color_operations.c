@@ -14,6 +14,7 @@ t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2)
 {
 	t_vec3	col;
 
+	
 	col.r = c1.r * c2.r;
 	col.g = c1.g * c2.g;
 	col.b = c1.b * c2.b;
