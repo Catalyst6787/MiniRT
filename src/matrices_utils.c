@@ -1,63 +1,81 @@
 #include "minirt.h"
 
-void	print_matrice(t_matrix matrice)
+void	print_matrice(t_matrix m)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < matrice.rows)
+	j = 0;
+	while (i < m.row)
 	{
-		j = 0;
 		printf("|");
-		while (j < matrice.cols)
+		while (j < m.col)
 		{
-			printf(" %.1f |", matrice.matrix[i][j]);
-			if (matrice.matrix[i][j] < 10)
+			printf(" %.1f |", m.matrix[i][j]);
+			if (m.matrix[i][j] < 10)
 				printf(" ");
 			j++;
 		}
 		printf("\n");
+		j = 0;
 		i++;
 	}
 	printf("\n");
 }
 
-void	free_matrice(t_matrix *matrix)
+t_matrix	get_matrix(int row, int col, bool identity)
 {
-	int i = 0;
-	
-	while (i < matrix->rows)
-	{
-		free(matrix->matrix[i]);
-		i++;
-	}
-	free(matrix->matrix);
-}
+	t_matrix	new_matrix;
+	int			i;
+	int			j;
 
-t_matrix	new_matrix(int rows, int cols, bool identity)
-{
-	t_matrix new_matrix;
-	int	i;
-	int	j;
-
-	new_matrix.rows = rows;
-	new_matrix.cols = cols;
 	i = 0;
-	new_matrix.matrix = (double **)malloc(sizeof(double *) * rows);
-	while (i < rows)
+	j = 0;
+	ft_memset(&new_matrix, 0, sizeof(t_matrix));
+	new_matrix.row = row;
+	new_matrix.col = col;
+	if (identity)
 	{
-		new_matrix.matrix[i] = malloc(sizeof(double) * cols);
-		j = 0;
-		while (j < cols)
+		while (i < new_matrix.row)
 		{
-			new_matrix.matrix[i][j] = 0;
-			if (identity && i == j)
-				new_matrix.matrix[i][j] = 1;
-			j++;
+			while (j < new_matrix.col)
+			{
+				if (i == j)
+					new_matrix.matrix[i][j] = 1;
+				j++;
+			}
+			j = 0;
+			i++;
 		}
-		i++;
 	}
 	return (new_matrix);
 }
 
+bool	matrix_isequal(t_matrix m1, t_matrix m2)
+{
+	int	i;
+	int	j;
+
+	if (m1.row != m2.row || m1.col != m2.col)
+		return (0);
+	while (i < m1.row)
+	{
+		while (i < m1.col)
+		{
+			if (m1.matrix[i][j] != m2.matrix[i][j])
+				return (0);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (1);
+}
+
+void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
+{
+	if (i >= m->row || j >= m->col)
+		return (print_err(FILE, LINE, "matrix_set_elem, tried to set element outside of matrix"), NULL);
+	m->matrix[i][j] = elem;
+}

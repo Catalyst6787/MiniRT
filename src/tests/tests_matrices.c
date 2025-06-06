@@ -50,10 +50,10 @@ void	test_print_matrice(t_matrix matrice)
 	int	j;
 
 	i = 0;
-	while (i < matrice.rows)
+	while (i < matrice.row)
 	{
 		j = 0;
-		while (j < matrice.cols)
+		while (j < matrice.col)
 		{
 			printf("|");
 			printf(" %.1f |", matrice.matrix[i][j]);
@@ -70,8 +70,8 @@ void	test_print_matrice(t_matrix matrice)
 void	test_free_matrice(t_matrix *matrix)
 {
 	int i = 0;
-	
-	while (i < matrix->rows)
+
+	while (i < matrix->row)
 	{
 		free(matrix->matrix[i]);
 		i++;
@@ -79,21 +79,21 @@ void	test_free_matrice(t_matrix *matrix)
 	free(matrix->matrix);
 }
 
-t_matrix	test_new_matrix(int rows, int cols)
+t_matrix	test_new_matrix(int row, int col)
 {
-	t_matrix new_matrix;
-	int	i;
-	int	j;
+	t_matrix	new_matrix;
+	int			i;
+	int			j;
 
-	new_matrix.rows = rows;
-	new_matrix.cols = cols;
+	new_matrix.row = row;
+	new_matrix.col = col;
 	i = 0;
-	new_matrix.matrix = (double **)malloc(sizeof(double *) * rows);
-	while (i < rows)
+	new_matrix.matrix = (double **)malloc(sizeof(double *) * row);
+	while (i < row)
 	{
-		new_matrix.matrix[i] = malloc(sizeof(double) * cols);
+		new_matrix.matrix[i] = malloc(sizeof(double) * col);
 		j = 0;
-		while (j < cols)
+		while (j < col)
 		{
 			new_matrix.matrix[i][j] = 0;
 			j++;
@@ -110,14 +110,15 @@ double	test_get_cell(t_matrix m1, t_matrix m2, int row, int col)
 	int		i;
 	int		j;
 
-	
+
 	i = 0;
 	j = 0;
 	sum = 0;
-	while (i < m1.cols && j < m2.rows)
+	while (i < m1.col && j < m2.row)
 	{
-		
-		printf("m1[%d][%d] (%.1f) * m2[%d][%d] (%.1f)", row, j,m1.matrix[row][j], i, col,  m2.matrix[i][col]);
+
+		printf("m1[%d][%d] (%.1f) * m2[%d][%d] (%.1f)",
+			row, j, m1.matrix[row][j], i, col, m2.matrix[i][col]);
 		printf("\n");
 		sum += m1.matrix[row][j] * m2.matrix[i][col];
 		i++;
@@ -133,13 +134,13 @@ t_matrix	test_multiply_matrix(t_matrix m1, t_matrix m2)
 	int			j;
 
 
-	m3 = test_new_matrix(test_get_min_int(m1.rows, m2.rows), 
-					test_get_min_int(m1.cols, m2.cols));
+	m3 = test_new_matrix(test_get_min_int(m1.row, m2.row),
+					test_get_min_int(m1.col, m2.col));
 	i = 0;
-	while (i < m3.rows)
+	while (i < m3.row)
 	{
 		j = 0;
-		while (j < m3.cols)
+		while (j < m3.col)
 		{
 			m3.matrix[i][j] = test_get_cell(m1, m2, i, j);
 			printf("\n\n\n");
@@ -168,10 +169,10 @@ t_matrix	test_multiply_matrix(t_matrix m1, t_matrix m2)
 // 	t_matrix	m1 = test_new_matrix(4, 4);
 // 	t_matrix	m2 = test_new_matrix(4, 1);
 
-	
+
 // 	ftest_fill_matrice1(m1.matrix);
 // 	test_fill_matrice2(m2.matrix);
-	
+
 // 	t_matrix	m3 = multiply_matrix(m1, m2);
 // 	test_print_matrice(m1);
 // 	test_print_matrice(m2);
