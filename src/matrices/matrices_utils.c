@@ -1,27 +1,49 @@
 #include "minirt.h"
 
-void	print_matrice(t_matrix m)
+
+void	print_matrice(t_matrix *m)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (i < m.row)
+	while (i < 4)
 	{
+		j = 0;
 		printf("|");
-		while (j < m.col)
+		while (j < 4)
 		{
-			printf(" %.1f |", m.matrix[i][j]);
-			if (m.matrix[i][j] < 10)
+			printf(" %.1f |", m->matrix[i][j]);
+			if (m->matrix[i][j] < 10.0 && m->matrix[i][j] >= 0.0)
 				printf(" ");
 			j++;
 		}
 		printf("\n");
-		j = 0;
 		i++;
 	}
 	printf("\n");
+}
+
+
+void	initialize_matrice(t_matrix *m, bool identity)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (identity && i == j)
+				m->matrix[i][j] = 1;
+			else
+				m->matrix[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
 }
 
 t_matrix	get_matrix(int row, int col, bool identity)
@@ -82,3 +104,4 @@ void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
 	}
 	m->matrix[i][j] = elem;
 }
+

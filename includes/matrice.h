@@ -8,10 +8,13 @@ typedef	struct s_matrix
 	int		col;
 }			t_matrix;
 
-void			print_matrice(t_matrix matrice);
+void			print_matrice(t_matrix *m);
+void			initialize_matrice(t_matrix *m, bool identity);
 t_matrix		get_matrix(int row, int col, bool identity);
-t_matrix		multiply_4x4_matrix(t_matrix m1, t_matrix m2);
 bool			matrix_isequal(t_matrix m1, t_matrix m2);
 void			matrix_set_elem(t_matrix *m, int i, int j, double elem);
+
+t_matrix		translate_4x4_matrice(t_matrix *m);
+t_matrix		multiply_4x4_matrix(t_matrix *m1, t_matrix *m2);
 
 #endif

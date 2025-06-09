@@ -40,7 +40,7 @@ SRC					=	main.c \
 						render.c \
 						render_utils.c \
 						sphere.c \
-						matrices_utils.c matrices_multiplications.c \
+						matrices_utils.c matrices_multiplications.c matrices_translations.c \
 						utils.c \
 						color_operations.c \
 						free_utils.c \
@@ -56,6 +56,7 @@ vpath %.c $(SRC_DIR):$(SRC_DIR)/debug
 vpath %.c $(SRC_DIR):$(SRC_DIR)/rays
 vpath %.c $(SRC_DIR):$(SRC_DIR)/tests
 vpath %.c $(SRC_DIR):$(SRC_DIR)/colors
+vpath %.c $(SRC_DIR):$(SRC_DIR)/matrices
 
 PURPLE = \033[0;34m
 RED = \033[0;31m
@@ -92,6 +93,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/tests/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/colors/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/matrices/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 
