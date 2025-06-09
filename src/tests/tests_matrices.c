@@ -211,6 +211,106 @@ int	test_matrix_multiplication(void)
 	return (0);
 }
 
+int	test_matrix_inversion(void)
+{
+	t_matrix	m1;
+	t_matrix	m2;
+	t_matrix	m3;
+
+	// 2 x 2 determinant
+
+	m1 = get_arb_matrix(2, 2,
+			1, 5, 0, 0,
+			-3, 2, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0);
+	assert(get_determinant(m1) == 17);
+
+	// submatrices
+
+	m1 = get_arb_matrix(3, 3,
+			1, 5, 0, 0,
+			-3, 2, 7, 0,
+			0, 6, -3, 0,
+			0, 0, 0, 0);
+	m2 = get_submatrice(m1, 0, 2);
+	m3 = get_arb_matrix(2, 2,
+			-3, 2, 0, 0,
+			-0, 6, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0);
+	assert(matrix_isequal(m2, m3));
+	m1 = get_arb_matrix(4, 4,
+			-6, 1, 1, 6,
+			-8, 5, 8, 6,
+			-1, 0, 8, 2,
+			-7, 1, 0-1, 1);
+	m2 = get_submatrice(m1, 2, 1);
+	m3 = get_arb_matrix(3, 3,
+			-6, 1, 6, 0,
+			-8, 8, 6, 0,
+			-7, -1, 1, 0,
+			0, 0, 0, 0);
+	assert(matrix_isequal(m2, m3));
+
+	// 3x3 matrice determinant
+
+	m1 = get_arb_matrix(3, 3,
+			1, 2, 6, 0,
+			-5, 8, -4, 0,
+			2, 6, 4, 0,
+			0, 0, 0, 0);
+	assert(get_determinant(m1) == -196);
+
+	// 4x4 matrice determinant
+
+		// test 1
+
+	m1 = get_arb_matrix(4, 4,
+			-2, -8, 3, 5,
+			-3, 1, 7, 3,
+			1, 2, -9, 6,
+			-6, 7, 7, -9);
+	assert(get_determinant(m1) == -4071);
+
+		// test 2
+
+	m1 = get_arb_matrix(4, 4,
+			6, 4, 4, 4,
+			5, 5, 7, 6,
+			4, -9, 3, -7,
+			9, 1, 7, -6);
+	assert(get_determinant(m1) == -2120);
+	
+	// Matrice inversion
+	
+	m1 = get_arb_matrix(4, 4,
+		-5, 2, 6, -8,
+		1, -5, 1, 8,
+		7, 7, -6, -7,
+		1, -3, 7, 4);
+	m2 = get_inversed_matrix(m1);
+	m3 = get_arb_matrix(4, 4,
+		0.21805, 0.45113, 0.24060, -0.04511,
+		-0.80827, -1.45677, -0.44361, 0.52068,
+		-0.07895, -0.22368, -0.05263, 0.19737,
+		-0.52256, -0.81391, -0.30075, 0.30639);
+	assert(matrix_isequal(m2, m3));
+	m1 = get_arb_matrix(4, 4,
+			3, -9, 7, 3,
+			3, -8, 2, -9,
+			-4, 4, 4, 1,
+			-6, 5, -1, 1);
+	m2 = get_arb_matrix(4, 4,
+			8, 2, 2, 2,
+			3, -1, 7, 0,
+			7, 0, 5, 4,
+			6, -2, 0, 5);
+	m3 = mutliply_matrix(m1, m2);
+	assert (matrix_isequal(mutliply_matrix(m3, get_inversed_matrix(m2)), m1));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -223,6 +323,8 @@ int	start_all_matrix_tests(void)
 	printf("test_matrix_size passed\n");
 	test_matrix_multiplication();
 	printf("test_matrix_multiplication passed\n");
+	test_matrix_inversion();
+	printf("test_matrix_inversion passed\n");
 	return (0);
 }
 

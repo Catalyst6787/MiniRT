@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-
 void	print_matrice(t_matrix m)
 {
 	int	i;
