@@ -7,7 +7,7 @@ static double get_dot(t_matrix m1, t_matrix m2, int row, int col)
 
 	i = 0;
 	sum = 0;
-	if (row > m1.row || col > m2.col || m1.row != m2.col)
+	if (row >= m1.row || col >= m2.col || m1.col != m2.row)
 		return (print_err(FILE, LINE, "invalid point outside matrices"), 0);
 	while (i < m1.col)
 	{

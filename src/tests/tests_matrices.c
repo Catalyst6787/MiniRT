@@ -188,6 +188,26 @@ int	test_matrix_multiplication(void)
 	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
 	m3 = mutliply_matrix(m1, m2);
 	assert(m3.row == m1.row && m3.col == m2.col);
+	// multiplying matrices by "tuples" (4x1 matrice)
+	m1 = get_arb_matrix(4, 4,
+			1, 2, 3, 4,
+			2, 4, 4, 2,
+			8, 6, 4, 1,
+			0, 0, 0, 1);
+	m2 = get_arb_matrix(4, 1,
+			1, 0, 0, 0,
+			2, 0, 0, 0,
+			3, 0, 0, 0,
+			1, 0, 0, 0);
+	m3 = get_arb_matrix(4, 1,
+			18, 0, 0, 0,
+			24, 0, 0, 0,
+			33, 0, 0, 0,
+			1, 0, 0, 0);
+	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
+	m3 = mutliply_matrix(m1, m2);
+	assert(m3.row == 4);
+	assert(m3.col == 1);
 	return (0);
 }
 
