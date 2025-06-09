@@ -1,5 +1,32 @@
 #include "minirt.h"
 
+t_matrix	get_arb_matrix(int row, int col,
+		double a0, double a1, double a2, double a3,
+		double b0, double b1, double b2, double b3,
+		double c0, double c1, double c2, double c3,
+		double d0, double d1, double d2, double d3)
+{
+	t_matrix	m = get_matrix(row, col, 0);
+
+	m.matrix[0][0] = a0;
+	m.matrix[0][1] = a1;
+	m.matrix[0][2] = a2;
+	m.matrix[0][3] = a3;
+	m.matrix[1][0] = b0;
+	m.matrix[1][1] = b1;
+	m.matrix[1][2] = b2;
+	m.matrix[1][3] = b3;
+	m.matrix[2][0] = c0;
+	m.matrix[2][1] = c1;
+	m.matrix[2][2] = c2;
+	m.matrix[2][3] = c3;
+	m.matrix[3][0] = d0;
+	m.matrix[3][1] = d1;
+	m.matrix[3][2] = d2;
+	m.matrix[3][3] = d3;
+
+	return (m);
+}
 
 int	test_get_max_int(int a, int b)
 {
@@ -16,165 +43,30 @@ int	test_get_min_int(int a, int b)
 }
 
 
-void	test_fill_matrice1(double **m1)
+int	basic_test_matrix(void)
 {
-	m1[0][0] = 1;
-	m1[0][1] = 2;
-	m1[0][2] = 3;
-	m1[0][3] = 4;
-	m1[1][0] = 2;
-	m1[1][1] = 4;
-	m1[1][2] = 4;
-	m1[1][3] = 2;
-	m1[2][0] = 8;
-	m1[2][1] = 6;
-	m1[2][2] = 4;
-	m1[2][3] = 1;
-	m1[3][0] = 0;
-	m1[3][1] = 0;
-	m1[3][2] = 0;
-	m1[3][3] = 1;
+	t_matrix	m;
+
+	m = get_arb_matrix(4, 4,
+			1, 2, 3, 4,
+			5.5, 6.5, 7.5, 8.5,
+			9, 10, 11, 12,
+			13.5, 14.5, 15.5, 16.5);
+	print_matrice(m);
+	assert(m.matrix[0][0] == 1);
+	assert(m.matrix[0][3] == 4);
+	assert(m.matrix[1][0] == 5.5);
+	assert(m.matrix[1][2] == 7.5);
+	assert(m.matrix[2][2] == 11);
+	assert(m.matrix[3][0] == 13.5);
+	assert(m.matrix[3][2] == 15.5);
+	return (0);
 }
 
-void	test_fill_matrice2(double **m2)
+int	start_all_matrix_tests(void)
 {
-	m2[0][0] = 1;
-	m2[1][0] = 2;
-	m2[2][0] = 3;
-	m2[3][0] = 1;
+	basic_test_matrix();
+	printf("basic matrix test passed\n");
+	return (0);
 }
 
-void	test_print_matrice(t_matrix matrice)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < matrice.row)
-	{
-		j = 0;
-		while (j < matrice.col)
-		{
-			printf("|");
-			printf(" %.1f |", matrice.matrix[i][j]);
-			if (matrice.matrix[i][j] < 10)
-				printf(" ");
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-}
-
-void	test_free_matrice(t_matrix *matrix)
-{
-	int i = 0;
-
-	while (i < matrix->row)
-	{
-		free(matrix->matrix[i]);
-		i++;
-	}
-	free(matrix->matrix);
-}
-
-t_matrix	test_new_matrix(int row, int col)
-{
-	t_matrix	new_matrix;
-	int			i;
-	int			j;
-
-	new_matrix.row = row;
-	new_matrix.col = col;
-	i = 0;
-	new_matrix.matrix = (double **)malloc(sizeof(double *) * row);
-	while (i < row)
-	{
-		new_matrix.matrix[i] = malloc(sizeof(double) * col);
-		j = 0;
-		while (j < col)
-		{
-			new_matrix.matrix[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	return (new_matrix);
-}
-
-
-double	test_get_cell(t_matrix m1, t_matrix m2, int row, int col)
-{
-	double	sum;
-	int		i;
-	int		j;
-
-
-	i = 0;
-	j = 0;
-	sum = 0;
-	while (i < m1.col && j < m2.row)
-	{
-
-		printf("m1[%d][%d] (%.1f) * m2[%d][%d] (%.1f)",
-			row, j, m1.matrix[row][j], i, col, m2.matrix[i][col]);
-		printf("\n");
-		sum += m1.matrix[row][j] * m2.matrix[i][col];
-		i++;
-		j++;
-	}
-	return (sum);
-}
-
-t_matrix	test_multiply_matrix(t_matrix m1, t_matrix m2)
-{
-	t_matrix	m3;
-	int			i;
-	int			j;
-
-
-	m3 = test_new_matrix(test_get_min_int(m1.row, m2.row),
-					test_get_min_int(m1.col, m2.col));
-	i = 0;
-	while (i < m3.row)
-	{
-		j = 0;
-		while (j < m3.col)
-		{
-			m3.matrix[i][j] = test_get_cell(m1, m2, i, j);
-			printf("\n\n\n");
-			j++;
-		}
-		i++;
-	}
-	return (m3);
-}
-
-
-// int main ()
-// {
-// 	// double matrice1[4][4] = {
-// 		// 	{1.0, 2.0, 3.0, 4.0},
-// 		// 	{2.0, 3.0, 4.0, 5.0},
-// 		// 	{3.0, 4.0, 5.0, 6.0},
-// 		// 	{4.0, 5.0, 6.0, 7.0}
-// 		// };
-// 	// double matrice2[4][4] = {
-// 	// 	{0.0, 1.0, 2.0, 3.0},
-// 	// 	{1.0, 2.0, 4.0, 8.0},
-// 	// 	{2.0, 4.0, 8.0, 16.0},
-// 	// 	{4.0, 8.0, 16.0, 32.0},
-// 	// };
-// 	t_matrix	m1 = test_new_matrix(4, 4);
-// 	t_matrix	m2 = test_new_matrix(4, 1);
-
-
-// 	ftest_fill_matrice1(m1.matrix);
-// 	test_fill_matrice2(m2.matrix);
-
-// 	t_matrix	m3 = multiply_matrix(m1, m2);
-// 	test_print_matrice(m1);
-// 	test_print_matrice(m2);
-// 	test_print_matrice(m3);
-// }

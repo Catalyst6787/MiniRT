@@ -76,6 +76,9 @@ bool	matrix_isequal(t_matrix m1, t_matrix m2)
 void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
 {
 	if (i >= m->row || j >= m->col)
-		return (print_err(FILE, LINE, "matrix_set_elem, tried to set element outside of matrix"), NULL);
+	{
+		print_err(FILE, LINE, "matrix_set_elem, tried to set element outside of matrix");
+		return ;
+	}
 	m->matrix[i][j] = elem;
 }
