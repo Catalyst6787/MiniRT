@@ -11,7 +11,7 @@ if [ $# == 0 ]; then
 fi
 
 make fclean
-make re
+make
 printf "\n\n"
 if [ $scene == 1 ]; then
 	./miniRT assets/scenes/subject_example.rt

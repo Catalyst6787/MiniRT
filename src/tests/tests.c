@@ -141,13 +141,6 @@ int test_cross_product(void)
 	return (0);
 }
 
-int	test_create_matrice(void)
-{
-	t_matrix	m;
-
-	m = get_matrix(4, 4, 0);
-	matrix_set_elem(&m, 0, 0, 1);
-}
 
 // ALL
 int	start_all_tests(void)
