@@ -1,36 +1,43 @@
 #include "minirt.h"
 
-static double	get_cell(double m1[4][4], double m2[4][4], int row, int col)
+static double get_dot(t_matrix m1, t_matrix m2, int row, int col)
 {
-	double	sum;
-	int		i;
+	int i;
+	double sum;
 
 	i = 0;
 	sum = 0;
-	while (i < 4)
+	if (row > m1.row || col > m2.col || m1.row != m2.col)
+		return (print_err(FILE, LINE, "invalid point outside matrices"), 0);
+	while (i < m1.col)
 	{
-		sum += m1[row][i] * m2[i][col];
+		sum += (m1.matrix[row][i] * m2.matrix[i][col]);
 		i++;
 	}
 	return (sum);
 }
 
-t_matrix	multiply_4x4_matrix(t_matrix *m1, t_matrix *m2)
+t_matrix	mutliply_matrix(t_matrix m1, t_matrix m2)
 {
 	int			i;
 	int			j;
-	t_matrix	m3;
+	t_matrix	res;
 
 	i = 0;
-	while (i < 4)
+	j = 0;
+	if (!(m1.col == m2.row))
+		return (print_err(FILE, LINE, "matrices have different col and rows"),
+			get_matrix(4, 4, 0));
+	res = get_matrix(m1.row, m2.col, 0);
+	while (i < res.row)
 	{
 		j = 0;
-		while (j < 4)
+		while (j < res.col)
 		{
-			m3.matrix[i][j] = get_cell(m1->matrix, m2->matrix, i, j);
+			res.matrix[i][j] = get_dot(m1, m2, i, j);
 			j++;
 		}
 		i++;
 	}
-	return (m3);
+	return (res);
 }

@@ -147,6 +147,50 @@ int	test_matrix_size(void)
 	return (0);
 }
 
+int	test_matrix_multiplication(void)
+{
+	t_matrix	m1;
+	t_matrix	m2;
+	t_matrix	m3;
+
+	m1 = get_arb_matrix(4, 4,
+			1, 2, 3, 4,
+			5, 6, 7, 8,
+			9, 8, 7, 6,
+			5, 4, 3, 2);
+	m2 = get_arb_matrix(4, 4,
+			-2, 1, 2, 3,
+			3, 2, 1, -1,
+			4, 3, 6, 5,
+			1, 2, 7, 8);
+	m3 = get_arb_matrix(4, 4,
+			20, 22, 50, 48,
+			44, 54, 114, 108,
+			40, 58, 110, 102,
+			16, 26, 46, 42);
+	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
+	m1 = get_arb_matrix(2, 3,
+			1, 2, 3, 0,
+			4, 5, 6, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0);
+	m2 = get_arb_matrix(3, 2,
+			7, 8, 0, 0,
+			9, 10, 0, 0,
+			11, 12, 0, 0,
+			0, 0, 0, 0);
+
+	m3 = get_arb_matrix(2, 2,
+			58, 64, 0, 0,
+			139, 154, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0);
+	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
+	m3 = mutliply_matrix(m1, m2);
+	assert(m3.row == m1.row && m3.col == m2.col);
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -157,6 +201,8 @@ int	start_all_matrix_tests(void)
 	printf("test matrix isequal passed\n");
 	test_matrix_size();
 	printf("test_matrix_size passed\n");
+	test_matrix_multiplication();
+	printf("test_matrix_multiplication passed\n");
 	return (0);
 }
 
