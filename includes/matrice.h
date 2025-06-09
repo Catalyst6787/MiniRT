@@ -12,7 +12,7 @@ void			print_matrice(t_matrix m);
 t_matrix		get_matrix(int row, int col, bool identity);
 bool			matrix_isequal(t_matrix m1, t_matrix m2);
 void			matrix_set_elem(t_matrix *m, int i, int j, double elem);
-
+t_matrix		transpose_matrix(t_matrix m);
 t_matrix		translate_4x4_matrice(t_matrix *m);
 t_matrix		mutliply_matrix(t_matrix m1, t_matrix m2);
 

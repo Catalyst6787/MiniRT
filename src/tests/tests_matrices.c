@@ -211,6 +211,53 @@ int	test_matrix_multiplication(void)
 	return (0);
 }
 
+int	test_identity_matrix(void)
+{
+	t_matrix m1;
+	t_matrix tuple;
+	// multiplying by identity matrix should return original matrix
+	m1 = get_arb_matrix(4, 4,
+			0, 1, 2, 4,
+			1, 2, 4, 8,
+			2, 4, 8, 16,
+			4, 8, 16, 32);
+	assert(matrix_isequal(m1, mutliply_matrix(m1, get_matrix(4, 4, 1))));
+	//multiplying the identity matrix by a tuple should return tuple
+	tuple = get_arb_matrix(4, 1,
+			1, 0, 0, 0,
+			2, 0, 0, 0,
+			3, 0, 0, 0,
+			4, 0, 0, 0);
+	assert(matrix_isequal(tuple, mutliply_matrix(get_matrix(4, 4, 1), tuple)));
+	return (0);
+}
+
+int test_transpose_matrix(void)
+{
+	t_matrix m;
+	t_matrix transposed;
+
+	m = get_arb_matrix(4, 4,
+			0, 9, 3, 0,
+			9, 8, 0, 8,
+			1, 8, 5, 3,
+			0, 0, 5, 8);
+	transposed = get_arb_matrix(4, 4,
+			0, 9, 1, 0,
+			9, 8, 8, 0,
+			3, 0, 5, 5,
+			0, 8, 3, 8);
+	// transposing a 4x4 matrix
+	assert(matrix_isequal(transpose_matrix(m), transposed));
+	// transposing a identity matrix -> doesnt do anything
+	assert(matrix_isequal(transpose_matrix(get_matrix(4, 4, 1)),
+			get_matrix(4, 4, 1)));
+	// transposing a matrix change its shape
+	assert(matrix_isequal(get_matrix(1, 4, 0),
+			transpose_matrix(get_matrix(4, 1, 0))));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -223,6 +270,10 @@ int	start_all_matrix_tests(void)
 	printf("test_matrix_size passed\n");
 	test_matrix_multiplication();
 	printf("test_matrix_multiplication passed\n");
+	test_identity_matrix();
+	printf("test_identity_matrix passed\n");
+	test_transpose_matrix();
+	printf("test_transpose_matrix passed\n");
 	return (0);
 }
 
