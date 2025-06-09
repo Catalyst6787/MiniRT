@@ -169,7 +169,7 @@ int	start_all_tests(void)
 	printf("test_cross_product passed\n");
 
 	start_all_matrix_tests();
-	printf("all matrix test passed\n");
+	printf("\nall matrix test passed\n");
 	printf("\n%s", COLOR_RESET);
 
 	return (0);

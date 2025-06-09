@@ -47,12 +47,19 @@ int	basic_test_matrix(void)
 {
 	t_matrix	m;
 
+	// m = get_matrix(4, 4, 0);
+	// print_matrice(m);
+	// printf("matrice m row[%d] col[%d]\n", m.row, m.col);
+	// m = get_matrix(4, 4, 1);
+	// print_matrice(m);
+	// printf("matrice m row[%d] col[%d]\n", m.row, m.col);
 	m = get_arb_matrix(4, 4,
 			1, 2, 3, 4,
 			5.5, 6.5, 7.5, 8.5,
 			9, 10, 11, 12,
 			13.5, 14.5, 15.5, 16.5);
-	print_matrice(m);
+	// print_matrice(m);
+	// printf("matrice m row[%d] col[%d]\n", m.row, m.col);
 	assert(m.matrix[0][0] == 1);
 	assert(m.matrix[0][3] == 4);
 	assert(m.matrix[1][0] == 5.5);
@@ -63,10 +70,93 @@ int	basic_test_matrix(void)
 	return (0);
 }
 
+int	test_matrix_isequal(void)
+{
+	//same matrix
+	assert(matrix_isequal(
+			get_arb_matrix(4, 4,
+				1, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5),
+			get_arb_matrix(4, 4,
+				1, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5)));
+	// different matrix
+	assert(!matrix_isequal(
+			get_arb_matrix(4, 4,
+				42, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5),
+			get_arb_matrix(4, 4,
+				1, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5)));
+	// different size identical matrix
+	assert(!matrix_isequal(
+			get_arb_matrix(4, 4,
+				1, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5),
+			get_arb_matrix(4, 2,
+				1, 2, 3, 4,
+				5.5, 6.5, 7.5, 8.5,
+				9, 10, 11, 12,
+				13.5, 14.5, 15.5, 16.5)));
+	return (0);
+}
+
+int	test_matrix_zero(void)
+{
+	assert(matrix_isequal(
+			get_matrix(4, 4, 0),
+			get_arb_matrix(4, 4,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0)));
+	assert(matrix_isequal(
+			get_matrix(1, 1, 0),
+			get_arb_matrix(1, 1,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0)));
+	assert(matrix_isequal(
+			get_matrix(2, 1, 0),
+			get_arb_matrix(2, 1,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0)));
+	assert(matrix_isequal(
+			get_matrix(2, 3, 0),
+			get_arb_matrix(2, 3,
+				0, 0, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0)));
+	return (0);
+}
+
+int	test_matrix_size(void)
+{
+	assert(matrix_isequal(get_arb_matrix(2, 2,
+							-3, 5, 0, 0,
+							1, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+						get_arb_matrix(2, 2,
+							-3, 5, 1, 1,
+							1, -2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
 	printf("basic matrix test passed\n");
+	test_matrix_zero();
+	printf("test matrix zero passed\n");
+	test_matrix_isequal();
+	printf("test matrix isequal passed\n");
+	test_matrix_size();
+	printf("test_matrix_size passed\n");
 	return (0);
 }
 
