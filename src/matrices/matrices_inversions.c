@@ -101,8 +101,7 @@ t_matrix	get_inversed_matrix(t_matrix m)
 	int			j;
 
 	if (!matrix_is_invertible(m))
-		return (print_err(FILE, LINE, "tried to invert non-invertible matrix"),
-			get_matrix(4, 4, 0));
+		return (print_err(FILE, LINE, "non-invertible matrix"), m);
 	inversed_matrix = get_matrix(m.row, m.col, 0);
 	determinant = get_determinant(m);
 	i = 0;
