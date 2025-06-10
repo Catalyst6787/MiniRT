@@ -394,6 +394,31 @@ int test_transpose_matrix(void)
 	return (0);
 }
 
+int test_translation(void)
+{
+	t_matrix	transform;
+	t_vec3		point;
+	t_vec3		res;
+	t_matrix	inv;
+	t_vec3		vector;
+
+	transform = get_translation_matrix(5, -3, 2);
+	point = get_point3(-3, 4, 5);
+	res = get_point3(2, 1, 7);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), res));
+
+	transform = get_translation_matrix(5, -3, 2);
+	inv = get_inversed_matrix(transform);
+	res = get_point3(-8, 7, 3);
+	assert(vec3_isequal(vec3_matrix_multiply(inv, point), res));
+
+	// translation doesnt affect vectors
+	transform = get_translation_matrix(5, -3, 2);
+	vector = get_vec3(-3, 4, 5);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, vector), vector));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -412,6 +437,8 @@ int	start_all_matrix_tests(void)
 	printf("test_transpose_matrix passed\n");
 	test_matrix_inversion();
 	printf("test_matrix_inversion passed\n");
+	test_translation();
+	printf("test_translation passed\n");
 	return (0);
 }
 

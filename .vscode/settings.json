@@ -9,6 +9,7 @@
 		"errno.h": "c",
 		"math.h": "c",
 		"fcntl.h": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"matrice.h": "c"
 	}
 }

@@ -1,25 +1,13 @@
 #include "minirt.h"
 
-t_matrix	translate_nxn_matrice(t_matrix *m, int n)
+// returns a 4x4 translation matrix built with the given offsets
+t_matrix	get_translation_matrix(double tx, double ty, double tz)
 {
-	t_matrix	translated_matrix;
-	int			i;
-	int			j;
+	t_matrix m;
 
-	if (m->col != m->row)
-		return (print_err(FILE, LINE, 
-				"Error : trying to translate matrices with i != j"),
-				get_matrix(4, 4, 0));
-	i = 0;
-	while (i < n)
-	{
-		j = 0;
-		while (j < n)
-		{
-			translated_matrix.matrix[i][j] = m->matrix[j][i];
-			j++;
-		}
-		i++;
-	}
-	return(translated_matrix);
+	m = get_matrix(4, 4, 1);
+	m.matrix[0][3] = tx;
+	m.matrix[1][3] = ty;
+	m.matrix[2][3] = tz;
+	return (m);
 }
