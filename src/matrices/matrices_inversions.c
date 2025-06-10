@@ -40,7 +40,7 @@ double	get_determinant_of_3x3_matrice(t_matrix m)
 	double	cofactor3;
 
 	if (m.col != 3 || m.row != 3)
-		return (print_err(FILE, LINE, 
+		return (print_err(FILE, LINE,
 				"Error : wrong size to get 3x3 determinant"),
 				get_matrix(4, 4, 0), 0);
 	cofactor1 = get_determinant(get_submatrice(m, 0, 0));
@@ -60,7 +60,7 @@ double	get_determinant_of_4x4_matrice(t_matrix m)
 
 
 	if (m.col != 4 || m.row != 4)
-		return (print_err(FILE, LINE, 
+		return (print_err(FILE, LINE,
 				"Error : wrong size to get 4x4 determinant"),
 				get_matrix(4, 4, 0), 0);
 	cofactor1 = get_determinant(get_submatrice(m, 0, 0));
@@ -82,9 +82,15 @@ double	get_determinant(t_matrix m)
 		return (get_determinant_of_3x3_matrice(m));
 	else if (m.col == 4 && m.row == 4)
 		return (get_determinant_of_4x4_matrice(m));
-	return (print_err(FILE, LINE, 
-				"Error : wrong size to get determinant"),
-				get_matrix(4, 4, 0), 0); ;
+	return (print_err(FILE, LINE,
+				"Error : wrong size to get determinant"), 0);
+}
+
+bool	matrix_is_invertible(t_matrix m)
+{
+	if (double_isequal(get_determinant(m), 0))
+		return (0);
+	return (1);
 }
 
 t_matrix	get_inversed_matrix(t_matrix m)
@@ -94,7 +100,9 @@ t_matrix	get_inversed_matrix(t_matrix m)
 	int			i;
 	int			j;
 
-	// printf("row %d col %d\n", m.row, m.col);
+	if (!matrix_is_invertible(m))
+		return (print_err(FILE, LINE, "tried to invert non-invertible matrix"),
+			get_matrix(4, 4, 0));
 	inversed_matrix = get_matrix(m.row, m.col, 0);
 	determinant = get_determinant(m);
 	i = 0;

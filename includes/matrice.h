@@ -25,7 +25,9 @@ t_matrix		mutliply_matrix(t_matrix m1, t_matrix m2);
 
 double			get_determinant(t_matrix m);
 t_matrix		get_submatrice(t_matrix m, int row, int col);
+bool			matrix_is_invertible(t_matrix m);
 t_matrix		get_inversed_matrix(t_matrix m);
+
 
 
 
