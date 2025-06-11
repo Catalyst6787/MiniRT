@@ -4,6 +4,15 @@
 #include "vec3.h"
 #include <math.h>
 
+
+t_inter	get_inter(void)
+{
+	t_inter	inter;
+
+	ft_memset(&inter, 0, sizeof(t_inter));
+	return (inter);
+}
+
 // int	set_focal_length(t_minirt *minirt)
 // {
 // 	double	fov_y_rad;
@@ -107,3 +116,4 @@
 // 	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 // 	return (0);
 // }
+
