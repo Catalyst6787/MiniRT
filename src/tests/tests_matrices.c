@@ -449,6 +449,51 @@ int	test_scaling(void)
 	return (0);
 }
 
+int	test_shearing(void)
+{
+	t_matrix	transform;
+	t_shear		shear_params;
+	t_vec3		point;
+
+	shear_params = get_shear_params();
+	shear_params.xy = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(5, 3, 4)));
+
+	shear_params.xy = 0;
+	shear_params.xz = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(6, 3, 4)));
+
+	shear_params.xz = 0;
+	shear_params.yx = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 5, 4)));
+
+	shear_params.yx = 0;
+	shear_params.yz = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 7, 4)));
+
+	shear_params.yz = 0;
+	shear_params.zx = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 3, 6)));
+
+	shear_params.zx = 0;
+	shear_params.zy = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 3, 7)));
+
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -471,6 +516,8 @@ int	start_all_matrix_tests(void)
 	printf("test_translation passed\n");
 	test_scaling();
 	printf("test_scaling passed\n");
+	test_shearing();
+	printf("test_shearing passed\n");
 	return (0);
 }
 
