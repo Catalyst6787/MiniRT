@@ -13,16 +13,16 @@
 // 	return (inter);
 // }
 
-t_sphere	*new_sphere(t_vec3 *pos, double diameter, t_vec3 *color)
+t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
 	t_sphere	*sphere;
 
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (!sphere)
 		return (perror("new_sphere. Error\n"), NULL);
-	sphere->pos = pos;
+	sphere->pos = &pos;
 	sphere->diameter = diameter;
-	sphere->color = color;
+	sphere->color = &color;
 	return (sphere);
 }
 

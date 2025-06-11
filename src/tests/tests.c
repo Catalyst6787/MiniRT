@@ -1,6 +1,7 @@
 #include "minirt.h"
 
 
+int test_sphere_intersection(void);
 
 // Tuples tests
 
@@ -171,6 +172,7 @@ int	start_all_tests(void)
 	start_all_matrix_tests();
 	printf("\nall matrix test passed\n");
 	printf("\n%s", COLOR_RESET);
+
 
 	return (0);
 }
