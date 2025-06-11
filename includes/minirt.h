@@ -28,7 +28,7 @@
 # include <fcntl.h>
 # include <assert.h>
 
-# define SPACE_SET = " 	\n"
+# define SPACE_SET = " \t\n"
 
 # define WIN_W 800
 # define WIN_H 400

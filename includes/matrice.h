@@ -35,5 +35,14 @@ t_matrix		get_inversed_matrix(t_matrix m);
 
 t_matrix		get_translation_matrix(double tx, double ty, double tz);
 
+////////		Scaling
+
+t_matrix		get_scaling_matrice(double x, double y, double z);
+
+////////		Rotation
+
+t_matrix	get_rotation_matrix_x(double r);
+t_matrix	get_rotation_matrix_y(double r);
+t_matrix	get_rotation_matrix_z(double r);
 
 #endif
