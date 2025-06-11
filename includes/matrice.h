@@ -11,12 +11,23 @@ typedef	struct s_matrix
 	int		col;
 }			t_matrix;
 
+typedef struct s_shear
+{
+	double	xy;
+	double	xz;
+	double	yx;
+	double	yz;
+	double	zx;
+	double	zy;
+}			t_shear;
+
 ////////		Utils
 
 void			print_matrice(t_matrix m);
 t_matrix		get_matrix(int row, int col, bool identity);
 bool			matrix_isequal(t_matrix m1, t_matrix m2);
 void			matrix_set_elem(t_matrix *m, int i, int j, double elem);
+t_shear			get_shear_params(void);
 
 ////////		Operations
 
@@ -34,7 +45,14 @@ t_matrix		get_inversed_matrix(t_matrix m);
 ////////		Translation
 
 t_matrix		get_translation_matrix(double tx, double ty, double tz);
+
+////////		Scaling
+
 t_matrix		get_scaling_matrix(double tx, double ty, double tz);
+
+////////		Shearing
+
+t_matrix		get_shearing_matrix(t_shear	params);
 
 
 ////////		Scaling

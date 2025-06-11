@@ -439,7 +439,7 @@ int	test_scaling(void)
 	scaled_point = vec3_matrix_multiply(inverse, vector);
 	result = get_vec3(-2, 2, 2);
 	assert(vec3_isequal(scaled_point, result));
-	
+
 	return (0);
 }
 
@@ -468,7 +468,7 @@ int	test_rotation(void)
 
 
 	point = get_point3(0, 0, 1);
-	rotate_matrix = get_rotation_matrix_y(M_PI/4);	
+	rotate_matrix = get_rotation_matrix_y(M_PI/4);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
 	result = get_point3(sqrtf(2)/2, 0,  sqrtf(2)/2);
 	assert(vec3_isequal(rotated_point, result));
@@ -479,7 +479,7 @@ int	test_rotation(void)
 
 
 	point = get_point3(0, 1, 0);
-	rotate_matrix = get_rotation_matrix_z(M_PI/4);	
+	rotate_matrix = get_rotation_matrix_z(M_PI/4);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
 	result = get_point3((-1) * sqrtf(2)/2, sqrtf(2)/2, 0);
 	assert(vec3_isequal(rotated_point, result));
@@ -487,7 +487,7 @@ int	test_rotation(void)
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
 	result = get_point3(-1, 0, 0);
 	assert(vec3_isequal(rotated_point, result));
-	
+
 	t_matrix	transform;
 	t_matrix	inv;
 	// t_vec3		point;
@@ -516,6 +516,50 @@ int	test_rotation(void)
 	return (0);
 }
 
+int	test_shearing(void)
+{
+	t_matrix	transform;
+	t_shear		shear_params;
+	t_vec3		point;
+
+	shear_params = get_shear_params();
+	shear_params.xy = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(5, 3, 4)));
+
+	shear_params.xy = 0;
+	shear_params.xz = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(6, 3, 4)));
+
+	shear_params.xz = 0;
+	shear_params.yx = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 5, 4)));
+
+	shear_params.yx = 0;
+	shear_params.yz = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 7, 4)));
+
+	shear_params.yz = 0;
+	shear_params.zx = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 3, 6)));
+
+	shear_params.zx = 0;
+	shear_params.zy = 1;
+	transform = get_shearing_matrix(shear_params);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(2, 3, 7)));
+
+	return (0);
+}
 
 int	start_all_matrix_tests(void)
 {
@@ -541,6 +585,8 @@ int	start_all_matrix_tests(void)
 	printf("test_scaling passed\n");
 	test_rotation();
 	printf("test_rotation passed\n");
+	test_shearing();
+	printf("test_shearing passed\n");
 	return (0);
 }
 
