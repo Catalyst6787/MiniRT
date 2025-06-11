@@ -1,6 +1,7 @@
 #include "minirt.h"
 
 
+int test_sphere_intersection(void);
 
 // Tuples tests
 
@@ -173,6 +174,7 @@ int	start_all_tests(void)
 	start_all_ray_tests();
 	printf("\nall ray tests passed\n\n");
 	printf("\n%s", COLOR_RESET);
+
 
 	return (0);
 }
