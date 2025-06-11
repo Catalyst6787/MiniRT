@@ -30,7 +30,7 @@ t_vec3	vec3_normalise(t_vec3 vec3)
 }
 
 // commutative
-double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
+double	vec3_dot(const t_vec3 *vec3_u, const t_vec3 *vec3_v)
 {
 	assert(vec3_u);
 	assert(vec3_v);
@@ -41,7 +41,7 @@ double	vec3_dot(t_vec3 *vec3_u, t_vec3 *vec3_v)
 		+ (vec3_u->z * vec3_v->z));
 }
 
-int	vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b)
+int	vec3_isequal(const t_vec3 vec3_a, const t_vec3	vec3_b)
 {
 	if (double_isequal(vec3_a.x, vec3_b.x)
 		&& double_isequal(vec3_a.y, vec3_b.y)
@@ -52,7 +52,7 @@ int	vec3_isequal(t_vec3 vec3_a, t_vec3	vec3_b)
 }
 
 // order matters! vec3_cross(a, b) != vec3_cross(b, a).
-t_vec3	vec3_cross(t_vec3 a, t_vec3 b)
+t_vec3	vec3_cross(const t_vec3 a, const t_vec3 b)
 {
 	if (a.w || b.w)
 		print_err(FILE, LINE, "vec3_cross, trying to cross a point");
