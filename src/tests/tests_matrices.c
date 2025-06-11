@@ -429,7 +429,7 @@ int	test_scaling(void)
 	t_vec3		vector;
 	// t_matrix	m2;
 
-	m1 = get_scaling_matrice(2, 3, 4);
+	m1 = get_scaling_matrix(2, 3, 4);
 	point = get_point3(-4, 6, 8);
 	scaled_point = vec3_matrix_multiply(m1, point);
 	result = get_point3(-8, 18, 32);
@@ -490,7 +490,7 @@ int	test_rotation(void)
 	
 	t_matrix	transform;
 	t_matrix	inv;
-	t_vec3		point;
+	// t_vec3		point;
 	t_vec3		vec;
 
 	transform = get_scaling_matrix(2, 3, 4);

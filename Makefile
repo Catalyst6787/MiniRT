@@ -40,8 +40,8 @@ SRC					=	main.c \
 						render.c \
 						render_utils.c \
 						sphere.c \
-						matrices_utils.c matrices_multiplications.c matrices_translations.c  matrices_inversions.c \
-						matrices_transpositions.c matrices_scaling.c matrices_rotations.c \
+						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
+						matrices_translations.c matrices_transpositions.c  matrices_utils.c \
 						utils.c \
 						color_operations.c \
 						free_utils.c \

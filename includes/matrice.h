@@ -39,7 +39,7 @@ t_matrix		get_scaling_matrix(double tx, double ty, double tz);
 
 ////////		Scaling
 
-t_matrix		get_scaling_matrice(double x, double y, double z);
+t_matrix		get_scaling_matrix(double x, double y, double z);
 
 ////////		Rotation
 
