@@ -14,10 +14,10 @@ t_vec3	ray_at(double t, const t_ray ray)
 {
 	t_vec3	v;
 
-	v.x = ray.origin->x + (ray.dir->x * t);
-	v.y = ray.origin->y + (ray.dir->y * t);
-	v.z = ray.origin->z + (ray.dir->z * t);
-	v.w = ray.origin->w;
+	v.x = ray.origin.x + (ray.dir.x * t);
+	v.y = ray.origin.y + (ray.dir.y * t);
+	v.z = ray.origin.z + (ray.dir.z * t);
+	v.w = ray.origin.w;
 	return (v);
 }
 

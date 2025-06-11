@@ -54,6 +54,6 @@ t_vec3	vec3_matrix_multiply(t_matrix m, t_vec3 v);
 
 /*                                 UTILS                                  */
 
-int		vec3_debug_print(t_vec3 *vec3);
+int		vec3_debug_print(t_vec3	vec3);
 
 #endif
