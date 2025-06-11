@@ -34,6 +34,8 @@ t_matrix		get_inversed_matrix(t_matrix m);
 ////////		Translation
 
 t_matrix		get_translation_matrix(double tx, double ty, double tz);
+t_matrix		get_scaling_matrix(double tx, double ty, double tz);
+
 
 ////////		Scaling
 

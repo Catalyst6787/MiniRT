@@ -394,7 +394,7 @@ int test_transpose_matrix(void)
 	return (0);
 }
 
-int test_translation(void)
+int	test_translation(void)
 {
 	t_matrix	transform;
 	t_vec3		point;
@@ -487,9 +487,32 @@ int	test_rotation(void)
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
 	result = get_point3(-1, 0, 0);
 	assert(vec3_isequal(rotated_point, result));
+	
+	t_matrix	transform;
+	t_matrix	inv;
+	t_vec3		point;
+	t_vec3		vec;
 
+	transform = get_scaling_matrix(2, 3, 4);
+	point = get_point3(-4, 6, 8);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-8, 18, 32)));
 
+	vec = get_vec3(-4, 6, 8);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, vec), get_vec3(-8, 18, 32)));
+	return	(0);
 
+	//Multiplying by the inverse of a scaling matrix
+	inv = get_inversed_matrix(transform);
+	assert(vec3_isequal(vec3_matrix_multiply(inv, vec), get_vec3(-2, 2, 2)));
+	// reflection
+
+	transform = get_scaling_matrix(-1, 1, 1);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, 3, 4)));
+
+	transform = get_scaling_matrix(-1, -1, -1);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, -3, -4)));
 	return (0);
 }
 
