@@ -61,8 +61,8 @@ t_matrix		get_scaling_matrix(double x, double y, double z);
 
 ////////		Rotation
 
-t_matrix	get_rotation_matrix_x(double r);
-t_matrix	get_rotation_matrix_y(double r);
-t_matrix	get_rotation_matrix_z(double r);
+t_matrix		get_rotation_matrix_x(double r);
+t_matrix		get_rotation_matrix_y(double r);
+t_matrix		get_rotation_matrix_z(double r);
 
 #endif
