@@ -394,7 +394,7 @@ int test_transpose_matrix(void)
 	return (0);
 }
 
-int test_translation(void)
+int	test_translation(void)
 {
 	t_matrix	transform;
 	t_vec3		point;
@@ -419,6 +419,36 @@ int test_translation(void)
 	return (0);
 }
 
+int	test_scaling(void)
+{
+	t_matrix	transform;
+	t_matrix	inv;
+	t_vec3		point;
+	t_vec3		vec;
+
+	transform = get_scaling_matrix(2, 3, 4);
+	point = get_point3(-4, 6, 8);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-8, 18, 32)));
+
+	vec = get_vec3(-4, 6, 8);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, vec), get_vec3(-8, 18, 32)));
+	return	(0);
+
+	//Multiplying by the inverse of a scaling matrix
+	inv = get_inversed_matrix(transform);
+	assert(vec3_isequal(vec3_matrix_multiply(inv, vec), get_vec3(-2, 2, 2)));
+	// reflection
+
+	transform = get_scaling_matrix(-1, 1, 1);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, 3, 4)));
+
+	transform = get_scaling_matrix(-1, -1, -1);
+	point = get_point3(2, 3, 4);
+	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, -3, -4)));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -439,6 +469,8 @@ int	start_all_matrix_tests(void)
 	printf("test_matrix_inversion passed\n");
 	test_translation();
 	printf("test_translation passed\n");
+	test_scaling();
+	printf("test_scaling passed\n");
 	return (0);
 }
 
