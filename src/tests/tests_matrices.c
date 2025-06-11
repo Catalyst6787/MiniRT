@@ -561,6 +561,39 @@ int	test_shearing(void)
 	return (0);
 }
 
+int	test_chaining(void)
+{
+	t_matrix	a;
+	t_matrix	b;
+	t_matrix	c;
+	t_vec3		p;
+
+	p = get_point3(1, 0, 1);
+	a = get_rotation_matrix_x(M_PI / 2);
+	b = get_scaling_matrix(5, 5, 5);
+	c = get_translation_matrix(10, 5, 7);
+
+	// apply rotation first
+	t_vec3 p2 = vec3_matrix_multiply(a, p);
+	assert(vec3_isequal(p2, get_point3(1, -1, 0)));
+
+	// apply scaling
+	t_vec3 p3 = vec3_matrix_multiply(b, p2);
+	assert(vec3_isequal(p3, get_point3(5, -5, 0)));
+
+	t_vec3 p4 = vec3_matrix_multiply(c, p3);
+	assert(vec3_isequal(p4, get_point3(15, 0, 7)));
+
+	// Chained transformations must be applied in reverse order
+	// for ex, to do T = C * B * A
+	t_matrix	transform = mutliply_matrix(c, mutliply_matrix(b, a));
+	// or:
+	// t_matrix	transform = mutliply_matrix(mutliply_matrix(c, b), a);
+	p = vec3_matrix_multiply(transform, p);
+	assert(vec3_isequal(p, get_point3(15, 0, 7)));
+	return (0);
+}
+
 int	start_all_matrix_tests(void)
 {
 	basic_test_matrix();
@@ -587,6 +620,8 @@ int	start_all_matrix_tests(void)
 	printf("test_rotation passed\n");
 	test_shearing();
 	printf("test_shearing passed\n");
+	test_chaining();
+	printf("test_chaining passed\n");
 	return (0);
 }
 
