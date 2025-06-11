@@ -20,20 +20,6 @@ double	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	else
 	{
 		return ((-b - sqrt(discriminant)) / (2.0 * a));
+		return ((-b + sqrt(discriminant)) / (2.0 * a));
 	}
-}
-
-t_sphere	*new_sphere(t_vec3 *pos, double diameter, t_vec3 *color)
-{
-	t_sphere	*sphere;
-
-	// if (!pos || !color)
-	// 	return (ft_printf("new_sphere. Error, passed NULL ptr.\n"), NULL);
-	sphere = ft_calloc(1, sizeof(t_sphere));
-	if (!sphere)
-		return (perror("new_sphere. Error\n"), NULL);
-	sphere->pos = pos;
-	sphere->diameter = diameter;
-	sphere->color = color;
-	return (sphere);
 }
