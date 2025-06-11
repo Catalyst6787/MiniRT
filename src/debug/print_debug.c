@@ -27,8 +27,8 @@ void	print_render_pixel(t_vec3	pixel_center,
 {
 	PRINT_DEBUG("Pixel center :				(%.3f, %.3f, %.3f)\n", pixel_center.x, pixel_center.y, pixel_center.z);
 	PRINT_DEBUG("Ray direction :				(%.3f, %.3f, %.3f)\n", ray_direction.x, ray_direction.y, ray_direction.z);
-	PRINT_DEBUG("ray dir :					(%.3f, %.3f, %.3f)\n", ray.dir->x, ray.dir->y, ray.dir->z); 
-	PRINT_DEBUG("ray origin :				(%.3f, %.3f, %.3f)\n", ray.origin->x, ray.origin->y, ray.origin->z); 
+	PRINT_DEBUG("ray dir :					(%.3f, %.3f, %.3f)\n", ray.dir.x, ray.dir.y, ray.dir.z);
+	PRINT_DEBUG("ray origin :				(%.3f, %.3f, %.3f)\n", ray.origin.x, ray.origin.y, ray.origin.z);
 	PRINT_DEBUG("color :						(%.3f, %.3f, %.3f)\n", color.x, color.y, color.z);
 	PRINT_DEBUG("\n\n");
 }
