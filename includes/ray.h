@@ -5,10 +5,8 @@
 
 typedef struct s_ray
 {
-	t_vec3	*origin;
-	t_vec3	*dir;
-	// t_vec3	*color;
-	// double	brightness;
+	t_vec3	origin;
+	t_vec3	dir;
 }			t_ray;
 
 
