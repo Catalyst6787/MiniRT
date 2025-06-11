@@ -19,9 +19,8 @@ t_matrix	get_arb_matrix(int row, int col,
 				double c0, double c1, double c2, double c3,
 				double d0, double d1, double d2, double d3);
 
-
-
 void		test_color_mult(t_vec3 *color, int i, int j);
 int			start_all_matrix_tests(void);
+int			start_all_ray_tests(void);
 
 #endif
