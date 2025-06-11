@@ -115,7 +115,7 @@ int	test_vec_normalize(void)
 	t_vec3 v;
 	v = get_vec3(4, 0, 0);
 	v = vec3_normalise(v);
-	print_vec_stack(v, "normalised vector");
+	print_vec3(v, "normalised vector");
 	assert(vec3_isequal(v, get_vec3(1, 0, 0)));
 	v = get_vec3(1, 2, 3);
 	v = vec3_normalise(v);
@@ -171,6 +171,9 @@ int	start_all_tests(void)
 
 	start_all_matrix_tests();
 	printf("\nall matrix test passed\n");
+
+	start_sphere_tests();
+	printf("\nsphere tests passed\n");
 	printf("\n%s", COLOR_RESET);
 
 

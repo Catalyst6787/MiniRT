@@ -4,8 +4,6 @@ void	free_sphere(t_sphere *sphere)
 {
 	if (!sphere)
 		return;
-	free(sphere->pos);
-	free(sphere->color);
 	free_and_null((void **)&sphere);
 }
 

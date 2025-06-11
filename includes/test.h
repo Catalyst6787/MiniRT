@@ -13,6 +13,8 @@ int			test_scalar_multiplication(void);
 int			test_scalar_division(void);
 int			test_vec_normalize(void);
 
+int			start_sphere_tests();
+
 t_matrix	get_arb_matrix(int row, int col,
 				double a0, double a1, double a2, double a3,
 				double b0, double b1, double b2, double b3,
