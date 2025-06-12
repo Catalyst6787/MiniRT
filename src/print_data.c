@@ -32,9 +32,9 @@ void	print_spheres_data(t_minirt *minirt)
 	while (++i < minirt->scene->nb_sphere)
 	{
 		printf("Sphere[%d/%d] :\n\n", i + 1, minirt->scene->nb_sphere);
-		printf("	x y z : %.2f %.2f %.2f\n", minirt->scene->spheres[i]->pos->x, minirt->scene->spheres[i]->pos->y, minirt->scene->spheres[i]->pos->z);
+		printf("	x y z : %.2f %.2f %.2f\n", minirt->scene->spheres[i]->pos.x, minirt->scene->spheres[i]->pos.y, minirt->scene->spheres[i]->pos.z);
 		printf("	Diameter : %.2f\n", minirt->scene->spheres[i]->diameter);
-		printf("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->color->r, minirt->scene->spheres[i]->color->g, minirt->scene->spheres[i]->color->b);
+		printf("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->color.r, minirt->scene->spheres[i]->color.g, minirt->scene->spheres[i]->color.b);
 	}
 }
 

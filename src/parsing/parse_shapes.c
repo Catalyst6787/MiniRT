@@ -3,22 +3,24 @@
 int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor)
 {
 	int	i;
+	(void)minirt;
+	// sphere->pos = malloc(sizeof(t_vec3));
 
-	sphere->pos = malloc(sizeof(t_vec3));
-	sphere->color = malloc(sizeof(t_vec3));
-	if (!sphere->pos || !sphere->color)
-		quit(minirt, MALLOC_ERR);
+	// sphere->color = malloc(sizeof(t_vec3));
+	// if (!sphere->pos || !sphere->color)
+	// 	quit(minirt, MALLOC_ERR);
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
-	sphere->pos->x = ato_buffer(&scene->buffer[i], &i, ',');
-	sphere->pos->y = ato_buffer(&scene->buffer[i], &i, ',');
-	sphere->pos->z = ato_buffer(&scene->buffer[i], &i, ' ');
-	sphere->pos->w = 1;
+	sphere->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
+	sphere->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
+	sphere->pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	sphere->pos.w = 1;
 	sphere->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
-	sphere->color->r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	sphere->color->g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	sphere->color->b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	sphere->radius = sphere->diameter / 2;
+	sphere->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check

@@ -27,12 +27,12 @@ void	free_scene(t_scene *scene)
 	i = -1;
 	if (scene->spheres)
 	{
-		while (++i < scene->nb_sphere)
-		{
-			free(scene->spheres[i]->pos);
-			free(scene->spheres[i]->color);
-			free(scene->spheres[i]);
-		}
+		// while (++i < scene->nb_sphere)
+		// {
+		// 	free(scene->spheres[i]->pos);
+		// 	free(scene->spheres[i]->color);
+		// 	free(scene->spheres[i]);
+		// }
 		free(scene->spheres[i]);
 		free(scene->spheres);
 	}

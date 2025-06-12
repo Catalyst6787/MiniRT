@@ -1,5 +1,18 @@
 #include "minirt.h"
 
+t_ray	get_scaled_ray(t_ray r, t_vec3 scaler)
+{
+	t_ray		ray2;
+	t_matrix	m;
+
+	m = get_scaling_matrix(scaler.x, scaler.y, scaler.z);
+	ray2 = get_ray(vec3_matrix_multiply(m, r.origin), vec3_matrix_multiply(m, r.dir));
+
+	return( (ray2));
+}
+
+
+
 int	test_render_scene(t_minirt *minirt)
 {
 	t_sphere	*sphere;
@@ -30,7 +43,6 @@ int	test_render_scene(t_minirt *minirt)
 	t_vec3 col = get_color(1, 0, 0);
 	sphere = new_sphere(point, 2, col);
 	original_ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-
 	while (i < canva_size)
 	{
 		j = 0;
@@ -41,10 +53,9 @@ int	test_render_scene(t_minirt *minirt)
 			wall_point = get_point3(world_x, world_y, wall_distance);
 			r = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
 			inter = get_sphere_inter(sphere, r);
-			if (inter.count)
+			if (!inter.count)
 			{
 				my_mlx_pixel_put(minirt, j, i, color_to_int(get_color(0, 0, 255)));
-				printf("i = %d, j = %d\n", i, j);
 			}
 			else
 			{
@@ -55,5 +66,6 @@ int	test_render_scene(t_minirt *minirt)
 		i++;
 	}
 	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
+	free_sphere(sphere);
 	return (0);
 }
