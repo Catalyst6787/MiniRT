@@ -86,11 +86,11 @@ typedef struct s_minirt
 	t_render	*render;
 }	t_minirt;
 
-typedef struct s_inter
-{
-	int		count;
-	double	x[2];
-}	t_inter;
+// typedef struct s_inter
+// {
+// 	int		count;
+// 	double	x[2];
+// }	t_inter;
 
 /*                                 INIT                                  */
 
@@ -125,7 +125,7 @@ void		check_characters_validity(t_minirt *minirt);
 /*                                 RENDER                                  */
 
 t_inter		get_inter(void);
-t_inter		get_sphere_inter(const t_sphere *sphere, const t_ray ray);
+int			get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list);
 
 int			render_scene(t_minirt *minirt);
 int			render_pixel(int i, int j, t_render *render, t_minirt *minirt, t_sphere *sphere);
