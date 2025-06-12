@@ -3,7 +3,7 @@
 
 t_vec3	color_int_multiplication(t_vec3 c0, int n);
 t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2);
-int		color_to_int(t_vec3 *color);
+int		color_to_int(t_vec3 color);
 t_vec3	int_to_color(int int_color);
 
 //Regular text

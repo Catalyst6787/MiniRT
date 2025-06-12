@@ -87,7 +87,7 @@ t_inter	get_inter(void)
 // 	ray_direction = vec3_vec_substraction(pixel_center, render->camera_center);
 // 	set_ray(&ray, &render->camera_center, &ray_direction);
 // 	ray_color(&ray, &color, is_debug_pixel(i, j), sphere);
-// 	my_mlx_pixel_put(minirt, i, j, color_to_int(&color));
+// 	my_mlx_pixel_put(minirt, i, j, color_to_int(color));
 // 	return (0);
 // }
 
