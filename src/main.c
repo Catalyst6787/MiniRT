@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	if (init_mlx(&minirt))
 		quit(&minirt, MLX_ERR);
-	// init_events(&minirt);
+	init_events(&minirt);
 
 	clock_t t;
 	t = clock();
