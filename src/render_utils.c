@@ -31,7 +31,7 @@ int	set_pixel00_loc(t_minirt *minirt)
 				)
 			);
 
-	return (0);
+return (0);
 }
 
 t_vec3	get_pixel_center(int i, int j, t_render	*render)

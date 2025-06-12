@@ -12,12 +12,10 @@ int	basic_ray_test(void)
 	return (0);
 }
 
-int	test_ray_intersect_sphere()
+int	test_ray_intersect_sphere(void)
 {
 	t_ray			r;
 	t_sphere		s;
-	t_vec3			c;
-	t_vec3			pos;
 	t_inter			inter[10]; // can be malloc'ed aswell
 	t_inter_list	lst;
 
@@ -27,10 +25,8 @@ int	test_ray_intersect_sphere()
 	lst.capacity = 10;
 	lst.inters = inter;
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	c = get_color(1, 0, 0);
-	pos = get_point3(0, 0, 0);
-	s.color = &c;
-	s.pos = &pos;
+	s.color = get_color(1, 0, 0);
+	s.pos = get_point3(0, 0, 0);
 	s.diameter = 2;
 	// a ray interescts a sphere at two points
 	get_sphere_inter(&s, r, &lst);

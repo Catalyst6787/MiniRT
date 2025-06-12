@@ -44,7 +44,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		|| !is_ok_color(scene->light->color))
 		quit(minirt, WRONG_LIGHT_DATA);
 	while (++i < scene->nb_sphere)
-		if (!is_ok_color(scene->spheres[i]->color))
+		if (!is_ok_color(&scene->spheres[i]->color))
 			quit(minirt, WRONG_SPH_DATA);
 	i = -1;
 	while (++i < scene->nb_plane)

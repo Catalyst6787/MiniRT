@@ -47,8 +47,7 @@ SRC					=	main.c \
 						free_utils.c \
 						vec3_basic_op.c vec3_complex_operations.c \
 						vec3_utils.c \
-						tests.c tests_color.c tests_matrices.c tests_rays.c \
-						sphere_new.c
+						tests.c tests_color.c tests_matrices.c tests_rays.c test_render.c
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

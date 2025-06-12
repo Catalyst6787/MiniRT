@@ -87,9 +87,9 @@ void	print_scene_data(t_minirt *minirt)
 	while (++i < minirt->scene->nb_sphere)
 	{
 		PRINT_DEBUG("Sphere[%d/%d] :\n\n", i + 1, minirt->scene->nb_sphere);
-		PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->spheres[i]->pos->x, minirt->scene->spheres[i]->pos->y, minirt->scene->spheres[i]->pos->z);
+		PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->spheres[i]->pos.x, minirt->scene->spheres[i]->pos.y, minirt->scene->spheres[i]->pos.z);
 		PRINT_DEBUG("	Diameter : %.2f\n", minirt->scene->spheres[i]->diameter);
-		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->color->r, minirt->scene->spheres[i]->color->g, minirt->scene->spheres[i]->color->b);
+		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->color.r, minirt->scene->spheres[i]->color.g, minirt->scene->spheres[i]->color.b);
 	}
 	i = -1;
 	while (++i < minirt->scene->nb_plane)

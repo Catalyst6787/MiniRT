@@ -10,15 +10,15 @@ t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2)
 	return (vec3_vec_multiplication(c1, c2));
 }
 
-int	color_to_int(t_vec3 *color)
+int	color_to_int(t_vec3 color)
 {
 	int	red;
 	int	green;
 	int	blue;
 
-	red = (int)(color->r * 255.0);
-	green = (int)(color->g * 255.0);
-	blue = (int)(color->b * 255.0);
+	red = (int)(color.r * 255.0);
+	green = (int)(color.g * 255.0);
+	blue = (int)(color.b * 255.0);
 	if (red > 255)
 		red = 255;
 	if (red < 0)
