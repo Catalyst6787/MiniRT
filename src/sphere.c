@@ -18,7 +18,10 @@ t_inter	get_sphere_inter(const t_sphere *sphere, const t_ray ray)
 	c = vec3_dot(&oc, &oc) - 1;
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)
+	{
+		inter.count = 0;
 		return (inter);
+	}
 	inter.x[0] = ((-b - sqrt(discriminant)) / (2.0 * a));
 	inter.x[1] = ((-b + sqrt(discriminant)) / (2.0 * a));
 	inter.count = 2;

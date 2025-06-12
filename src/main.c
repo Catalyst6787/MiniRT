@@ -24,22 +24,23 @@ int	main(int ac, char **av)
 		quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt, av[1]);
 
-	// if (WIN_H < 10 || WIN_W < 10)
-	// 	quit(&minirt, WIN_SIZE_ERR);
-	// if (init_mlx(&minirt))
-	// 	quit(&minirt, MLX_ERR);
+	if (WIN_H < 10 || WIN_W < 10)
+		quit(&minirt, WIN_SIZE_ERR);
+	if (init_mlx(&minirt))
+		quit(&minirt, MLX_ERR);
 	// init_events(&minirt);
 
-	// clock_t t;
-	// t = clock();
+	clock_t t;
+	t = clock();
 
 	// render_scene(&minirt);
+	test_render_scene(&minirt);
 
-	// t = clock() - t;
-	// double time_taken = ((double)t) / CLOCKS_PER_SEC;
-	// printf("rendered image in %f seconds\n", time_taken);
-	// mlx_loop(mlx.mlx);
-	// CLOSE_DEBUG_FD;
+	t = clock() - t;
+	double time_taken = ((double)t) / CLOCKS_PER_SEC;
+	printf("rendered image in %f seconds\n", time_taken);
+	mlx_loop(mlx.mlx);
+	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);
 }

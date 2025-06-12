@@ -21,13 +21,11 @@
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
 	t_sphere	*sphere;
-	t_vec3		v_pos;
 
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (!sphere)
 		return (perror("new_sphere. Error\n"), NULL);
-	v_pos = get_point3(pos.x, pos.y, pos.z);
-	sphere->pos = &v_pos;
+	sphere->pos = &pos;
 	sphere->diameter = diameter;
 	sphere->color = &color;
 	return (sphere);
