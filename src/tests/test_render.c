@@ -28,7 +28,12 @@ int	test_render_scene(t_minirt *minirt)
 	double		world_x;
 	t_vec3	wall_point;
 	t_ray	r;
-	t_inter	inter;
+	t_inter	inter[2];
+	t_inter_list lst;
+
+	lst.capacity = 2;
+	lst.count = 0;
+	lst.inters = inter;
 
 	wall_distance = 10;
 	wall_size = 7;
@@ -36,7 +41,7 @@ int	test_render_scene(t_minirt *minirt)
 	pixel_size = wall_size / canva_size;
 	half = wall_size / 2;
 
-	
+
 	i = 0;
 	j = 0;
 	t_vec3 point = get_point3(0, 0, 0);
@@ -52,8 +57,8 @@ int	test_render_scene(t_minirt *minirt)
 			world_x = half - pixel_size * j;
 			wall_point = get_point3(world_x, world_y, wall_distance);
 			r = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
-			inter = get_sphere_inter(sphere, r);
-			if (!inter.count)
+			get_sphere_inter(sphere, r, &lst);
+			if (!lst.count)
 			{
 				my_mlx_pixel_put(minirt, j, i, color_to_int(get_color(0, 0, 255)));
 			}
@@ -62,6 +67,7 @@ int	test_render_scene(t_minirt *minirt)
 				my_mlx_pixel_put(minirt, j, i, color_to_int(get_color(255, 0, 0)));
 			}
 			j++;
+			lst.count = 0;
 		}
 		i++;
 	}
