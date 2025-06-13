@@ -50,6 +50,7 @@ int	test_render_scene(t_minirt *minirt)
 	t_ray	r;
 	t_inter	inter[2];
 	t_inter_list lst;
+	t_matrix	transform;
 
 	t_vec3	scaler;
 	t_vec3	translater;
