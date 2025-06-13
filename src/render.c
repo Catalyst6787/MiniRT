@@ -2,6 +2,7 @@
 #include "minirt.h"
 #include "ray.h"
 #include "vec3.h"
+#include <float.h>
 #include <math.h>
 
 
@@ -12,6 +13,30 @@ t_inter	get_inter(void)
 	ft_memset(&inter, 0, sizeof(t_inter));
 	return (inter);
 }
+
+// expects a sorted list!
+t_inter	*get_hit(t_inter_list *lst)
+{
+	int		i;
+	t_inter	*smallest;
+	t_inter	s;
+
+	i = 0;
+	smallest = &s;
+	smallest->t = DBL_MAX;
+	smallest->obj = NULL;
+	while (i < lst->count)
+	{
+		if (lst->inters[i].t > 0 && lst->inters[i].t < smallest->t)
+			smallest = &lst->inters[i];
+		i++;
+	}
+	if (!smallest->obj)
+		return (NULL);
+	return (smallest);
+
+}
+
 
 // int	set_focal_length(t_minirt *minirt)
 // {

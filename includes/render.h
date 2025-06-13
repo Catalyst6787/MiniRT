@@ -17,4 +17,9 @@ typedef struct s_inter_list
 	int			capacity;
 }			t_inter_list;
 
+
+// sort intersections
+void	sort_inter(t_inter_list *inter_lst);
+t_inter	*get_hit(t_inter_list *lst);
+
 #endif
