@@ -19,6 +19,25 @@ void	print_render_pixel(t_vec3	pixel_center,
 	PRINT_DEBUG("\n\n");
 }
 
+void	debug_print_inter(t_inter inter)
+{
+	printf("inter: t=[%f], obj=[%p]\n", inter.t, inter.obj);
+}
+
+void	debug_print_inter_list(t_inter_list lst)
+{
+	int	i;
+
+	i = 0;
+	printf("inter_lst of size %d:\n", lst.count);
+	while (i < lst.count)
+	{
+		printf("inter [%d]:	", i);
+		debug_print_inter(lst.inters[i]);
+		i++;
+	}
+
+}
 
 void	print_scene(t_minirt *minirt, bool asterix)
 {
