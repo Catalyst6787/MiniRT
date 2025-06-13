@@ -19,30 +19,6 @@ log_error(){
 	logging "${LIGHT_RED}error${RESET}" "$@" >&2
 }
 
-
-# Try to use pkg-config first
-if command -v pkg-config >/dev/null 2>&1; then
-    if pkg-config --exists x11; then
-        log_info "Using pkg-config to find X11"
-        CFLAGS="$(pkg-config --cflags x11 xext)"
-				LIBS="$(pkg-config --libs x11 xext)"
-				# log_info "pkg-config CFLAGS: $CFLAGS"
-				# log_info "pkg-config LIBS: $LIBS"
-    else
-        log_info "pkg-config could not find 'x11' package"
-        log_info "Ensure 'libx11-dev' is installed (Ubuntu), or set PKG_CONFIG_PATH appropriately"
-        log_info "Falling back to hardcoded paths"
-        CFLAGS="-I$(get_xlib_include_path)"
-        LIBS="-lX11"
-    fi
-else
-    log_info "pkg-config not found, falling back to hardcoded paths"
-    CFLAGS="-I$(get_xlib_include_path)"
-    LIBS="-lX11"
-fi
-export CFLAGS LIBS
-
-
 # find and print x11 header path
 get_xlib_include_path(){
 	local result=""
@@ -120,21 +96,14 @@ parse_args(){
 }
 
 main(){
+	local xlib_inc="$(get_xlib_include_path)"
+
 	case $(uname) in
 		FreeBSD) MAKE=gmake ;;
 		*) MAKE=make ;;
 	esac
 
 	parse_args "$@"
-
-	# Use CFLAGS if already set, otherwise fall back
-	if [ -n "$CFLAGS" ]; then
-		# Extract the first -I path
-		xlib_inc="$(echo "$CFLAGS" | grep -oE -- '-I[^ ]+' | head -n1 | sed 's/^-I//')"
-	else
-		xlib_inc="$(get_xlib_include_path)"
-	fi
-
 	if [ -z "$xlib_inc" ]; then
 		log_error "Can't find a suitable X11 include directory."
 		exit 1
@@ -142,10 +111,10 @@ main(){
 	log_info "Found X11 include path directory: $xlib_inc"
 
 	log_info 'Generate "makefile.gen" from template "makefile.mk"'
-		echo "INC=$xlib_inc"        >  Makefile.gen 
-		cat Makefile.mk | grep -v %%%% >> Makefile.gen
+		echo "INC=$xlib_inc"  	 	    	>  Makefile.gen 
+		cat Makefile.mk | grep -v %%%%  	>> Makefile.gen
 	log_info 'Generate "test/makefile.gen" from template "test/makefile.mk"'
-		echo "INC=$xlib_inc"         >  test/Makefile.gen
+		echo "INC=$xlib_inc"				>  test/Makefile.gen
 		cat test/Makefile.mk | grep -v %%%% >> test/Makefile.gen
 
 	log_info 'Execute "make all" from file "makefile.gen"'
