@@ -14,13 +14,8 @@ t_inter	get_inter(void)
 	return (inter);
 }
 
-// int	render_scene(t_minirt *minirt)
-// {
-// 	int	i;
-// 	int	j;
 
-// 	return (0);
-// }
+
 // expects a sorted list!
 t_inter	*get_hit(t_inter_list *lst)
 {

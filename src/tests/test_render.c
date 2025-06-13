@@ -34,6 +34,9 @@ t_ray	get_translated_ray(t_ray r, t_vec3 translater)
 // int	get_normal_at(t_sphere *sphere, t_vec3 point)
 // {
 // 	t_vec3	object_normal;
+// 	t_vec3	transformed_point;
+
+// 	transformed_point = get
 
 
 
@@ -74,8 +77,8 @@ int	test_render_scene(t_minirt *minirt)
 
 	wall_distance = 10;
 	wall_size = 7;
-	canva_width = 100;
-	canva_height = 100;
+	canva_width = WIN_H;
+	canva_height = WIN_H;
 	pixel_size = wall_size / canva_width;
 	half = wall_size / 2;
 
@@ -99,7 +102,7 @@ int	test_render_scene(t_minirt *minirt)
 			r = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
 			// r = get_translated_ray(r, translater);
 			// r = get_scaled_ray(r, scaler);
-			r = ray_transform(r, transform);
+			// r = ray_transform(r, transform);
 			get_sphere_inter(sphere, r, &lst);
 			if (!lst.count)
 			{
