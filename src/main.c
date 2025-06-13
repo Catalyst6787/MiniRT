@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
-
 	if (start_all_tests())
 		quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt, av[1]);
@@ -34,7 +33,7 @@ int	main(int ac, char **av)
 	t = clock();
 
 	// render_scene(&minirt);
-	// test_render_scene(&minirt);
+	test_render_scene(&minirt);
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;

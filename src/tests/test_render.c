@@ -2,13 +2,25 @@
 
 t_ray	get_scaled_ray(t_ray r, t_vec3 scaler)
 {
-	t_ray		ray2;
+	t_ray		scaled_ray;
 	t_matrix	m;
 
 	m = get_scaling_matrix(scaler.x, scaler.y, scaler.z);
-	ray2 = get_ray(vec3_matrix_multiply(m, r.origin), vec3_matrix_multiply(m, r.dir));
+	m = get_inversed_matrix(m);
+	scaled_ray = get_ray(vec3_matrix_multiply(m, r.origin), vec3_matrix_multiply(m, r.dir));
 
-	return( (ray2));
+	return(scaled_ray);
+}
+
+t_ray	get_translated_ray(t_ray r, t_vec3 translater)
+{
+	t_ray		translated_ray;
+	t_matrix	m;
+
+	m = get_translation_matrix(translater.x, translater.y, translater.z);
+	m = get_inversed_matrix(m);
+	translated_ray = get_ray(vec3_matrix_multiply(m, r.origin), vec3_matrix_multiply(m, r.dir));
+	return (translated_ray);
 }
 
 
@@ -28,10 +40,16 @@ int	test_render_scene(t_minirt *minirt)
 	double		world_x;
 	t_vec3	wall_point;
 	t_ray	r;
-	t_inter	inter[2];
+	t_inter	inter[3];
 	t_inter_list lst;
 
-	lst.capacity = 2;
+	t_vec3	scaler;
+	t_vec3	translater;
+	
+	scaler = get_vec3(1, 0.5, 1);
+	translater = get_vec3(0, 1, 0);
+
+	lst.capacity = 50;
 	lst.count = 0;
 	lst.inters = inter;
 
@@ -44,10 +62,9 @@ int	test_render_scene(t_minirt *minirt)
 
 	i = 0;
 	j = 0;
-	t_vec3 point = get_point3(0, 0, 0);
-	t_vec3 col = get_color(1, 0, 0);
-	sphere = new_sphere(point, 2, col);
+	sphere = new_sphere(get_point3(0, 0, 0), 2, get_color(1, 0, 0));
 	original_ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+
 	while (i < canva_size)
 	{
 		j = 0;
@@ -57,6 +74,8 @@ int	test_render_scene(t_minirt *minirt)
 			world_x = half - pixel_size * j;
 			wall_point = get_point3(world_x, world_y, wall_distance);
 			r = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
+			r = get_scaled_ray(r, scaler);
+			r = get_translated_ray(r, translater);
 			get_sphere_inter(sphere, r, &lst);
 			if (!lst.count)
 			{

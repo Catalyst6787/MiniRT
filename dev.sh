@@ -5,14 +5,18 @@ scene=$1
 RED='\033[0;31m'
 RESET='\033[0m'
 
-if [ $# == 0 ]; then
-	printf "${RED}usage ./dev.sh <map_number>\n${RESET}"
-	exit 1
-fi
-
 make fclean
 make
 printf "\n\n"
+
+if [ $# == 0 ]; then
+	# printf "${RED}Warning : no scene loaded (usage ./dev.sh <map_number>)\n${RESET}"
+	printf "${RED}usage ./dev.sh <map_number>\n${RESET}"
+	# ./miniRT assets/scenes/subject_example.rt
+	exit 1
+fi
+
+
 if [ $scene == 1 ]; then
 	./miniRT assets/scenes/subject_example.rt
 elif [ $scene == 2 ]; then
@@ -30,3 +34,4 @@ elif [ $scene == 7 ]; then
 elif [ $scene == 8 ]; then
 	echo scene slot 8 is empty
 fi
+
