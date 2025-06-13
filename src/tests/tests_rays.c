@@ -22,7 +22,7 @@ void	debug_print_inter_list(t_inter_list lst)
 
 int	basic_ray_test(void)
 {
-	t_ray r;
+	t_ray	r;
 
 	r = get_ray(get_point3(2, 3, 4), get_vec3(1, 0, 0));
 	assert(vec3_isequal(ray_at(0, r), get_point3(2, 3, 4)));
