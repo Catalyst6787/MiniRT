@@ -47,21 +47,12 @@
 
 typedef struct s_render
 {
-	double	focal_length;
-	double	viewport_height;
-	double	viewport_width;
-	t_vec3	camera_center;
-	t_vec3	camera_dir;
-	t_vec3	world_up;
-	t_vec3	right;
-	t_vec3	up;
-	t_vec3	viewport_u;
-	t_vec3	viewport_v;
-	t_vec3	pixel_delta_u;
-	t_vec3	pixel_delta_v;
-	t_vec3	viewport_upper_left;
-	t_vec3	pixel00_loc;
-}	t_render;
+	t_vec3			camera_center;
+	t_vec3			camera_dir;
+	t_inter_list	inter_list;
+}					t_render;
+
+
 
 typedef struct s_img_data
 {
@@ -84,7 +75,7 @@ typedef struct s_minirt
 	t_mlx_data	*mlx;
 	t_scene		*scene;
 	t_render	*render;
-}	t_minirt;
+}				t_minirt;
 
 // typedef struct s_inter
 // {
@@ -121,6 +112,8 @@ void		char_error_check(t_minirt *minirt,
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
+
+void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
 

@@ -6,6 +6,8 @@
 # include "cylinder.h"
 # include "plane.h"
 
+
+
 typedef struct s_ambient
 {
 	double		brightness;
