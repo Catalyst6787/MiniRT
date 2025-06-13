@@ -17,4 +17,15 @@ typedef struct s_inter_list
 	int			capacity;
 }			t_inter_list;
 
+typedef struct s_render
+{
+	t_vec3			camera_center;
+	// t_vec3			camera_dir;
+	t_inter_list	inter_list;
+}					t_render;
+
+
+
+
+
 #endif

@@ -13,6 +13,15 @@ t_inter	get_inter(void)
 	return (inter);
 }
 
+// int	render_scene(t_minirt *minirt)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	return (0);
+// }
+
+
 // int	set_focal_length(t_minirt *minirt)
 // {
 // 	double	fov_y_rad;

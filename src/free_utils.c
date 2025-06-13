@@ -9,7 +9,7 @@ void	free_sphere(t_sphere *sphere)
 
 int	free_render(t_render *render)
 {
-	(void)render;
+	free(render->inter_list.inters);
 	return (0);
 }
 

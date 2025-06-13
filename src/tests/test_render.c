@@ -31,6 +31,14 @@ t_ray	get_translated_ray(t_ray r, t_vec3 translater)
 
 // }
 
+// int	get_normal_at(t_sphere *sphere, t_vec3 point)
+// {
+// 	t_vec3	object_normal;
+
+
+
+
+// }
 
 int	test_render_scene(t_minirt *minirt)
 {
@@ -89,8 +97,7 @@ int	test_render_scene(t_minirt *minirt)
 			world_x = half - pixel_size * j;
 			wall_point = get_point3(world_x, world_y, wall_distance);
 			r = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
-			// r = get_translated_ray(r, translater);
-			// r = get_scaled_ray(r, scaler);
+			r = get_ray(vec3_matrix_multiply(transform, r.origin), vec3_matrix_multiply(transform, r.dir));
 			get_sphere_inter(sphere, r, &lst);
 			if (!lst.count)
 			{

@@ -45,15 +45,6 @@
 # define FILE __FILE__
 # define LINE __LINE__
 
-typedef struct s_render
-{
-	t_vec3			camera_center;
-	t_vec3			camera_dir;
-	t_inter_list	inter_list;
-}					t_render;
-
-
-
 typedef struct s_img_data
 {
 	void	*img;
