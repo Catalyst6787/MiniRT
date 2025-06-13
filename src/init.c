@@ -1,32 +1,30 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 12:21:39 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/06 16:34:53 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
 
-int	init_structure(t_mlx_data *mlx, t_img_data *img)
+int	init_mlx(t_minirt *minirt)
 {
+	t_img_data	*img_st;
+	t_mlx_data	*mlx;
+
+	mlx = minirt->mlx;
+
+	img_st = malloc(sizeof(t_img_data));
+	if (!img_st)
+		return (perror(MALLOC_ERR), 1);
+	ft_memset(img_st, '\0', sizeof(t_img_data));
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, WIN_W, WIN_H, "miniRT");
-	img->img = mlx_new_image(mlx->mlx, WIN_W, WIN_H);
-	img->addr = mlx_get_data_addr(img->img, &mlx->bits_per_pixel,
+	img_st->img = mlx_new_image(mlx->mlx, WIN_W, WIN_H);
+	img_st->addr = mlx_get_data_addr(img_st->img, &mlx->bits_per_pixel,
 			&mlx->line_length, &mlx->endian);
-	mlx->img_st = img;
+	mlx->img_st = img_st;
 	return (0);
 }
 
-int	init_events(t_mlx_data *mlx)
+int	init_events(t_minirt *minirt)
 {
-	mlx_hook(mlx->mlx_win, 2, 1L << 0, handle_keypress, mlx);
-	mlx_hook(mlx->mlx_win, 17, 1L << 0, end_mlx_loop, mlx);
-	mlx_hook(mlx->mlx_win, 4, 1L << 2, handle_mouseclick, mlx);
+	mlx_hook(minirt->mlx->mlx_win, 2, 1L << 0, handle_keypress, minirt);
+	mlx_hook(minirt->mlx->mlx_win, 17, 1L << 0, end_mlx_loop, minirt->mlx);
+	mlx_hook(minirt->mlx->mlx_win, 4, 1L << 2, handle_mouseclick, minirt);
 	return (0);
 }

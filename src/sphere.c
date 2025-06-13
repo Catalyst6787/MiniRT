@@ -1,18 +1,28 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/12 16:25:31 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/12 17:15:45 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minirt.h"
+#include "vec3.h"
 
-int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
+t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
+{
+	t_sphere	*sphere;
+
+	sphere = ft_calloc(1, sizeof(t_sphere));
+	if (!sphere)
+		return (perror("new_sphere. Error\n"), NULL);
+	sphere->pos.x = pos.x;
+	sphere->pos.y = pos.y;
+	sphere->pos.z = pos.z;
+	sphere->pos.w = 1;
+	sphere->diameter = diameter;
+	sphere->radius = diameter / 2;
+	sphere->color.x = color.x;
+	sphere->color.y = color.y;
+	sphere->color.z = color.z;
+	return (sphere);
+}
+
+
+int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list)
 {
 	t_vec3	oc;
 	double	a;
@@ -20,27 +30,23 @@ int	hit_sphere(const t_sphere *sphere, const t_ray *ray)
 	double	c;
 	double	discriminant;
 
-	ft_memset(&oc, 0, sizeof(t_vec3));
-	vec3_copy(&oc, sphere->pos);
-	vec3_substract_inplace(&oc, ray->origin);
-	a = vec3_dot(ray->dir, ray->dir);
-	b = -2.0 * vec3_dot(ray->dir, &oc);
-	c = vec3_dot(&oc, &oc) - (sphere->diameter * sphere->diameter);
+	if (!list)
+		return (print_err(FILE, LINE, "get_sphere_inter: NULL pointer"), 1);
+	oc = vec3_vec_substraction(ray.origin, sphere->pos);
+	a = vec3_dot(&ray.dir, &ray.dir);
+	b = 2.0 * vec3_dot(&ray.dir, &oc);
+	c = vec3_dot(&oc, &oc) - 1;
 	discriminant = (b * b) - (4 * a * c);
-	return (discriminant >= 0);
-}
-
-t_sphere	*sphere_new_alloc(t_vec3 *pos, double diameter, t_vec3 *color)
-{
-	t_sphere	*sphere;
-
-	if (!pos || !color)
-		return (ft_printf("sphere_new_alloc. Error, passed NULL ptr.\n"), NULL);
-	sphere = ft_calloc(1, sizeof(t_sphere));
-	if (!sphere)
-		return (perror("sphere_new_alloc. Error\n"), NULL);
-	sphere->pos = pos;
-	sphere->diameter = diameter;
-	sphere->color = color;
-	return (sphere);
+	if (discriminant < 0)
+		return (0);
+	if (list->count > list->capacity - 2)
+		return (print_err(FILE, LINE,
+				"get_sphere_inter: no more space in list"), 1);
+	list->inters[list->count].t = ((-b - sqrt(discriminant)) / (2.0 * a));
+	list->inters[list->count].obj = sphere;
+	list->count++;
+	list->inters[list->count].t = ((-b + sqrt(discriminant)) / (2.0 * a));
+	list->inters[list->count].obj = sphere;
+	list->count++;
+	return (0);
 }

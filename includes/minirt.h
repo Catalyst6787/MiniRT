@@ -1,52 +1,67 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/05 12:01:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 11:49:32 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINIRT_H
 # define MINIRT_H
 
+// # ifndef __USE_MISC
+// #  define __USE_MISC 1
+// # endif
+
 # include "libft.h"
 
+# include "mlx.h"
 # include "vec3.h"
 # include "ray.h"
-# include "sphere.h"
 # include "scene.h"
-# include "mlx.h"
+# include "debug.h"
+# include "errors.h"
+# include "keycodes.h"
+# include "colors.h"
+# include "test.h"
+# include "matrice.h"
+# include "render.h"
 
 
-
+# include <sys/errno.h>
+# include <stdbool.h>
+# include <string.h>
 # include <time.h>
+
 # include <math.h>
 # include <fcntl.h>
-
-// DEBUG
 # include <assert.h>
+
+# define SPACE_SET = " \t\n"
 
 # define WIN_W 800
 # define WIN_H 400
-# define FOCAL_LEN 1.0
+// # define FOCAL_LEN 1.0
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
+# define M_PI 3.14159265358979323846
 # define EPSILON 1.0E-5
 
-# define Q 113
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define SPACE 32
-# define ESC 65307
+# define FILE __FILE__
+# define LINE __LINE__
+
+typedef struct s_render
+{
+	double	focal_length;
+	double	viewport_height;
+	double	viewport_width;
+	t_vec3	camera_center;
+	t_vec3	camera_dir;
+	t_vec3	world_up;
+	t_vec3	right;
+	t_vec3	up;
+	t_vec3	viewport_u;
+	t_vec3	viewport_v;
+	t_vec3	pixel_delta_u;
+	t_vec3	pixel_delta_v;
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel00_loc;
+}	t_render;
 
 typedef struct s_img_data
 {
@@ -64,64 +79,113 @@ typedef struct s_mlx_data
 	t_img_data	*img_st;
 }	t_mlx_data;
 
-// INIT
-int		init_structure(t_mlx_data *mlx, t_img_data *img);
-int		init_events(t_mlx_data *mlx);
+typedef struct s_minirt
+{
+	t_mlx_data	*mlx;
+	t_scene		*scene;
+	t_render	*render;
+}	t_minirt;
 
-// PARSING
-int		parse(char *file_path, t_scene *scene);
+// typedef struct s_inter
+// {
+// 	int		count;
+// 	double	x[2];
+// }	t_inter;
 
-// PARSING TYPES
-int		parse_ambiant(char *line, t_scene *scene);
-int		parse_camera(char *line, t_scene *scene);
-int		parse_light(char *line, t_scene *scene);
-int		parse_sphere(char *line, t_scene *scene);
-int		parse_plane(char *line, t_scene *scene);
-int		parse_cylinder(char *line, t_scene *scene);
+/*                                 INIT                                  */
 
-// UTILS
-void	my_mlx_pixel_put(t_mlx_data *mlx, int x, int y, int color);
-void	free_tab(char **arr);
-void	free_and_null(void	**ptr);
-int		get_color_as_int(t_vec3 *color);
+int			init_mlx(t_minirt *minirt);
+int			init_events(t_minirt *minirt);
 
-//FILE UTILS
-int		check_file(char *file_path, int *fd);
-int		get_file_contents(int fd, char **file_contents);
+/*                                 PARSING                                  */
 
-// EVENTS
-int		end_mlx_loop(t_mlx_data *mlx);
-int		handle_keypress(int keycode, t_mlx_data *mlx);
-int		handle_mouseclick(int button, int x, int y, t_mlx_data *mlx);
+void		parse_scene(t_minirt *minirt, char *file_path);
+void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
-// EXIT
-int		quit(t_mlx_data *mlx);
+double		ato_buffer(char *ptr, int *cursor, int delim);
 
-// DEBUG
-int		debug_print_keycode(int keycode);
-void	debug_aff_image(t_mlx_data *mlx);
-void	debug_pixel(const t_ray *r);
+int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor);
+int			parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor);
+int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
 
-// RENDER
-int		render_scene(t_mlx_data *mlx, t_scene *scene);
-int		render_pixel(int i, int j, t_render	*render, t_mlx_data *mlx, t_sphere *sphere);
-int		ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
-int		free_render(t_render *render);
-int		init_render(t_render *render);
+void		check_file_name(t_minirt *minirt, char *file_path);
+void		check_file_not_empty(t_minirt *minirt);
+void		check_data_validity(t_minirt *minirt, t_scene *scene);
+void		char_error_check(t_minirt *minirt,
+							char c,
+							const char *alpha_set,
+							const char *sign_set);
+void		single_elements_check(t_minirt *minirt, t_scene *scene);
+void		count_elements(t_scene *scene);
+void		check_characters_validity(t_minirt *minirt);
 
-// RENDER UTILS
-int		set_viewport_upper_left(t_render *render);
-int		set_pixel00_loc(t_render *render);
-int		set_pixel_center(t_vec3	*pixel_center,
-			int i, int j, t_render	*render);
-int		set_ray_direction(t_vec3 *ray_direction,
-			t_render *render, t_vec3 *pixel_center);
-int		is_debug_pixel(int i, int j);
+/*                                 RENDER                                  */
 
-// DOUBLE UTILS
+t_inter		get_inter(void);
 
-double	double_abs(double d);
-int		double_isequal(double a, double b);
+int			render_scene(t_minirt *minirt);
+int			render_pixel(int i, int j, t_render *render, t_minirt *minirt, t_sphere *sphere);
+int			ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
+int			free_render(t_render *render);
+int			init_render(t_minirt *minirt);
 
+int			set_viewport_upper_left(t_minirt *minirt);
+int			set_pixel00_loc(t_minirt *minirt);
+t_vec3		get_pixel_center(int i, int j, t_render	*render);
+int			is_debug_pixel(int i, int j);
+
+/*                             COLOR UTILS                                  */
+
+t_vec3		color_int_multiplication(t_vec3 c0, int n);
+t_vec3		color_color_multiplication(t_vec3 c1, t_vec3 c2);
+int			color_to_int(t_vec3 color);
+t_vec3		int_to_color(int int_color);
+
+/*                                 UTILS                                  */
+
+void		my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color);
+void		free_tab(char **arr);
+void		free_and_null(void	**ptr);
+void		print_err(char *file, int line, char *s);
+int			get_max_int(int a, int b);
+int			get_min_int(int a, int b);
+
+/*                                 EVENTS                                  */
+
+int			end_mlx_loop(t_mlx_data *mlx);
+int			handle_keypress(int keycode, t_minirt *minirt);
+int			handle_mouseclick(int button, int x, int y, t_minirt *minirt);
+void		event_print_debug(t_minirt *minirt);
+void		print_camera_data(t_minirt *minirt);
+
+/*                                 EXIT                                  */
+
+int			quit(t_minirt *minirt, char *str);
+
+/*                                 DEBUG                                  */
+
+int			debug_print_keycode(int keycode);
+void		debug_aff_image(t_minirt *minirt);
+void		debug_pixel(const t_ray *r);
+void		print_scene_data(t_minirt *minirt);
+void		print_scene_ok_message(void);
+void		print_vector_data(t_vec3 *vec, char *vec_name);
+void		print_vec3(t_vec3 vec, char *vec_name);
+void		print_ray(t_ray r);
+void		print_render_data(t_render *render);
+void		print_render_pixel(t_vec3	pixel_center,
+			t_vec3	ray_direction,
+			t_ray	ray,
+			t_vec3	color);
+
+/*                                 DOUBLE UTILS                                  */
+
+double		double_abs(double d);
+int			double_isequal(double a, double b);
+
+int			test_render_scene(t_minirt *minirt);
 
 #endif

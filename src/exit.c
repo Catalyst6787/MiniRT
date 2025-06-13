@@ -1,18 +1,85 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/06 12:22:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/05/14 12:03:25 by lfaure           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
+#include "libft.h"
 #include "minirt.h"
 
-int	quit(t_mlx_data *mlx)
+void	print_exit_info(char *str)
+{
+	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd(RED, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	if (errno)
+	{
+		ft_putstr_fd("(strerror[", STDERR_FILENO);
+		ft_putnbr_fd(errno, STDERR_FILENO);
+		ft_putstr_fd("] : ", STDERR_FILENO);
+		ft_putstr_fd(strerror(errno), STDERR_FILENO);
+		ft_putstr_fd(")\n", STDERR_FILENO);
+	}
+	ft_putstr_fd(COLOR_RESET, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
+
+void	free_scene(t_scene *scene)
+{
+	int	i;
+
+	i = -1;
+	if (scene->spheres)
+	{
+		while (++i < scene->nb_sphere)
+			free(scene->spheres[i]);
+		free(scene->spheres[i]);
+		free(scene->spheres);
+	}
+	i = -1;
+	if (scene->planes)
+	{
+		while (++i < scene->nb_plane)
+		{
+			free(scene->planes[i]->dir);
+			free(scene->planes[i]->pos);
+			free(scene->planes[i]->color);
+			free(scene->planes[i]);
+		}
+		free(scene->planes[i]);
+		free(scene->planes);
+	}
+	i = -1;
+	if (scene->cylinders)
+	{
+		while (++i < scene->nb_cylinder)
+		{
+			free(scene->cylinders[i]->dir);
+			free(scene->cylinders[i]->pos);
+			free(scene->cylinders[i]->color);
+			free(scene->cylinders[i]);
+		}
+		free(scene->cylinders[i]);
+		free(scene->cylinders);
+	}
+	if (scene->light)
+	{
+		free(scene->light->color);
+		free(scene->light->pos);
+		free(scene->light);
+	}
+	if (scene->ambient)
+	{
+		free(scene->ambient->color);
+		free(scene->ambient);
+	}
+	if (scene->camera)
+	{
+		free(scene->camera->pos);
+		free(scene->camera->dir);
+		free(scene->camera);
+	}
+	if (scene->buffer)
+		free(scene->buffer);
+}
+
+void	free_mlx(t_mlx_data *mlx)
 {
 	if (mlx && mlx->mlx)
 	{
@@ -23,6 +90,25 @@ int	quit(t_mlx_data *mlx)
 		mlx_destroy_display(mlx->mlx);
 		free(mlx->mlx);
 		mlx->mlx = NULL;
+		free(mlx->img_st);
+		mlx->img_st = NULL;
 	}
+}
+
+
+int	quit(t_minirt *minirt, char *str)
+{
+	(void) minirt;
+	if (minirt)
+	{
+		if (minirt->mlx)
+			free_mlx(minirt->mlx);
+		if (minirt->scene)
+			free_scene(minirt->scene);
+		if (minirt->render)
+			free_render(minirt->render);
+	}
+	print_exit_info(str);
+	CLOSE_DEBUG_FD;
 	exit(0);
 }
