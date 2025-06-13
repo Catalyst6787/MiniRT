@@ -19,24 +19,25 @@ t_inter	get_inter(void)
 // expects a sorted list!
 t_inter	*get_hit(t_inter_list *lst)
 {
-	int		i;
+	int			i;
 	t_inter	*smallest;
-	t_inter	s;
+	bool		isset;
 
 	i = 0;
-	smallest = &s;
-	smallest->t = DBL_MAX;
-	smallest->obj = NULL;
+	isset = false;
+	smallest = NULL;
 	while (i < lst->count)
 	{
-		if (lst->inters[i].t > 0 && lst->inters[i].t < smallest->t)
+		if (lst->inters[i].t > 0 && (!isset || lst->inters[i].t < smallest->t))
+		{
 			smallest = &lst->inters[i];
+			isset = 1;
+		}
 		i++;
 	}
-	if (!smallest->obj)
+	if (!isset)
 		return (NULL);
 	return (smallest);
-
 }
 
 
