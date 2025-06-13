@@ -1,8 +1,10 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
+# include "vec3.h"
 # include "minirt.h"
 # include "stdbool.h"
+
 
 typedef	struct s_matrix
 {
@@ -32,7 +34,7 @@ t_shear			get_shear_params(void);
 ////////		Operations
 
 t_matrix		transpose_matrix(t_matrix m);
-t_matrix		mutliply_matrix(t_matrix m1, t_matrix m2);
+t_matrix		multiply_matrix(t_matrix m1, t_matrix m2);
 
 ////////		Inversion
 
@@ -41,28 +43,22 @@ t_matrix		get_submatrice(t_matrix m, int row, int col);
 bool			matrix_is_invertible(t_matrix m);
 t_matrix		get_inversed_matrix(t_matrix m);
 
-
 ////////		Translation
-
-t_matrix		get_translation_matrix(double tx, double ty, double tz);
+t_matrix		get_translation_matrix(t_vec3 v);
 
 ////////		Scaling
-
-t_matrix		get_scaling_matrix(double tx, double ty, double tz);
+t_matrix		get_scaling_matrix(t_vec3 v);
 
 ////////		Shearing
-
 t_matrix		get_shearing_matrix(t_shear	params);
 
-
-////////		Scaling
-
-t_matrix		get_scaling_matrix(double x, double y, double z);
-
 ////////		Rotation
-
 t_matrix		get_rotation_matrix_x(double r);
 t_matrix		get_rotation_matrix_y(double r);
 t_matrix		get_rotation_matrix_z(double r);
+t_matrix		get_rotation_matrix(t_vec3 v);
+
+/*                                 MATRIX OPS                              */
+t_vec3			vec3_matrix_multiply(t_matrix m, t_vec3 v);
 
 #endif

@@ -2,7 +2,7 @@
 # define VEC3_H
 
 # include "minirt.h"
-# include "matrice.h"
+// # include "matrice.h"
 # include <stdbool.h>
 
 typedef union s_vec3
@@ -49,9 +49,6 @@ t_vec3	vec3_normalise(t_vec3 vec3);
 double	vec3_dot(const t_vec3 *vec3_u, const t_vec3 *vec3_v);
 int		vec3_isequal(const t_vec3 vec3_a, const t_vec3 vec3_b);
 t_vec3	vec3_cross(const t_vec3 vec3_a, const t_vec3 vec3_b);
-
-/*                                 MATRIX OPS                              */
-t_vec3	vec3_matrix_multiply(t_matrix m, t_vec3 v);
 
 /*                                 UTILS                                  */
 

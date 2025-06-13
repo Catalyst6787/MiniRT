@@ -168,7 +168,7 @@ int	test_matrix_multiplication(void)
 			44, 54, 114, 108,
 			40, 58, 110, 102,
 			16, 26, 46, 42);
-	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
+	assert(matrix_isequal(multiply_matrix(m1, m2), m3));
 	m1 = get_arb_matrix(2, 3,
 			1, 2, 3, 0,
 			4, 5, 6, 0,
@@ -185,8 +185,8 @@ int	test_matrix_multiplication(void)
 			139, 154, 0, 0,
 			0, 0, 0, 0,
 			0, 0, 0, 0);
-	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
-	m3 = mutliply_matrix(m1, m2);
+	assert(matrix_isequal(multiply_matrix(m1, m2), m3));
+	m3 = multiply_matrix(m1, m2);
 	assert(m3.row == m1.row && m3.col == m2.col);
 	// multiplying matrices by "tuples" (4x1 matrice)
 	m1 = get_arb_matrix(4, 4,
@@ -204,8 +204,8 @@ int	test_matrix_multiplication(void)
 			24, 0, 0, 0,
 			33, 0, 0, 0,
 			1, 0, 0, 0);
-	assert(matrix_isequal(mutliply_matrix(m1, m2), m3));
-	m3 = mutliply_matrix(m1, m2);
+	assert(matrix_isequal(multiply_matrix(m1, m2), m3));
+	m3 = multiply_matrix(m1, m2);
 	assert(m3.row == 4);
 	assert(m3.col == 1);
 	return (0);
@@ -342,8 +342,8 @@ int	test_matrix_inversion(void)
 			3, -1, 7, 0,
 			7, 0, 5, 4,
 			6, -2, 0, 5);
-	m3 = mutliply_matrix(m1, m2);
-	assert (matrix_isequal(mutliply_matrix(m3, get_inversed_matrix(m2)), m1));
+	m3 = multiply_matrix(m1, m2);
+	assert (matrix_isequal(multiply_matrix(m3, get_inversed_matrix(m2)), m1));
 	return (0);
 }
 
@@ -357,14 +357,14 @@ int	test_identity_matrix(void)
 			1, 2, 4, 8,
 			2, 4, 8, 16,
 			4, 8, 16, 32);
-	assert(matrix_isequal(m1, mutliply_matrix(m1, get_matrix(4, 4, 1))));
+	assert(matrix_isequal(m1, multiply_matrix(m1, get_matrix(4, 4, 1))));
 	//multiplying the identity matrix by a tuple should return tuple
 	tuple = get_arb_matrix(4, 1,
 			1, 0, 0, 0,
 			2, 0, 0, 0,
 			3, 0, 0, 0,
 			4, 0, 0, 0);
-	assert(matrix_isequal(tuple, mutliply_matrix(get_matrix(4, 4, 1), tuple)));
+	assert(matrix_isequal(tuple, multiply_matrix(get_matrix(4, 4, 1), tuple)));
 	return (0);
 }
 
@@ -402,18 +402,18 @@ int	test_translation(void)
 	t_matrix	inv;
 	t_vec3		vector;
 
-	transform = get_translation_matrix(5, -3, 2);
+	transform = get_translation_matrix(get_vec3(5, -3, 2));
 	point = get_point3(-3, 4, 5);
 	res = get_point3(2, 1, 7);
 	assert(vec3_isequal(vec3_matrix_multiply(transform, point), res));
 
-	transform = get_translation_matrix(5, -3, 2);
+	transform = get_translation_matrix(get_vec3(5, -3, 2));
 	inv = get_inversed_matrix(transform);
 	res = get_point3(-8, 7, 3);
 	assert(vec3_isequal(vec3_matrix_multiply(inv, point), res));
 
 	// translation doesnt affect vectors
-	transform = get_translation_matrix(5, -3, 2);
+	transform = get_translation_matrix(get_vec3(5, -3, 2));
 	vector = get_vec3(-3, 4, 5);
 	assert(vec3_isequal(vec3_matrix_multiply(transform, vector), vector));
 	return (0);
@@ -429,7 +429,7 @@ int	test_scaling(void)
 	t_vec3		vector;
 	// t_matrix	m2;
 
-	m1 = get_scaling_matrix(2, 3, 4);
+	m1 = get_scaling_matrix(get_vec3(2, 3, 4));
 	point = get_point3(-4, 6, 8);
 	scaled_point = vec3_matrix_multiply(m1, point);
 	result = get_point3(-8, 18, 32);
@@ -493,7 +493,7 @@ int	test_rotation(void)
 	// t_vec3		point;
 	t_vec3		vec;
 
-	transform = get_scaling_matrix(2, 3, 4);
+	transform = get_scaling_matrix(get_vec3(2, 3, 4));
 	point = get_point3(-4, 6, 8);
 	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-8, 18, 32)));
 
@@ -506,11 +506,11 @@ int	test_rotation(void)
 	assert(vec3_isequal(vec3_matrix_multiply(inv, vec), get_vec3(-2, 2, 2)));
 	// reflection
 
-	transform = get_scaling_matrix(-1, 1, 1);
+	transform = get_scaling_matrix(get_vec3(-1, 1, 1));
 	point = get_point3(2, 3, 4);
 	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, 3, 4)));
 
-	transform = get_scaling_matrix(-1, -1, -1);
+	transform = get_scaling_matrix(get_vec3(-1, -1, -1));
 	point = get_point3(2, 3, 4);
 	assert(vec3_isequal(vec3_matrix_multiply(transform, point), get_point3(-2, -3, -4)));
 	return (0);
@@ -570,8 +570,8 @@ int	test_chaining(void)
 
 	p = get_point3(1, 0, 1);
 	a = get_rotation_matrix_x(M_PI / 2);
-	b = get_scaling_matrix(5, 5, 5);
-	c = get_translation_matrix(10, 5, 7);
+	b = get_scaling_matrix(get_vec3(5, 5, 5));
+	c = get_translation_matrix(get_vec3(10, 5, 7));
 
 	// apply rotation first
 	t_vec3 p2 = vec3_matrix_multiply(a, p);
@@ -586,9 +586,9 @@ int	test_chaining(void)
 
 	// Chained transformations must be applied in reverse order
 	// for ex, to do T = C * B * A
-	t_matrix	transform = mutliply_matrix(c, mutliply_matrix(b, a));
+	t_matrix	transform = multiply_matrix(c, multiply_matrix(b, a));
 	// or:
-	// t_matrix	transform = mutliply_matrix(mutliply_matrix(c, b), a);
+	// t_matrix	transform = multiply_matrix(multiply_matrix(c, b), a);
 	p = vec3_matrix_multiply(transform, p);
 	assert(vec3_isequal(p, get_point3(15, 0, 7)));
 	return (0);

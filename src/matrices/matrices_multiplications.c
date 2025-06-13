@@ -17,7 +17,7 @@ static double get_dot(t_matrix m1, t_matrix m2, int row, int col)
 	return (sum);
 }
 
-t_matrix	mutliply_matrix(t_matrix m1, t_matrix m2)
+t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 {
 	int			i;
 	int			j;

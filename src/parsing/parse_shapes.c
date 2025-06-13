@@ -16,6 +16,7 @@ int	parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor)
 	sphere->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	sphere->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	sphere->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	// sphere->transform = multiply_matrix(get_translation_matrix())
 	*cursor = i;
 	return (1);
 	//check

@@ -10,6 +10,12 @@
 		"math.h": "c",
 		"fcntl.h": "c",
 		"libft.h": "c",
-		"matrice.h": "c"
+		"matrice.h": "c",
+		"test.h": "c",
+		"colors.h": "c",
+		"keycodes.h": "c",
+		"debug.h": "c",
+		"ray.h": "c",
+		"stdbool.h": "c"
 	}
 }

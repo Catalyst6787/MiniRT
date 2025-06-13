@@ -18,13 +18,13 @@ int	transform_ray_test(void)
 	t_matrix	m;
 	// translating a ray
 	r = get_ray(get_point3(1, 2, 3), get_vec3(0, 1, 0));
-	m = get_translation_matrix(3, 4, 5);
+	m = get_translation_matrix(get_vec3(3, 4, 5));
 	r = ray_transform(r, m);
 	assert(vec3_isequal(r.origin, get_point3(4, 6, 8)));
 	assert(vec3_isequal(r.dir, get_vec3(0, 1, 0)));
 	// scaling a ray
 	r = get_ray(get_point3(1, 2, 3), get_vec3(0, 1, 0));
-	m = get_scaling_matrix(2, 3, 4);
+	m = get_scaling_matrix(get_vec3(2, 3, 4));
 	r = ray_transform(r, m);
 	assert(vec3_isequal(r.origin, get_point3(2, 6, 12)));
 	assert(vec3_isequal(r.dir, get_vec3(0, 3, 0)));

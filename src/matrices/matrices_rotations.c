@@ -35,3 +35,13 @@ t_matrix	get_rotation_matrix_z(double r)
 	rotated_matrix.matrix[1][1] = cos(r);
 	return (rotated_matrix);
 }
+
+t_matrix	get_rotation_matrix(t_vec3 v)
+{
+	t_matrix	m;
+
+	m = multiply_matrix(get_rotation_matrix_z(v.z),
+			multiply_matrix(get_rotation_matrix_y(v.y),
+				get_rotation_matrix_x(v.x)));
+	return (m);
+}

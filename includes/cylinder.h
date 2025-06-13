@@ -10,6 +10,7 @@ typedef struct s_cylinder
 	double		diameter;
 	double		height;
 	t_vec3		color;
+	t_matrix	transform;
 }	t_cylinder;
 
 

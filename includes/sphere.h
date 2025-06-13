@@ -10,6 +10,7 @@ typedef struct s_sphere
 	t_vec3		color;
 	double		diameter;
 	double		radius;
+	t_matrix	transform;
 }	t_sphere;
 
 
