@@ -1,8 +1,28 @@
 #include "minirt.h"
 
+void	debug_print_inter(t_inter inter)
+{
+	printf("inter: t=[%f], obj=[%p]\n", inter.t, inter.obj);
+}
+
+void	debug_print_inter_list(t_inter_list lst)
+{
+	int	i;
+
+	i = 0;
+	printf("inter_lst of size %d:\n", lst.count);
+	while (i < lst.count)
+	{
+		printf("inter [%d]:	", i);
+		debug_print_inter(lst.inters[i]);
+		i++;
+	}
+
+}
+
 int	basic_ray_test(void)
 {
-	t_ray r;
+	t_ray	r;
 
 	r = get_ray(get_point3(2, 3, 4), get_vec3(1, 0, 0));
 	assert(vec3_isequal(ray_at(0, r), get_point3(2, 3, 4)));
@@ -20,10 +40,12 @@ int	test_ray_intersect_sphere(void)
 	t_inter_list	lst;
 
 	// inter = malloc(sizeof(t_inter) * 10);
+
 	ft_memset(&inter, 0, sizeof(t_inter) * 10);
 	lst.count = 0;
 	lst.capacity = 10;
 	lst.inters = inter;
+	debug_print_inter_list(lst);
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 	s.color = get_color(1, 0, 0);
 	s.pos = get_point3(0, 0, 0);
@@ -57,6 +79,16 @@ int	test_ray_intersect_sphere(void)
 	assert(lst.count == 8);
 	assert(lst.inters[6].t == -6.0);
 	assert(lst.inters[7].t == -4.0);
+
+	// test sort intersections
+	debug_print_inter_list(lst);
+	sort_inter(&lst);
+	debug_print_inter_list(lst);
+
+	printf("hit is: ");
+	debug_print_inter(*get_hit(&lst));
+
+
 	return (0);
 }
 

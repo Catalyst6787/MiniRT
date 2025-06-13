@@ -28,4 +28,8 @@ typedef struct s_render
 
 
 
+// sort intersections
+void	sort_inter(t_inter_list *inter_lst);
+t_inter	*get_hit(t_inter_list *lst);
+
 #endif

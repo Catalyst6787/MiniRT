@@ -21,3 +21,12 @@ t_vec3	ray_at(double t, const t_ray ray)
 	return (v);
 }
 
+t_ray	ray_transform(t_ray r, t_matrix m)
+{
+	t_ray	new_ray;
+
+	new_ray.origin = vec3_matrix_multiply(m, r.origin);
+	new_ray.dir = vec3_matrix_multiply(m, r.dir);
+	return (new_ray);
+}
+

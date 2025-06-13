@@ -36,9 +36,9 @@ SRC					=	main.c \
 						get_debug_fd.c \
 						init.c \
 						print_debug.c \
-						ray_stack.c \
-						ray_operations.c \
+						rays.c ray_operations.c \
 						render.c \
+						sort_inter.c \
 						render_utils.c \
 						sphere.c \
 						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
