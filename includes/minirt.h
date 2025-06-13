@@ -86,12 +86,12 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
-int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor);
-int			parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor);
-int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
+int			parse_ambiant_light(t_scene *scene, int *cursor);
+int			parse_camera(t_scene *scene, int *cursor);
+int			parse_light(t_scene *scene, int *cursor);
+int			parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor);
+int			parse_plane(t_scene *scene, t_plane *plane, int *cursor);
+int			parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor);
 
 void		check_file_name(t_minirt *minirt, char *file_path);
 void		check_file_not_empty(t_minirt *minirt);

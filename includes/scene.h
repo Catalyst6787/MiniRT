@@ -11,21 +11,21 @@
 typedef struct s_ambient
 {
 	double		brightness;
-	t_vec3		*color;
+	t_vec3		color;
 }	t_ambient;
 
 typedef struct s_camera
 {
-	t_vec3			*pos;
-	t_vec3			*dir;
+	t_vec3			pos;
+	t_vec3			dir;
 	unsigned int	fov;
 }	t_camera;
 
 typedef struct s_light
 {
-	t_vec3		*pos;
+	t_vec3		pos;
 	double		brightness;
-	t_vec3		*color;
+	t_vec3		color;
 }	t_light;
 
 

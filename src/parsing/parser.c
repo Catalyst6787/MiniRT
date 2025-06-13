@@ -23,7 +23,7 @@ void	count_elements(t_scene *scene)
 	}
 }
 
-void	parse_objects(t_minirt *minirt, t_scene *scene)
+void	parse_objects(t_scene *scene)
 {
 	int	cursor;
 	int	s;
@@ -40,20 +40,20 @@ void	parse_objects(t_minirt *minirt, t_scene *scene)
 				&& ft_isspace(scene->buffer[cursor]))
 			cursor++;
 		if (scene->buffer[cursor] == 'A')
-			parse_ambiant_light(minirt, scene, &cursor);
+			parse_ambiant_light(scene, &cursor);
 		if (scene->buffer[cursor] == 'C')
-			parse_camera(minirt, scene, &cursor);
+			parse_camera(scene, &cursor);
 		if (scene->buffer[cursor] == 'L')
-			parse_light(minirt, scene, &cursor);
+			parse_light(scene, &cursor);
 		if (scene->buffer[cursor] == 's')
 			if (scene->buffer[++cursor] == 'p')
-				s += parse_sphere(minirt, scene, scene->spheres[s], &cursor);
+				s += parse_sphere(scene, scene->spheres[s], &cursor);
 		if (scene->buffer[cursor] == 'p')
 			if (scene->buffer[++cursor] == 'l')
-				p += parse_plane(minirt, scene, scene->planes[p], &cursor);
+				p += parse_plane(scene, scene->planes[p], &cursor);
 		if (scene->buffer[cursor] == 'c')
 			if (scene->buffer[++cursor] == 'y')
-				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
+				c += parse_cylinder(scene, scene->cylinders[c], &cursor);
 	}
 	/* should work if buffer_data checks correctly done*/
 }
@@ -108,7 +108,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
-	parse_objects(minirt, minirt->scene);
+	parse_objects(minirt->scene);
 	print_scene_data(minirt);
 	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();
