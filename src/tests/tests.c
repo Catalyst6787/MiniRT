@@ -1,8 +1,4 @@
 #include "minirt.h"
-
-
-int test_sphere_intersection(void);
-
 // Tuples tests
 
 int	test_tuple_point(void)
@@ -173,8 +169,9 @@ int	start_all_tests(void)
 	printf("\nall matrix test passed\n\n");
 	start_all_ray_tests();
 	printf("\nall ray tests passed\n\n");
+	start_all_intersection_tests();
+	printf("\nall intersection tests passed\n\n");
 	printf("\n%s", COLOR_RESET);
-
 
 	return (0);
 }
