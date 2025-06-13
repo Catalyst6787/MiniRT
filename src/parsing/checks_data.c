@@ -1,23 +1,23 @@
 #include "minirt.h"
 
-int	is_ok_color(t_vec3 *v)
+int	is_ok_color(t_vec3 v)
 {
-	if (v->r < 0 || 255 < v->r)
+	if (v.r < 0 || 255 < v.r)
 		return (0);
-	if (v->g < 0 || 255 < v->g)
+	if (v.g < 0 || 255 < v.g)
 		return (0);
-	if (v->b < 0 || 255 < v->b)
+	if (v.b < 0 || 255 < v.b)
 		return (0);
 	return (1);
 }
 
-int	is_ok_dir(t_vec3 *v)
+int	is_ok_dir(t_vec3 v)
 {
-	if (v->x < -1 || 1 < v->x)
+	if (v.x < -1 || 1 < v.x)
 		return (0);
-	if (v->y < -1 || 1 < v->y)
+	if (v.y < -1 || 1 < v.y)
 		return (0);
-	if (v->z < -1 || 1 < v->z)
+	if (v.z < -1 || 1 < v.z)
 		return (0);
 	return (1);
 }
@@ -44,7 +44,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		|| !is_ok_color(scene->light->color))
 		quit(minirt, WRONG_LIGHT_DATA);
 	while (++i < scene->nb_sphere)
-		if (!is_ok_color(&scene->spheres[i]->color))
+		if (!is_ok_color(scene->spheres[i]->color))
 			quit(minirt, WRONG_SPH_DATA);
 	i = -1;
 	while (++i < scene->nb_plane)

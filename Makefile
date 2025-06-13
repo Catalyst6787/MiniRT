@@ -36,7 +36,7 @@ SRC					=	main.c \
 						get_debug_fd.c \
 						init.c \
 						print_debug.c \
-						rays.c ray_operations.c \
+						rays.c \
 						render.c \
 						sort_inter.c \
 						render_utils.c \
