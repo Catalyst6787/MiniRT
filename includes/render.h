@@ -21,7 +21,7 @@ typedef struct s_render
 {
 	t_vec3			camera_center;
 	t_vec3			camera_dir;
-	
+
 	t_inter_list	inter_list;
 }					t_render;
 
@@ -32,5 +32,7 @@ typedef struct s_render
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);
 t_inter	*get_hit(t_inter_list *lst);
+int		get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list);
+
 
 #endif

@@ -5,20 +5,6 @@
 // #  define __USE_MISC 1
 // # endif
 
-# include "libft.h"
-
-# include "mlx.h"
-# include "vec3.h"
-# include "ray.h"
-# include "scene.h"
-# include "debug.h"
-# include "errors.h"
-# include "keycodes.h"
-# include "colors.h"
-# include "test.h"
-# include "matrice.h"
-# include "render.h"
-
 
 # include <sys/errno.h>
 # include <stdbool.h>
@@ -28,6 +14,19 @@
 # include <math.h>
 # include <fcntl.h>
 # include <assert.h>
+
+# include "libft.h"
+# include "mlx.h"
+# include "vec3.h"
+# include "matrice.h"
+# include "ray.h"
+# include "scene.h"
+# include "errors.h"
+# include "keycodes.h"
+# include "colors.h"
+# include "test.h"
+# include "render.h"
+# include "debug.h"
 
 # define SPACE_SET = " \t\n"
 
@@ -92,6 +91,8 @@ int			parse_light(t_scene *scene, int *cursor);
 int			parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor);
 int			parse_plane(t_scene *scene, t_plane *plane, int *cursor);
 int			parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor);
+
+void		set_objects_transformation(t_scene *scene);
 
 void		check_file_name(t_minirt *minirt, char *file_path);
 void		check_file_not_empty(t_minirt *minirt);
@@ -171,5 +172,10 @@ double		double_abs(double d);
 int			double_isequal(double a, double b);
 
 int			test_render_scene(t_minirt *minirt);
+
+///				Transformation
+void		set_sphere_transformation(t_sphere *s);
+void		set_plane_transformation(t_plane *pl);
+void		set_cylinder_tranformation(t_cylinder *cy);
 
 #endif

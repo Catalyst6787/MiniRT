@@ -2,7 +2,7 @@
 # define RAY_H
 
 # include "minirt.h"
-# include "matrice.h"
+// # include "matrice.h"
 
 typedef struct s_ray
 {

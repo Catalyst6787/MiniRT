@@ -3,7 +3,7 @@
 
 # include "minirt.h"
 // # include "matrice.h"
-# include <stdbool.h>
+// # include <stdbool.h>
 
 typedef union s_vec3
 {

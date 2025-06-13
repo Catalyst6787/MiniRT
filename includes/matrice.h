@@ -1,12 +1,13 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
-# include "vec3.h"
+// # include "vec3.h"
 # include "minirt.h"
-# include "stdbool.h"
+// # include "stdbool.h"
+// # include "sphere.h"
 
 
-typedef	struct s_matrix
+typedef struct s_matrix
 {
 	double	matrix[4][4];
 	int		row;

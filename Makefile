@@ -27,6 +27,7 @@ OBJ_DIR = ./objects
 SRC					=	main.c \
 						parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
 						checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
+						transform_objects.c \
 						fill_intersection_table.c \
 						debug.c \
 						double_utils.c \
@@ -43,6 +44,7 @@ SRC					=	main.c \
 						sphere.c \
 						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
 						matrices_translations.c matrices_transpositions.c  matrices_utils.c matrices_shearing.c \
+						transformations.c \
 						utils.c \
 						color_operations.c \
 						free_utils.c \
