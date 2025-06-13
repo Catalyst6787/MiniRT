@@ -39,7 +39,7 @@ int	test_render_scene(t_minirt *minirt)
 	double		world_x;
 	t_vec3	wall_point;
 	t_ray	r;
-	t_inter	inter[3];
+	t_inter	inter[2];
 	t_inter_list lst;
 
 	t_vec3	scaler;
@@ -49,7 +49,7 @@ int	test_render_scene(t_minirt *minirt)
 	scaler = get_vec3(1, 0.5, 1);
 	translater = get_vec3(0, 1, 0);
 
-	lst.capacity = 50;
+	lst.capacity = 2;
 	lst.count = 0;
 	lst.inters = inter;
 
