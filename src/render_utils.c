@@ -55,3 +55,12 @@ t_vec3	get_normal_at(t_sphere *s, t_vec3 world_point)
 	world_normal.w = 0;
 	return (vec3_normalise(world_normal));
 }
+
+t_vec3	get_reflection(t_vec3 in, t_vec3 normal)
+{
+	t_vec3	res;
+
+	res = vec3_double_multiplication(normal, 2);
+	res = vec3_double_multiplication(res, vec3_dot(&in, &normal));
+	return (vec3_vec_substraction(in, res));
+}
