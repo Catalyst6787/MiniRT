@@ -42,7 +42,9 @@ typedef struct s_render
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);
 t_inter	*get_hit(t_inter_list *lst);
-int		get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list);
+t_vec3	get_normal_at(t_sphere *s, t_vec3 world_point);
+int		get_sphere_inter(const t_sphere *sphere,
+			const t_ray ray, t_inter_list *list);
 
 
 #endif

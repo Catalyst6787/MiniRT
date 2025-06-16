@@ -1,11 +1,14 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# define _USE_MATH_DEFINES
+
 # include <sys/errno.h>
 # include <stdbool.h>
 # include <string.h>
 # include <time.h>
 # include <math.h>
+# include <stdio.h>
 # include <fcntl.h>
 # include <assert.h>
 
