@@ -24,8 +24,7 @@ int	main(int ac, char **av)
 
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);
-	if (init_mlx(&minirt))
-		quit(&minirt, MLX_ERR);
+	init_mlx(&minirt);
 	init_events(&minirt);
 
 	clock_t t;

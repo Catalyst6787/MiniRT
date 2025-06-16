@@ -14,7 +14,7 @@ int	render_scene(t_minirt *minirt)
 
 	if (!minirt)
 		return (print_err(FILE, LINE, "render_scene: NULL prt!"), 1);
-	printf("inter count: [%d], inter capacity: [%d]",
+	printf("inter count: [%d], inter capacity: [%d]\n\n",
 		minirt->render->inter_list.count, minirt->render->inter_list.capacity);
 
 	return (0);

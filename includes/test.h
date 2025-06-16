@@ -26,5 +26,6 @@ void		test_color_mult(t_vec3 *color, int i, int j);
 int			start_all_matrix_tests(void);
 int			start_all_ray_tests(void);
 int			start_all_intersection_tests(void);
+int			start_all_normals_tests(void);
 
 #endif

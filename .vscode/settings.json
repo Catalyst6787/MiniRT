@@ -16,6 +16,7 @@
 		"keycodes.h": "c",
 		"debug.h": "c",
 		"ray.h": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"cmath": "c"
 	}
 }

@@ -36,12 +36,7 @@ void	free_scene(t_scene *scene)
 	if (scene->planes)
 	{
 		while (++i < scene->nb_plane)
-		{
-			// free(scene->planes[i]->dir);
-			// free(scene->planes[i]->pos);
-			// free(scene->planes[i]->color);
 			free(scene->planes[i]);
-		}
 		free(scene->planes[i]);
 		free(scene->planes);
 	}
@@ -49,32 +44,16 @@ void	free_scene(t_scene *scene)
 	if (scene->cylinders)
 	{
 		while (++i < scene->nb_cylinder)
-		{
-			// free(scene->cylinders[i]->dir);
-			// free(scene->cylinders[i]->pos);
-			// free(scene->cylinders[i]->color);
 			free(scene->cylinders[i]);
-		}
 		free(scene->cylinders[i]);
 		free(scene->cylinders);
 	}
 	if (scene->light)
-	{
-		// free(scene->light->color);
-		// free(scene->light->pos);
 		free(scene->light);
-	}
 	if (scene->ambient)
-	{
-		// free(scene->ambient->color);
 		free(scene->ambient);
-	}
 	if (scene->camera)
-	{
-		// free(scene->camera->pos);
-		// free(scene->camera->dir);
 		free(scene->camera);
-	}
 	if (scene->buffer)
 		free(scene->buffer);
 }

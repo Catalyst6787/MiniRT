@@ -171,6 +171,8 @@ int	start_all_tests(void)
 	printf("\nall ray tests passed\n\n");
 	start_all_intersection_tests();
 	printf("\nall intersection tests passed\n\n");
+	start_all_normals_tests();
+	printf("\nall normals tests passed\n\n");
 	printf("\n%s", COLOR_RESET);
 
 	return (0);

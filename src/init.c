@@ -10,7 +10,7 @@ int	init_mlx(t_minirt *minirt)
 
 	img_st = malloc(sizeof(t_img_data));
 	if (!img_st)
-		return (perror(MALLOC_ERR), 1);
+		quit(minirt, MLX_ERR);
 	ft_memset(img_st, '\0', sizeof(t_img_data));
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, WIN_W, WIN_H, "miniRT");
