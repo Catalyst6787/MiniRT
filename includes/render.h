@@ -30,6 +30,8 @@ typedef struct s_render
 	double			world_y;
 	double			world_x;
 	t_vec3			wall_point;
+	t_ray			original_ray;
+	t_ray			unique_ray;
 	t_inter_list	inter_list;
 }					t_render;
 

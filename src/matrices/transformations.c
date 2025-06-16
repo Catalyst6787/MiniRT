@@ -8,9 +8,9 @@ void	set_sphere_transformation(t_sphere *s)
 			get_translation_matrix(s->pos),
 			get_scaling_matrix(
 				get_vec3(
-					s->diameter,
-					s->diameter,
-					s->diameter)));
+					s->radius,
+					s->radius,
+					s->radius)));
 	s->inv = get_inversed_matrix(s->transform);
 }
 
