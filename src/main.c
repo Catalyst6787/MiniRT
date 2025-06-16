@@ -30,8 +30,6 @@ int	main(int ac, char **av)
 	clock_t t;
 	t = clock();
 
-	// render_scene(&minirt);
-	test_render_scene(&minirt);
 	render_scene(&minirt);
 
 	t = clock() - t;

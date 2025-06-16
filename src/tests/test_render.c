@@ -73,17 +73,17 @@ int	test_render_scene(t_minirt *minirt)
 
 	original_ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 
-	transform = multiply_matrix(get_translation_matrix(get_vec3(0, 0, 2)), get_rotation_matrix(get_vec3(0, 0, 0.5)));
-	transform = multiply_matrix(transform, get_scaling_matrix(get_vec3(0.3, 2, 2)));
+	transform = multiply_matrix(get_translation_matrix(get_vec3(0.1, 0, 2)), get_rotation_matrix(get_vec3(0, 0, 0)));
+	transform = multiply_matrix(transform, get_scaling_matrix(get_vec3(1, 1, 1)));
 	transform = get_inversed_matrix(transform);
 	sphere->transform = transform;
 
-	transform2 = multiply_matrix(get_translation_matrix(get_vec3(0, 0.5, -1)), get_rotation_matrix(get_vec3(0, 0, 0)));
+	transform2 = multiply_matrix(get_translation_matrix(get_vec3(0, 0.1, 1)), get_rotation_matrix(get_vec3(0, 0, 0)));
 	transform2 = multiply_matrix(transform2, get_scaling_matrix(get_vec3(0.5, 0.5, 0.5)));
 	transform2 = get_inversed_matrix(transform2);
 	sphere2->transform = transform2;
 
-	transform3 = multiply_matrix(get_translation_matrix(get_vec3(0.2, 0, -2)), get_rotation_matrix(get_vec3(0, 0, 0)));
+	transform3 = multiply_matrix(get_translation_matrix(get_vec3(0, 0, -1)), get_rotation_matrix(get_vec3(0, 0, 0)));
 	transform3 = multiply_matrix(transform3, get_scaling_matrix(get_vec3(0.1, 0.1, 0.1)));
 	transform3 = get_inversed_matrix(transform3);
 	sphere3->transform = transform3;
