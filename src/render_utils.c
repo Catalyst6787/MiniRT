@@ -21,9 +21,9 @@ t_inter	get_inter(void)
 // expects a sorted list!
 t_inter	*get_hit(t_inter_list *lst)
 {
-	int			i;
+	int		i;
 	t_inter	*smallest;
-	bool		isset;
+	bool	isset;
 
 	i = 0;
 	isset = false;

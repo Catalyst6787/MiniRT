@@ -1,11 +1,7 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
-// # include "vec3.h"
 # include "minirt.h"
-// # include "stdbool.h"
-// # include "sphere.h"
-
 
 typedef struct s_matrix
 {

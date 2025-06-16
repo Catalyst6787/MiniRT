@@ -2,7 +2,6 @@
 # define SPHERE_H
 
 # include "minirt.h"
-// # include "render.h"
 
 typedef struct s_sphere
 {

@@ -2,8 +2,6 @@
 # define VEC3_H
 
 # include "minirt.h"
-// # include "matrice.h"
-// # include <stdbool.h>
 
 typedef union s_vec3
 {
@@ -52,6 +50,5 @@ t_vec3	vec3_cross(const t_vec3 vec3_a, const t_vec3 vec3_b);
 
 /*                                 UTILS                                  */
 
-int		vec3_debug_print(t_vec3	vec3);
 
 #endif
