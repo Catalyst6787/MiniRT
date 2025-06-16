@@ -6,11 +6,12 @@ int	main(int ac, char **av)
 	t_mlx_data	mlx;
 	t_scene		scene;
 	t_render	render;
+	clock_t		t;
 
-	ft_memset(&minirt, '\0', sizeof(t_minirt));
-	ft_memset(&mlx, '\0', sizeof(t_mlx_data));
-	ft_memset(&scene, '\0', sizeof(t_scene));
-	ft_memset(&render, '\0', sizeof(t_render));
+	ft_memset(&minirt, 0, sizeof(t_minirt));
+	ft_memset(&mlx, 0, sizeof(t_mlx_data));
+	ft_memset(&scene, 0, sizeof(t_scene));
+	ft_memset(&render, 0, sizeof(t_render));
 	minirt.mlx = &mlx;
 	minirt.scene = &scene;
 	minirt.render = &render;
@@ -26,8 +27,6 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	init_mlx(&minirt);
 	init_events(&minirt);
-
-	clock_t t;
 	t = clock();
 
 	render_scene(&minirt);

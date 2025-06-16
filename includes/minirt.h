@@ -1,16 +1,10 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-// # ifndef __USE_MISC
-// #  define __USE_MISC 1
-// # endif
-
-
 # include <sys/errno.h>
 # include <stdbool.h>
 # include <string.h>
 # include <time.h>
-
 # include <math.h>
 # include <fcntl.h>
 # include <assert.h>
@@ -32,7 +26,6 @@
 
 # define WIN_W 800
 # define WIN_H 400
-// # define FOCAL_LEN 1.0
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
@@ -67,12 +60,6 @@ typedef struct s_minirt
 	t_render	*render;
 }				t_minirt;
 
-// typedef struct s_inter
-// {
-// 	int		count;
-// 	double	x[2];
-// }	t_inter;
-
 /*                                 INIT                                  */
 
 int			init_mlx(t_minirt *minirt);
@@ -98,9 +85,9 @@ void		check_file_name(t_minirt *minirt, char *file_path);
 void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);
 void		char_error_check(t_minirt *minirt,
-							char c,
-							const char *alpha_set,
-							const char *sign_set);
+				char c,
+				const char *alpha_set,
+				const char *sign_set);
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
@@ -110,16 +97,8 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 /*                                 RENDER                                  */
 
 t_inter		get_inter(void);
-
 int			render_scene(t_minirt *minirt);
-int			render_pixel(int i, int j, t_render *render, t_minirt *minirt, t_sphere *sphere);
-int			ray_color(const t_ray *r, t_vec3 *color, int is_debug_pixel, t_sphere *sphere);
 int			free_render(t_render *render);
-int			init_render(t_minirt *minirt);
-
-int			set_viewport_upper_left(t_minirt *minirt);
-int			set_pixel00_loc(t_minirt *minirt);
-t_vec3		get_pixel_center(int i, int j, t_render	*render);
 int			is_debug_pixel(int i, int j);
 
 /*                             COLOR UTILS                                  */
@@ -154,7 +133,6 @@ int			quit(t_minirt *minirt, char *str);
 
 int			debug_print_keycode(int keycode);
 void		debug_aff_image(t_minirt *minirt);
-void		debug_pixel(const t_ray *r);
 void		print_scene_data(t_minirt *minirt);
 void		print_scene_ok_message(void);
 void		print_vector_data(t_vec3 *vec, char *vec_name);
@@ -162,21 +140,18 @@ void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
 void		print_render_data(t_render *render);
 void		print_render_pixel(t_vec3	pixel_center,
-			t_vec3	ray_direction,
-			t_ray	ray,
-			t_vec3	color);
+				t_vec3	ray_direction,
+				t_ray	ray,
+				t_vec3	color);
 
-/*                                 DOUBLE UTILS                                  */
+/*                                 DOUBLE UTILS                            */
 
 double		double_abs(double d);
 int			double_isequal(double a, double b);
-
-int			test_render_scene(t_minirt *minirt);
 
 ///				Transformation
 void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
-int			render_scene(t_minirt *minirt);
 
 #endif
