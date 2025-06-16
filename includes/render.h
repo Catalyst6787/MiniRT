@@ -21,7 +21,15 @@ typedef struct s_render
 {
 	t_vec3			camera_center;
 	t_vec3			camera_dir;
-
+	double			wall_distance;
+	double			wall_size;
+	double			canva_height;
+	double			canva_width;
+	double			pixel_size;
+	double			half;
+	double			world_y;
+	double			world_x;
+	t_vec3			wall_point;
 	t_inter_list	inter_list;
 }					t_render;
 

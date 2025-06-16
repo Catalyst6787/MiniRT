@@ -9,6 +9,7 @@ typedef struct s_plane
 	t_vec3		dir;
 	t_vec3		color;
 	t_matrix	transform;
+	t_matrix	inv;
 }	t_plane;
 
 

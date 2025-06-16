@@ -22,27 +22,6 @@ t_ray	get_translated_ray(t_ray r, t_vec3 translater)
 	return (translated_ray);
 }
 
-// t_ray	get_sheared_ray(t_ray r, t_vec3 shearer)
-// {
-// 	t_ray		sheared_ray;
-// 	t_matrix	m;
-// 	m = get_translation_matrix(translater.x, translater.y, translater.z).;
-
-
-// }
-
-// int	get_normal_at(t_sphere *sphere, t_vec3 point)
-// {
-// 	t_vec3	object_normal;
-// 	t_vec3	transformed_point;
-
-// 	transformed_point = get
-
-
-
-
-// }
-
 int	test_render_scene(t_minirt *minirt)
 {
 	t_sphere		*sphere;
@@ -79,7 +58,7 @@ int	test_render_scene(t_minirt *minirt)
 	lst.inters = inter;
 
 	wall_distance = 10;
-	wall_size = 7;
+	wall_size = 7; //FOV
 	canva_width = WIN_H;
 	canva_height = WIN_H;
 	pixel_size = wall_size / canva_width;
@@ -99,12 +78,12 @@ int	test_render_scene(t_minirt *minirt)
 	transform = get_inversed_matrix(transform);
 	sphere->transform = transform;
 
-	transform2 = multiply_matrix(get_translation_matrix(get_vec3(0, 0, -1)), get_rotation_matrix(get_vec3(0, 0, 0)));
+	transform2 = multiply_matrix(get_translation_matrix(get_vec3(0, 0.5, -1)), get_rotation_matrix(get_vec3(0, 0, 0)));
 	transform2 = multiply_matrix(transform2, get_scaling_matrix(get_vec3(0.5, 0.5, 0.5)));
 	transform2 = get_inversed_matrix(transform2);
 	sphere2->transform = transform2;
 
-	transform3 = multiply_matrix(get_translation_matrix(get_vec3(0, 0, -2)), get_rotation_matrix(get_vec3(0, 0, 0)));
+	transform3 = multiply_matrix(get_translation_matrix(get_vec3(0.2, 0, -2)), get_rotation_matrix(get_vec3(0, 0, 0)));
 	transform3 = multiply_matrix(transform3, get_scaling_matrix(get_vec3(0.1, 0.1, 0.1)));
 	transform3 = get_inversed_matrix(transform3);
 	sphere3->transform = transform3;
@@ -115,7 +94,7 @@ int	test_render_scene(t_minirt *minirt)
 		world_y = half - pixel_size * i;
 		while (j < canva_width)
 		{
-			world_x = half - pixel_size * j;
+			world_x = pixel_size * j - half;
 			wall_point = get_point3(world_x, world_y, wall_distance);
 			unique_ray = get_ray(original_ray.origin, vec3_normalise(vec3_vec_substraction(wall_point, original_ray.origin)));
 			r = unique_ray;
@@ -138,7 +117,6 @@ int	test_render_scene(t_minirt *minirt)
 			hit = get_hit(&lst);
 			if (!hit)
 				my_mlx_pixel_put(minirt, j, i, color_to_int(get_color(0, 0, 0)));
-
 			else
 			{
 				const t_sphere *intersected_sphere = hit->obj;

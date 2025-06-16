@@ -177,5 +177,6 @@ int			test_render_scene(t_minirt *minirt);
 void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
+int			render_scene(t_minirt *minirt);
 
 #endif
