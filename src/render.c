@@ -62,10 +62,6 @@ int	render_scene(t_minirt *minirt)
 	double	world_y;
 
 	if (!minirt)
-		return (print_err(FILE, LINE, "render_scene: NULL prt!"), 1);
-	printf("inter count: [%d], inter capacity: [%d]\n\n",
-		minirt->render->inter_list.count, minirt->render->inter_list.capacity);
-
 		quit(minirt, "render_scene: NULL prt!");
 	minirt->render->wall_distance = 10;
 	minirt->render->wall_size = 7;
