@@ -24,6 +24,6 @@ int			start_all_ray_tests(void);
 int			start_all_intersection_tests(void);
 int			start_all_normals_tests(void);
 int			start_all_reflection_tests(void);
-
+int			start_all_lighting_tests(void);
 
 #endif

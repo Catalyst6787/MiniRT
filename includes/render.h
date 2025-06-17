@@ -35,6 +35,16 @@ typedef struct s_render
 	t_inter_list	inter_list;
 }					t_render;
 
+typedef struct s_lighting
+{
+	t_material	m;
+	t_light		light;
+	t_vec3		pos;
+	t_vec3		eyev;
+	t_vec3		normalv;
+}			t_lighting;
+
+
 
 
 

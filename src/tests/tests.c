@@ -175,6 +175,8 @@ int	start_all_tests(void)
 	printf("\nall normals tests passed\n\n");
 	start_all_reflection_tests();
 	printf("\nall reflection tests passed\n\n");
+	start_all_lighting_tests();
+	printf("\nall lighting tests passed\n\n");
 	printf("\n%s", COLOR_RESET);
 
 	return (0);
