@@ -35,7 +35,9 @@
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
-# define M_PI 3.14159265358979323846
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 # define EPSILON 1.0E-5
 
 # define FILE __FILE__

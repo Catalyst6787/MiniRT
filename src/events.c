@@ -4,7 +4,9 @@
 int	end_mlx_loop(t_mlx_data *mlx)
 {
 	(void) mlx;
+	#ifndef __APPLE__
 	mlx_loop_end(mlx->mlx);
+	#endif
 	return (0);
 }
 
