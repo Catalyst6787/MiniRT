@@ -110,6 +110,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	alloc_elements(minirt, minirt->scene);
 	parse_objects(minirt->scene);
 	set_objects_transformation(minirt->scene);
+	set_objects_material(minirt->scene);
 	print_scene_data(minirt);
 	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();

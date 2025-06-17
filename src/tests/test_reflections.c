@@ -1,7 +1,5 @@
 #include "minirt.h"
 
-
-
 int	basic_test_reflection(void)
 {
 	t_vec3	v;

@@ -11,6 +11,7 @@ typedef struct s_sphere
 	double		radius;
 	t_matrix	transform;
 	t_matrix	inv;
+	t_material	material;
 }	t_sphere;
 
 

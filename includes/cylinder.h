@@ -12,6 +12,7 @@ typedef struct s_cylinder
 	t_vec3		color;
 	t_matrix	transform;
 	t_matrix	inv;
+	t_material	material;
 }	t_cylinder;
 
 

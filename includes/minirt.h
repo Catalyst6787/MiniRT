@@ -15,6 +15,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include "vec3.h"
+# include "material.h"
 # include "matrice.h"
 # include "ray.h"
 # include "scene.h"
@@ -83,6 +84,7 @@ int			parse_plane(t_scene *scene, t_plane *plane, int *cursor);
 int			parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
+void		set_objects_material(t_scene *scene);
 
 void		check_file_name(t_minirt *minirt, char *file_path);
 void		check_file_not_empty(t_minirt *minirt);
