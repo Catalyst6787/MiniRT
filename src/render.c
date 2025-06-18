@@ -46,6 +46,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	// 	get_plane_inter(minirt->scene->planes[i], r, &minirt->render->inter_list);
 	// 	i++;
 	// }
+	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	sort_inter(&minirt->render->inter_list);
 	if (!hit)
