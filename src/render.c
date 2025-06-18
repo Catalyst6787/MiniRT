@@ -97,8 +97,8 @@ int	render_scene(t_minirt *minirt)
 	minirt->render->half = minirt->render->wall_size / 2;
 	y = 0;
 	minirt->render->original_ray = get_ray(
-			get_point3(0, 0, -5),
-			get_vec3(0, 0, 1));
+			minirt->scene->camera->pos,
+			minirt->scene->camera->dir);
 	while (y < minirt->render->canva_height)
 	{
 		world_y = minirt->render->half - minirt->render->pixel_size * y;
