@@ -1,6 +1,5 @@
 
 #include "minirt.h"
-#include "vec3.h"
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {

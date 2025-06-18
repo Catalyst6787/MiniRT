@@ -14,11 +14,13 @@ t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
 	l.eyev = vec3_reverse(r.dir);
 	l.light = *minirt->scene->light;
 	intersected_sphere = hit->obj;
+	// PRINT_DEBUG("%p\n", (void*)intersected_sphere);
 	l.m = intersected_sphere->material;
 	l.pos = ray_at(hit->t, r);
 	l.normalv = get_normal_at(hit->obj, l.pos);
 	return (get_lighting(l));
 }
+
 
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 {
@@ -35,13 +37,20 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 			r, &minirt->render->inter_list);
 		i++;
 	}
+	i = 0;
+	// while (i < minirt->scene->nb_plane)
+	// {
+	// 	r = ray_transform(unique_ray, minirt->scene->planes[i]->inv);
+	// 	r.dir = vec3_normalise(r.dir);
+	// 	get_plane_inter(minirt->scene->planes[i], r, &minirt->render->inter_list);
+	// 	i++;
+	// }
 	hit = get_hit(&minirt->render->inter_list);
+	sort_inter(&minirt->render->inter_list);
 	if (!hit)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
 	else
-	{
 		my_mlx_pixel_put(minirt, x, y, color_to_int(shade_intersection(hit, r, minirt)));
-	}
 	minirt->render->inter_list.count = 0;
 	return (0);
 }
@@ -79,10 +88,10 @@ int	render_scene(t_minirt *minirt)
 		quit(minirt, "render_scene: NULL prt!");
 	minirt->render->wall_distance = 10;
 	minirt->render->wall_size = 7;
-	minirt->render->canva_width = WIN_H;
+	minirt->render->canva_width = WIN_W;
 	minirt->render->canva_height = WIN_H;
 	minirt->render->pixel_size = minirt->render->wall_size
-		/ minirt->render->canva_width;
+		/ minirt->render->canva_height;
 	minirt->render->half = minirt->render->wall_size / 2;
 	y = 0;
 	minirt->render->original_ray = get_ray(

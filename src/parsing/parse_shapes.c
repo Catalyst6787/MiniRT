@@ -13,9 +13,9 @@ int	parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor)
 	sphere->pos.w = 1;
 	sphere->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	sphere->radius = sphere->diameter / 2;
-	sphere->material.color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	sphere->material.color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	sphere->material.color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	sphere->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	sphere->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check
@@ -35,9 +35,9 @@ int	parse_plane(t_scene *scene, t_plane *plane, int *cursor)
 	plane->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	plane->material.color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	plane->material.color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	plane->material.color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	plane->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	plane->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	plane->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check
@@ -60,9 +60,9 @@ int	parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor)
 	cylinder->dir.w = 0;
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->height = ato_buffer(&scene->buffer[i], &i, ' ');
-	cylinder->material.color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	cylinder->material.color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	cylinder->material.color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	cylinder->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cylinder->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cylinder->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 	//check

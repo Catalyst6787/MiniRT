@@ -11,6 +11,7 @@ typedef struct s_plane
 	t_matrix	transform;
 	t_matrix	inv;
 	t_material	material;
+	
 }	t_plane;
 
 
