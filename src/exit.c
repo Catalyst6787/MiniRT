@@ -66,7 +66,9 @@ void	free_mlx(t_mlx_data *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img_st->img);
 		mlx->img_st->addr = NULL;
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+		#ifndef __APPLE__
 		mlx_destroy_display(mlx->mlx);
+		#endif
 		free(mlx->mlx);
 		mlx->mlx = NULL;
 		free(mlx->img_st);
