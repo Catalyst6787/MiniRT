@@ -11,6 +11,7 @@ t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
 	t_lighting		l;
 	const t_sphere	*intersected_sphere;
 
+	ft_memset(&l, 0, sizeof(t_lighting));
 	l.eyev = vec3_reverse(r.dir);
 	l.light = *minirt->scene->light;
 	intersected_sphere = hit->obj;
