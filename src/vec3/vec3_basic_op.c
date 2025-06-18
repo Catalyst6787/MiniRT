@@ -68,14 +68,12 @@ t_vec3	vec3_dup(t_vec3 to_dup)
 /************** 2 VECTORS OPERATIONS ****************/
 
 
-t_vec3	vec3_vec_addition(char *file, int line, t_vec3 v1, t_vec3 v2)
+t_vec3	vec3_vec_addition(t_vec3 v1, t_vec3 v2)
 {
 	t_vec3	v;
-	(void)file;
-	(void)line;
 
 	if (v1.w && v2.w)
-		print_err(file, line, "vec3_vec_addition, trying to add two points");
+		print_err(FILE, LINE, "vec3_vec_addition, trying to add two points");
 	v.x = v1.x + v2.x;
 	v.y = v1.y + v2.y;
 	v.z = v1.z + v2.z;
@@ -105,6 +103,7 @@ t_vec3	vec3_vec_multiplication(t_vec3 v1, t_vec3 v2)
 	v.x = v1.x * v2.x;
 	v.y = v1.y * v2.y;
 	v.z = v1.z * v2.z;
+	v.w = 0;
 	return (v);
 }
 
@@ -117,6 +116,7 @@ t_vec3	vec3_vec_division(t_vec3 v1, t_vec3 v2)
 	v.x = v1.x / v2.x;
 	v.y = v1.y / v2.y;
 	v.z = v1.z / v2.z;
+	v.w = 0;
 	return (v);
 }
 

@@ -31,13 +31,13 @@ int	test_adding_tuples(void)
 	t_vec3	b = get_vec3(-2, 3, 1);
 
 	assert(vec3_isequal(
-			vec3_vec_addition(FILE, LINE, a, b),
+			vec3_vec_addition(a, b),
 			get_point3(1, 1, 6)));
 
 	a = get_vec3(0, 0, 0);
 	b = get_vec3(0, 0, 0);
 	assert(vec3_isequal(
-			vec3_vec_addition(FILE, LINE, a, b),
+			vec3_vec_addition(a, b),
 			get_vec3(0, 0, 0)));
 	return (0);
 }
@@ -175,6 +175,8 @@ int	start_all_tests(void)
 	printf("\nall normals tests passed\n\n");
 	start_all_reflection_tests();
 	printf("\nall reflection tests passed\n\n");
+	start_all_lighting_tests();
+	printf("\nall lighting tests passed\n\n");
 	printf("\n%s", COLOR_RESET);
 
 	return (0);
