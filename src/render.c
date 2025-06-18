@@ -15,9 +15,9 @@ t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
 	l.eyev = vec3_reverse(r.dir);
 	l.light = *minirt->scene->light;
 	intersected_sphere = hit->obj;
-	// PRINT_DEBUG("%p\n", (void*)intersected_sphere);
 	l.m = intersected_sphere->material;
 	l.pos = ray_at(hit->t, r);
+	// Problem is here !
 	l.normalv = get_normal_at(hit->obj, l.pos);
 	return (get_lighting(l));
 }
@@ -39,6 +39,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 		i++;
 	}
 	i = 0;
+
 	// while (i < minirt->scene->nb_plane)
 	// {
 	// 	r = ray_transform(unique_ray, minirt->scene->planes[i]->inv);
@@ -48,7 +49,6 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	// }
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
-	sort_inter(&minirt->render->inter_list);
 	if (!hit)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
 	else
