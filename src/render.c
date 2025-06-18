@@ -36,6 +36,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 			r, &minirt->render->inter_list);
 		i++;
 	}
+	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
@@ -80,10 +81,10 @@ int	render_scene(t_minirt *minirt)
 		quit(minirt, "render_scene: NULL prt!");
 	minirt->render->wall_distance = 10;
 	minirt->render->wall_size = 7;
-	minirt->render->canva_width = WIN_H;
+	minirt->render->canva_width = WIN_W;
 	minirt->render->canva_height = WIN_H;
 	minirt->render->pixel_size = minirt->render->wall_size
-		/ minirt->render->canva_width;
+		/ minirt->render->canva_height;
 	minirt->render->half = minirt->render->wall_size / 2;
 	y = 0;
 	minirt->render->original_ray = get_ray(
