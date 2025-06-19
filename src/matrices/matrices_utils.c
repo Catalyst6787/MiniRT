@@ -87,3 +87,5 @@ void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
 	m->matrix[i][j] = elem;
 }
 
+
+

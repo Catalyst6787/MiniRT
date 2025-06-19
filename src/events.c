@@ -49,11 +49,11 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 void	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == S)
-		minirt->scene->camera->pos.z += 0.1;
+		minirt->scene->camera->pos.z -= 0.1;
 	else if (keycode == A)
 		minirt->scene->camera->pos.x -= 0.1;
 	else if (keycode == W)
-		minirt->scene->camera->pos.z -= 0.1;
+		minirt->scene->camera->pos.z += 0.1;
 	else if (keycode == D)
 		minirt->scene->camera->pos.x += 0.1;
 	else if (keycode == E)

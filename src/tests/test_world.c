@@ -68,6 +68,9 @@ int start_all_world_tests(void)
 
 
 	free(light);
+	free_sphere(scene.spheres[0]);
+	free_sphere(scene.spheres[1]);
 	free(scene.spheres);
+	free(scene.camera);
 	return (0);
 }
