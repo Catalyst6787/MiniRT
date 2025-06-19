@@ -1,7 +1,6 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
-# include "minirt.h"
 
 
 # define FILE_OPEN_ERR "Error : couldn't open file\n"

@@ -18,6 +18,7 @@
 # include "material.h"
 # include "matrice.h"
 # include "ray.h"
+# include "sphere.h"
 # include "scene.h"
 # include "errors.h"
 # include "keycodes.h"

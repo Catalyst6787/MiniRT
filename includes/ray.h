@@ -1,8 +1,6 @@
 #ifndef RAY_H
 # define RAY_H
 
-# include "minirt.h"
-
 typedef struct s_ray
 {
 	t_vec3	origin;

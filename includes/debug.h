@@ -1,7 +1,6 @@
 #ifndef DEBUG_H
 # define DEBUG_H
 
-#include "minirt.h"
 
 int		get_debug_fd(void);
 void	debug_print_inter(t_inter inter);

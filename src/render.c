@@ -17,7 +17,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	while (i < minirt->scene->nb_sphere)
 	{
 		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
-		r.dir = vec3_normalise(r.dir);
+		// r.dir = vec3_normalise(r.dir); // c'etait pour ca les spheres qui apparaisaient, on comparait des t normalisés!!
 		get_sphere_inter(minirt->scene->spheres[i],
 			r, &minirt->render->inter_list);
 		i++;

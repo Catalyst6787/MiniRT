@@ -1,8 +1,6 @@
 #ifndef SPHERE_H
 # define SPHERE_H
 
-# include "minirt.h"
-
 typedef struct s_sphere
 {
 	t_vec3		pos;

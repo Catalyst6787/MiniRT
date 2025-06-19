@@ -1,7 +1,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "minirt.h"
+// # include "minirt.h"
 # include "sphere.h"
 # include "cylinder.h"
 # include "plane.h"

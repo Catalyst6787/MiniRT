@@ -53,7 +53,7 @@ t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r) // need to replac
 	sphere = (t_sphere *)hit->obj;
 	comp.m = sphere->material;
 	comp.point = ray_at(hit->t, r);
-	comp.normalv = get_normal_at(hit->obj, comp.point);
+	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
 	comp.t = hit->t;
 	if (vec3_dot(&comp.normalv, &comp.eyev) < 0)
 	{

@@ -1,4 +1,3 @@
-#include "minirt.h"
 
 typedef struct s_material
 {

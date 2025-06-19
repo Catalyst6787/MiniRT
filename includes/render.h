@@ -1,7 +1,6 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-# include "minirt.h"
 
 typedef struct s_comp
 {
@@ -49,7 +48,7 @@ typedef struct s_render
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);
 t_inter	*get_hit(t_inter_list *lst);
-t_vec3	get_normal_at(const t_sphere *s, const t_vec3 world_point);
+t_vec3	get_sphere_normal_at(const t_sphere *s, const t_vec3 world_point);
 t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
 int		get_sphere_inter(const t_sphere *sphere,
 			const t_ray ray, t_inter_list *list);
