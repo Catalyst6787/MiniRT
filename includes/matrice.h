@@ -49,6 +49,11 @@ t_matrix		get_scaling_matrix(t_vec3 v);
 ////////		Shearing
 t_matrix		get_shearing_matrix(t_shear	params);
 
+///////			All
+t_matrix		get_transformation(t_matrix translation,
+					t_matrix rotation, t_matrix shearing, t_matrix scaling);
+
+
 ////////		Rotation
 t_matrix		get_rotation_matrix_x(double r);
 t_matrix		get_rotation_matrix_y(double r);

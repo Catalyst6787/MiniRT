@@ -1,5 +1,17 @@
 #include "minirt.h"
 
+t_matrix	get_transformation(t_matrix translation,
+		t_matrix rotation, t_matrix shearing, t_matrix scaling)
+{
+	t_matrix	result;
+
+	result = multiply_matrix(translation,
+			multiply_matrix(rotation,
+				multiply_matrix(
+					shearing,
+					scaling)));
+	return (result);
+}
 
 // squishing and shearing not implemented
 void	set_sphere_transformation(t_sphere *s)
