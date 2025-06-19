@@ -16,30 +16,18 @@ t_inter	get_inter(void)
 	return (inter);
 }
 
-
-
-// expects a sorted list!
 t_inter	*get_hit(t_inter_list *lst)
 {
-	int		i;
-	t_inter	*smallest;
-	bool	isset;
+	int	i;
 
 	i = 0;
-	isset = false;
-	smallest = NULL;
 	while (i < lst->count)
 	{
-		if (lst->inters[i].t > 0 && (!isset || lst->inters[i].t < smallest->t))
-		{
-			smallest = &lst->inters[i];
-			isset = 1;
-		}
+		if (lst->inters[i].t > 0)
+			return (&lst->inters[i]);
 		i++;
 	}
-	if (!isset)
-		return (NULL);
-	return (smallest);
+	return (NULL);
 }
 
 t_vec3	get_normal_at(const t_sphere *s, const t_vec3 world_point)
