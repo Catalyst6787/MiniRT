@@ -117,6 +117,11 @@ t_vec3		color_color_multiplication(t_vec3 c1, t_vec3 c2);
 int			color_to_int(t_vec3 color);
 t_vec3		int_to_color(int int_color);
 
+/* 								Material Utils						*/
+
+t_material	get_material(void);
+t_material	get_default_material(t_vec3 color, t_scene *scene);
+
 /*                                 UTILS                                  */
 
 void		my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color);

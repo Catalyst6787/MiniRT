@@ -25,7 +25,8 @@ t_vec3	get_lighting(t_lighting	lighting)
 	effective_color = vec3_vec_multiplication(lighting.m.color, lighting.light.color);
 	effective_color = vec3_double_multiplication(effective_color, lighting.light.brightness);
 	light_vector = vec3_normalise(vec3_vec_substraction(lighting.light.pos, lighting.pos));
-	ambient = vec3_double_multiplication(effective_color, lighting.m.ambient);
+	ambient = vec3_vec_multiplication(effective_color, lighting.m.ambient_color);
+	ambient = vec3_double_multiplication(ambient, lighting.m.ambient);
 	light_dot_normal = vec3_dot(&light_vector, &lighting.normalv);
 	if (light_dot_normal < 0)
 	{
@@ -50,5 +51,4 @@ t_vec3	get_lighting(t_lighting	lighting)
 		}
 	}
 	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
-
 }
