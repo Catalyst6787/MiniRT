@@ -7,7 +7,6 @@ int	init_mlx(t_minirt *minirt)
 	t_mlx_data	*mlx;
 
 	mlx = minirt->mlx;
-
 	img_st = malloc(sizeof(t_img_data));
 	if (!img_st)
 		quit(minirt, MLX_ERR);
