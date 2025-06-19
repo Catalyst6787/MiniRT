@@ -43,6 +43,7 @@ SRC					=	main.c \
 						sort_inter.c \
 						render_utils.c \
 						sphere.c \
+						plane.c \
 						material.c \
 						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
 						matrices_translations.c matrices_transpositions.c  matrices_utils.c matrices_shearing.c \
@@ -53,7 +54,7 @@ SRC					=	main.c \
 						vec3_basic_op.c vec3_complex_operations.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
-						test_lighting.c
+						test_lighting.c test_world.c
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

@@ -20,6 +20,7 @@ t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
 	return (get_lighting(l));
 }
 
+
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 {
 	int				i;
@@ -35,14 +36,21 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 			r, &minirt->render->inter_list);
 		i++;
 	}
+	i = 0;
+
+	// while (i < minirt->scene->nb_plane)
+	// {
+	// 	r = ray_transform(unique_ray, minirt->scene->planes[i]->inv);
+	// 	r.dir = vec3_normalise(r.dir);
+	// 	get_plane_inter(minirt->scene->planes[i], r, &minirt->render->inter_list);
+	// 	i++;
+	// }
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
 	else
-	{
 		my_mlx_pixel_put(minirt, x, y, color_to_int(shade_intersection(hit, r, minirt)));
-	}
 	minirt->render->inter_list.count = 0;
 	return (0);
 }

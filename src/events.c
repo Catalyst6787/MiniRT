@@ -43,17 +43,17 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 		ft_printf("[-] pressed\n");
 		minirt->scene->camera->dir.z -= 0.1;
 	}
-	// render_scene(minirt);
+	render_scene(minirt);
 }
 
 void	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == S)
-		minirt->scene->camera->pos.z += 0.1;
+		minirt->scene->camera->pos.z -= 0.1;
 	else if (keycode == A)
 		minirt->scene->camera->pos.x -= 0.1;
 	else if (keycode == W)
-		minirt->scene->camera->pos.z -= 0.1;
+		minirt->scene->camera->pos.z += 0.1;
 	else if (keycode == D)
 		minirt->scene->camera->pos.x += 0.1;
 	else if (keycode == E)
@@ -61,7 +61,7 @@ void	asdw_handle(int keycode, t_minirt *minirt)
 	else if (keycode == R)
 		minirt->scene->camera->pos.y -= 0.05;
 	ft_printf("[%c] pressed\n", keycode - 32);
-	// render_scene(minirt);
+	render_scene(minirt);
 }
 
 int	handle_keypress(int keycode, t_minirt *minirt)
