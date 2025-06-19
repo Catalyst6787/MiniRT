@@ -4,21 +4,6 @@
 #include <float.h>
 #include <math.h>
 
-//returns color at intersection
-t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
-{
-	t_lighting		l;
-	const t_sphere	*intersected_sphere;
-
-	ft_memset(&l, 0, sizeof(t_lighting));
-	l.eyev = vec3_reverse(r.dir);
-	l.light = *minirt->scene->light;
-	intersected_sphere = hit->obj;
-	l.m = intersected_sphere->material;
-	l.pos = ray_at(hit->t, r);
-	l.normalv = get_normal_at(hit->obj, l.pos);
-	return (get_lighting(l));
-}
 
 
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
@@ -26,31 +11,27 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	int				i;
 	t_ray			r;
 	t_inter			*hit;
+	t_comp			comp;
 
 	i = 0;
 	while (i < minirt->scene->nb_sphere)
 	{
 		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
-		r.dir = vec3_normalise(r.dir);
+		// r.dir = vec3_normalise(r.dir); // c'etait pour ca les spheres qui apparaisaient, on comparait des t normalisés!!
 		get_sphere_inter(minirt->scene->spheres[i],
 			r, &minirt->render->inter_list);
 		i++;
 	}
 	i = 0;
-
-	// while (i < minirt->scene->nb_plane)
-	// {
-	// 	r = ray_transform(unique_ray, minirt->scene->planes[i]->inv);
-	// 	r.dir = vec3_normalise(r.dir);
-	// 	get_plane_inter(minirt->scene->planes[i], r, &minirt->render->inter_list);
-	// 	i++;
-	// }
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
 	else
-		my_mlx_pixel_put(minirt, x, y, color_to_int(shade_intersection(hit, r, minirt)));
+	{
+		comp = get_computations(minirt->scene, hit, unique_ray);
+		my_mlx_pixel_put(minirt, x, y, color_to_int(get_lighting(comp)));
+	}
 	minirt->render->inter_list.count = 0;
 	return (0);
 }

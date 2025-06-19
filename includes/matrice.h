@@ -1,8 +1,6 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
-# include "minirt.h"
-
 typedef struct s_matrix
 {
 	double	matrix[4][4];

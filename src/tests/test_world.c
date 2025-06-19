@@ -1,17 +1,5 @@
 #include "minirt.h"
 
-typedef struct s_comp
-{
-	void		*object;
-	double		t;
-	t_vec3		point;
-	t_vec3		eyev;
-	t_vec3		normalv;
-	bool		inside;
-}				t_comp;
-
-
-
 t_light	*new_light(t_vec3 pos, t_vec3 color)
 {
 	t_light	*light;
@@ -54,40 +42,36 @@ int	intersect_test(t_scene scene)
 	return (0);
 }
 
-t_comp	get_computations(t_inter_list inter_list, t_ray r)
+t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r) // need to replace sphere by object
 {
-	t_comp	comp;
+	t_comp		comp;
+	const t_sphere	*sphere; // change for object
 
-
-	comp.object = (void*)inter_list.inters[0].obj;
-	comp.t = inter_list.inters[0].t;
-	comp.point = ray_at(comp.t, r);
+	ft_memset(&comp, 0, sizeof(comp));
 	comp.eyev =  vec3_reverse(r.dir);
-	comp.normalv = get_normal_at(comp.object, comp.point);
+	comp.light = *scene->light;
+	sphere = (t_sphere *)hit->obj;
+	comp.m = sphere->material;
+	comp.point = ray_at(hit->t, r);
+	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
+	comp.t = hit->t;
 	if (vec3_dot(&comp.normalv, &comp.eyev) < 0)
 	{
 		comp.inside = true;
 		comp.normalv = vec3_reverse(comp.normalv);
-		comp.t = fabs(inter_list.inters[0].t); // delete after, check 
 	}
 	else
 		comp.inside = false;
 	return (comp);
 }
 
-t_vec3	shade_hit(t_comp comp, t_scene scene, t_inter_list inter_list, t_sphere *sphere)
+t_vec3	shade_hit(t_comp comp)
 {
-	t_lighting	l;
-	(void)inter_list;
+// 	(void)inter_list;
+	t_vec3	color;
 
-	l.eyev = comp.eyev;
-	l.light = *scene.light;
-	l.m = sphere->material;
-	l.normalv = comp.normalv;
-	l.pos = comp.point;
-	
-	// return(lig)
-	return (get_lighting(l));
+	color = get_lighting(comp);
+	return (color);
 }
 
 int start_all_world_tests(void)
@@ -116,70 +100,74 @@ int start_all_world_tests(void)
 	
 	////////////	Test Computation outside
 	
-	printf("\nOutside computation :\n\n");
+	// printf("\nOutside computation :\n\n");
 	inter_list.count = 0;
 	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
 	r = ray_transform(original_ray, scene.spheres[0]->inv);
 	get_sphere_inter(scene.spheres[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.spheres[1]->inv);
 	get_sphere_inter(scene.spheres[1], r, &inter_list);
-	for (int i = 0; i < 4; i++)
-		printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
 	sort_inter(&inter_list);
-	for (int i = 0; i < 4; i++)
-		printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
 
-	comp = get_computations(inter_list, original_ray);
+	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
 
-	printf("Comp t : %.2f\n", comp.t);
-	print_vec3(comp.point, "Comp point");
-	print_vec3(comp.eyev, "Comp eyev");
-	print_vec3(comp.normalv, "Comp normalv");
-	printf("Comp inside : %d\n\n", comp.inside);
+	assert(comp.t == 4);
+	assert(vec3_isequal(comp.point, get_point3(0, 0, -1)));
+	assert(vec3_isequal(comp.eyev, get_vec3(0, 0, -1)));
+	assert(vec3_isequal(comp.normalv, get_vec3(0, 0, -1)));
+	assert(comp.inside == 0);
 
 	////////////	Test Computation inside
 
-	printf("\nInside computation :\n\n");
+	// printf("\nInside computation :\n\n");
 	inter_list.count = 0;
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
 	r = ray_transform(original_ray, scene.spheres[0]->inv);
 	get_sphere_inter(scene.spheres[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.spheres[1]->inv);
 	get_sphere_inter(scene.spheres[1], r, &inter_list);
-	for (int i = 0; i < 4; i++)
-		printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
-	sort_inter(&inter_list);
-	for (int i = 0; i < 4; i++)
-		printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
-
-	comp = get_computations(inter_list, original_ray);
-	printf("Comp t : %.2f\n", comp.t);
-	print_vec3(comp.point, "Comp point");
-	print_vec3(comp.eyev, "Comp eyev");
-	print_vec3(comp.normalv, "Comp normalv");
-	printf("Comp inside : %d\n\n", comp.inside);
-
-
-	////////////	Test Shading
-
-	(void)c;
-	// original_ray = get_ray(scene.camera->pos, scene.camera->dir);
-	// r = ray_transform(original_ray, scene.spheres[0]->inv);
-	// get_sphere_inter(scene.spheres[0], r, &inter_list);
-	// r = ray_transform(original_ray, scene.spheres[1]->inv);
-	// get_sphere_inter(scene.spheres[1], r, &inter_list);
 	// for (int i = 0; i < 4; i++)
 	// 	printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
-	// sort_inter(&inter_list);
+	sort_inter(&inter_list);
 	// for (int i = 0; i < 4; i++)
 	// 	printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
 
-	// comp = get_computations(inter_list, original_ray);
+	inter_list.inters[0].t = 1; //delete and rearrange inter for when the ray is inside an object
+	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+
+	assert(comp.t == 1);
+	assert(vec3_isequal(comp.point, get_point3(0, 0, 1)));
+	assert(vec3_isequal(comp.eyev, get_vec3(0, 0, -1)));
+	assert(vec3_isequal(comp.normalv, get_vec3(0, 0, -1)));
+	assert(comp.inside == 1);
+
+
+	////////////	Test Shading outside
+
+	(void)c;
+	inter_list.count = 0;
+	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	r = ray_transform(original_ray, scene.spheres[0]->inv);
+	get_sphere_inter(scene.spheres[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.spheres[1]->inv);
+	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	sort_inter(&inter_list);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+
+	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+
+	c = shade_hit(comp);
+	// print_vec3(c, "color");
 
 	// if (!comp.inside)
 	// {
-	// 	c = shade_hit(comp, scene, inter_list, (t_sphere *)inter_list.inters[0].obj);
-	// 	print_vec3(c, "color");
 	// }
 
 

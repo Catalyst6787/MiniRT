@@ -18,6 +18,7 @@
 # include "material.h"
 # include "matrice.h"
 # include "ray.h"
+# include "sphere.h"
 # include "scene.h"
 # include "errors.h"
 # include "keycodes.h"
@@ -106,7 +107,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
-t_vec3		get_lighting(t_lighting	lighting);
+t_vec3		get_lighting(t_comp comp);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 
