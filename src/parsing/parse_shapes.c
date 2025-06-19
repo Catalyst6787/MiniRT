@@ -35,6 +35,7 @@ int	parse_plane(t_scene *scene, t_plane *plane, int *cursor)
 	plane->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	plane->dir.w = 0;
 	plane->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	plane->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	plane->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;

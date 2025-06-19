@@ -1,6 +1,5 @@
 
 #include "minirt.h"
-#include "vec3.h"
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
@@ -18,6 +17,9 @@ t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 	sphere->color.x = color.x;
 	sphere->color.y = color.y;
 	sphere->color.z = color.z;
+	sphere->material.color.x = color.x;
+	sphere->material.color.y = color.y;
+	sphere->material.color.z = color.z;
 	sphere->transform = get_matrix(4, 4, 1);
 	sphere->inv = get_matrix(4, 4, 1);
 	return (sphere);

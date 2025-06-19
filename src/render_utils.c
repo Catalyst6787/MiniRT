@@ -56,6 +56,9 @@ t_vec3	get_normal_at(const t_sphere *s, const t_vec3 world_point)
 	return (vec3_normalise(world_normal));
 }
 
+
+
+
 t_vec3	get_reflection(t_vec3 in, t_vec3 normal)
 {
 	t_vec3	res;

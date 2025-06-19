@@ -94,7 +94,7 @@ void	print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("Sphere[%d/%d] :\n\n", i + 1, minirt->scene->nb_sphere);
 		PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->spheres[i]->pos.x, minirt->scene->spheres[i]->pos.y, minirt->scene->spheres[i]->pos.z);
 		PRINT_DEBUG("	Diameter : %.2f\n", minirt->scene->spheres[i]->diameter);
-		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->color.r, minirt->scene->spheres[i]->color.g, minirt->scene->spheres[i]->color.b);
+		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->spheres[i]->material.color.r, minirt->scene->spheres[i]->material.color.g, minirt->scene->spheres[i]->material.color.b);
 	}
 	i = -1;
 	while (++i < minirt->scene->nb_plane)
@@ -102,7 +102,7 @@ void	print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("Plane[%d/%d] :\n\n", i + 1, minirt->scene->nb_plane);
 		PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->planes[i]->pos.x, minirt->scene->planes[i]->pos.y, minirt->scene->planes[i]->pos.z);
 		PRINT_DEBUG("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->planes[i]->dir.x, minirt->scene->planes[i]->dir.y, minirt->scene->planes[i]->dir.z);
-		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->planes[i]->color.r, minirt->scene->planes[i]->color.g, minirt->scene->planes[i]->color.b);
+		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->planes[i]->material.color.r, minirt->scene->planes[i]->material.color.g, minirt->scene->planes[i]->material.color.b);
 	}
 	i = -1;
 	while (++i < minirt->scene->nb_cylinder)
@@ -112,7 +112,7 @@ void	print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->cylinders[i]->dir.x, minirt->scene->cylinders[i]->dir.y, minirt->scene->cylinders[i]->dir.z);
 		PRINT_DEBUG("	Diameter : %.2f\n", minirt->scene->cylinders[i]->diameter);
 		PRINT_DEBUG("	Height : %.2f\n", minirt->scene->cylinders[i]->height);
-		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->color.r, minirt->scene->cylinders[i]->color.g, minirt->scene->cylinders[i]->color.b);
+		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->material.color.r, minirt->scene->cylinders[i]->material.color.g, minirt->scene->cylinders[i]->material.color.b);
 	}
 	PRINT_DEBUG("\n");
 	// PRINT_DEBUG("	aspect_ratio = [%f]\n", minirt->aspect_ratio);
