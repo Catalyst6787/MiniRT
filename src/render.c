@@ -17,7 +17,6 @@ t_vec3	shade_intersection(t_inter *hit, t_ray r, t_minirt *minirt)
 	intersected_sphere = hit->obj;
 	l.m = intersected_sphere->material;
 	l.pos = ray_at(hit->t, r);
-	// Problem is here !
 	l.normalv = get_normal_at(hit->obj, l.pos);
 	return (get_lighting(l));
 }
