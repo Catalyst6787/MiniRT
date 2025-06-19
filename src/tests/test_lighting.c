@@ -4,8 +4,16 @@ int	start_all_lighting_tests(void)
 {
 	t_lighting	l;
 	t_vec3		result;
+	t_scene		scene;
+	t_ambient	ambient;
 
-	l.m = get_default_material(get_vec3(1, 1, 1));
+	ft_memset(&scene, 0, sizeof(t_scene));
+	ft_memset(&ambient, 0, sizeof(t_ambient));
+	scene.ambient = &ambient;
+	scene.ambient->brightness = 0.1;
+	scene.ambient->color = get_color(1, 1, 1);
+
+	l.m = get_default_material(get_vec3(1, 1, 1), &scene);
 	l.pos = get_point3(0, 0, 0);
 
 	// Lighting with the eye between the light and the surface
