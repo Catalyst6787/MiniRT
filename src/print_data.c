@@ -1,10 +1,5 @@
 #include "minirt.h"
 
-void	print_vector_data(t_vec3 *vec, char *vec_name)
-{
-	printf("%s - x y z w : %.2f %.2f %.2f %d\n", vec_name, vec->x, vec->y, vec->z, vec->w);
-}
-
 void	print_vec3(t_vec3 vec, char *vec_name)
 {
 	printf("%s - x y z w : %.2f %.2f %.2f %d\n", vec_name, vec.x, vec.y, vec.z, vec.w);

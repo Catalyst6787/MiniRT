@@ -1,5 +1,16 @@
 #include "minirt.h"
 
+typedef struct s_comp
+{
+	void		*object;
+	double		t;
+	t_vec3		point;
+	t_vec3		eyev;
+	t_vec3		normalv;
+	bool		inside;
+}				t_comp;
+
+
 
 t_light	*new_light(t_vec3 pos, t_vec3 color)
 {
@@ -43,31 +54,147 @@ int	intersect_test(t_scene scene)
 	return (0);
 }
 
+t_comp	get_computations(t_inter_list inter_list, t_ray r)
+{
+	t_comp	comp;
 
+
+	comp.object = (void*)inter_list.inters[0].obj;
+	comp.t = inter_list.inters[0].t;
+	comp.point = ray_at(comp.t, r);
+	comp.eyev =  vec3_reverse(r.dir);
+	comp.normalv = get_normal_at(comp.object, comp.point);
+	if (vec3_dot(&comp.normalv, &comp.eyev) < 0)
+	{
+		comp.inside = true;
+		comp.normalv = vec3_reverse(comp.normalv);
+		comp.t = fabs(inter_list.inters[0].t); // delete after, check 
+	}
+	else
+		comp.inside = false;
+	return (comp);
+}
+
+t_vec3	shade_hit(t_comp comp, t_scene scene, t_inter_list inter_list, t_sphere *sphere)
+{
+	t_lighting	l;
+	(void)inter_list;
+
+	l.eyev = comp.eyev;
+	l.light = *scene.light;
+	l.m = sphere->material;
+	l.normalv = comp.normalv;
+	l.pos = comp.point;
+	
+	// return(lig)
+	return (get_lighting(l));
+}
 
 int start_all_world_tests(void)
 {
-	t_light			*light;
-	t_inter_list	i;
+	t_inter_list	inter_list;
 	t_scene			scene;
-	(void) i;
+	t_comp			comp;
+	t_ray			r;
+	t_vec3			c;
+	t_ray			original_ray;
+
 
 	scene.spheres = malloc(sizeof(t_sphere) * 2);
-	light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
-	scene.spheres[0] = new_sphere(get_point3(0, 0, 0), 2, get_color(0.8, 1.0, 0.6));
-	scene.spheres[1] = new_sphere(get_point3(1, 0, 0), 1, get_color(1, 0.2, 0.1));
+	scene.light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
+	scene.spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
+	scene.spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 0.2, 0.1));
 	scene.spheres[0]->material.diffuse = 0.7;
 	scene.spheres[0]->material.specular = 0.2;
 	scene.spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
+	scene.spheres[1]->inv = get_inversed_matrix(scene.spheres[1]->transform);
 	scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 
+	r = get_ray(scene.camera->pos, scene.camera->dir);
+	inter_list.capacity = 4;
+	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
+	
+	////////////	Test Computation outside
+	
+	printf("\nOutside computation :\n\n");
+	inter_list.count = 0;
+	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	r = ray_transform(original_ray, scene.spheres[0]->inv);
+	get_sphere_inter(scene.spheres[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.spheres[1]->inv);
+	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	for (int i = 0; i < 4; i++)
+		printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	sort_inter(&inter_list);
+	for (int i = 0; i < 4; i++)
+		printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+
+	comp = get_computations(inter_list, original_ray);
+
+	printf("Comp t : %.2f\n", comp.t);
+	print_vec3(comp.point, "Comp point");
+	print_vec3(comp.eyev, "Comp eyev");
+	print_vec3(comp.normalv, "Comp normalv");
+	printf("Comp inside : %d\n\n", comp.inside);
+
+	////////////	Test Computation inside
+
+	printf("\nInside computation :\n\n");
+	inter_list.count = 0;
+	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
+	r = ray_transform(original_ray, scene.spheres[0]->inv);
+	get_sphere_inter(scene.spheres[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.spheres[1]->inv);
+	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	for (int i = 0; i < 4; i++)
+		printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	sort_inter(&inter_list);
+	for (int i = 0; i < 4; i++)
+		printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+
+	comp = get_computations(inter_list, original_ray);
+	printf("Comp t : %.2f\n", comp.t);
+	print_vec3(comp.point, "Comp point");
+	print_vec3(comp.eyev, "Comp eyev");
+	print_vec3(comp.normalv, "Comp normalv");
+	printf("Comp inside : %d\n\n", comp.inside);
 
 
-	// intersect_test();
+	////////////	Test Shading
+
+	(void)c;
+	// original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	// r = ray_transform(original_ray, scene.spheres[0]->inv);
+	// get_sphere_inter(scene.spheres[0], r, &inter_list);
+	// r = ray_transform(original_ray, scene.spheres[1]->inv);
+	// get_sphere_inter(scene.spheres[1], r, &inter_list);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+	// sort_inter(&inter_list);
+	// for (int i = 0; i < 4; i++)
+	// 	printf("sorted xs[%d].t = %.2f\n", i, inter_list.inters[i].t);
+
+	// comp = get_computations(inter_list, original_ray);
+
+	// if (!comp.inside)
+	// {
+	// 	c = shade_hit(comp, scene, inter_list, (t_sphere *)inter_list.inters[0].obj);
+	// 	print_vec3(c, "color");
+	// }
 
 
 
-	free(light);
+	// scene.light = new_light(get_point3(0, 0.25, 0), get_color(1, 1, 1));
+	// r = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
+	
+	// assert(vec3_isequal(c, get_color(0.38066, 0.47583, 0.2855)));
+	
+
+
+
+
+	free(scene.light);
+	free(inter_list.inters);
 	free_sphere(scene.spheres[0]);
 	free_sphere(scene.spheres[1]);
 	free(scene.spheres);

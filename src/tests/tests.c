@@ -111,7 +111,6 @@ int	test_vec_normalize(void)
 	t_vec3 v;
 	v = get_vec3(4, 0, 0);
 	v = vec3_normalise(v);
-	print_vec3(v, "normalised vector");
 	assert(vec3_isequal(v, get_vec3(1, 0, 0)));
 	v = get_vec3(1, 2, 3);
 	v = vec3_normalise(v);
@@ -164,7 +163,6 @@ int	start_all_tests(void)
 	printf("test_dot_product passed\n");
 	test_cross_product();
 	printf("test_cross_product passed\n");
-
 	start_all_matrix_tests();
 	printf("\nall matrix test passed\n\n");
 	start_all_ray_tests();

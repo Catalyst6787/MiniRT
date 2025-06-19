@@ -144,7 +144,6 @@ int			debug_print_keycode(int keycode);
 void		debug_aff_image(t_minirt *minirt);
 void		print_scene_data(t_minirt *minirt);
 void		print_scene_ok_message(void);
-void		print_vector_data(t_vec3 *vec, char *vec_name);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
 void		print_render_data(t_render *render);
