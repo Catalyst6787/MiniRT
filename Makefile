@@ -47,6 +47,7 @@ SRC					=	main.c \
 						material.c \
 						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
 						matrices_translations.c matrices_transpositions.c  matrices_utils.c matrices_shearing.c \
+						matrices_orientations.c \
 						transformations.c \
 						utils.c \
 						color_operations.c \

@@ -12,7 +12,7 @@ void	print_matrice(t_matrix m)
 		printf("|");
 		while (j < m.col)
 		{
-			printf(" %.1f |", m.matrix[i][j]);
+			printf(" %.3f |", m.matrix[i][j]);
 			if (m.matrix[i][j] < 10.0 && m.matrix[i][j] >= 0.0)
 				printf(" ");
 			j++;

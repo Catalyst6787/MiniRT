@@ -21,10 +21,10 @@
 # include "sphere.h"
 # include "scene.h"
 # include "errors.h"
+# include "render.h"
 # include "keycodes.h"
 # include "colors.h"
 # include "test.h"
-# include "render.h"
 # include "debug.h"
 
 # define SPACE_SET = " \t\n"
@@ -110,6 +110,7 @@ int			render_scene(t_minirt *minirt);
 t_vec3		get_lighting(t_comp comp);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
+t_matrix	get_orientation_matrix(t_view view);
 
 /*                             COLOR UTILS                                  */
 
