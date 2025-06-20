@@ -4,7 +4,12 @@
 #include <float.h>
 #include <math.h>
 
+// get_intersection(t_object object, t_ray ray, t_inter_list *list)
+// {
+// 	if (!list)
+// 		return (print_err(FILE, LINE, "get_sphere_inter: NULL pointer"), 1);
 
+// }
 
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 {
@@ -16,8 +21,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	i = 0;
 	while (i < minirt->scene->nb_sphere)
 	{
-		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
-		// r.dir = vec3_normalise(r.dir); // c'etait pour ca les spheres qui apparaisaient, on comparait des t normalisés!!
+		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
 		get_sphere_inter(minirt->scene->spheres[i],
 			r, &minirt->render->inter_list);
 		i++;
