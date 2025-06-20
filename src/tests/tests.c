@@ -90,18 +90,18 @@ int	test_scalar_division(void)
 int	test_vec_magnitude(void)
 {
 	t_vec3 v = get_vec3(1, 0, 0);
-	double magnitude = vec3_exact_length(&v);
+	double magnitude = vec3_exact_length(v);
 	assert(magnitude == 1);
 	v = get_vec3(0, 1, 0);
-	magnitude = vec3_exact_length(&v);
+	magnitude = vec3_exact_length(v);
 	assert(magnitude == 1);
-	magnitude = vec3_exact_length(&v);
+	magnitude = vec3_exact_length(v);
 	assert(magnitude == 1);
 	v = get_vec3(1, 2, 3);
-	magnitude = vec3_exact_length(&v);
+	magnitude = vec3_exact_length(v);
 	assert(magnitude == sqrt(14));
 	v = get_vec3(-1, -2, -3);
-	magnitude = vec3_exact_length(&v);
+	magnitude = vec3_exact_length(v);
 	assert(magnitude == sqrt(14));
 	return (0);
 }
@@ -123,7 +123,7 @@ int test_dot_product(void)
 	t_vec3 a = get_vec3(1, 2, 3);
 	t_vec3 b = get_vec3(2, 3, 4);
 
-	assert(vec3_dot(&a, &b) == 20);
+	assert(vec3_dot(a, b) == 20);
 	return (0);
 }
 

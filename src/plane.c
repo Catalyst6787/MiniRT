@@ -13,7 +13,7 @@ int	get_plane_inter(const t_plane *plane, const t_ray ray, t_inter_list *list)
 		return (0);
 	// list->inters[list->count].t = ((-1) * ray.origin.y) / ray.dir.y;
 	t_vec3	v1 = vec3_vec_substraction(plane->pos, ray.origin);
-	list->inters[list->count].t = vec3_dot(&v1, &plane->dir) / vec3_dot(&ray.dir, &plane->dir);
+	list->inters[list->count].t = vec3_dot(v1, plane->dir) / vec3_dot(ray.dir, plane->dir);
 	if (list->inters[list->count].t < 0)
 		return (0);
 	list->inters[list->count].obj = plane;

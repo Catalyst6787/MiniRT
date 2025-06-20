@@ -50,6 +50,6 @@ t_vec3	get_reflection(t_vec3 in, t_vec3 normal)
 	t_vec3	res;
 
 	res = vec3_double_multiplication(normal, 2);
-	res = vec3_double_multiplication(res, vec3_dot(&in, &normal));
+	res = vec3_double_multiplication(res, vec3_dot(in, normal));
 	return (vec3_vec_substraction(in, res));
 }

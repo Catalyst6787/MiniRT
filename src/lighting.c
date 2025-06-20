@@ -27,7 +27,7 @@ t_vec3	get_lighting(t_comp	comp)
 	light_vector = vec3_normalise(vec3_vec_substraction(comp.light.pos, comp.point));
 	ambient = vec3_vec_multiplication(effective_color, comp.m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp.m.ambient);
-	light_dot_normal = vec3_dot(&light_vector, &comp.normalv);
+	light_dot_normal = vec3_dot(light_vector, comp.normalv);
 	if (light_dot_normal < 0)
 	{
 		diffuse = get_color(0, 0, 0);
@@ -37,7 +37,7 @@ t_vec3	get_lighting(t_comp	comp)
 	{
 		diffuse = vec3_double_multiplication(effective_color, (comp.m.diffuse * light_dot_normal));
 		reflectv = get_reflection(vec3_reverse(light_vector), comp.normalv);
-		reflect_dot_eye = vec3_dot(&reflectv, &comp.eyev);
+		reflect_dot_eye = vec3_dot(reflectv, comp.eyev);
 		if (reflect_dot_eye <= 0)
 			specular = get_color(0, 0, 0);
 		else

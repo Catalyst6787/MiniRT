@@ -40,10 +40,10 @@ t_vec3	vec3_double_division(t_vec3 src, double n);
 
 /*                                 COMPLEX OPS                              */
 
-double	vec3_length_squared(t_vec3 *vec3);
-double	vec3_exact_length(t_vec3 *vec3);
+double	vec3_length_squared(t_vec3 vec3);
+double	vec3_exact_length(t_vec3 vec3);
 t_vec3	vec3_normalise(t_vec3 vec3);
-double	vec3_dot(const t_vec3 *vec3_u, const t_vec3 *vec3_v);
+double	vec3_dot(t_vec3 vec3_u, t_vec3 vec3_v);
 int		vec3_isequal(const t_vec3 vec3_a, const t_vec3 vec3_b);
 t_vec3	vec3_cross(const t_vec3 vec3_a, const t_vec3 vec3_b);
 
