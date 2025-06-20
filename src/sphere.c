@@ -17,6 +17,7 @@ t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 	sphere->color.y = color.y;
 	sphere->color.z = color.z;
 	sphere->material = get_material();
+	sphere->material.color = color;
 	sphere->transform = get_matrix(4, 4, 1);
 	sphere->inv = get_matrix(4, 4, 1);
 	return (sphere);
