@@ -48,6 +48,8 @@ void	free_scene(t_scene *scene)
 		free(scene->cylinders[i]);
 		free(scene->cylinders);
 	}
+	if (scene->objects)
+		free(scene->objects);
 	if (scene->light)
 		free(scene->light);
 	if (scene->ambient)

@@ -35,6 +35,7 @@ typedef struct s_scene
 	t_sphere	**spheres;
 	t_plane		**planes;
 	t_cylinder	**cylinders;
+	t_object	*objects;
 	char		*buffer;
 	int			nb_amb;
 	int			nb_cam;
@@ -42,6 +43,7 @@ typedef struct s_scene
 	int			nb_sphere;
 	int			nb_plane;
 	int			nb_cylinder;
+	int			nb_objects;
 }	t_scene;
 
 #endif

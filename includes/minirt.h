@@ -19,6 +19,7 @@
 # include "matrice.h"
 # include "ray.h"
 # include "sphere.h"
+# include "object.h"
 # include "scene.h"
 # include "errors.h"
 # include "render.h"
@@ -26,7 +27,7 @@
 # include "colors.h"
 # include "test.h"
 # include "debug.h"
-# include "object.h"
+
 
 # define SPACE_SET = " \t\n"
 
