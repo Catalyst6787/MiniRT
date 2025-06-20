@@ -114,6 +114,12 @@ void	print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("	Height : %.2f\n", minirt->scene->cylinders[i]->height);
 		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->material.color.r, minirt->scene->cylinders[i]->material.color.g, minirt->scene->cylinders[i]->material.color.b);
 	}
+	i = 0;
+	while (i < minirt->scene->nb_objects)
+	{
+		PRINT_DEBUG("object type: %d\n", minirt->scene->objects[i].type);
+		i++;
+	}
 	PRINT_DEBUG("\n");
 	// PRINT_DEBUG("	aspect_ratio = [%f]\n", minirt->aspect_ratio);
 	// PRINT_DEBUG("	img_width = [%d]\n", minirt->img_width);

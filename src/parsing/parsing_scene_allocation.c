@@ -76,10 +76,18 @@ void	cylinders_alloc(t_minirt *minirt, t_scene *scene)
 	scene->cylinders[i] = NULL;
 }
 
+void	objects_alloc(t_minirt *minirt, t_scene *scene)
+{
+	scene->objects = malloc(sizeof(t_object) * (scene->nb_objects + 1));
+	if (!scene->objects && scene->nb_objects)
+		quit(minirt, MALLOC_ERR);
+}
+
 void	alloc_elements(t_minirt *minirt, t_scene *scene)
 {
 	cam_light_alloc(minirt);
 	spheres_alloc(minirt, scene);
 	planes_alloc(minirt, scene);
 	cylinders_alloc(minirt, scene);
+	objects_alloc(minirt, scene);
 }
