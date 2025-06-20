@@ -16,13 +16,11 @@ t_matrix	get_transformation(t_matrix translation,
 // squishing and shearing not implemented
 void	set_sphere_transformation(t_sphere *s)
 {
-	s->transform = multiply_matrix(
+	s->transform = get_transformation(
 			get_translation_matrix(s->pos),
-			get_scaling_matrix(
-				get_vec3(
-					s->radius,
-					s->radius,
-					s->radius)));
+			get_matrix(4, 4, 1),
+			get_matrix(4, 4, 1),
+			get_scaling_matrix(get_vec3(s->radius, s->radius, s->radius)));
 	s->inv = get_inversed_matrix(s->transform);
 }
 

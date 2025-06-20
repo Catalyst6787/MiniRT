@@ -18,6 +18,7 @@
 		"ray.h": "c",
 		"stdbool.h": "c",
 		"cmath": "c",
-		"plane.h": "c"
+		"plane.h": "c",
+		"object.h": "c"
 	}
 }

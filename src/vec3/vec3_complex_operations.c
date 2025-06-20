@@ -3,15 +3,13 @@
 
 // good for quick length comparison, less precise but faster than
 // vec3_exact_lenght
-double	vec3_length_squared(t_vec3 *vec3)
+double	vec3_length_squared(t_vec3 vec3)
 {
-	assert(vec3);
-	return (vec3->x * vec3->x + vec3->y * vec3->y + vec3->z * vec3->z);
+	return (vec3.x * vec3.x + vec3.y * vec3.y + vec3.z * vec3.z);
 }
 
-double	vec3_exact_length(t_vec3 *vec3)
+double	vec3_exact_length(t_vec3 vec3)
 {
-	assert(vec3);
 	return (sqrt(vec3_length_squared(vec3)));
 }
 
@@ -20,7 +18,7 @@ t_vec3	vec3_normalise(t_vec3 vec3)
 	t_vec3	normalised;
 	double	length;
 
-	length = vec3_exact_length(&vec3);
+	length = vec3_exact_length(vec3);
 	assert(length != 0);
 	normalised.x = vec3.x / length;
 	normalised.y = vec3.y / length;
@@ -30,15 +28,13 @@ t_vec3	vec3_normalise(t_vec3 vec3)
 }
 
 // commutative
-double	vec3_dot(const t_vec3 *vec3_u, const t_vec3 *vec3_v)
+double	vec3_dot(const t_vec3 vec3_u, const t_vec3 vec3_v)
 {
-	assert(vec3_u);
-	assert(vec3_v);
-	if (vec3_u->w || vec3_v->w)
+	if (vec3_u.w || vec3_v.w)
 		print_err(FILE, LINE, "vec3_dot, tring to dot a point");
-	return ((vec3_u->x * vec3_v->x)
-		+ (vec3_u->y * vec3_v->y)
-		+ (vec3_u->z * vec3_v->z));
+	return ((vec3_u.x * vec3_v.x)
+		+ (vec3_u.y * vec3_v.y)
+		+ (vec3_u.z * vec3_v.z));
 }
 
 int	vec3_isequal(const t_vec3 vec3_a, const t_vec3	vec3_b)

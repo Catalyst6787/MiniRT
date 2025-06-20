@@ -26,6 +26,7 @@
 # include "colors.h"
 # include "test.h"
 # include "debug.h"
+# include "object.h"
 
 # define SPACE_SET = " \t\n"
 

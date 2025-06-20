@@ -71,8 +71,7 @@ t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r) // need to replac
 	comp.point = ray_at(hit->t, r);
 	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
 	comp.t = hit->t;
-	comp.object = (void *)hit->obj;
-	if (vec3_dot(&comp.normalv, &comp.eyev) < 0)
+	if (vec3_dot(comp.normalv, comp.eyev) < 0)
 	{
 		comp.inside = true;
 		comp.normalv = vec3_reverse(comp.normalv);
@@ -119,10 +118,10 @@ int start_all_world_tests(void)
 	r = get_ray(scene.camera->pos, scene.camera->dir);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
-	
-	
+
+
 	////////////	Test Computation outside
-	
+
 
 	inter_list.count = 0;
 	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
@@ -132,7 +131,7 @@ int start_all_world_tests(void)
 	get_sphere_inter(scene.spheres[1], r, &inter_list);
 	sort_inter(&inter_list);
 
-	inter_list.inters[0].t = 4; 
+	inter_list.inters[0].t = 4;
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
 
 	assert(comp.t == 4);
