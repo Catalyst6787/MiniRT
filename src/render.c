@@ -41,10 +41,14 @@ t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
 }
 
 
-static int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
+int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
 {
 	if (object->type == SPHERE)
 		get_sphere_inter(object, ray, list);
+	// else if (object->type == PLANE)
+	// 	get_plane_inter(object, ray, list);
+	// else if (object->type == CYLINDER)
+	// 	get_cylinder_inter(object, ray, list);
 	return (0);
 }
 
@@ -60,10 +64,10 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	while (i < minirt->scene->nb_objects)
 	{
 		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
-		get_intersection(&minirt->scene->objects[i],r, &minirt->render->inter_list);
+		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
 		i++;
 	}
-	i = 0;
+	// i = 0;
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)

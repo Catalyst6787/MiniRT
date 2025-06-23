@@ -63,5 +63,6 @@ int		get_sphere_inter(const t_object *object,
 int		get_plane_inter(const t_object *plane,
 			const t_ray ray, t_inter_list *list);
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r);
+int		get_intersection(t_object *object, t_ray ray, t_inter_list *list);
 
 #endif
