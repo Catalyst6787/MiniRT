@@ -14,7 +14,7 @@ t_matrix	get_transformation(t_matrix translation,
 }
 
 // squishing and shearing not implemented
-void	set_sphere_transformation(t_sphere *s)
+void	set_sphere_transformation(t_object *s)
 {
 	s->transform = get_transformation(
 			get_translation_matrix(s->pos),
@@ -25,7 +25,7 @@ void	set_sphere_transformation(t_sphere *s)
 }
 
 // shearing not implemented
-void	set_plane_transformation(t_plane *pl)
+void	set_plane_transformation(t_object *pl)
 {
 	pl->transform = multiply_matrix(
 			get_translation_matrix(pl->pos),
@@ -33,7 +33,7 @@ void	set_plane_transformation(t_plane *pl)
 	pl->inv = get_inversed_matrix(pl->transform);
 }
 
-void	set_cylinder_tranformation(t_cylinder *cy)
+void	set_cylinder_tranformation(t_object *cy)
 {
 	cy->transform = multiply_matrix(
 			get_translation_matrix(cy->pos),

@@ -51,4 +51,6 @@ typedef struct s_scene
 	int			nb_objects;
 }	t_scene;
 
+
+
 #endif

@@ -30,7 +30,7 @@ t_inter	*get_hit(t_inter_list *lst)
 	return (NULL);
 }
 
-t_vec3	get_sphere_normal_at(const t_sphere *s, const t_vec3 world_point)
+t_vec3	get_sphere_normal_at(const t_object *s, const t_vec3 world_point)
 {
 	t_vec3	object_point;
 	t_vec3	object_normal;

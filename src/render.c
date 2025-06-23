@@ -19,14 +19,14 @@ static void	init_render(t_render *render, t_scene *scene)
 
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
 {
-	t_comp		comp;
-	const t_sphere	*sphere; // change for object
+	t_comp			comp;
+	const t_object	*object; // change for object
 
 	ft_memset(&comp, 0, sizeof(comp));
 	comp.eyev =  vec3_reverse(r.dir);
 	comp.light = *scene->light;
-	sphere = (t_sphere *)hit->obj;
-	comp.m = sphere->material;
+	object = hit->obj;
+	comp.m = object->material;
 	comp.point = ray_at(hit->t, r);
 	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
 	comp.t = hit->t;
@@ -41,11 +41,12 @@ t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
 }
 
 
-// int	get_intersections(t_scene *scene, t_ray ray, t_inter_list *list)
-// {
-// 	if
-
-// }
+static int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
+{
+	if (object->type == SPHERE)
+		get_sphere_inter(object, ray, list);
+	return (0);
+}
 
 
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
@@ -56,12 +57,10 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	t_comp			comp;
 
 	i = 0;
-	// while (i < minirt->scene->nb_objects)
-	while (i < minirt->scene->nb_sphere)
+	while (i < minirt->scene->nb_objects)
 	{
-		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
-		get_sphere_inter(minirt->scene->spheres[i],
-			r, &minirt->render->inter_list);
+		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
+		get_intersection(&minirt->scene->objects[i],r, &minirt->render->inter_list);
 		i++;
 	}
 	i = 0;

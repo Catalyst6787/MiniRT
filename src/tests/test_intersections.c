@@ -3,7 +3,7 @@
 int	test_ray_intersect_sphere(void)
 {
 	t_ray			r;
-	t_sphere		s;
+	t_object		s;
 	t_inter			inter[10]; // can be malloc'ed aswell
 	t_inter_list	lst;
 	int				i;
@@ -58,10 +58,6 @@ int	test_ray_intersect_sphere(void)
 		assert(lst.inters[i].t <= lst.inters[i + 1].t);
 		i++;
 	}
-	// debug_print_inter_list(lst);
-
-	// printf("hit is: ");
-	// debug_print_inter(*get_hit(&lst));
 
 
 	return (0);

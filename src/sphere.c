@@ -1,29 +1,30 @@
 #include "minirt.h"
 
-t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
+t_object	new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
-	t_sphere	*sphere;
+	t_object	sphere;
 
-	sphere = ft_calloc(1, sizeof(t_sphere));
-	if (!sphere)
-		return (perror("new_sphere. Error\n"), NULL);
-	sphere->pos.x = pos.x;
-	sphere->pos.y = pos.y;
-	sphere->pos.z = pos.z;
-	sphere->pos.w = 1;
-	sphere->diameter = diameter;
-	sphere->radius = diameter / 2;
-	sphere->color.x = color.x;
-	sphere->color.y = color.y;
-	sphere->color.z = color.z;
-	sphere->material = get_material();
-	sphere->material.color = color;
-	sphere->transform = get_matrix(4, 4, 1);
-	sphere->inv = get_matrix(4, 4, 1);
+	// sphere = ft_calloc(1, sizeof(t_object));
+	// if (!sphere)
+	// 	return (perror("new_sphere. Error\n"), NULL);
+	sphere.pos.x = pos.x;
+	sphere.pos.y = pos.y;
+	sphere.pos.z = pos.z;
+	sphere.pos.w = 1;
+	sphere.diameter = diameter;
+	sphere.radius = diameter / 2;
+	sphere.color.x = color.x;
+	sphere.color.y = color.y;
+	sphere.color.z = color.z;
+	sphere.material = get_material();
+	sphere.material.color = color;
+	sphere.transform = get_matrix(4, 4, 1);
+	sphere.inv = get_matrix(4, 4, 1);
+	sphere.type = SPHERE;
 	return (sphere);
 }
 
-int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list)
+int	get_sphere_inter(const t_object *object, const t_ray ray, t_inter_list *list)
 {
 	t_vec3	oc;
 	double	a;
@@ -44,10 +45,10 @@ int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list
 		return (print_err(FILE, LINE,
 				"get_sphere_inter: no more space in list"), 1);
 	list->inters[list->count].t = ((-b - sqrt(discriminant)) / (2.0 * a));
-	list->inters[list->count].obj = sphere;
+	list->inters[list->count].obj = object;
 	list->count++;
 	list->inters[list->count].t = ((-b + sqrt(discriminant)) / (2.0 * a));
-	list->inters[list->count].obj = sphere;
+	list->inters[list->count].obj = object;
 	list->count++;
 	return (0);
 }

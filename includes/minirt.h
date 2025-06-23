@@ -126,7 +126,12 @@ t_vec3		color_color_multiplication(t_vec3 c1, t_vec3 c2);
 int			color_to_int(t_vec3 color);
 t_vec3		int_to_color(int int_color);
 
-/* 								Material Utils						*/
+/*                                SHAPES                                */
+
+t_object	new_sphere(t_vec3 pos, double diameter, t_vec3 color);
+void		free_sphere(t_object *object);
+
+/*                             Material Utils                               */
 
 t_material	get_material(void);
 t_material	get_default_material(t_vec3 color, t_scene *scene);
@@ -172,8 +177,8 @@ double		double_abs(double d);
 int			double_isequal(double a, double b);
 
 ///				Transformation
-void		set_sphere_transformation(t_sphere *s);
-void		set_plane_transformation(t_plane *pl);
-void		set_cylinder_tranformation(t_cylinder *cy);
+void		set_sphere_transformation(t_object *s);
+void		set_plane_transformation(t_object *pl);
+void		set_cylinder_tranformation(t_object *cy);
 
 #endif
