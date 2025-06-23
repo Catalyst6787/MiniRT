@@ -2,6 +2,7 @@
 #include "minirt.h"
 #include "vec3.h"
 #include <assert.h>
+#include <math.h>
 
 int start_all_world_tests(void)
 {
@@ -25,9 +26,9 @@ int start_all_world_tests(void)
 	scene.spheres[0]->material.specular = 0.2;
 	scene.spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
 	scene.spheres[1]->inv = get_inversed_matrix(scene.spheres[1]->transform);
-	scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	scene.camera = new_camera(get_point3(0, 0, -5), get_point3(0, 0, 1), get_vec3(0, 1, 0), M_1_PI / 2);
 
-	r = get_ray(scene.camera->pos, scene.camera->dir);
+	r = get_ray(scene.camera->view.from, scene.camera->view.to);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
 
@@ -36,7 +37,7 @@ int start_all_world_tests(void)
 
 
 	inter_list.count = 0;
-	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
 	r = ray_transform(original_ray, scene.spheres[0]->inv);
 	get_sphere_inter(scene.spheres[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.spheres[1]->inv);
@@ -77,7 +78,7 @@ int start_all_world_tests(void)
 
 	(void)c;
 	inter_list.count = 0;
-	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
 	r = ray_transform(original_ray, scene.spheres[0]->inv);
 	get_sphere_inter(scene.spheres[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.spheres[1]->inv);
@@ -91,7 +92,7 @@ int start_all_world_tests(void)
 
 	////////////	Test Shading inside
 
-	
+
 	inter_list.count = 0;
 	scene.light->pos = get_point3(0, 0.25, 0);
 	scene.light->color = get_color(1, 1, 1);
@@ -120,7 +121,7 @@ int start_all_world_tests(void)
 	r = ray_transform(original_ray, scene.spheres[1]->inv);
 	get_sphere_inter(scene.spheres[1], r, &inter_list);
 	sort_inter(&inter_list);
-	
+
 	if (inter_list.count)
 	{
 		comp = get_computations(&scene, &inter_list.inters[0], original_ray);

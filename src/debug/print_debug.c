@@ -82,9 +82,9 @@ void	print_scene_data(t_minirt *minirt)
 	PRINT_DEBUG("	Ratio : %.2f\n", minirt->scene->ambient->brightness);
 	PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->ambient->color.r,minirt->scene->ambient->color.g, minirt->scene->ambient->color.b);
 	PRINT_DEBUG("Camera :\n\n");
-	PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->camera->pos.x, minirt->scene->camera->pos.y, minirt->scene->camera->pos.z);
-	PRINT_DEBUG("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->camera->dir.x, minirt->scene->camera->dir.y, minirt->scene->camera->dir.z);
-	PRINT_DEBUG("	FOV : %d\n\n", minirt->scene->camera->fov);
+	PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->camera->view.from.x, minirt->scene->camera->view.from.y, minirt->scene->camera->view.from.z);
+	PRINT_DEBUG("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->camera->view.to.x, minirt->scene->camera->view.to.y, minirt->scene->camera->view.to.z);
+	PRINT_DEBUG("	FOV : %f\n\n", minirt->scene->camera->fov);
 	PRINT_DEBUG("Light(s) :\n\n");
 	PRINT_DEBUG("	x y z : %.2f %.2f %.2f\n", minirt->scene->light->pos.x, minirt->scene->light->pos.y, minirt->scene->light->pos.z);
 	PRINT_DEBUG("	Ratio : %.2f\n", minirt->scene->light->brightness);

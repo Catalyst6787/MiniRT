@@ -14,9 +14,9 @@ void	print_ray(t_ray r)
 void	print_camera_data(t_minirt *minirt)
 {
 	printf("Camera :\n\n");
-	printf("	x y z : %.2f %.2f %.2f\n", minirt->scene->camera->pos.x, minirt->scene->camera->pos.y, minirt->scene->camera->pos.z);
-	printf("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->camera->dir.x, minirt->scene->camera->dir.y, minirt->scene->camera->dir.z);
-	printf("	FOV : %d\n\n", minirt->scene->camera->fov);
+	printf("	x y z : %.2f %.2f %.2f\n", minirt->scene->camera->view.from.x, minirt->scene->camera->view.from.y, minirt->scene->camera->view.from.z);
+	printf("	vectors x y z : %.2f %.2f %.2f\n", minirt->scene->camera->view.to.x, minirt->scene->camera->view.to.y, minirt->scene->camera->view.to.z);
+	printf("	FOV : %f\n\n", minirt->scene->camera->fov);
 }
 
 void	print_spheres_data(t_minirt *minirt)

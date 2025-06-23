@@ -13,8 +13,8 @@ static void	init_render(t_render *render, t_scene *scene)
 	render->pixel_size = render->wall_size
 		/ render->canva_height;
 	render->half = render->wall_size / 2;
-	render->original_ray = get_ray(scene->camera->pos,
-									scene->camera->dir);
+	render->original_ray = get_ray(scene->camera->view.from,
+									scene->camera->view.to);
 }
 
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)

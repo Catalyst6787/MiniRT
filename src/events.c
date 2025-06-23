@@ -13,35 +13,35 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
-	if (keycode == UP && minirt->scene->camera->dir.y < 0.99)
+	if (keycode == UP && minirt->scene->camera->view.to.y < 0.99)
 	{
 		ft_printf("[↑] pressed\n");
-		minirt->scene->camera->dir.y += 0.1;
+		minirt->scene->camera->view.to.y += 0.1;
 	}
-	else if (keycode == DOWN && minirt->scene->camera->dir.y > -0.99)
+	else if (keycode == DOWN && minirt->scene->camera->view.to.y > -0.99)
 	{
 		ft_printf("[↓] pressed\n");
-		minirt->scene->camera->dir.y -= 0.1;
+		minirt->scene->camera->view.to.y -= 0.1;
 	}
-	else if (keycode == LEFT  && minirt->scene->camera->dir.x > -0.99)
+	else if (keycode == LEFT  && minirt->scene->camera->view.to.x > -0.99)
 	{
 		ft_printf("[←] pressed\n");
-		minirt->scene->camera->dir.x -= 0.1;
+		minirt->scene->camera->view.to.x -= 0.1;
 	}
-	else if (keycode == RIGHT && minirt->scene->camera->dir.x < 0.99)
+	else if (keycode == RIGHT && minirt->scene->camera->view.to.x < 0.99)
 	{
 		ft_printf("[→] pressed\n");
-		minirt->scene->camera->dir.x += 0.1;
+		minirt->scene->camera->view.to.x += 0.1;
 	}
-	else if (keycode == PLUS  && minirt->scene->camera->dir.z < 0.99)
+	else if (keycode == PLUS  && minirt->scene->camera->view.to.z < 0.99)
 	{
 		ft_printf("[+] pressed\n");
-		minirt->scene->camera->dir.z += 0.1;
+		minirt->scene->camera->view.to.z += 0.1;
 	}
-	else if (keycode == MINUS && minirt->scene->camera->dir.z > -0.99)
+	else if (keycode == MINUS && minirt->scene->camera->view.to.z > -0.99)
 	{
 		ft_printf("[-] pressed\n");
-		minirt->scene->camera->dir.z -= 0.1;
+		minirt->scene->camera->view.to.z -= 0.1;
 	}
 	render_scene(minirt);
 }
@@ -49,17 +49,17 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 void	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == S)
-		minirt->scene->camera->pos.z -= 0.1;
+		minirt->scene->camera->view.from.z -= 0.1;
 	else if (keycode == A)
-		minirt->scene->camera->pos.x -= 0.1;
+		minirt->scene->camera->view.from.x -= 0.1;
 	else if (keycode == W)
-		minirt->scene->camera->pos.z += 0.1;
+		minirt->scene->camera->view.from.z += 0.1;
 	else if (keycode == D)
-		minirt->scene->camera->pos.x += 0.1;
+		minirt->scene->camera->view.from.x += 0.1;
 	else if (keycode == E)
-		minirt->scene->camera->pos.y += 0.1;
+		minirt->scene->camera->view.from.y += 0.1;
 	else if (keycode == R)
-		minirt->scene->camera->pos.y -= 0.05;
+		minirt->scene->camera->view.from.y -= 0.05;
 	ft_printf("[%c] pressed\n", keycode - 32);
 	render_scene(minirt);
 }

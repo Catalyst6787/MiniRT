@@ -24,14 +24,14 @@ int	parse_camera(t_scene *scene, int *cursor)
 	i = *cursor + 1;
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
-	scene->camera->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	scene->camera->pos.w = 1;
-	scene->camera->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	scene->camera->dir.w = 0;
+	scene->camera->view.from.x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->view.from.w = 1;
+	scene->camera->view.from.x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->view.from.w = 0;
 	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
 	*cursor = i;
 	return (1);
