@@ -1,4 +1,6 @@
+#include "matrice.h"
 #include "minirt.h"
+#include "vec3.h"
 
 int	main(int ac, char **av)
 {
@@ -32,15 +34,16 @@ int	main(int ac, char **av)
 	init_events(&minirt);
 	t = clock();
 
-	// fun:
-	// if (minirt.scene->spheres[0])
-	// {
-	// 	t_shear shear = get_shear_params();
-	// 	// shear.xy = 1;
-	// 	// shear.yz = 4;
-	// 	minirt.scene->spheres[0]->transform = get_transformation(get_translation_matrix(get_vec3(0, 0, 0)), get_rotation_matrix(get_vec3(0, 0, 0)), get_shearing_matrix(shear), get_scaling_matrix(get_vec3(1, 0.5, 1)));
-	// 	minirt.scene->spheres[0]->inv = get_inversed_matrix(minirt.scene->spheres[0]->transform);
-	// }
+	// t_shear shear;
+	// shear = get_shear_params();
+	// shear.xy = 1;
+	// scene.spheres[0]->transform = get_transformation(
+	// 		get_translation_matrix(get_vec3(1, 0, 0)),
+	// 		get_rotation_matrix(get_vec3(0, 0, 0)),
+	// 		get_shearing_matrix(shear),
+	// 		get_scaling_matrix(get_vec3(1, 1, 1)));
+	// scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
+
 	render_scene(&minirt);
 
 	t = clock() - t;

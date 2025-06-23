@@ -1,4 +1,7 @@
+#include "matrice.h"
 #include "minirt.h"
+#include "vec3.h"
+#include <assert.h>
 
 
 t_light	*new_light(t_vec3 pos, t_vec3 color)
@@ -229,8 +232,26 @@ int start_all_world_tests(void)
 	c = shade_hit(comp);
 	assert(vec3_isequal(c, scene.spheres[1]->material.color));
 
+	//// transformation matrix for default orientation
 
-	////////////	Trnsformation matrix for default orientation
+
+	view.from = get_point3(0, 0, 0);
+	view.to = get_point3(0, 0, -1);
+	view.up = get_vec3(0, 1, 0);
+	orientation = get_orientation_matrix(view);
+	assert(matrix_isequal(orientation, get_matrix(4, 4, 1)));
+
+
+	//// transformation matrix looking in pos z dir
+
+	view.from = get_point3(0, 0, 0);
+	view.to = get_point3(0, 0, 1);
+	view.up = get_vec3(0, 1, 0);
+	orientation = get_orientation_matrix(view);
+	assert(matrix_isequal(orientation, get_scaling_matrix(get_vec3(-1, 1, -1))));
+
+
+	////////////	Transformation matrix for arbitrary orientation
 
 	t_matrix result = get_arb_matrix(4, 4,
 				-0.50709, 0.50709, 0.67612, -2.36643,
