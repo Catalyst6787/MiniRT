@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
 		{
+			"name": "debug mac",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/miniRT",
+			"args": ["assets/scenes/subject_example.rt"],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"MIMode": "lldb"
+		},
+		{
 			"name": "debug linux",
 			"type": "cppdbg",
 			"request": "launch",

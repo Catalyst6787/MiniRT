@@ -20,20 +20,14 @@ static void	fill_inter_objects(t_render *render, t_scene *scene)
 	i = 0;
 	while (obj_id < scene->nb_objects)
 	{
-		render->inter_list.inters[i++].obj = &scene->objects[obj_id];
-		render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
+		if (scene->objects[obj_id].type == PLANE)
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
+		else
+		{
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
+		}
 	}
-	// obj_id = 0;
-	// while (obj_id < scene->nb_plane)
-	// {
-	// 	render->inter_list.inters[i++].obj = scene->planes[obj_id++];
-	// }
-	// obj_id = 0;
-	// while (obj_id < scene->nb_cylinder)
-	// {
-	// 	render->inter_list.inters[i++].obj = scene->cylinders[obj_id];
-	// 	render->inter_list.inters[i++].obj = scene->cylinders[obj_id++];
-	// }
 }
 
 void	fill_intersection_table(t_minirt *minirt, t_render *render)

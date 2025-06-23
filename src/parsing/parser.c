@@ -111,9 +111,6 @@ void	create_object_list(t_scene *scene)
 		scene->objects[j].material = scene->spheres[i]->material;
 		scene->objects[j].transform = scene->spheres[i]->transform;
 		scene->objects[j].inv = scene->spheres[i]->inv;
-		scene->objects[j].diameter = scene->spheres[i]->diameter;
-		scene->objects[j].radius = scene->spheres[i]->radius;
-		scene->objects[j].pos = scene->spheres[i]->pos;
 		i++;
 		j++;
 	}
@@ -124,8 +121,6 @@ void	create_object_list(t_scene *scene)
 		scene->objects[j].material = scene->planes[i]->material;
 		scene->objects[j].transform = scene->planes[i]->transform;
 		scene->objects[j].inv = scene->planes[i]->inv;
-		scene->objects[j].pos = scene->planes[i]->pos;
-		scene->objects[j].dir = scene->planes[i]->dir;
 		i++;
 		j++;
 	}
@@ -136,10 +131,6 @@ void	create_object_list(t_scene *scene)
 		scene->objects[j].material = scene->cylinders[i]->material;
 		scene->objects[j].transform = scene->cylinders[i]->transform;
 		scene->objects[j].inv = scene->cylinders[i]->inv;
-		scene->objects[j].diameter = scene->cylinders[i]->diameter;
-		scene->objects[j].height = scene->cylinders[i]->height;
-		scene->objects[j].pos = scene->cylinders[i]->pos;
-		scene->objects[j].dir = scene->cylinders[i]->dir;
 		i++;
 		j++;
 	}
@@ -157,9 +148,9 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
 	parse_objects(minirt->scene);
+	set_objects_transformation(minirt->scene);
 	set_objects_material(minirt->scene);
 	create_object_list(minirt->scene);
-	set_objects_transformation(minirt->scene);
 	print_scene_data(minirt);
 	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();
@@ -167,4 +158,3 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);
 }
-

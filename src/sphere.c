@@ -3,19 +3,21 @@
 t_object	new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
 	t_object	sphere;
+	(void)pos;
+	(void)diameter;
 
 	// sphere = ft_calloc(1, sizeof(t_object));
 	// if (!sphere)
 	// 	return (perror("new_sphere. Error\n"), NULL);
-	sphere.pos.x = pos.x;
-	sphere.pos.y = pos.y;
-	sphere.pos.z = pos.z;
-	sphere.pos.w = 1;
-	sphere.diameter = diameter;
-	sphere.radius = diameter / 2;
-	sphere.color.x = color.x;
-	sphere.color.y = color.y;
-	sphere.color.z = color.z;
+	// sphere.pos.x = pos.x;
+	// sphere.pos.y = pos.y;
+	// sphere.pos.z = pos.z;
+	// sphere.pos.w = 1;
+	// sphere.diameter = diameter;
+	// sphere.radius = diameter / 2;
+	// sphere.color.x = color.x;
+	// sphere.color.y = color.y;
+	// sphere.color.z = color.z;
 	sphere.material = get_material();
 	sphere.material.color = color;
 	sphere.transform = get_matrix(4, 4, 1);

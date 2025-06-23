@@ -5,7 +5,7 @@ scene=$1
 RED='\033[0;31m'
 RESET='\033[0m'
 
-make re
+make
 printf "\n\n"
 
 if [ $# == 0 ]; then

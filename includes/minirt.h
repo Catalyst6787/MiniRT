@@ -177,8 +177,8 @@ double		double_abs(double d);
 int			double_isequal(double a, double b);
 
 ///				Transformation
-void		set_sphere_transformation(t_object *s);
-void		set_plane_transformation(t_object *pl);
-void		set_cylinder_tranformation(t_object *cy);
+void		set_sphere_transformation(t_sphere *s);
+void		set_plane_transformation(t_plane *pl);
+void		set_cylinder_tranformation(t_cylinder *cy);
 
 #endif
