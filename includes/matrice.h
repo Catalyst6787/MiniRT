@@ -1,6 +1,9 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
+#include <stdbool.h>
+#include "vec3.h"
+
 typedef struct s_matrix
 {
 	double	matrix[4][4];

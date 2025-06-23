@@ -59,7 +59,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	// while (i < minirt->scene->nb_objects)
 	while (i < minirt->scene->nb_sphere)
 	{
-		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
+		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
 		get_sphere_inter(minirt->scene->spheres[i],
 			r, &minirt->render->inter_list);
 		i++;

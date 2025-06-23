@@ -2,9 +2,11 @@
 # define SCENE_H
 
 // # include "minirt.h"
+#include "matrice.h"
 # include "sphere.h"
 # include "cylinder.h"
 # include "plane.h"
+#include "vec3.h"
 
 typedef struct s_ambient
 {
@@ -14,9 +16,12 @@ typedef struct s_ambient
 
 typedef struct s_camera
 {
-	t_vec3			pos;
-	t_vec3			dir;
-	unsigned int	fov;
+	t_vec3		pos;
+	t_vec3		dir;
+	int				hsize;
+	int				vsize;
+	int				fov;
+	t_matrix	transform;
 }	t_camera;
 
 typedef struct s_light
