@@ -106,6 +106,7 @@ void		check_characters_validity(t_minirt *minirt);
 t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
+t_camera	get_camera(int hsize, int vsize, double fov);
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 

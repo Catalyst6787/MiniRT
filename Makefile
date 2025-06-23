@@ -56,7 +56,7 @@ SRC					=	main.c \
 						vec3_basic_op.c vec3_complex_operations.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
-						test_lighting.c test_world.c test_shadows.c
+						test_lighting.c test_world.c test_shadows.c test_camera.c
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

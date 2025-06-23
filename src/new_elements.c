@@ -1,5 +1,7 @@
+#include "libft.h"
 #include "minirt.h"
 #include "render.h"
+#include "scene.h"
 #include "vec3.h"
 #include <math.h>
 
@@ -35,7 +37,7 @@ t_ambient	*new_ambiant(t_vec3 color)
 	return (ambient);
 }
 
-void	get_pixel_size(t_camera *camera)
+static void	set_pixel_size(t_camera *camera)
 {
 	double	half_view;
 	double	apsect;
@@ -69,7 +71,23 @@ t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov)
 	camera->hsize = WIN_H;
 	camera->vsize = WIN_W;
 	camera->fov = fov;
-	get_pixel_size(camera);
+	set_pixel_size(camera);
 	camera->transform = get_orientation_matrix(camera->view);
+	return (camera);
+}
+
+// testing version, sets default transform (identity)
+t_camera	get_camera(int hsize, int vsize, double fov)
+{
+	t_camera	camera;
+
+	camera.view.from = get_point3(0, 0, 0);
+	camera.view.to = get_point3(0, 0, -1);
+	camera.view.up = get_vec3(0, 1, 0);
+	camera.hsize = hsize;
+	camera.vsize = vsize;
+	camera.fov = fov;
+	set_pixel_size(&camera);
+	camera.transform = get_orientation_matrix(camera.view);
 	return (camera);
 }

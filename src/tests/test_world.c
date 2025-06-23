@@ -26,7 +26,9 @@ int start_all_world_tests(void)
 	scene.spheres[0]->material.specular = 0.2;
 	scene.spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
 	scene.spheres[1]->inv = get_inversed_matrix(scene.spheres[1]->transform);
-	scene.camera = new_camera(get_point3(0, 0, -5), get_point3(0, 0, 1), get_vec3(0, 1, 0), M_1_PI / 2);
+	scene.camera = new_camera(get_point3(0, 0, -5), get_point3(0, 0, 1), get_vec3(0, 1, 0), M_PI / 2);
+	scene.camera->view.from.w = 1; // temp hardcode before reworking tests
+	scene.camera->view.to.w = 0;
 
 	r = get_ray(scene.camera->view.from, scene.camera->view.to);
 	inter_list.capacity = 4;
