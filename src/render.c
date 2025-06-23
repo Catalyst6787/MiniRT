@@ -4,12 +4,49 @@
 #include <float.h>
 #include <math.h>
 
-// get_intersection(t_object object, t_ray ray, t_inter_list *list)
+static void	init_render(t_render *render, t_scene *scene)
+{
+	render->wall_distance = 10;
+	render->wall_size = 7;
+	render->canva_width = WIN_W;
+	render->canva_height = WIN_H;
+	render->pixel_size = render->wall_size
+		/ render->canva_height;
+	render->half = render->wall_size / 2;
+	render->original_ray = get_ray(scene->camera->pos,
+									scene->camera->dir);
+}
+
+t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
+{
+	t_comp		comp;
+	const t_sphere	*sphere; // change for object
+
+	ft_memset(&comp, 0, sizeof(comp));
+	comp.eyev =  vec3_reverse(r.dir);
+	comp.light = *scene->light;
+	sphere = (t_sphere *)hit->obj;
+	comp.m = sphere->material;
+	comp.point = ray_at(hit->t, r);
+	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
+	comp.t = hit->t;
+	if (vec3_dot(comp.normalv, comp.eyev) < 0)
+	{
+		comp.inside = true;
+		comp.normalv = vec3_reverse(comp.normalv);
+	}
+	else
+		comp.inside = false;
+	return (comp);
+}
+
+
+// int	get_intersections(t_scene *scene, t_ray ray, t_inter_list *list)
 // {
-// 	if (!list)
-// 		return (print_err(FILE, LINE, "get_sphere_inter: NULL pointer"), 1);
+// 	if
 
 // }
+
 
 int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 {
@@ -19,6 +56,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	t_comp			comp;
 
 	i = 0;
+	// while (i < minirt->scene->nb_objects)
 	while (i < minirt->scene->nb_sphere)
 	{
 		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
@@ -69,19 +107,10 @@ int	render_scene(t_minirt *minirt)
 	int		y;
 	double	world_y;
 
+	y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
-	minirt->render->wall_distance = 10;
-	minirt->render->wall_size = 7;
-	minirt->render->canva_width = WIN_W;
-	minirt->render->canva_height = WIN_H;
-	minirt->render->pixel_size = minirt->render->wall_size
-		/ minirt->render->canva_height;
-	minirt->render->half = minirt->render->wall_size / 2;
-	y = 0;
-	minirt->render->original_ray = get_ray(
-			minirt->scene->camera->pos,
-			minirt->scene->camera->dir);
+	init_render(minirt->render, minirt->scene);
 	while (y < minirt->render->canva_height)
 	{
 		world_y = minirt->render->half - minirt->render->pixel_size * y;

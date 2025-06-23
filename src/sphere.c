@@ -23,7 +23,6 @@ t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 	return (sphere);
 }
 
-
 int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list)
 {
 	t_vec3	oc;

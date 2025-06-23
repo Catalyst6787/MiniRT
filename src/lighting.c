@@ -21,6 +21,7 @@ t_vec3	get_lighting(t_comp	comp)
 	double	light_dot_normal;
 	double	reflect_dot_eye;
 	double	factor;
+	bool	in_shadow = false;
 
 	effective_color = vec3_vec_multiplication(comp.m.color, comp.light.color);
 	effective_color = vec3_double_multiplication(effective_color, comp.light.brightness);
@@ -50,5 +51,7 @@ t_vec3	get_lighting(t_comp	comp)
 					factor);
 		}
 	}
+	if (in_shadow)
+		return (ambient);
 	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
 }

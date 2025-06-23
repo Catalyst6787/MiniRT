@@ -22,15 +22,3 @@ int	get_plane_inter(const t_plane *plane, const t_ray ray, t_inter_list *list)
 }
 
 
-
-
-
-
-
-
-/*
-
-if abs(dot(ray.direction, plane.normal)) < EPSILON then
-    return ()  # Ray is parallel to the plane
-
-*/

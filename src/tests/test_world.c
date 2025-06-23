@@ -1,96 +1,5 @@
 #include "minirt.h"
 
-
-t_light	*new_light(t_vec3 pos, t_vec3 color)
-{
-	t_light	*light;
-
-	light = ft_calloc(1, sizeof(t_light));
-	if (!light)
-		return (perror("new_light. Error\n"), NULL);
-	light->pos.x = pos.x;
-	light->pos.y = pos.y;
-	light->pos.z = pos.z;
-	light->pos.w = 1;
-	light->color.x = color.x;
-	light->color.y = color.y;
-	light->color.z = color.z;
-	light->brightness = 1;
-	return (light);
-}
-
-t_ambient	*new_ambiant(t_vec3 color)
-{
-	t_ambient	*ambient;
-
-	ambient = ft_calloc(1, sizeof(t_ambient));
-	if (!ambient)
-		return (perror("new_ambient. Error\n"), NULL);
-	ambient->color.x = color.x;
-	ambient->color.y = color.y;
-	ambient->color.z = color.z;
-	ambient->brightness = 0;
-	return (ambient);
-}
-
-t_camera	*new_camera(t_vec3 pos, t_vec3 dir)
-{
-	t_camera	*camera;
-
-	camera = ft_calloc(1, sizeof(t_camera));
-	if (!camera)
-		return (perror("new_camera. Error\n"), NULL);
-	camera->pos.x = pos.x;
-	camera->pos.y = pos.y;
-	camera->pos.z = pos.z;
-	camera->pos.w = 1;
-	camera->dir.x = dir.x;
-	camera->dir.y = dir.y;
-	camera->dir.z = dir.z;
-	camera->dir.w = 0;
-	return (camera);
-}
-
-int	intersect_test(t_scene scene)
-{
-	(void) scene;
-
-	return (0);
-}
-
-t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r) // need to replace sphere by object
-{
-	t_comp		comp;
-	const t_sphere	*sphere; // change for object
-
-	ft_memset(&comp, 0, sizeof(comp));
-	comp.eyev =  vec3_reverse(r.dir);
-	comp.light = *scene->light;
-	sphere = (t_sphere *)hit->obj;
-	comp.m = sphere->material;
-	comp.point = ray_at(hit->t, r);
-	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
-	comp.t = hit->t;
-	if (vec3_dot(comp.normalv, comp.eyev) < 0)
-	{
-		comp.inside = true;
-		comp.normalv = vec3_reverse(comp.normalv);
-	}
-	else
-		comp.inside = false;
-	return (comp);
-}
-
-t_vec3	shade_hit(t_comp comp)
-{
-	t_vec3	color;
-
-	color = get_lighting(comp);
-	return (color);
-}
-
-
-
 int start_all_world_tests(void)
 {
 	t_inter_list	inter_list;
@@ -173,7 +82,7 @@ int start_all_world_tests(void)
 	sort_inter(&inter_list);
 
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = shade_hit(comp);
+	c = get_lighting(comp);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
 
@@ -194,7 +103,7 @@ int start_all_world_tests(void)
 	inter_list.inters[0].t = 0.5;
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
 	comp.t = 0.5;
-	c = shade_hit(comp);
+	c = get_lighting(comp);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
 
 
@@ -212,7 +121,7 @@ int start_all_world_tests(void)
 	if (inter_list.count)
 	{
 		comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-		c = shade_hit(comp);
+		c = get_lighting(comp);
 	}
 	else
 		c = get_color(0, 0, 0); //should we add bakcground colour to the scene ?
@@ -226,11 +135,11 @@ int start_all_world_tests(void)
 	scene.spheres[1]->material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = shade_hit(comp);
+	c = get_lighting(comp);
 	assert(vec3_isequal(c, scene.spheres[1]->material.color));
 
 
-	////////////	Trnsformation matrix for default orientation
+	////////////	Transformation matrix for default orientation
 
 	t_matrix result = get_arb_matrix(4, 4,
 				-0.50709, 0.50709, 0.67612, -2.36643,
@@ -243,6 +152,8 @@ int start_all_world_tests(void)
 	view.up = get_vec3(1, 1, 0);
 	orientation = get_orientation_matrix(view);
 	assert(matrix_isequal(orientation, result));
+
+
 
 
 	////////////	Free
