@@ -22,7 +22,7 @@ t_vec3	get_lighting(t_comp	comp, bool in_shadow)
 	double	reflect_dot_eye;
 	double	factor;
 
-	in_shadow = false;   // delete later
+	// in_shadow = false;   // delete later
 	effective_color = vec3_vec_multiplication(comp.m.color, comp.light.color);
 	effective_color = vec3_double_multiplication(effective_color, comp.light.brightness);
 	light_vector = vec3_normalise(vec3_vec_substraction(comp.light.pos, comp.point));
