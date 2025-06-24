@@ -177,4 +177,16 @@ void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
 
+// sort intersections
+void	sort_inter(t_inter_list *inter_lst);
+t_inter	*get_hit(t_inter_list *lst);
+t_vec3	get_sphere_normal_at(const t_sphere *s, const t_vec3 world_point);
+t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
+int		get_sphere_inter(const t_sphere *sphere,
+			const t_ray ray, t_inter_list *list);
+int		get_plane_inter(const t_plane *plane,
+			const t_ray ray, t_inter_list *list);
+t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r);
+t_ray		ray_for_pixel(t_camera camera, double px, double py);
+
 #endif

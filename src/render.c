@@ -1,6 +1,7 @@
+// #include "render.h"
 #include "minirt.h"
-#include "ray.h"
-#include "vec3.h"
+// #include "ray.h"
+// #include "vec3.h"
 #include <float.h>
 #include <math.h>
 
@@ -90,12 +91,13 @@ int	render_line(t_minirt *minirt, double world_y, int y)
 		world_x = minirt->render->pixel_size * x - minirt->render->half;
 		minirt->render->wall_point = get_point3(world_x, world_y,
 				minirt->render->wall_distance);
-		unique_ray = get_ray(
-				minirt->render->original_ray.origin,
-				vec3_normalise(
-					vec3_vec_substraction(
-						minirt->render->wall_point,
-						minirt->render->original_ray.origin)));
+		// unique_ray = get_ray(
+		// 		minirt->render->original_ray.origin,
+		// 		vec3_normalise(
+		// 			vec3_vec_substraction(
+		// 				minirt->render->wall_point,
+		// 				minirt->render->original_ray.origin)));
+		unique_ray = ray_for_pixel(*minirt->scene->camera, x, y);
 		intersect_objects(minirt, unique_ray, x, y);
 		x++;
 	}

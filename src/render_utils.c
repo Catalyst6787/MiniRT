@@ -1,5 +1,6 @@
 
 #include "minirt.h"
+#include "vec3.h"
 
 int	is_debug_pixel(int i, int j)
 {
@@ -63,5 +64,6 @@ t_ray	ray_for_pixel(t_camera camera, double px, double py)
 	// canva is always a z = -1 from camera. camera is always at 0.0.0.
 	t_vec3	pixel = vec3_matrix_multiply(get_inversed_matrix(camera.transform), get_point3(world_x, world_y, -1)); // easy optimisation -> compute inverse matrix while initialisation TODO
 	t_vec3	origin = vec3_matrix_multiply(get_inversed_matrix(camera.transform), get_point3(0, 0, 0));
-	// ... TODO
+	t_vec3	direction = vec3_normalise(vec3_vec_substraction(pixel, origin));
+	return (get_ray(origin, direction));
 }

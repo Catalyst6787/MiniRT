@@ -4,12 +4,12 @@
 
 int	main(int ac, char **av)
 {
-	t_minirt	minirt;
+	t_minirt		minirt;
 	t_mlx_data	mlx;
 	t_img_data	img_st;
-	t_scene		scene;
-	t_render	render;
-	clock_t		t;
+	t_scene			scene;
+	t_render		render;
+	clock_t			t;
 
 	ft_memset(&minirt, 0, sizeof(t_minirt));
 	ft_memset(&mlx, 0, sizeof(t_mlx_data));
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	// 		get_scaling_matrix(get_vec3(1, 1, 1)));
 	// scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
 
-	// render_scene(&minirt);
+	render_scene(&minirt);
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
