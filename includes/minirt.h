@@ -119,6 +119,7 @@ t_vec3		get_lighting(t_comp comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
+t_vec3		shade_hit(t_comp comp);
 
 /*                             COLOR UTILS                                  */
 

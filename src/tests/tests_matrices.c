@@ -244,7 +244,7 @@ int	test_matrix_inversion(void)
 			-6, 1, 1, 6,
 			-8, 5, 8, 6,
 			-1, 0, 8, 2,
-			-7, 1, 0-1, 1);
+			-7, 1, -1, 1);
 	m2 = get_submatrice(m1, 2, 1);
 	m3 = get_arb_matrix(3, 3,
 			-6, 1, 6, 0,

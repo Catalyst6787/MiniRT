@@ -16,6 +16,11 @@ static void	init_render(t_render *render, t_scene *scene)
 	render->original_ray = get_ray(scene->camera->pos,
 									scene->camera->dir);
 }
+t_vec3	shade_hit(t_comp comp)
+{
+	return (get_lighting(comp, 0));
+}
+
 
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
 {

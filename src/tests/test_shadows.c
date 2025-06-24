@@ -10,8 +10,9 @@ int	is_shadowed(t_scene scene, t_vec3 point)
 	int				i;
 	t_inter			*hit;
 
-	list.inters = malloc(sizeof(t_inter) * 4);
-	list.capacity = 4;
+
+	list.capacity = 4;  //need to implement this to miniRT
+	list.inters = malloc(sizeof(t_inter) * list.capacity);
 	list.count = 0;
 	i = 0;
 	v = vec3_vec_substraction(scene.light->pos, point);
@@ -52,40 +53,63 @@ void	set_default_world(t_scene *scene)
 
 int	start_all_shadows_tests(void)
 {
-
 	t_comp			comp;
-	t_inter_list	inter_list;
+	t_inter_list	list;
 	t_vec3			color;
 	bool			in_shadow;
 	t_scene			scene;
+	t_ray			r;
+	int				i;
 
+	i = 0;
 	ft_memset(&scene, 0, sizeof(t_scene));
 	set_default_world(&scene);
-	inter_list.count = 0;
+	list.count = 0;
 
 	comp.eyev = get_vec3(0, 0, -1);
 	comp.normalv = get_vec3(0, 0, -1);
 	scene.light->pos = get_point3(0, 0, -10);
 	scene.light->color = get_color(1, 1, 1);
 	comp.light = *scene.light;
+	comp.point = get_point3(0, 0, 0);  //don't know about this one
+
 	comp.m = get_default_material(get_color(1, 1, 1), &scene);
 
 	in_shadow = true;
 	color = get_lighting(comp, in_shadow);
 	assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
-
 	set_default_world(&scene);
 
 	in_shadow = is_shadowed(scene, get_point3(0, 10, 0));
 	assert(!in_shadow);
-
 	in_shadow = is_shadowed(scene, get_point3(10, -10, 10));
 	assert(in_shadow);
-
 	in_shadow = is_shadowed(scene, get_point3(-20, 20, -20));
 	assert(!in_shadow);
-
 	in_shadow = is_shadowed(scene, get_point3(-2, 2, -2));
 	assert(!in_shadow);
+
+	set_default_world(&scene);
+
+	scene.light->pos = get_point3(0, 0, -10);
+	scene.spheres[0]->transform = get_translation_matrix(get_vec3(0, 0, 10));
+	scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
+
+	create_object_list(&scene);
+	r = get_ray(get_point3(0, 0, 5), get_vec3(0, 0, 1));
+	list.capacity = 4;  //need to implement this to miniRT
+	list.inters = malloc(sizeof(t_inter) * list.capacity);
+	list.count = 0;
+	while (i < scene.nb_objects)
+	{
+		get_intersection(&scene.objects[i], r, &list);
+		i++;
+	}
+	i = 0;
+	while (i < list.count)
+	{
+		printf("%.2f\n", list.inters[i].t);
+		i++;
+	}
 	return (0);
 }

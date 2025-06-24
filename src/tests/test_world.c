@@ -3,6 +3,8 @@
 #include "vec3.h"
 #include <assert.h>
 
+
+
 int start_all_world_tests(void)
 {
 	t_inter_list	inter_list;
