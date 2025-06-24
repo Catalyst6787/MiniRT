@@ -40,19 +40,19 @@ t_ambient	*new_ambiant(t_vec3 color)
 static void	set_pixel_size(t_camera *camera)
 {
 	double	half_view;
-	double	apsect;
+	double	aspect;
 
 	half_view = tan(camera->fov / 2);
-	apsect = camera->hsize / camera->vsize;
-	if (apsect >= 1)
+	aspect = camera->hsize / camera->vsize;
+	if (aspect >= 1)
 	{
 		camera->half_width = half_view;
-		camera->half_height = half_view / apsect;
+		camera->half_height = half_view / aspect;
 	}
 	else
 	{
+		camera->half_width = half_view * aspect;
 		camera->half_height = half_view;
-		camera->half_width = half_view / apsect;
 	}
 	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
 }
@@ -88,6 +88,6 @@ t_camera	get_camera(int hsize, int vsize, double fov)
 	camera.vsize = vsize;
 	camera.fov = fov;
 	set_pixel_size(&camera);
-	camera.transform = get_orientation_matrix(camera.view);
+	camera.transform = get_matrix(4, 4, true);
 	return (camera);
 }

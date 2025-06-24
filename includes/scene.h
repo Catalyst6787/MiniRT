@@ -25,8 +25,8 @@ typedef struct s_view
 typedef struct s_camera
 {
 	t_view			view;
-	int				hsize;
-	int				vsize;
+	double			hsize;
+	double			vsize;
 	double			fov;
 	double			pixel_size;
 	double			half_width;
