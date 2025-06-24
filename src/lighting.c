@@ -10,7 +10,7 @@ t_light	get_light(t_vec3 pos, double brightness, t_vec3 color)
 	return (light);
 }
 
-t_vec3	get_lighting(t_comp	comp)
+t_vec3	get_lighting(t_comp	comp, bool in_shadow)
 {
 	t_vec3	effective_color;
 	t_vec3	light_vector;
@@ -21,8 +21,8 @@ t_vec3	get_lighting(t_comp	comp)
 	double	light_dot_normal;
 	double	reflect_dot_eye;
 	double	factor;
-	bool	in_shadow = false;
 
+	in_shadow = false;   // delete later
 	effective_color = vec3_vec_multiplication(comp.m.color, comp.light.color);
 	effective_color = vec3_double_multiplication(effective_color, comp.light.brightness);
 	light_vector = vec3_normalise(vec3_vec_substraction(comp.light.pos, comp.point));

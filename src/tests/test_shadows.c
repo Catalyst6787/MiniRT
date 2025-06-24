@@ -18,32 +18,50 @@
 // 	return (false);
 // }
 
+void	set_default_world(t_scene *scene)
+{
+	scene = ft_calloc(1, sizeof(t_scene));
+	// ft_memset(&scene, 0, sizeof(t_scene));
+	scene->light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
+	scene->spheres = malloc(sizeof(t_sphere) * 2);
+	scene->spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
+	scene->spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
+	scene->spheres[0]->material = get_default_material(get_color(0.8, 1.0, 0.6), scene);
+	scene->spheres[1]->material = get_default_material(get_color(1, 1, 1), scene);
+	scene->spheres[0]->material.diffuse = 0.7;
+	scene->spheres[0]->material.specular = 0.2;
+	scene->spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
+	scene->spheres[1]->inv = get_inversed_matrix(scene->spheres[1]->transform);
+	scene->nb_sphere = 2;
+	scene->nb_objects = 2;
+	scene->objects = malloc(sizeof(t_object) * 2);
+	create_object_list(scene);
+}
 
 int	start_all_shadows_tests(void)
 {
-// 	t_scene			scene;
-// 	t_comp			comp;
-// 	t_light			*light;
-// 	bool			in_shadow;
-// 	t_inter_list	inter_list;
-// 	t_ray			original_ray;
-// 	t_ray			r;
-// 	t_inter			*hit;
-// 	// (void) in_shadow;
+	t_scene			scene;
+	t_comp			comp;
+	t_inter_list	inter_list;
+	t_ray			original_ray;
+	bool			in_shadow;
+	(void)in_shadow;
+	(void)original_ray;
 
-// 	inter_list.count = 0;
-// 	ft_memset(&scene, 0, sizeof(t_scene));
-// 	scene.objects = malloc(sizeof(t_object) * 2);
-// 	scene.light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
-// 	scene.objects[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
-// 	scene.objects[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
-// 	scene.objects[0].material = get_default_material(get_color(0.8, 1.0, 0.6), &scene);
-// 	scene.objects[1].material = get_default_material(get_color(1, 1, 1), &scene);
-// 	scene.objects[0].material.diffuse = 0.7;
-// 	scene.objects[0].material.specular = 0.2;
-// 	scene.objects[1].transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
-// 	scene.objects[1].inv = get_inversed_matrix(scene.objects[1].transform);
-// 	scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	set_default_world(&scene);
+	inter_list.count = 0;
+
+	comp.eyev = get_vec3(0, 0, -1);
+	comp.normalv = get_vec3(0, 0, -1);
+	scene.light->pos = get_point3(0, 0, -10);
+	scene.light->color = get_color(1, 1, 1);
+	comp.light = *scene.light;
+
+	in_shadow = true;
+
+
+
+
 
 // 	inter_list.capacity = 4;
 // 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
@@ -58,10 +76,8 @@ int	start_all_shadows_tests(void)
 
 // 	inter_list.count = 0;
 // 	light = new_light(get_point3(0, 0, -10), get_color(1, 1, 1));
-// 	comp.eyev = get_vec3(0, 0, -1);
-// 	comp.normalv = get_vec3(0, 0, -1);
-// 	comp.light = *light;
-// 	in_shadow = true;
+
+
 // 	print_vec3(get_lighting(comp), "Lightning");
 // 	hit = get_hit(&inter_list);
 // 	in_shadow = is_shadowed(scene, hit, r.origin);

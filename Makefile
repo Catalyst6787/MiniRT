@@ -11,7 +11,7 @@ ifeq ($(UNAME), Linux)
 	MLX = ./minilibx-linux/libmlx.a
 endif
 ifeq ($(UNAME), Darwin)
-    CFLAGS = -Wall -Wextra -Werror -O3 -I ./libft/includes -I ./mlx_macos -I ./includes -g # Added -g for debugging, remove later
+    CFLAGS = -Wall -Wextra -Werror -I ./libft/includes -I ./mlx_macos -I ./includes -g # Added -g for debugging, remove later
     LDFLAGS = -L ./libft -lft -L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
 	MLX = ./mlx_macos/libmlx.a
 endif

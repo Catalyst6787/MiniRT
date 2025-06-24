@@ -45,4 +45,4 @@ miniRT
 .cache
 compile_commands.json
 
-shell.nix
+# shell.nix

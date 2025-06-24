@@ -59,6 +59,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	t_ray			r;
 	t_inter			*hit;
 	t_comp			comp;
+	bool			in_shadow = false;  // delete the initialization later
 
 	i = 0;
 	while (i < minirt->scene->nb_objects)
@@ -67,7 +68,6 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
 		i++;
 	}
-	// i = 0;
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
@@ -75,7 +75,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	else
 	{
 		comp = get_computations(minirt->scene, hit, unique_ray);
-		my_mlx_pixel_put(minirt, x, y, color_to_int(get_lighting(comp)));
+		my_mlx_pixel_put(minirt, x, y, color_to_int(get_lighting(comp, in_shadow)));
 	}
 	minirt->render->inter_list.count = 0;
 	return (0);

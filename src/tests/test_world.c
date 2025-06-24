@@ -15,18 +15,21 @@ int start_all_world_tests(void)
 	t_matrix		orientation;
 
 	ft_memset(&scene, 0, sizeof(t_scene));
-	scene.objects = malloc(sizeof(t_object) * 2);
+	scene.spheres = malloc(sizeof(t_sphere) * 2);
+	scene.nb_sphere = 2;
+	scene.nb_objects = 2;
 	scene.light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
-	scene.objects[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
-	scene.objects[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
-	scene.objects[0].material = get_default_material(get_color(0.8, 1.0, 0.6), &scene);
-	scene.objects[1].material = get_default_material(get_color(1, 1, 1), &scene);
-	scene.objects[0].material.diffuse = 0.7;
-	scene.objects[0].material.specular = 0.2;
-	scene.objects[1].transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
-	scene.objects[1].inv = get_inversed_matrix(scene.objects[1].transform);
+	scene.spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
+	scene.spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
+	scene.spheres[0]->material = get_default_material(get_color(0.8, 1.0, 0.6), &scene);
+	scene.spheres[1]->material = get_default_material(get_color(1, 1, 1), &scene);
+	scene.spheres[0]->material.diffuse = 0.7;
+	scene.spheres[0]->material.specular = 0.2;
+	scene.spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
+	scene.spheres[1]->inv = get_inversed_matrix(scene.spheres[1]->transform);
 	scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-
+	scene.objects = malloc(sizeof(t_object) * 2);
+	create_object_list(&scene);
 	r = get_ray(scene.camera->pos, scene.camera->dir);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
@@ -84,7 +87,7 @@ int start_all_world_tests(void)
 	sort_inter(&inter_list);
 
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp);
+	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
 
@@ -106,7 +109,7 @@ int start_all_world_tests(void)
 	inter_list.inters[0].t = 0.5;
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
 	comp.t = 0.5;
-	c = get_lighting(comp);
+	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
 
 
@@ -119,11 +122,11 @@ int start_all_world_tests(void)
 	r = ray_transform(original_ray, scene.objects[1].inv);
 	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
-	
+
 	if (inter_list.count)
 	{
 		comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-		c = get_lighting(comp);
+		c = get_lighting(comp, 0);
 	}
 	else
 		c = get_color(0, 0, 0); //should we add bakcground colour to the scene ?
@@ -136,7 +139,7 @@ int start_all_world_tests(void)
 	scene.objects[1].material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
 	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp);
+	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, scene.objects[1].material.color));
 
 	//// transformation matrix for default orientation

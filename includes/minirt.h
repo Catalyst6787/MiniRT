@@ -107,6 +107,7 @@ t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 t_camera	*new_camera(t_vec3 pos, t_vec3 dir);
 
+void		create_object_list(t_scene *scene);
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
@@ -114,7 +115,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
-t_vec3		get_lighting(t_comp comp);
+t_vec3		get_lighting(t_comp comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
@@ -128,7 +129,7 @@ t_vec3		int_to_color(int int_color);
 
 /*                                SHAPES                                */
 
-t_object	new_sphere(t_vec3 pos, double diameter, t_vec3 color);
+t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
 void		free_sphere(t_object *object);
 
 /*                             Material Utils                               */
