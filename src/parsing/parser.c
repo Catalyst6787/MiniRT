@@ -98,44 +98,6 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 		quit(minirt, EMPTY_FILE);
 }
 
-void	create_object_list(t_scene *scene)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < scene->nb_sphere && j < scene->nb_objects)
-	{
-		scene->objects[j].type = SPHERE;
-		scene->objects[j].material = scene->spheres[i]->material;
-		scene->objects[j].transform = scene->spheres[i]->transform;
-		scene->objects[j].inv = scene->spheres[i]->inv;
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_plane && j < scene->nb_objects)
-	{
-		scene->objects[j].type = PLANE;
-		scene->objects[j].material = scene->planes[i]->material;
-		scene->objects[j].transform = scene->planes[i]->transform;
-		scene->objects[j].inv = scene->planes[i]->inv;
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_cylinder && j < scene->nb_objects)
-	{
-		scene->objects[j].type = CYLINDER;
-		scene->objects[j].material = scene->cylinders[i]->material;
-		scene->objects[j].transform = scene->cylinders[i]->transform;
-		scene->objects[j].inv = scene->cylinders[i]->inv;
-		i++;
-		j++;
-	}
-}
-
 void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	PRINT_DEBUG("\n%s\n\n", file_path);

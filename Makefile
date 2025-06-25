@@ -27,7 +27,7 @@ OBJ_DIR = ./objects
 SRC					=	main.c \
 						parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
 						checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
-						transform_objects.c set_objects_material.c \
+						transform_objects.c set_objects_material.c create_objects_from_shapes.c \
 						fill_intersection_table.c \
 						debug.c \
 						double_utils.c \

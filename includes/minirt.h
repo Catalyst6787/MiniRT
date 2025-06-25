@@ -108,6 +108,11 @@ t_ambient	*new_ambiant(t_vec3 color);
 t_camera	*new_camera(t_vec3 pos, t_vec3 dir);
 
 void		create_object_list(t_scene *scene);
+void		create_object_from_sphere(t_object *object, t_sphere *sphere);
+void		create_object_from_plane(t_object *object, t_plane *plane);
+void		create_object_from_cylinder(t_object *object, t_cylinder *cylinder);
+
+
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */

@@ -49,7 +49,7 @@ int start_all_world_tests(void)
 	sort_inter(&inter_list);
 
 	inter_list.inters[0].t = 4;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 
 	assert(comp.t == 4);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, -1)));
@@ -68,7 +68,7 @@ int start_all_world_tests(void)
 	get_sphere_inter(&scene.objects[1], r, &inter_list);
 
 	inter_list.inters[0].t = 1;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 
 	assert(comp.t == 1);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, 1)));
@@ -88,7 +88,7 @@ int start_all_world_tests(void)
 	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
 
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
@@ -109,7 +109,7 @@ int start_all_world_tests(void)
 	inter_list.inters[0].obj = &scene.objects[1];
 	// scene.spheres[1]->color = get_color(1, 1, 1);
 	inter_list.inters[0].t = 0.5;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 	comp.t = 0.5;
 	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
@@ -127,7 +127,7 @@ int start_all_world_tests(void)
 
 	if (inter_list.count)
 	{
-		comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+		set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 		c = get_lighting(comp, 0);
 	}
 	else
@@ -140,7 +140,7 @@ int start_all_world_tests(void)
 	scene.objects[0].material.ambient = 1;
 	scene.objects[1].material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, scene.objects[1].material.color));
 

@@ -22,27 +22,30 @@ t_vec3	shade_hit(t_comp comp)
 }
 
 
-t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
+void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 {
-	t_comp			comp;
-	const t_object	*object; // change for object
+	// t_comp			comp;
+	const t_object	*object;
 
-	ft_memset(&comp, 0, sizeof(comp));
-	comp.eyev =  vec3_reverse(r.dir);
-	comp.light = *scene->light;
+	ft_memset(comp_out, 0, sizeof(t_comp));
+	comp_out->eyev =  vec3_reverse(r.dir);
+	comp_out->light = *scene->light;
 	object = hit->obj;
-	comp.m = object->material;
-	comp.point = ray_at(hit->t, r);
-	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
-	comp.t = hit->t;
-	if (vec3_dot(comp.normalv, comp.eyev) < 0)
+	comp_out->m = object->material;
+	comp_out->point = ray_at(hit->t, r);
+	comp_out->normalv = get_sphere_normal_at(hit->obj, comp_out->point);
+	comp_out->t = hit->t;
+	if (vec3_dot(comp_out->normalv, comp_out->eyev) < 0)
 	{
-		comp.inside = true;
-		comp.normalv = vec3_reverse(comp.normalv);
+		comp_out->inside = true;
+		comp_out->normalv = vec3_reverse(comp_out->normalv);
 	}
 	else
-		comp.inside = false;
-	return (comp);
+	{
+		comp_out->inside = false;
+	}
+	comp_out->over_point = vec3_vec_addition(comp_out->point,
+						vec3_double_multiplication(comp_out->normalv, EPSILON));
 }
 
 
@@ -79,7 +82,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_color(0, 0, 0)));
 	else
 	{
-		comp = get_computations(minirt->scene, hit, unique_ray);
+		set_computations(&comp, minirt->scene, hit, unique_ray);
 		my_mlx_pixel_put(minirt, x, y, color_to_int(get_lighting(comp, in_shadow)));
 	}
 	minirt->render->inter_list.count = 0;

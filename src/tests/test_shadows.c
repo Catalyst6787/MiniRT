@@ -24,7 +24,7 @@ int	is_shadowed(t_scene scene, t_vec3 point)
 		get_intersection(&scene.objects[i], r, &list);
 		i++;
 	}
-
+	i = 0;
 	hit = get_hit(&list);
 	if (hit && hit->t < distance)
 		return (true);
@@ -51,6 +51,31 @@ void	set_default_world(t_scene *scene)
 	create_object_list(scene);
 }
 
+void	set_rendering_shadow_world(t_scene *scene)
+{
+	ft_memset(scene, 0, sizeof(t_scene));
+	scene->light = new_light(get_point3(0, 0, -10), get_color(1, 1, 1));
+	scene->spheres = malloc(sizeof(t_sphere) * 2);
+	scene->spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
+	scene->spheres[1] = new_sphere(get_point3(0, 0, 10), 1, get_color(1, 1, 1));
+	scene->spheres[0]->material = get_default_material(get_color(1, 1, 1), scene);
+	scene->spheres[1]->material = get_default_material(get_color(1, 1, 1), scene);
+	scene->spheres[1]->transform = get_translation_matrix(get_vec3(0, 0, 10));
+	scene->spheres[1]->inv = get_inversed_matrix(scene->spheres[1]->transform);
+	scene->nb_sphere = 2;
+	scene->nb_objects = 2;
+	scene->objects = malloc(sizeof(t_object) * 2);
+	create_object_list(scene);
+}
+
+// void	set_rendering_shadow_world_2(t_scene *scene)
+// {
+// 	ft_memset(scene, 0, sizeof(t_scene));
+
+
+// }
+
+
 int	start_all_shadows_tests(void)
 {
 	t_comp			comp;
@@ -60,9 +85,13 @@ int	start_all_shadows_tests(void)
 	t_scene			scene;
 	t_ray			r;
 	int				i;
+	t_sphere		*sphere;
 
 	i = 0;
 	ft_memset(&scene, 0, sizeof(t_scene));
+
+	////////////	Tests color if shadowed
+
 	set_default_world(&scene);
 	list.count = 0;
 
@@ -78,6 +107,11 @@ int	start_all_shadows_tests(void)
 	in_shadow = true;
 	color = get_lighting(comp, in_shadow);
 	assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
+
+
+	////////////	is_shadowed tests
+
+
 	set_default_world(&scene);
 
 	in_shadow = is_shadowed(scene, get_point3(0, 10, 0));
@@ -88,15 +122,15 @@ int	start_all_shadows_tests(void)
 	assert(!in_shadow);
 	in_shadow = is_shadowed(scene, get_point3(-2, 2, -2));
 	assert(!in_shadow);
+	free(scene.spheres);
+	free(scene.objects);
 
-	set_default_world(&scene);
+	////////////	Tests rendering shadows
 
-	scene.light->pos = get_point3(0, 0, -10);
-	scene.spheres[0]->transform = get_translation_matrix(get_vec3(0, 0, 10));
-	scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
 
-	create_object_list(&scene);
+	set_rendering_shadow_world(&scene);
 	r = get_ray(get_point3(0, 0, 5), get_vec3(0, 0, 1));
+
 	list.capacity = 4;  //need to implement this to miniRT
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
 	list.count = 0;
@@ -105,11 +139,36 @@ int	start_all_shadows_tests(void)
 		get_intersection(&scene.objects[i], r, &list);
 		i++;
 	}
-	i = 0;
-	while (i < list.count)
-	{
-		printf("%.2f\n", list.inters[i].t);
-		i++;
-	}
+	list.inters[0].obj = &scene.objects[1];
+	list.inters[0].t = 4;
+	set_computations(&comp, &scene, &list.inters[0], r);
+	color = shade_hit(comp); //this works if in_shadow is true (will be implemented later in tests) !!!
+	// assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
+
+
+	////////////	Tests rendering shadows 2
+
+	(void)sphere;
+	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	free(scene.spheres[0]);
+	free(scene.spheres[1]);
+	free(scene.objects);
+	list.capacity = 4;
+	list.inters = malloc(sizeof(t_inter) * list.capacity);
+	list.count = 0;
+	scene.spheres[0] = new_sphere(get_point3(0, 0, 1), 1, get_color(1, 1, 1));
+	set_sphere_transformation(scene.spheres[0]);
+	scene.nb_sphere = 1;
+ 	scene.nb_objects = 1;
+	scene.objects = malloc(sizeof(t_object));
+	create_object_list(&scene);
+
+	list.inters[0].obj = scene.objects;
+	list.inters[0].t = 5;
+
+	set_computations(&comp, &scene, &list.inters[0], r);
+	assert(comp.over_point.z < (-EPSILON / 2));
+	assert(comp.point.z > (comp.over_point.z));
+
 	return (0);
 }
