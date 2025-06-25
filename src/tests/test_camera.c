@@ -42,6 +42,7 @@ int	start_all_camera_tests(void)
 	// Constructig a ray when the camera is transformed
 	c = get_camera(201, 101, M_PI / 2);
 	c.transform = multiply_matrix(get_rotation_matrix_y(M_PI / 4), get_translation_matrix(get_vec3(0, -2, 5)));
+	c.inv = get_inversed_matrix(c.transform);
 	r = ray_for_pixel(c, 100, 50);
 	assert(vec3_isequal(r.origin, get_point3(0, 2, -5)));
 	assert(vec3_isequal(r.dir, get_vec3(sqrt(2) / 2, 0, -sqrt(2) / 2)));

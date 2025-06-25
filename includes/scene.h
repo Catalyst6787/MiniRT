@@ -32,6 +32,7 @@ typedef struct s_camera
 	double			half_width;
 	double			half_height;
 	t_matrix		transform;
+	t_matrix		inv;
 }	t_camera;
 
 typedef struct s_light

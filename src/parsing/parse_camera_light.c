@@ -1,4 +1,6 @@
+#include "matrice.h"
 #include "minirt.h"
+#include "vec3.h"
 
 int	parse_ambiant_light(t_scene *scene, int *cursor)
 {
@@ -28,11 +30,17 @@ int	parse_camera(t_scene *scene, int *cursor)
 	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->camera->view.from.w = 1;
-	scene->camera->view.from.x = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	scene->camera->view.from.w = 0;
+	scene->camera->view.to.x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.to.y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.to.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->view.to.w = 0;
+	scene->camera->view.up = get_vec3(0, 1, 0);
+	scene->camera->hsize = WIN_W;
+	scene->camera->vsize = WIN_H;
 	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
+	set_pixel_size(scene->camera);
+	scene->camera->transform = get_transformation(get_translation_matrix(scene->camera->view.from), get_rotation_matrix(scene->camera->view.to), get_matrix(4, 4, true), get_matrix(4, 4, true));
+	scene->camera->inv = get_inversed_matrix(scene->camera->transform);
 	*cursor = i;
 	return (1);
 	//check

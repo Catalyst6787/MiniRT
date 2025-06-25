@@ -1,4 +1,5 @@
 #include "libft.h"
+#include "matrice.h"
 #include "minirt.h"
 #include "render.h"
 #include "scene.h"
@@ -37,7 +38,7 @@ t_ambient	*new_ambiant(t_vec3 color)
 	return (ambient);
 }
 
-static void	set_pixel_size(t_camera *camera)
+void	set_pixel_size(t_camera *camera)
 {
 	double	half_view;
 	double	aspect;
@@ -89,5 +90,6 @@ t_camera	get_camera(int hsize, int vsize, double fov)
 	camera.fov = fov;
 	set_pixel_size(&camera);
 	camera.transform = get_matrix(4, 4, true);
+	camera.inv = get_inversed_matrix(camera.transform);
 	return (camera);
 }
