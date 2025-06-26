@@ -177,6 +177,10 @@ int start_all_world_tests(void)
 	orientation = get_orientation_matrix(view);
 	assert(matrix_isequal(orientation, result));
 
+	*scene.camera = get_camera(11, 11, M_PI / 2);
+	scene.camera->view.from = get_point3(0, 0, -5);
+	scene.camera->view.to = get_point3(0, 0, 0);
+
 
 
 

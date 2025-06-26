@@ -51,17 +51,35 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 void	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == S)
+	{
 		minirt->scene->camera->view.from.z -= 0.5;
+		minirt->scene->camera->view.to.z -= 0.5;
+	}
 	else if (keycode == A)
+	{
 		minirt->scene->camera->view.from.x -= 0.5;
+		minirt->scene->camera->view.to.x -= 0.5;
+	}
 	else if (keycode == W)
+	{
 		minirt->scene->camera->view.from.z += 0.5;
+		minirt->scene->camera->view.to.z += 0.5;
+	}
 	else if (keycode == D)
+	{
 		minirt->scene->camera->view.from.x += 0.5;
+		minirt->scene->camera->view.to.x += 0.5;
+	}
 	else if (keycode == E)
+	{
 		minirt->scene->camera->view.from.y += 0.5;
+		minirt->scene->camera->view.to.y += 0.5;
+	}
 	else if (keycode == R)
-		minirt->scene->camera->view.from.y -= 0.05;
+	{
+		minirt->scene->camera->view.from.y -= 0.5;
+		minirt->scene->camera->view.to.y -= 0.5;
+	}
 	ft_printf("[%c] pressed\n", keycode - 32);
 	minirt->scene->camera->transform = get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv = get_inversed_matrix(minirt->scene->camera->transform);

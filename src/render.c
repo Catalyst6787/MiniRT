@@ -65,7 +65,7 @@ int	render_scene(t_minirt *minirt)
 	y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
-	print_camera_data(minirt);
+	// print_camera_data(minirt);
 	while (y < minirt->scene->camera->vsize - 1)
 	{
 		x = 0;
@@ -80,4 +80,12 @@ int	render_scene(t_minirt *minirt)
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 	return (0);
+}
+
+t_vec3	render_one_pixel_test(t_minirt *minirt, int x, int y)
+{
+	t_ray	ray;
+
+	ray = ray_for_pixel(*minirt->scene->camera, x, y);
+	return(intersect_objects(minirt, ray));
 }
