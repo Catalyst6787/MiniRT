@@ -201,6 +201,7 @@ t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
 // int		get_plane_inter(const t_plane *plane,
 // 			const t_ray ray, t_inter_list *list);
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r);
-t_ray		ray_for_pixel(t_camera camera, double px, double py);
+t_ray	ray_for_pixel(t_camera camera, double px, double py);
+void	load_special_scene(int number, t_minirt *minirt);
 
 #endif

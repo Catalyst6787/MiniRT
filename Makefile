@@ -6,7 +6,7 @@ UNAME = $(shell uname -s)
 CC = gcc
 
 ifeq ($(UNAME), Linux)
-	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g # remove -g and add -03 when done debugging
+	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g
 	LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 	MLX = ./minilibx-linux/libmlx.a
 endif
@@ -41,6 +41,7 @@ SRC					=	main.c \
 						render.c \
 						lighting.c \
 						sort_inter.c \
+						special_scenes.c \
 						render_utils.c \
 						sphere.c \
 						plane.c \

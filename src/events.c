@@ -87,6 +87,16 @@ void	asdw_handle(int keycode, t_minirt *minirt)
 	render_scene(minirt);
 }
 
+void	number_handle(int keycode, t_minirt *minirt)
+{
+	int number;
+
+	number = keycode - 48;
+	printf("special scene: %d loading...\n", number);
+	load_special_scene(number, minirt);
+	render_scene(minirt);
+}
+
 int	handle_keypress(int keycode, t_minirt *minirt)
 {
 	if (keycode == Q || keycode == ESC)
@@ -99,6 +109,8 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		event_print_debug(minirt);
 	else if (keycode == C)
 		print_camera_data(minirt);
+	else if (keycode >= 48 && keycode <= 57)
+		number_handle(keycode, minirt);
 	else
 		ft_printf("unknow action: %d\n", keycode);
 	return (0);

@@ -34,16 +34,6 @@ int	main(int ac, char **av)
 	init_events(&minirt);
 	t = clock();
 
-	// t_shear shear;
-	// shear = get_shear_params();
-	// shear.xy = 1;
-	// scene.spheres[0]->transform = get_transformation(
-	// 		get_translation_matrix(get_vec3(1, 0, 0)),
-	// 		get_rotation_matrix(get_vec3(0, 0, 0)),
-	// 		get_shearing_matrix(shear),
-	// 		get_scaling_matrix(get_vec3(1, 1, 1)));
-	// scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
-
 	render_scene(&minirt);
 
 	t = clock() - t;
