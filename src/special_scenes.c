@@ -9,7 +9,6 @@ void	scene_1(t_minirt *minirt)
 	free(minirt->render->inter_list.inters);
 	minirt->scene->nb_objects = 6;
 	minirt->scene->objects = malloc(sizeof(t_object) * minirt->scene->nb_objects);
-	// ft_memset(&minirt->scene->objects, 0, sizeof(t_object) * minirt->scene->nb_objects);
 	minirt->render->inter_list.inters = malloc(sizeof(t_inter) * minirt->scene->nb_objects * 2);
 	minirt->render->inter_list.capacity = minirt->scene->nb_objects * 2;
 	minirt->render->inter_list.count = 0;
@@ -59,6 +58,8 @@ void	scene_1(t_minirt *minirt)
 	minirt->scene->camera->view.from = get_point3(0, 1.5, -5);
 	minirt->scene->camera->view.to = get_point3(0, 1, 0);
 	minirt->scene->camera->view.up = get_vec3(0, 1, 0);
+	minirt->scene->camera->fov = M_PI / 3;
+	set_pixel_size(minirt->scene->camera);
 	minirt->scene->camera->transform = get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv = get_inversed_matrix(minirt->scene->camera->transform);
 
