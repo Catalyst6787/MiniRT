@@ -4,7 +4,7 @@
 
 typedef struct s_comp
 {
-	void		*object;
+	t_object	*object;
 	double		t;
 	t_vec3		point;
 	t_vec3		eyev;
@@ -69,7 +69,7 @@ int		get_plane_inter(const t_object *plane,
 			const t_ray ray, t_inter_list *list);
 void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r);
 int		get_intersection(t_object *object, t_ray ray, t_inter_list *list);
-int		is_shadowed(t_render *render, t_scene *scene, t_vec3 point);
+int		is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
 
 
 #endif

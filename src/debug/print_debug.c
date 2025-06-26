@@ -168,13 +168,13 @@ void	debug_print_inter_list(t_inter_list *list)
 	int	i;
 
 	i = 0;
+	PRINT_DEBUG("Inter Count %d\n", list->count);
 	while (i < list->count)
 	{
 		PRINT_DEBUG("Inter obj [%d] : %p\n", i, list->inters[i].obj);
 		PRINT_DEBUG("Inter  [%d] : %.3f\n", i, list->inters[i].t);
 		i++;
 	}
-	PRINT_DEBUG("\n");
 }
 
 

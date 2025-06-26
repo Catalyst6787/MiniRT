@@ -26,6 +26,7 @@ void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 	comp_out->point = ray_at(hit->t, r);
 	comp_out->normalv = get_sphere_normal_at(hit->obj, comp_out->point);
 	comp_out->t = hit->t;
+	comp_out->object = (t_object *)hit->obj;
 	if (vec3_dot(comp_out->normalv, comp_out->eyev) < 0)
 	{
 		comp_out->inside = true;
@@ -70,7 +71,6 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
 		i++;
 	}
-	// debug_print_inter_list(&minirt->render->inter_list);
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
@@ -78,8 +78,7 @@ int	intersect_objects(t_minirt *minirt, t_ray unique_ray, int x, int y)
 	else
 	{
 		set_computations(&comp, minirt->scene, hit, unique_ray);
-		my_mlx_pixel_put(minirt, x, y, color_to_int(shade_hit(minirt->render,
-														minirt->scene, &comp)));
+		my_mlx_pixel_put(minirt, x, y, color_to_int(shade_hit(minirt->render, minirt->scene, &comp)));
 	}
 	minirt->render->inter_list.count = 0;
 	return (0);
