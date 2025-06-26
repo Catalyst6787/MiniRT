@@ -191,9 +191,13 @@ int start_all_world_tests(void)
 
 	free(scene.light);
 	free(inter_list.inters);
+	free(scene.spheres[0]);
+	free(scene.spheres[1]);
+	free(scene.spheres);
+	free(scene.objects);
 	// free_sphere(&scene.objects[0]);
 	// free_sphere(&scene.objects[1]);
-	free(scene.objects);
+	// free(scene.objects);
 	free(scene.camera);
 	return (0);
 }
