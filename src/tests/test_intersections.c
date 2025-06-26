@@ -3,7 +3,7 @@
 int	test_ray_intersect_sphere(void)
 {
 	t_ray			r;
-	t_sphere		s;
+	t_object		s;
 	t_inter			inter[10]; // can be malloc'ed aswell
 	t_inter_list	lst;
 	int				i;
@@ -16,9 +16,9 @@ int	test_ray_intersect_sphere(void)
 	lst.inters = inter;
 	// debug_print_inter_list(lst);
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	s.color = get_color(1, 0, 0);
-	s.pos = get_point3(0, 0, 0);
-	s.diameter = 2;
+	// s.color = get_color(1, 0, 0);
+	// s.pos = get_point3(0, 0, 0);
+	// s.diameter = 2;
 	// a ray interescts a sphere at two points
 	get_sphere_inter(&s, r, &lst);
 	assert(lst.count == 2);
@@ -58,10 +58,6 @@ int	test_ray_intersect_sphere(void)
 		assert(lst.inters[i].t <= lst.inters[i + 1].t);
 		i++;
 	}
-	// debug_print_inter_list(lst);
-
-	// printf("hit is: ");
-	// debug_print_inter(*get_hit(&lst));
 
 
 	return (0);

@@ -28,7 +28,7 @@ miniRT
 !.vscode/*.code-snippets
 
 # logs
-log/
+*.log
 
 # Local History for Visual Studio Code
 .history/
@@ -44,3 +44,5 @@ log/
 ## Clangd -- bear
 .cache
 compile_commands.json
+
+# shell.nix

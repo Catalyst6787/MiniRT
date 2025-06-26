@@ -13,13 +13,13 @@ t_matrix	get_submatrice(t_matrix m, int row, int col)
 	i_sub = 0;
 	i = 0;
 	submatrice = get_matrix(m.row - 1, m.col - 1, 0);
-	while (i_sub < m.row)
+	while (i_sub < submatrice.row)
 	{
 		if (i == row)
 			i++;
 		j_sub = 0;
 		j = 0;
-		while (j_sub < m.col)
+		while (j_sub < submatrice.col)
 		{
 			if (j == col)
 				j++;

@@ -11,7 +11,7 @@ ifeq ($(UNAME), Linux)
 	MLX = ./minilibx-linux/libmlx.a
 endif
 ifeq ($(UNAME), Darwin)
-    CFLAGS = -Wall -Wextra -Werror -O3 -I ./libft/includes -I ./mlx_macos -I ./includes -g # Added -g for debugging, remove later
+    CFLAGS = -Wall -Wextra -Werror -I ./libft/includes -I ./mlx_macos -I ./includes -g -fsanitize=address # Added -g for debugging, remove later
     LDFLAGS = -L ./libft -lft -L ./mlx_macos -lmlx -framework OpenGL -framework AppKit
 	MLX = ./mlx_macos/libmlx.a
 endif
@@ -27,7 +27,7 @@ OBJ_DIR = ./objects
 SRC					=	main.c \
 						parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
 						checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
-						transform_objects.c set_objects_material.c \
+						transform_objects.c set_objects_material.c create_objects_from_shapes.c \
 						fill_intersection_table.c \
 						debug.c \
 						double_utils.c \

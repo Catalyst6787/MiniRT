@@ -109,6 +109,12 @@ void			set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
 
+void		create_object_list(t_scene *scene);
+void		create_object_from_sphere(t_object *object, t_sphere *sphere);
+void		create_object_from_plane(t_object *object, t_plane *plane);
+void		create_object_from_cylinder(t_object *object, t_cylinder *cylinder);
+
+
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
@@ -117,10 +123,11 @@ t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
-t_vec3		get_lighting(t_comp comp);
+t_vec3		get_lighting(t_comp comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
+t_vec3		shade_hit(t_comp comp);
 
 /*                             COLOR UTILS                                  */
 
@@ -129,7 +136,12 @@ t_vec3		color_color_multiplication(t_vec3 c1, t_vec3 c2);
 int			color_to_int(t_vec3 color);
 t_vec3		int_to_color(int int_color);
 
-/* 								Material Utils						*/
+/*                                SHAPES                                */
+
+t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
+void		free_sphere(t_object *object);
+
+/*                             Material Utils                               */
 
 t_material	get_material(void);
 t_material	get_default_material(t_vec3 color, t_scene *scene);
@@ -182,12 +194,12 @@ void		set_cylinder_tranformation(t_cylinder *cy);
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);
 t_inter	*get_hit(t_inter_list *lst);
-t_vec3	get_sphere_normal_at(const t_sphere *s, const t_vec3 world_point);
+// t_vec3	get_sphere_normal_at(const t_object *s, const t_vec3 world_point);
 t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
-int		get_sphere_inter(const t_sphere *sphere,
-			const t_ray ray, t_inter_list *list);
-int		get_plane_inter(const t_plane *plane,
-			const t_ray ray, t_inter_list *list);
+// int		get_sphere_inter(const t_obj *sphere,
+// 			const t_ray ray, t_inter_list *list);
+// int		get_plane_inter(const t_plane *plane,
+// 			const t_ray ray, t_inter_list *list);
 t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r);
 t_ray		ray_for_pixel(t_camera camera, double px, double py);
 

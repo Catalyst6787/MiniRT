@@ -21,7 +21,7 @@ void	print_render_pixel(t_vec3	pixel_center,
 
 void	debug_print_inter(t_inter inter)
 {
-	printf("inter: t=[%f], obj=[%p]\n", inter.t, inter.obj);
+	printf("inter: t=[%f], obj=[%p]\n", inter.t, (void *)inter.obj);
 }
 
 void	debug_print_inter_list(t_inter_list lst)

@@ -5,28 +5,49 @@
 #include <float.h>
 #include <math.h>
 
-t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r)
+void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 {
-	t_comp		comp;
-	const t_sphere	*sphere; // change for object
+	// t_comp			comp;
+	const t_object	*object;
 
-	ft_memset(&comp, 0, sizeof(comp));
-	comp.eyev =  vec3_reverse(r.dir);
-	comp.light = *scene->light;
-	sphere = (t_sphere *)hit->obj;
-	comp.m = sphere->material;
-	comp.point = ray_at(hit->t, r);
-	comp.normalv = get_sphere_normal_at(hit->obj, comp.point);
-	comp.t = hit->t;
-	if (vec3_dot(comp.normalv, comp.eyev) < 0)
+	ft_memset(comp_out, 0, sizeof(t_comp));
+	comp_out->eyev =  vec3_reverse(r.dir);
+	comp_out->light = *scene->light;
+	object = hit->obj;
+	comp_out->m = object->material;
+	comp_out->point = ray_at(hit->t, r);
+	comp_out->normalv = get_sphere_normal_at(hit->obj, comp_out->point);
+	comp_out->t = hit->t;
+	if (vec3_dot(comp_out->normalv, comp_out->eyev) < 0)
 	{
-		comp.inside = true;
-		comp.normalv = vec3_reverse(comp.normalv);
+		comp_out->inside = true;
+		comp_out->normalv = vec3_reverse(comp_out->normalv);
 	}
 	else
-		comp.inside = false;
-	return (comp);
+	{
+		comp_out->inside = false;
+	}
+	comp_out->over_point = vec3_vec_addition(comp_out->point,
+						vec3_double_multiplication(comp_out->normalv, EPSILON));
 }
+
+
+int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
+{
+	if (object->type == SPHERE)
+		get_sphere_inter(object, ray, list);
+	// else if (object->type == PLANE)
+	// 	get_plane_inter(object, ray, list);
+	// else if (object->type == CYLINDER)
+	// 	get_cylinder_inter(object, ray, list);
+	return (0);
+}
+
+t_vec3	shade_hit(t_comp comp)
+{
+	return (get_lighting(comp, 0));
+}
+
 
 t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 {
@@ -34,24 +55,23 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	t_ray			r;
 	t_inter			*hit;
 	t_comp			comp;
+	bool			in_shadow = false;  // delete the initialization later
 
 	i = 0;
-	while (i < minirt->scene->nb_sphere)
+	while (i < minirt->scene->nb_objects)
 	{
-		r = ray_transform(unique_ray, minirt->scene->spheres[i]->inv);
-		get_sphere_inter(minirt->scene->spheres[i],
-			r, &minirt->render->inter_list);
+		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
+		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
 		i++;
 	}
-	i = 0;
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		return (minirt->render->inter_list.count = 0, get_color(0, 0, 0));
 	else
 	{
-		comp = get_computations(minirt->scene, hit, unique_ray);
-		return (minirt->render->inter_list.count = 0 ,get_lighting(comp));
+		set_computations(&comp, minirt->scene, hit, unique_ray);
+		return (minirt->render->inter_list.count = 0, get_lighting(comp, in_shadow));
 	}
 	minirt->render->inter_list.count = 0;
 }
@@ -87,5 +107,5 @@ t_vec3	render_one_pixel_test(t_minirt *minirt, int x, int y)
 	t_ray	ray;
 
 	ray = ray_for_pixel(*minirt->scene->camera, x, y);
-	return(intersect_objects(minirt, ray));
+	return (intersect_objects(minirt, ray));
 }

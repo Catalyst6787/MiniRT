@@ -15,7 +15,7 @@ void	count_elements(t_scene *scene)
 		else if (scene->buffer[i] == 'L')
 			scene->nb_light++;
 		else if (scene->buffer[i] == 's' && scene->buffer[++i] == 'p')
-				scene->nb_sphere++;
+			scene->nb_sphere++;
 		else if (scene->buffer[i] == 'p' && scene->buffer[++i] == 'l')
 			scene->nb_plane++;
 		else if (scene->buffer[i] == 'c' && scene->buffer[++i] == 'y')
@@ -98,44 +98,6 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 		quit(minirt, EMPTY_FILE);
 }
 
-void	create_object_list(t_scene *scene)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < scene->nb_sphere && j < scene->nb_objects)
-	{
-		scene->objects[j].type = SPHERE;
-		scene->objects[j].material = scene->spheres[i]->material;
-		scene->objects[j].transform = scene->spheres[i]->transform;
-		scene->objects[j].inv = scene->spheres[i]->inv;
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_plane && j < scene->nb_objects)
-	{
-		scene->objects[j].type = PLANE;
-		scene->objects[j].material = scene->planes[i]->material;
-		scene->objects[j].transform = scene->planes[i]->transform;
-		scene->objects[j].inv = scene->planes[i]->inv;
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_cylinder && j < scene->nb_objects)
-	{
-		scene->objects[j].type = CYLINDER;
-		scene->objects[j].material = scene->cylinders[i]->material;
-		scene->objects[j].transform = scene->cylinders[i]->transform;
-		scene->objects[j].inv = scene->cylinders[i]->inv;
-		i++;
-		j++;
-	}
-}
-
 void	parse_scene(t_minirt *minirt, char *file_path)
 {
 	PRINT_DEBUG("\n%s\n\n", file_path);
@@ -150,12 +112,11 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	parse_objects(minirt->scene);
 	set_objects_transformation(minirt->scene);
 	set_objects_material(minirt->scene);
+	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
 	print_scene_data(minirt);
-	check_data_validity(minirt, minirt->scene);
 	print_scene_ok_message();
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);
 }
-

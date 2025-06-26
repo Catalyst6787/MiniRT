@@ -1,10 +1,10 @@
 #include "minirt.h"
 
-void	free_sphere(t_sphere *sphere)
+void	free_sphere(t_object *object)
 {
-	if (!sphere)
+	if (!object)
 		return;
-	free_and_null((void **)&sphere);
+	free_and_null((void **)&object);
 }
 
 int	free_render(t_render *render)

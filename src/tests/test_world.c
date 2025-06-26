@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <math.h>
 
+
+
 int start_all_world_tests(void)
 {
 	t_inter_list	inter_list;
@@ -17,6 +19,8 @@ int start_all_world_tests(void)
 
 	ft_memset(&scene, 0, sizeof(t_scene));
 	scene.spheres = malloc(sizeof(t_sphere) * 2);
+	scene.nb_sphere = 2;
+	scene.nb_objects = 2;
 	scene.light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
 	scene.spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
 	scene.spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
@@ -31,6 +35,10 @@ int start_all_world_tests(void)
 	scene.camera->view.to.w = 0;
 
 	r = get_ray(scene.camera->view.from, scene.camera->view.to);
+	// scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	scene.objects = malloc(sizeof(t_object) * 2);
+	create_object_list(&scene);
+	// r = get_ray(scene.camera->pos, scene.camera->dir);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
 
@@ -40,14 +48,19 @@ int start_all_world_tests(void)
 
 	inter_list.count = 0;
 	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
-	r = ray_transform(original_ray, scene.spheres[0]->inv);
-	get_sphere_inter(scene.spheres[0], r, &inter_list);
-	r = ray_transform(original_ray, scene.spheres[1]->inv);
-	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	// r = ray_transform(original_ray, scene.spheres[0]->inv);
+	// get_sphere_inter(scene.spheres[0], r, &inter_list);
+	// r = ray_transform(original_ray, scene.spheres[1]->inv);
+	// get_sphere_inter(scene.spheres[1], r, &inter_list);
+	// original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	r = ray_transform(original_ray, scene.objects[0].inv);
+	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[1].inv);
+	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
 
 	inter_list.inters[0].t = 4;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 
 	assert(comp.t == 4);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, -1)));
@@ -60,13 +73,13 @@ int start_all_world_tests(void)
 
 	inter_list.count = 0;
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
-	r = ray_transform(original_ray, scene.spheres[0]->inv);
-	get_sphere_inter(scene.spheres[0], r, &inter_list);
-	r = ray_transform(original_ray, scene.spheres[1]->inv);
-	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[0].inv);
+	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[1].inv);
+	get_sphere_inter(&scene.objects[1], r, &inter_list);
 
 	inter_list.inters[0].t = 1;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 
 	assert(comp.t == 1);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, 1)));
@@ -78,56 +91,55 @@ int start_all_world_tests(void)
 	////////////	Test Shading outside
 
 
-	(void)c;
 	inter_list.count = 0;
 	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
-	r = ray_transform(original_ray, scene.spheres[0]->inv);
-	get_sphere_inter(scene.spheres[0], r, &inter_list);
-	r = ray_transform(original_ray, scene.spheres[1]->inv);
-	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[0].inv);
+	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[1].inv);
+	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
 
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
+	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
 
 	////////////	Test Shading inside
 
 
+
 	inter_list.count = 0;
 	scene.light->pos = get_point3(0, 0.25, 0);
 	scene.light->color = get_color(1, 1, 1);
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
-	r = ray_transform(original_ray, scene.spheres[0]->inv);
-	get_sphere_inter(scene.spheres[0], r, &inter_list);
-	r = ray_transform(original_ray, scene.spheres[1]->inv);
-	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[0].inv);
+	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[1].inv);
+	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
-	inter_list.inters[0].obj = (void *)scene.spheres[1];
+	inter_list.inters[0].obj = &scene.objects[1];
 	// scene.spheres[1]->color = get_color(1, 1, 1);
 	inter_list.inters[0].t = 0.5;
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 	comp.t = 0.5;
-	c = get_lighting(comp);
+	c = get_lighting(comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
 
 
 	////////////	Test if color missing or not
 
-
 	inter_list.count = 0;
 	original_ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 1 ,0));
-	r = ray_transform(original_ray, scene.spheres[0]->inv);
-	get_sphere_inter(scene.spheres[0], r, &inter_list);
-	r = ray_transform(original_ray, scene.spheres[1]->inv);
-	get_sphere_inter(scene.spheres[1], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[0].inv);
+	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	r = ray_transform(original_ray, scene.objects[1].inv);
+	get_sphere_inter(&scene.objects[1], r, &inter_list);
 	sort_inter(&inter_list);
 
 	if (inter_list.count)
 	{
-		comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-		c = get_lighting(comp);
+		set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
+		c = get_lighting(comp, 0);
 	}
 	else
 		c = get_color(0, 0, 0); //should we add bakcground colour to the scene ?
@@ -136,16 +148,14 @@ int start_all_world_tests(void)
 
 	////////////	Intersection behind the ray
 
-
-	scene.spheres[0]->material.ambient = 1;
-	scene.spheres[1]->material.ambient = 1;
+	scene.objects[0].material.ambient = 1;
+	scene.objects[1].material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
-	comp = get_computations(&scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp);
-	assert(vec3_isequal(c, scene.spheres[1]->material.color));
+	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
+	c = get_lighting(comp, 0);
+	assert(vec3_isequal(c, scene.objects[1].material.color));
 
 	//// transformation matrix for default orientation
-
 
 	view.from = get_point3(0, 0, 0);
 	view.to = get_point3(0, 0, -1);
@@ -181,9 +191,9 @@ int start_all_world_tests(void)
 
 	free(scene.light);
 	free(inter_list.inters);
-	free_sphere(scene.spheres[0]);
-	free_sphere(scene.spheres[1]);
-	free(scene.spheres);
+	// free_sphere(&scene.objects[0]);
+	// free_sphere(&scene.objects[1]);
+	free(scene.objects);
 	free(scene.camera);
 	return (0);
 }

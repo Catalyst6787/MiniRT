@@ -3,6 +3,8 @@
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 {
 	t_sphere	*sphere;
+	(void)pos;
+	(void)diameter;
 
 	sphere = ft_calloc(1, sizeof(t_sphere));
 	if (!sphere)
@@ -23,7 +25,7 @@ t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color)
 	return (sphere);
 }
 
-int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list)
+int	get_sphere_inter(const t_object *object, const t_ray ray, t_inter_list *list)
 {
 	t_vec3	oc;
 	double	a;
@@ -44,10 +46,10 @@ int	get_sphere_inter(const t_sphere *sphere, const t_ray ray, t_inter_list *list
 		return (print_err(FILE, LINE,
 				"get_sphere_inter: no more space in list"), 1);
 	list->inters[list->count].t = ((-b - sqrt(discriminant)) / (2.0 * a));
-	list->inters[list->count].obj = sphere;
+	list->inters[list->count].obj = object;
 	list->count++;
 	list->inters[list->count].t = ((-b + sqrt(discriminant)) / (2.0 * a));
-	list->inters[list->count].obj = sphere;
+	list->inters[list->count].obj = object;
 	list->count++;
 	return (0);
 }
