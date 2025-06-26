@@ -89,7 +89,7 @@ int start_all_world_tests(void)
 	sort_inter(&inter_list);
 
 	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp, 0);
+	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
 
@@ -111,7 +111,7 @@ int start_all_world_tests(void)
 	inter_list.inters[0].t = 0.5;
 	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
 	comp.t = 0.5;
-	c = get_lighting(comp, 0);
+	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
 
 
@@ -128,7 +128,7 @@ int start_all_world_tests(void)
 	if (inter_list.count)
 	{
 		set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
-		c = get_lighting(comp, 0);
+		c = get_lighting(&comp, 0);
 	}
 	else
 		c = get_color(0, 0, 0); //should we add bakcground colour to the scene ?
@@ -141,7 +141,7 @@ int start_all_world_tests(void)
 	scene.objects[1].material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
 	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
-	c = get_lighting(comp, 0);
+	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, scene.objects[1].material.color));
 
 	//// transformation matrix for default orientation

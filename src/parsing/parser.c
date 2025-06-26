@@ -114,7 +114,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
-	print_scene_data(minirt);
+	debug_print_scene_data(minirt);
 	print_scene_ok_message();
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;

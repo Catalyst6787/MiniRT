@@ -6,6 +6,13 @@ void	print_render_data(t_render *render)
 	(void)render;
 	// PRINT_DEBUG("\n\n");
 }
+
+void	debug_print_ray(t_ray *r)
+{
+	PRINT_DEBUG("Ray Origin : (%.4f, %.4f, %.4f)\n", r->origin.x, r->origin.y, r->origin.z);
+	PRINT_DEBUG("Ray Direction : (%.4f, %.4f, %.4f)\n", r->dir.x, r->dir.y, r->dir.z);
+}
+
 void	print_render_pixel(t_vec3	pixel_center,
 	t_vec3	ray_direction,
 	t_ray	ray,
@@ -24,20 +31,22 @@ void	debug_print_inter(t_inter inter)
 	printf("inter: t=[%f], obj=[%p]\n", inter.t, (void *)inter.obj);
 }
 
-void	debug_print_inter_list(t_inter_list lst)
-{
-	int	i;
 
-	i = 0;
-	printf("inter_lst of size %d:\n", lst.count);
-	while (i < lst.count)
-	{
-		printf("inter [%d]:	", i);
-		debug_print_inter(lst.inters[i]);
-		i++;
-	}
 
-}
+// void	debug_print_inter_list(t_inter_list lst)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	printf("inter_lst of size %d:\n", lst.count);
+// 	while (i < lst.count)
+// 	{
+// 		printf("inter [%d]:	", i);
+// 		debug_print_inter(lst.inters[i]);
+// 		i++;
+// 	}
+
+// }
 
 void	print_scene(t_minirt *minirt, bool asterix)
 {
@@ -65,7 +74,7 @@ void	print_scene_ok_message(void)
 }
 
 
-void	print_scene_data(t_minirt *minirt)
+void	debug_print_scene_data(t_minirt *minirt)
 {
 	int i = -1;
 	PRINT_DEBUG("\n* * * * * * * * * * * * * * * * * * * * * *\n");
@@ -121,11 +130,53 @@ void	print_scene_data(t_minirt *minirt)
 		i++;
 	}
 	PRINT_DEBUG("\n");
-	// PRINT_DEBUG("	aspect_ratio = [%f]\n", minirt->aspect_ratio);
-	// PRINT_DEBUG("	img_width = [%d]\n", minirt->img_width);
-	// PRINT_DEBUG("	img_height = [%d]\n", minirt->img_height);
-	// PRINT_DEBUG("	viewport_width = [%f]\n", minirt->view_width);
-	// PRINT_DEBUG("	viewport_height = [%f]\n\n", minirt->view_height);
+}
+
+void	debug_print_objects_pointers(t_scene *scene)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	PRINT_DEBUG("Objects pointers :\n\n");
+	while (i < scene->nb_sphere && j < scene->nb_objects)
+	{
+		PRINT_DEBUG("Sphere[%d] : %p\n", i,  &scene->objects[j]);
+		i++;
+		j++;
+	}
+	i = 0;
+	while (i < scene->nb_plane && j < scene->nb_objects)
+	{
+		PRINT_DEBUG("Plane[%d] : %p\n", i,  &scene->objects[j]);
+		i++;
+		j++;
+	}
+	i = 0;
+	while (i < scene->nb_cylinder && j < scene->nb_objects)
+	{
+		PRINT_DEBUG("Cylinder[%d] : %p\n", i, &scene->objects[j]);
+		i++;
+		j++;
+	}
+	PRINT_DEBUG("\n");
+}
+
+void	debug_print_inter_list(t_inter_list *list)
+{
+	int	i;
+
+	i = 0;
+	while (i < list->count)
+	{
+		PRINT_DEBUG("Inter obj [%d] : %p\n", i, list->inters[i].obj);
+		PRINT_DEBUG("Inter  [%d] : %.3f\n", i, list->inters[i].t);
+		i++;
+	}
+	PRINT_DEBUG("\n");
 }
 
 
+// Sphere[0] : 0x619000002d80
+// Sphere[1] : 0x619000002ef8

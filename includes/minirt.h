@@ -120,11 +120,11 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
-t_vec3		get_lighting(t_comp comp, bool in_shadow);
+t_vec3		get_lighting(t_comp *comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
-t_vec3		shade_hit(t_comp comp);
+t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
 
 /*                             COLOR UTILS                                  */
 
@@ -168,7 +168,10 @@ int			quit(t_minirt *minirt, char *str);
 
 int			debug_print_keycode(int keycode);
 void		debug_aff_image(t_minirt *minirt);
-void		print_scene_data(t_minirt *minirt);
+void		debug_print_scene_data(t_minirt *minirt);
+void		debug_print_ray(t_ray *r);
+void		debug_print_objects_pointers(t_scene *scene);
+void		debug_print_inter_list(t_inter_list *list);
 void		print_scene_ok_message(void);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
@@ -177,6 +180,7 @@ void		print_render_pixel(t_vec3	pixel_center,
 				t_vec3	ray_direction,
 				t_ray	ray,
 				t_vec3	color);
+
 
 /*                                 DOUBLE UTILS                            */
 

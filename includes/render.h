@@ -44,6 +44,10 @@ typedef struct s_render
 	t_ray			original_ray;
 	t_ray			unique_ray;
 	t_inter_list	inter_list;
+	t_inter_list	shadow_list;
+	int				inter_count;
+	int				debug_x;
+	int				debug_y;
 }					t_render;
 
 typedef struct s_view
@@ -65,5 +69,7 @@ int		get_plane_inter(const t_object *plane,
 			const t_ray ray, t_inter_list *list);
 void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r);
 int		get_intersection(t_object *object, t_ray ray, t_inter_list *list);
+int		is_shadowed(t_render *render, t_scene *scene, t_vec3 point);
+
 
 #endif

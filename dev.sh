@@ -29,7 +29,7 @@ elif [ $scene == 5 ]; then
 elif [ $scene == 6 ]; then
 	./miniRT assets/scenes/ten_spheres.rt
 elif [ $scene == 7 ]; then
-	echo scene slot 7 is empty
+	./miniRT assets/scenes/shadows.rt
 elif [ $scene == 8 ]; then
 	echo scene slot 8 is empty
 fi
