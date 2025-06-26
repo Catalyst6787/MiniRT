@@ -24,8 +24,8 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
-	if (start_all_tests())
-		quit(&minirt, TESTS_ERR);
+	// if (start_all_tests())
+	// 	quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt, av[1]);
 
 	if (WIN_H < 10 || WIN_W < 10)
@@ -44,7 +44,8 @@ int	main(int ac, char **av)
 	// 		get_scaling_matrix(get_vec3(1, 1, 1)));
 	// scene.spheres[0]->inv = get_inversed_matrix(scene.spheres[0]->transform);
 
-	render_scene(&minirt);
+	// render_scene(&minirt);
+	render_test(&minirt);
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;

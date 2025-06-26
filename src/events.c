@@ -43,7 +43,7 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 		ft_printf("[-] pressed\n");
 		minirt->scene->camera->view.to.z -= 0.1;
 	}
-	render_scene(minirt);
+	render_test(minirt);
 }
 
 void	asdw_handle(int keycode, t_minirt *minirt)
@@ -61,7 +61,7 @@ void	asdw_handle(int keycode, t_minirt *minirt)
 	else if (keycode == R)
 		minirt->scene->camera->view.from.y -= 0.05;
 	ft_printf("[%c] pressed\n", keycode - 32);
-	render_scene(minirt);
+	render_test(minirt);
 }
 
 int	handle_keypress(int keycode, t_minirt *minirt)
