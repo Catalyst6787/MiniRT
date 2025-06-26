@@ -1,6 +1,10 @@
 #ifndef RENDER_H
 # define RENDER_H
 
+// # include "vec3.h"
+# include <stdbool.h>
+// # include "material.h"
+// # include "scene.h"
 
 typedef struct s_comp
 {
@@ -46,12 +50,6 @@ typedef struct s_render
 	t_inter_list	inter_list;
 }					t_render;
 
-typedef struct s_view
-{
-	t_vec3		from;
-	t_vec3		to;
-	t_vec3		up;
-}				t_view;
 
 
 // sort intersections

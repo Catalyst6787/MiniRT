@@ -1,4 +1,10 @@
+#include "libft.h"
+#include "matrice.h"
 #include "minirt.h"
+#include "render.h"
+#include "scene.h"
+#include "vec3.h"
+#include <math.h>
 
 t_light	*new_light(t_vec3 pos, t_vec3 color)
 {
@@ -32,20 +38,58 @@ t_ambient	*new_ambiant(t_vec3 color)
 	return (ambient);
 }
 
-t_camera	*new_camera(t_vec3 pos, t_vec3 dir)
+void	set_pixel_size(t_camera *camera)
+{
+	double	half_view;
+	double	aspect;
+
+	half_view = tan(camera->fov / 2);
+	aspect = camera->hsize / camera->vsize;
+	if (aspect >= 1)
+	{
+		camera->half_width = half_view;
+		camera->half_height = half_view / aspect;
+	}
+	else
+	{
+		camera->half_width = half_view * aspect;
+		camera->half_height = half_view;
+	}
+	camera->pixel_size = (camera->half_width * 2) / camera->hsize;
+}
+
+// up is a point!
+t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov)
 {
 	t_camera	*camera;
 
 	camera = ft_calloc(1, sizeof(t_camera));
 	if (!camera)
 		return (perror("new_camera. Error\n"), NULL);
-	camera->pos.x = pos.x;
-	camera->pos.y = pos.y;
-	camera->pos.z = pos.z;
-	camera->pos.w = 1;
-	camera->dir.x = dir.x;
-	camera->dir.y = dir.y;
-	camera->dir.z = dir.z;
-	camera->dir.w = 0;
+	camera->view.from = from;
+	camera->view.to = to;
+	camera->view.up = up;
+	camera->hsize = WIN_H;
+	camera->vsize = WIN_W;
+	camera->fov = fov;
+	set_pixel_size(camera);
+	camera->transform = get_orientation_matrix(camera->view);
+	return (camera);
+}
+
+// testing version, sets default transform (identity)
+t_camera	get_camera(int hsize, int vsize, double fov)
+{
+	t_camera	camera;
+
+	camera.view.from = get_point3(0, 0, 0);
+	camera.view.to = get_point3(0, 0, -1);
+	camera.view.up = get_vec3(0, 1, 0);
+	camera.hsize = hsize;
+	camera.vsize = vsize;
+	camera.fov = fov;
+	set_pixel_size(&camera);
+	camera.transform = get_matrix(4, 4, true);
+	camera.inv = get_inversed_matrix(camera.transform);
 	return (camera);
 }

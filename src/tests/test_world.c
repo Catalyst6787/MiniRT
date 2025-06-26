@@ -2,6 +2,7 @@
 #include "minirt.h"
 #include "vec3.h"
 #include <assert.h>
+#include <math.h>
 
 
 
@@ -29,10 +30,15 @@ int start_all_world_tests(void)
 	scene.spheres[0]->material.specular = 0.2;
 	scene.spheres[1]->transform = get_scaling_matrix(get_vec3(0.5, 0.5, 0.5));
 	scene.spheres[1]->inv = get_inversed_matrix(scene.spheres[1]->transform);
-	scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	scene.camera = new_camera(get_point3(0, 0, -5), get_point3(0, 0, 1), get_vec3(0, 1, 0), M_PI / 2);
+	scene.camera->view.from.w = 1; // temp hardcode before reworking tests
+	scene.camera->view.to.w = 0;
+
+	r = get_ray(scene.camera->view.from, scene.camera->view.to);
+	// scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 	scene.objects = malloc(sizeof(t_object) * 2);
 	create_object_list(&scene);
-	r = get_ray(scene.camera->pos, scene.camera->dir);
+	// r = get_ray(scene.camera->pos, scene.camera->dir);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);
 
@@ -41,7 +47,12 @@ int start_all_world_tests(void)
 
 
 	inter_list.count = 0;
-	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
+	// r = ray_transform(original_ray, scene.spheres[0]->inv);
+	// get_sphere_inter(scene.spheres[0], r, &inter_list);
+	// r = ray_transform(original_ray, scene.spheres[1]->inv);
+	// get_sphere_inter(scene.spheres[1], r, &inter_list);
+	// original_ray = get_ray(scene.camera->pos, scene.camera->dir);
 	r = ray_transform(original_ray, scene.objects[0].inv);
 	get_sphere_inter(&scene.objects[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
@@ -81,7 +92,7 @@ int start_all_world_tests(void)
 
 
 	inter_list.count = 0;
-	original_ray = get_ray(scene.camera->pos, scene.camera->dir);
+	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
 	r = ray_transform(original_ray, scene.objects[0].inv);
 	get_sphere_inter(&scene.objects[0], r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
@@ -175,18 +186,18 @@ int start_all_world_tests(void)
 	view.up = get_vec3(1, 1, 0);
 	orientation = get_orientation_matrix(view);
 	assert(matrix_isequal(orientation, result));
-
-
-
-
 	////////////	Free
 
 
 	free(scene.light);
 	free(inter_list.inters);
+	free(scene.spheres[0]);
+	free(scene.spheres[1]);
+	free(scene.spheres);
+	free(scene.objects);
 	// free_sphere(&scene.objects[0]);
 	// free_sphere(&scene.objects[1]);
-	free(scene.objects);
+	// free(scene.objects);
 	free(scene.camera);
 	return (0);
 }

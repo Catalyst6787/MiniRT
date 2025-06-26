@@ -6,7 +6,7 @@ UNAME = $(shell uname -s)
 CC = gcc
 
 ifeq ($(UNAME), Linux)
-	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g # remove -g and add -03 when done debugging
+	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g
 	LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 	MLX = ./minilibx-linux/libmlx.a
 endif
@@ -41,6 +41,7 @@ SRC					=	main.c \
 						render.c \
 						lighting.c \
 						sort_inter.c \
+						special_scenes.c \
 						render_utils.c \
 						sphere.c \
 						plane.c \
@@ -56,7 +57,7 @@ SRC					=	main.c \
 						vec3_basic_op.c vec3_complex_operations.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
-						test_lighting.c test_world.c test_shadows.c
+						test_lighting.c test_world.c test_shadows.c test_camera.c
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

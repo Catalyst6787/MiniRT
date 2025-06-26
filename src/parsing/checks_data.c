@@ -38,7 +38,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		|| !is_ok_color(scene->ambient->color))
 		quit(minirt, WRONG_AMB_DATA);;
 	if (scene->camera->fov < 0.0 || 180.0 < scene->camera->fov
-		|| !is_ok_dir(scene->camera->dir))
+		|| !is_ok_dir(scene->camera->view.to))
 		quit(minirt, WRONG_CAM_DATA);
 	if (!is_ok_ratio(scene->light->brightness)
 		|| !is_ok_color(scene->light->color))
