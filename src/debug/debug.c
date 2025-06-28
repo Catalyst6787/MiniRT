@@ -43,8 +43,3 @@ void	debug_aff_image(t_minirt *minirt)
 	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 }
 
-// void	debug_aff_image(t_mlx_data *mlx)
-// {
-// 	my_mlx_pixel_put(mlx, 1919, 1079, 0xff2d0);
-// 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->img_st->img, 0, 0);
-// }

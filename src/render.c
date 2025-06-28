@@ -1,23 +1,17 @@
-// #include "render.h"
 #include "minirt.h"
-// #include "ray.h"
-// #include "vec3.h"
 #include <float.h>
 #include <math.h>
 
 void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 {
-	// t_comp			comp;
-	const t_object	*object;
-
 	ft_memset(comp_out, 0, sizeof(t_comp));
 	comp_out->eyev =  vec3_reverse(r.dir);
 	comp_out->light = *scene->light;
-	object = hit->obj;
-	comp_out->m = object->material;
+	comp_out->m = hit->obj->material;
 	comp_out->point = ray_at(hit->t, r);
 	comp_out->normalv = get_sphere_normal_at(hit->obj, comp_out->point);
 	comp_out->t = hit->t;
+	comp_out->object = (t_object *)hit->obj;
 	if (vec3_dot(comp_out->normalv, comp_out->eyev) < 0)
 	{
 		comp_out->inside = true;
@@ -36,16 +30,15 @@ int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
 {
 	if (object->type == SPHERE)
 		get_sphere_inter(object, ray, list);
+
+
+	/*       ADD NEXT :       */
+
 	// else if (object->type == PLANE)
 	// 	get_plane_inter(object, ray, list);
 	// else if (object->type == CYLINDER)
 	// 	get_cylinder_inter(object, ray, list);
 	return (0);
-}
-
-t_vec3	shade_hit(t_comp comp)
-{
-	return (get_lighting(comp, 0));
 }
 
 
@@ -55,7 +48,6 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	t_ray			r;
 	t_inter			*hit;
 	t_comp			comp;
-	bool			in_shadow = false;  // delete the initialization later
 
 	i = 0;
 	while (i < minirt->scene->nb_objects)
@@ -71,7 +63,7 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	else
 	{
 		set_computations(&comp, minirt->scene, hit, unique_ray);
-		return (minirt->render->inter_list.count = 0, get_lighting(comp, in_shadow));
+		return (minirt->render->inter_list.count = 0, shade_hit(minirt->render, minirt->scene, &comp));
 	}
 	minirt->render->inter_list.count = 0;
 }
@@ -83,6 +75,8 @@ int	render_scene(t_minirt *minirt)
 	t_ray	ray;
 
 	y = 0;
+	debug_print_objects_pointers(minirt->scene);
+	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
 	// print_camera_data(minirt);
@@ -96,6 +90,7 @@ int	render_scene(t_minirt *minirt)
 			x++;
 		}
 		y++;
+		minirt->render->debug_y++;
 	}
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);

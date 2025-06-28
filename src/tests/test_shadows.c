@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	is_shadowed(t_scene scene, t_vec3 point)
+int	is_shadowed_tests(t_scene *scene, t_vec3 point)
 {
 	t_vec3			v;
 	double			distance;
@@ -15,13 +15,13 @@ int	is_shadowed(t_scene scene, t_vec3 point)
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
 	list.count = 0;
 	i = 0;
-	v = vec3_vec_substraction(scene.light->pos, point);
+	v = vec3_vec_substraction(scene->light->pos, point);
 	distance = vec3_exact_length(v);
 	direction = vec3_normalise(v);
 	r = get_ray(point, direction);
-	while (i < scene.nb_objects)
+	while (i < scene->nb_objects)
 	{
-		get_intersection(&scene.objects[i], r, &list);
+		get_intersection(&scene->objects[i], r, &list);
 		i++;
 	}
 	i = 0;
@@ -106,7 +106,7 @@ int	start_all_shadows_tests(void)
 	comp.m = get_default_material(get_color(1, 1, 1), &scene);
 
 	in_shadow = true;
-	color = get_lighting(comp, in_shadow);
+	color = get_lighting(&comp, in_shadow);
 	assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
 
 
@@ -119,13 +119,13 @@ int	start_all_shadows_tests(void)
 	free(scene.objects);
 	set_default_world(&scene);
 
-	in_shadow = is_shadowed(scene, get_point3(0, 10, 0));
+	in_shadow = is_shadowed_tests(&scene, get_point3(0, 10, 0));
 	assert(!in_shadow);
-	in_shadow = is_shadowed(scene, get_point3(10, -10, 10));
+	in_shadow = is_shadowed_tests(&scene, get_point3(10, -10, 10));
 	assert(in_shadow);
-	in_shadow = is_shadowed(scene, get_point3(-20, 20, -20));
+	in_shadow = is_shadowed_tests(&scene, get_point3(-20, 20, -20));
 	assert(!in_shadow);
-	in_shadow = is_shadowed(scene, get_point3(-2, 2, -2));
+	in_shadow = is_shadowed_tests(&scene, get_point3(-2, 2, -2));
 	assert(!in_shadow);
 
 	////////////	Tests rendering shadows
@@ -149,7 +149,7 @@ int	start_all_shadows_tests(void)
 	list.inters[0].obj = &scene.objects[1];
 	list.inters[0].t = 4;
 	set_computations(&comp, &scene, &list.inters[0], r);
-	color = shade_hit(comp); //this works if in_shadow is true (will be implemented later in tests) !!!
+	// color = shade_hit(&scene, &comp); //this works if in_shadow is true (will be implemented later in tests) !!!
 	// assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
 
 

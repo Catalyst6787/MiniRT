@@ -43,6 +43,7 @@ SRC					=	main.c \
 						sort_inter.c \
 						special_scenes.c \
 						render_utils.c \
+						shadows.c \
 						sphere.c \
 						plane.c \
 						material.c \
