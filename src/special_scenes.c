@@ -16,6 +16,7 @@ void	scene_1(t_minirt *minirt)
 	minirt->render->shadow_list.capacity = minirt->scene->nb_objects * 2;
 	minirt->render->inter_list.count = 0;
 	minirt->render->shadow_list.count = 0;
+	minirt->scene->ambient->brightness = 0.1;
 	while(i < 6)
 	{
 		minirt->scene->objects[i].type = SPHERE;

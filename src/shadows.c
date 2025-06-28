@@ -19,7 +19,8 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	t_vec3			v;
 	double			distance;
 	t_vec3			direction;
-	t_ray			r;
+	t_ray			og_r;
+	t_ray			new_r;
 	int				i;
 	t_inter			*hit;
 	(void)			direction;
@@ -30,14 +31,14 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	distance = vec3_exact_length(v);
 	direction = vec3_normalise(v);
 	PRINT_DEBUG("dist : %.2f\n", distance);
-	r = get_ray(comp->over_point, direction);
-	debug_print_ray(&r);
+	og_r = get_ray(comp->over_point, direction);
+	debug_print_ray(&og_r);
 	PRINT_DEBUG("Point : %.2f %.2f %.2f\n", comp->over_point.x, comp->over_point.y, comp->over_point.z);
 	while (i < scene->nb_objects)
 	{
 		// r = ray_transform(r, get_inversed_matrix(get_translation_matrix(scene->light->pos)));
-		r = ray_transform(r, scene->objects[i].inv);
-		get_intersection(&scene->objects[i], r, &render->shadow_list);
+		new_r = ray_transform(og_r, scene->objects[i].inv);
+		get_intersection(&scene->objects[i], new_r, &render->shadow_list);
 		i++;
 	}
 	sort_inter(&render->shadow_list);
