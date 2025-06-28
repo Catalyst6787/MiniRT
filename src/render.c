@@ -66,9 +66,10 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 		return (minirt->render->inter_list.count = 0, shade_hit(minirt->render, minirt->scene, &comp));
 	}
 	minirt->render->inter_list.count = 0;
+	minirt->render->shadow_list.count = 0;
 }
 
-void	print_pixel(t_minirt *minirt, int color, int x, int y)
+static void	put_pixel(t_minirt *minirt, int color, int x, int y)
 {
 	int	x_off;
 	int	y_off;
@@ -97,14 +98,13 @@ int	render_scene(t_minirt *minirt)
 	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
-	// print_camera_data(minirt);
 	while (y < minirt->scene->camera->vsize)
 	{
 		x = 0;
-		while(x < minirt->scene->camera->hsize)
+		while (x < minirt->scene->camera->hsize)
 		{
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
-			print_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
+			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
 			x += PIXEL_SIZE_MULT;
 		}
 		y += PIXEL_SIZE_MULT;

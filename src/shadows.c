@@ -26,7 +26,6 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	(void) hit;
 
 	i = 0;
-
 	v = vec3_vec_substraction(scene->light->pos, comp->over_point);
 	distance = vec3_exact_length(v);
 	direction = vec3_normalise(v);

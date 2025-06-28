@@ -7,11 +7,15 @@ void	scene_1(t_minirt *minirt)
 	i = 0;
 	free(minirt->scene->objects);
 	free(minirt->render->inter_list.inters);
+	free(minirt->render->shadow_list.inters);
 	minirt->scene->nb_objects = 6;
 	minirt->scene->objects = malloc(sizeof(t_object) * minirt->scene->nb_objects);
 	minirt->render->inter_list.inters = malloc(sizeof(t_inter) * minirt->scene->nb_objects * 2);
+	minirt->render->shadow_list.inters = malloc(sizeof(t_inter) * minirt->scene->nb_objects * 2);
 	minirt->render->inter_list.capacity = minirt->scene->nb_objects * 2;
+	minirt->render->shadow_list.capacity = minirt->scene->nb_objects * 2;
 	minirt->render->inter_list.count = 0;
+	minirt->render->shadow_list.count = 0;
 	while(i < 6)
 	{
 		minirt->scene->objects[i].type = SPHERE;
