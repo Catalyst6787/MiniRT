@@ -142,21 +142,21 @@ void	debug_print_objects_pointers(t_scene *scene)
 	PRINT_DEBUG("Objects pointers :\n\n");
 	while (i < scene->nb_sphere && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Sphere[%d] : %p\n", i,  &scene->objects[j]);
+		PRINT_DEBUG("Sphere[%d] : %p\n", i,  (void *)&scene->objects[j]);
 		i++;
 		j++;
 	}
 	i = 0;
 	while (i < scene->nb_plane && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Plane[%d] : %p\n", i,  &scene->objects[j]);
+		PRINT_DEBUG("Plane[%d] : %p\n", i,  (void *)&scene->objects[j]);
 		i++;
 		j++;
 	}
 	i = 0;
 	while (i < scene->nb_cylinder && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Cylinder[%d] : %p\n", i, &scene->objects[j]);
+		PRINT_DEBUG("Cylinder[%d] : %p\n", i, (void *)&scene->objects[j]);
 		i++;
 		j++;
 	}
@@ -171,7 +171,7 @@ void	debug_print_inter_list(t_inter_list *list)
 	PRINT_DEBUG("Inter Count %d\n", list->count);
 	while (i < list->count)
 	{
-		PRINT_DEBUG("Inter obj [%d] : %p\n", i, list->inters[i].obj);
+		PRINT_DEBUG("Inter obj [%d] : %p\n", i, (void *)list->inters[i].obj);
 		PRINT_DEBUG("Inter  [%d] : %.3f\n", i, list->inters[i].t);
 		i++;
 	}
