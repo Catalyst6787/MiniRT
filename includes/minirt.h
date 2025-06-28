@@ -38,6 +38,8 @@
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
+# define PIXEL_SIZE_MULT 4 // size of pixels, 1 is normal
+
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 # endif
