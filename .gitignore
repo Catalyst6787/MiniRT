@@ -29,7 +29,7 @@ miniRT
 
 # logs
 *.log
-
+log/debug.csv
 # Local History for Visual Studio Code
 .history/
 
