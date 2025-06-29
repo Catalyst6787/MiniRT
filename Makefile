@@ -6,7 +6,7 @@ UNAME = $(shell uname -s)
 CC = gcc
 
 ifeq ($(UNAME), Linux)
-	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g
+	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -I ./includes -g # -O2 -march=native -ffast-math -funroll-loops
 	LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 	MLX = ./minilibx-linux/libmlx.a
 endif
