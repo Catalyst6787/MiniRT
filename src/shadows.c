@@ -30,10 +30,10 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	v = vec3_vec_substraction(scene->light->pos, comp->over_point);
 	distance = vec3_exact_length(v);
 	direction = vec3_normalise(v);
-	PRINT_DEBUG("dist : %.2f\n", distance);
+	// PRINT_DEBUG("dist : %.2f\n", distance);
 	og_r = get_ray(comp->over_point, direction);
-	debug_print_ray(&og_r);
-	PRINT_DEBUG("Point : %.2f %.2f %.2f\n", comp->over_point.x, comp->over_point.y, comp->over_point.z);
+	// debug_print_ray(&og_r);
+	// PRINT_DEBUG("Point : %.2f %.2f %.2f\n", comp->over_point.x, comp->over_point.y, comp->over_point.z);
 	while (i < scene->nb_objects)
 	{
 		// r = ray_transform(r, get_inversed_matrix(get_translation_matrix(scene->light->pos)));
@@ -42,13 +42,13 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 		i++;
 	}
 	sort_inter(&render->shadow_list);
-	debug_print_inter_list(&render->shadow_list);
+	// debug_print_inter_list(&render->shadow_list);
 	hit = get_hit(&render->shadow_list);
 	// hit = get_shadow_hit(&render->shadow_list, comp->object);
 	render->shadow_list.count = 0;
 	if (hit && hit->t < distance)
-		return (PRINT_DEBUG("TRUE\n\n"), true);
-	return (PRINT_DEBUG("FALSE\n\n"), false);
+		return (true);
+	return (false);
 }
 
 t_vec3	shade_hit(t_render *render, t_scene *scene, t_comp *comp)
