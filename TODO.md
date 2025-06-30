@@ -22,6 +22,18 @@ Simple C ray tracer.
 - [ ] add double_is_equal() using epsilon
 - [ ] add vec3_is_equal() aswell
 
+
+### bonuses list
+
+ - [X] phong
+ - [ ] colored and multi spot lighs
+ - [ ] cube
+ - [ ] diffusion
+ - [ ] multithreading
+
+Other ideas :
+	Patterns (perlin)
+
 ### end
  - [ ] remove all asserts
  - [ ] remove time.h and timing in main

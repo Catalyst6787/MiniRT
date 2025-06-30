@@ -3,15 +3,24 @@
 scene=$1
 
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 RESET='\033[0m'
 
 make
-printf "\n\n"
+printf "\n"
 
 if [ $# == 0 ]; then
-	# printf "${RED}Warning : no scene loaded (usage ./dev.sh <map_number>)\n${RESET}"
-	printf "${RED}usage ./dev.sh <map_number>\n${RESET}"
-	# ./miniRT assets/scenes/subject_example.rt
+	printf "${RED}usage ./dev.sh <map_number>\n\n${RESET}"
+	printf "${BLUE}1 : subject_example.rt\n${RESET}"
+	printf "${BLUE}2 : subject_disorder.rt.rt\n${RESET}"
+	printf "${BLUE}3 : one_sphere.rt.rt\n${RESET}"
+	printf "${BLUE}4 : several_cylinders.rt\n${RESET}"
+	printf "${BLUE}5 : scene_3spheres.rt\n${RESET}"
+	printf "${BLUE}6 : ten_spheres.rt\n${RESET}"
+	printf "${BLUE}7 : shadows.rt\n${RESET}"
+	printf "${BLUE}8 : shadows_2.rt\n${RESET}"
+	printf "${BLUE}9 : plane_debug.rt\n${RESET}"
+
 	exit 1
 fi
 
@@ -32,5 +41,7 @@ elif [ $scene == 7 ]; then
 	./miniRT assets/scenes/shadows.rt
 elif [ $scene == 8 ]; then
 	./miniRT assets/scenes/shadows_2.rt
+elif [ $scene == 9 ]; then
+	./miniRT assets/scenes/plane_debug.rt
 fi
 

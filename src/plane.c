@@ -1,26 +1,31 @@
 #include "minirt.h"
 
-int	get_plane_inter(const t_object *plane, const t_ray ray, t_inter_list *list)
+t_plane	*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color)
 {
-	(void) plane;
-	(void) ray;
-	(void) list;
-	// if (!list)
-	// 	return (print_err(FILE, LINE, "get_plane_inter: NULL pointer"), 1);
+	t_plane	*plane;
 
-	// if (list->count > list->capacity - 1)
-	// 	return (print_err(FILE, LINE,
-	// 			"get_plane_inter: no more space in list"), 1);
-	// if (fabs(ray.dir.y) < EPSILON)
-	// 	return (0);
-	// // list->inters[list->count].t = ((-1) * ray.origin.y) / ray.dir.y;
-	// t_vec3	v1 = vec3_vec_substraction(plane->pos, ray.origin);
-	// list->inters[list->count].t = vec3_dot(v1, plane->dir) / vec3_dot(ray.dir, plane->dir);
-	// if (list->inters[list->count].t < 0)
-	// 	return (0);
-	// list->inters[list->count].obj = plane;
-	// list->count++;
-	return (0);
+	plane = ft_calloc(1, sizeof(t_plane));
+	if (!plane)
+		return (perror("new_plane. Error\n"), NULL);
+	plane->pos = pos;
+	plane->dir = dir;
+	plane->color = color;
+	plane->material = get_material();
+	plane->material.color = color;
+	plane->transform = get_matrix(4, 4, 1);
+	plane->inv = get_matrix(4, 4, 1);
+	return (plane);
 }
 
-
+int	get_plane_inter(const t_object *object, const t_ray ray, t_inter_list *list)
+{
+	if (double_abs(ray.dir.y) < EPSILON)
+		return (0);
+	if (list->count > list->capacity - 1)
+		return (print_err(FILE, LINE,
+				"get_plane_inter: no more space in list"), 1);
+	list->inters[list->count].t = (-(ray.origin.y) / ray.dir.y);
+	list->inters[list->count].obj = object;
+	list->count++;
+	return (0);
+}

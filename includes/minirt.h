@@ -142,6 +142,7 @@ t_vec3		int_to_color(int int_color);
 /*                                SHAPES                                */
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
+t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
 void		free_sphere(t_object *object);
 
 /*                             Material Utils                               */

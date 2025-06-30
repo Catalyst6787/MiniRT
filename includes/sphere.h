@@ -12,6 +12,4 @@ typedef struct s_sphere
 	t_material	material;
 }	t_sphere;
 
-
-
 #endif

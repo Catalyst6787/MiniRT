@@ -6,6 +6,7 @@ void	create_object_from_sphere(t_object *object, t_sphere *sphere)
 	object->material = sphere->material;
 	object->transform = sphere->transform;
 	object->inv = sphere->inv;
+	// object->plane_normal = get_vec3(0, 0, 0);
 }
 
 void	create_object_from_plane(t_object *object, t_plane *plane)
@@ -14,6 +15,8 @@ void	create_object_from_plane(t_object *object, t_plane *plane)
 	object->material = plane->material;
 	object->transform = plane->transform;
 	object->inv = plane->inv;
+	object->plane_normal = vec3_matrix_multiply(object->transform,
+												get_vec3(0, 1, 0));
 }
 
 void	create_object_from_cylinder(t_object *object, t_cylinder *cylinder)
@@ -22,6 +25,7 @@ void	create_object_from_cylinder(t_object *object, t_cylinder *cylinder)
 	object->material = cylinder->material;
 	object->transform = cylinder->transform;
 	object->inv = cylinder->inv;
+	// object->plane_normal = get_vec3(0, 0, 0);
 }
 
 void	create_object_list(t_scene *scene)

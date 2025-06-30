@@ -14,6 +14,7 @@ typedef struct s_object
 	t_matrix	transform;
 	t_matrix	inv;
 	t_material	material;
+	t_vec3		plane_normal;
 }	t_object;
 
 #endif

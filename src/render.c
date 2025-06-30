@@ -9,7 +9,7 @@ void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 	comp_out->light = *scene->light;
 	comp_out->m = hit->obj->material;
 	comp_out->point = ray_at(hit->t, r);
-	comp_out->normalv = get_sphere_normal_at(hit->obj, comp_out->point);
+	comp_out->normalv = get_object_normal_at(hit->obj, comp_out->point);
 	comp_out->t = hit->t;
 	comp_out->object = (t_object *)hit->obj;
 	if (vec3_dot(comp_out->normalv, comp_out->eyev) < 0)
@@ -30,12 +30,11 @@ int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
 {
 	if (object->type == SPHERE)
 		get_sphere_inter(object, ray, list);
-
+	if (object->type == PLANE)
+		get_plane_inter(object, ray, list);
 
 	/*       ADD NEXT :       */
 
-	// else if (object->type == PLANE)
-	// 	get_plane_inter(object, ray, list);
 	// else if (object->type == CYLINDER)
 	// 	get_cylinder_inter(object, ray, list);
 	return (0);
@@ -100,14 +99,16 @@ int	render_scene(t_minirt *minirt)
 	while (y < minirt->scene->camera->vsize)
 	{
 		x = 0;
+		minirt->render->debug_x = 0;
 		while (x < minirt->scene->camera->hsize)
 		{
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
 			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
 			x += PIXEL_SIZE_MULT;
+			minirt->render->debug_x = x;
 		}
 		y += PIXEL_SIZE_MULT;
-		minirt->render->debug_y++;
+		minirt->render->debug_y = y;
 	}
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);

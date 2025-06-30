@@ -181,7 +181,8 @@ int	start_all_tests(void)
 	printf("\nall shadow tests passed\n\n");
 	start_all_camera_tests();
 	printf("\nall camera test passed\n\n");
+	start_all_planes_tests();
+	printf("\nall planes test passed\n\n");
 	printf("\n%s", COLOR_RESET);
-
 	return (0);
 }
