@@ -28,5 +28,6 @@ int			start_all_world_tests(void);
 int			start_all_shadows_tests(void);
 int			start_all_camera_tests(void);
 int			start_all_planes_tests(void);
+int			start_all_cylinders_tests(void);
 
 #endif

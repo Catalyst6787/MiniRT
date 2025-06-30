@@ -115,7 +115,7 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
 	debug_print_scene_data(minirt);
-	print_scene_ok_message();
+	print_scene_ok_message(file_path);
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);

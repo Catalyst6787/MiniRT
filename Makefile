@@ -41,12 +41,12 @@ SRC					=	main.c \
 						render.c \
 						normals.c \
 						lighting.c \
+						intersections.c \
 						sort_inter.c \
 						special_scenes.c \
 						render_utils.c \
 						shadows.c \
-						sphere.c \
-						plane.c \
+						create_shapes.c \
 						material.c \
 						new_elements.c \
 						matrices_inversions.c  matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
@@ -60,7 +60,7 @@ SRC					=	main.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
 						test_lighting.c test_world.c test_shadows.c test_camera.c \
-						tests_planes.c
+						tests_planes.c tests_cylinders.c \
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 
@@ -73,10 +73,12 @@ vpath %.c $(SRC_DIR):$(SRC_DIR)/colors
 vpath %.c $(SRC_DIR):$(SRC_DIR)/matrices
 
 PURPLE = \033[0;34m
+GREEN = \033[0;32m
 RED = \033[0;31m
 RESET = \033[0m
 
 all: $(NAME)
+	@printf "$(GREEN)Successfully compiled!$(RESET)\n"
 
 $(NAME): $(SRC_OBJ) $(LIBFT) $(MLX)
 	@printf "$(PURPLE)Linking $(NAME)...$(RESET)\n"

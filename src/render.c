@@ -25,22 +25,6 @@ void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 						vec3_double_multiplication(comp_out->normalv, EPSILON));
 }
 
-
-int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
-{
-	if (object->type == SPHERE)
-		get_sphere_inter(object, ray, list);
-	if (object->type == PLANE)
-		get_plane_inter(object, ray, list);
-
-	/*       ADD NEXT :       */
-
-	// else if (object->type == CYLINDER)
-	// 	get_cylinder_inter(object, ray, list);
-	return (0);
-}
-
-
 t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 {
 	int				i;

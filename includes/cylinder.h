@@ -8,6 +8,7 @@ typedef struct s_cylinder
 	t_vec3		pos;
 	t_vec3		dir;
 	double		diameter;
+	double		radius;
 	double		height;
 	t_vec3		color;
 	t_matrix	transform;

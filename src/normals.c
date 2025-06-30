@@ -22,6 +22,5 @@ t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point)
 		return (get_sphere_normal_at(obj, world_point));
 	if (obj->type == PLANE)
 		return(obj->plane_normal);
-		// return (get_vec3(0, 1, 0));
 	return (get_sphere_normal_at(obj, world_point)); //delete!!
 }

@@ -143,6 +143,7 @@ t_vec3		int_to_color(int int_color);
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
 t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
+t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir, double diameter, double height, t_vec3 color);
 void		free_sphere(t_object *object);
 
 /*                             Material Utils                               */
@@ -179,7 +180,7 @@ void		debug_print_scene_data(t_minirt *minirt);
 void		debug_print_ray(t_ray *r);
 void		debug_print_objects_pointers(t_scene *scene);
 void		debug_print_inter_list(t_inter_list *list);
-void		print_scene_ok_message(void);
+void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
 void		print_render_data(t_render *render);

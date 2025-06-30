@@ -67,9 +67,9 @@ void	print_scene(t_minirt *minirt, bool asterix)
 	}
 }
 
-void	print_scene_ok_message(void)
+void	print_scene_ok_message(char *scene)
 {
-	printf("%sScene OK%s\n\n", GREEN, COLOR_RESET);
+	printf("%s\n%s : scene OK!%s\n\n", GREEN, scene, COLOR_RESET);
 	printf("--------------------------\n\n");
 }
 
@@ -126,7 +126,8 @@ void	debug_print_scene_data(t_minirt *minirt)
 	i = 0;
 	while (i < minirt->scene->nb_objects)
 	{
-		PRINT_DEBUG("object type: %d\n", minirt->scene->objects[i].type);
+		PRINT_DEBUG("object[%d] type : %d\n", i, minirt->scene->objects[i].type);
+		PRINT_DEBUG("Adress : %p\n", (void*)&minirt->scene->objects[i]);
 		i++;
 	}
 	PRINT_DEBUG("\n");
@@ -142,7 +143,7 @@ void	debug_print_objects_pointers(t_scene *scene)
 	PRINT_DEBUG("Objects pointers :\n\n");
 	while (i < scene->nb_sphere && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Sphere[%d] : %p\n", i,  (void *)&scene->objects[j]);
+		PRINT_DEBUG("Sphere[%d] : %p\n", i, (void *)&scene->objects[j]);
 		i++;
 		j++;
 	}
