@@ -33,8 +33,8 @@
 
 # define SPACE_SET = " \t\n"
 
-# define WIN_W 800
-# define WIN_H 400
+# define WIN_W 2000
+# define WIN_H 1000
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
@@ -206,15 +206,9 @@ void		set_cylinder_tranformation(t_cylinder *cy);
 
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);
-t_inter	*get_hit(t_inter_list *lst);
-// t_vec3	get_sphere_normal_at(const t_object *s, const t_vec3 world_point);
-t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
-// int		get_sphere_inter(const t_obj *sphere,
-// 			const t_ray ray, t_inter_list *list);
-// int		get_plane_inter(const t_plane *plane,
-// 			const t_ray ray, t_inter_list *list);
-t_comp	get_computations(t_scene *scene, t_inter *hit, t_ray r);
-t_ray	ray_for_pixel(t_camera camera, double px, double py);
-void	load_special_scene(int number, t_minirt *minirt);
+t_inter		*get_hit(t_inter_list *lst);
+t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
+t_ray		ray_for_pixel(t_camera camera, double px, double py);
+void		load_special_scene(int number, t_minirt *minirt);
 
 #endif
