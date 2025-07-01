@@ -43,11 +43,11 @@
 // 	return (1);
 // }
 
-t_vec3	get_cylinder_normal_at(const t_object *cy, const t_vec3 world_point)
-{
-	(void) cy;
-	return (get_vec3(world_point.x, 0, world_point.z));
-}
+// t_vec3	get_cylinder_normal_at(const t_object *cy, const t_vec3 world_point)
+// {
+// 	(void) cy;
+// 	return (get_vec3(world_point.x, 0, world_point.z));
+// }
 
 int	start_all_cylinders_tests(void)
 {
@@ -93,7 +93,7 @@ int	start_all_cylinders_tests(void)
 	list.count = 0;
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 	get_cylinder_inter(&cy_object, r, &list);
-	
+
 	assert(list.inters[0].t == 4);
 	assert(list.inters[1].t == 6);
 
@@ -109,7 +109,7 @@ int	start_all_cylinders_tests(void)
 
 	cy_object.obj_data.cylinder.min = 1;
 	cy_object.obj_data.cylinder.max = 2;
-	
+
 	/* 1 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 1.5, 0), get_vec3(0.1, 1, 0));
