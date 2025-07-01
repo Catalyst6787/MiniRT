@@ -46,5 +46,7 @@ elif [ $scene == 9 ]; then
 	./miniRT assets/scenes/plane_debug.rt
 elif [ $scene == 10 ]; then
 	./miniRT assets/scenes/plane_inter_shadow.rt
+elif [ $scene == 11 ]; then
+	./miniRT assets/scenes/cylinder_debug.rt
 fi
 

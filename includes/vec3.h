@@ -19,9 +19,7 @@ typedef union s_vec3
 	};
 }	t_vec3;
 
-
 /*                                 BASIC OPS                                  */
-
 
 t_vec3	vec3_reverse(t_vec3 vec);
 t_vec3	get_vec3(double x, double y, double z);

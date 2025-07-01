@@ -1,6 +1,14 @@
 
 #include "minirt.h"
 
+void	swap_doubles(double *a, double *b)
+{
+	double	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
 void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 {
@@ -30,6 +38,7 @@ void	free_and_null(void	**ptr)
 	free(*ptr);
 	ptr = NULL;
 }
+
 
 void	print_err(char *file, int line, char *s)
 {

@@ -19,6 +19,8 @@
 # include "matrice.h"
 # include "ray.h"
 # include "sphere.h"
+# include "plane.h"
+# include "cylinder.h"
 # include "object.h"
 # include "scene.h"
 # include "errors.h"
@@ -131,6 +133,7 @@ int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
 t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
+void		swap_inters(t_inter *a, t_inter *b);
 
 /*                             COLOR UTILS                                  */
 
@@ -159,6 +162,7 @@ void		free_and_null(void	**ptr);
 void		print_err(char *file, int line, char *s);
 int			get_max_int(int a, int b);
 int			get_min_int(int a, int b);
+void		swap_doubles(double *a, double *b);
 
 /*                                 EVENTS                                  */
 

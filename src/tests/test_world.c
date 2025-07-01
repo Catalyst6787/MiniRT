@@ -4,8 +4,6 @@
 #include <assert.h>
 #include <math.h>
 
-
-
 int start_all_world_tests(void)
 {
 	t_inter_list	inter_list;

@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static void	swap(t_inter *a, t_inter *b)
+void	swap_inters(t_inter *a, t_inter *b)
 {
 	t_inter	tmp;
 
@@ -23,11 +23,11 @@ static int	partition(t_inter_list *arr, int low, int high)
 		if (arr->inters[j].t < pivot.t)
 		{
 			i++;
-			swap(&arr->inters[i], &arr->inters[j]);
+			swap_inters(&arr->inters[i], &arr->inters[j]);
 		}
 		j++;
 	}
-	swap(&arr->inters[i + 1], &arr->inters[high]);
+	swap_inters(&arr->inters[i + 1], &arr->inters[high]);
 	return (i + 1);
 }
 

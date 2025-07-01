@@ -41,6 +41,8 @@
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
 # define PIXEL_PUT_ERR "Error : my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
 
+# define NORMAL_TYPE_NDEF "Error : get_object_normal_at object type not defined"
+
 # define TESTS_ERR "Error : Test(s) failed\n"
 
 #endif

@@ -1,8 +1,6 @@
 #ifndef CYLINDER_H
 # define CYLINDER_H
 
-# include "minirt.h"
-
 typedef struct s_cylinder
 {
 	t_vec3		pos;
@@ -18,4 +16,3 @@ typedef struct s_cylinder
 
 
 #endif
-

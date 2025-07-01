@@ -1,13 +1,11 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-// # include "minirt.h"
 # include "matrice.h"
-// # include "render.h"
 # include "sphere.h"
 # include "cylinder.h"
 # include "plane.h"
-#	include "vec3.h"
+# include "vec3.h"
 
 typedef struct s_ambient
 {

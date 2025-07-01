@@ -1,8 +1,6 @@
 #ifndef PLANE_H
 # define PLANE_H
 
-# include "minirt.h"
-
 typedef struct s_plane
 {
 	t_vec3		pos;

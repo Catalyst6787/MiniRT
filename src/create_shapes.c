@@ -54,8 +54,5 @@ t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir, double diameter, double height,
 	cylinder->transform = get_matrix(4, 4, 1);
 	cylinder->inv = get_matrix(4, 4, 1);
 	return (cylinder);
-
-
-
 }
 
