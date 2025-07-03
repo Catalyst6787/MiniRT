@@ -13,6 +13,12 @@ void	debug_print_ray(t_ray *r)
 	PRINT_DEBUG("Ray Direction : (%.4f, %.4f, %.4f)\n", r->dir.x, r->dir.y, r->dir.z);
 }
 
+void	debug_print_vec(t_vec3 *v, char *name)
+{
+	PRINT_DEBUG("Vector %s : ", name);
+	PRINT_DEBUG("(%.4f, %.4f, %.4f) ", v->x, v->y, v->z);
+}
+
 void	print_render_pixel(t_vec3	pixel_center,
 	t_vec3	ray_direction,
 	t_ray	ray,

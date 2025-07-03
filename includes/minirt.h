@@ -184,6 +184,7 @@ void		debug_print_scene_data(t_minirt *minirt);
 void		debug_print_ray(t_ray *r);
 void		debug_print_objects_pointers(t_scene *scene);
 void		debug_print_inter_list(t_inter_list *list);
+void		debug_print_vec(t_vec3 *v, char *name);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);

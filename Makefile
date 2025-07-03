@@ -78,7 +78,7 @@ RED = \033[0;31m
 RESET = \033[0m
 
 all: $(NAME)
-	@printf "$(GREEN)Successfully compiled!$(RESET)\n"
+	@printf "$(GREEN)Compilation OK!$(RESET)\n"
 
 $(NAME): $(SRC_OBJ) $(LIBFT) $(MLX)
 	@printf "$(PURPLE)Linking $(NAME)...$(RESET)\n"

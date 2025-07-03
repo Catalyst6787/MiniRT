@@ -35,8 +35,7 @@ t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point)
 	if (obj->type == PLANE)
 		return(obj->obj_data.plane_normal);
 	if (obj->type == CYLINDER)
-		return (get_cylinder_normal_at(obj, get_point3(world_point.x, 0, world_point.z)));
-		// return (vec3_normalise(get_vec3(world_point.x, 0, world_point.z)));
-	print_err(FILE, LINE, "get_object_normal, object type not set");
+		return (vec3_normalise(get_vec3(world_point.x, 0, world_point.z)));
+	print_err(FILE, LINE, "get_object_normal : object type not set");
 	return (get_vec3(0, 0, 0));
 }

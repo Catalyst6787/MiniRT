@@ -3,7 +3,8 @@ Simple C ray tracer.
 
 ### basic
 
-- []
+ - [ ] parsing : filter number of coma
+
 
 - [X] Create Camera and iterate over pixels
 - [ ] Create scene and calculate intersections of rays and objects
@@ -38,6 +39,7 @@ Other ideas :
  - [ ] remove all asserts
  - [ ] remove time.h and timing in main
  - [ ] remove PRINT_DEBUG
+
 
 ### Completed Column ✓
 - [X] Add error handling to init functions

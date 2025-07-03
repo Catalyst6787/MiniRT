@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:15 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/06/24 11:55:33 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:20:20 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ double	ft_atof(char *str)
 	str = decimal_point + 1;
 	if (!*str)
 		return (result);
-	result += get_right(str);
+	if (result >= 0)
+		result += get_right(str);
+	else
+		result -= get_right(str);
 	return (result * sign);
 }
