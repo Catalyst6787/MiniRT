@@ -87,6 +87,7 @@ int	render_scene(t_minirt *minirt)
 		minirt->render->debug_x = 0;
 		while (x < minirt->scene->camera->hsize)
 		{
+			// PRINT_DEBUG("(%d,%d) : ", x, y );
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
 			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
 			x += PIXEL_SIZE_MULT;

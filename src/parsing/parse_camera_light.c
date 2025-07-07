@@ -2,11 +2,29 @@
 #include "minirt.h"
 #include "vec3.h"
 
-int	parse_ambiant_light(t_scene *scene, int *cursor)
+int	count_comas(char *buffer, int i)
+{
+	int	count;
+
+	count = 0;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		if (buffer[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+
+
+int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 2)
+		quit(minirt, WRONG_AMB_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]))
 		i++;
 	scene->ambient->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
@@ -19,11 +37,13 @@ int	parse_ambiant_light(t_scene *scene, int *cursor)
 	//check
 }
 
-int	parse_camera(t_scene *scene, int *cursor)
+int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 4)
+		quit(minirt, WRONG_CAM_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
 	scene->camera->view.from.x = ato_buffer(&scene->buffer[i], &i, ',');
@@ -46,11 +66,13 @@ int	parse_camera(t_scene *scene, int *cursor)
 	//check
 }
 
-int	parse_light(t_scene *scene, int *cursor)
+int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 4)
+		quit(minirt, WRONG_LIGHT_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
 	scene->light->pos.x = ato_buffer(&scene->buffer[i], &i, ',');

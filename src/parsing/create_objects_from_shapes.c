@@ -20,7 +20,6 @@ void	create_object_from_plane(t_object *object, t_plane *plane)
 
 void	create_object_from_cylinder(t_object *object, t_cylinder *cylinder)
 {
-	
 	object->type = CYLINDER;
 	object->material = cylinder->material;
 	object->transform = cylinder->transform;

@@ -33,8 +33,8 @@
 
 # define SPACE_SET = " \t\n"
 
-# define WIN_W 800
-# define WIN_H 400
+# define WIN_W 1600
+# define WIN_H 800
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
@@ -85,16 +85,17 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
-int			parse_ambiant_light(t_scene *scene, int *cursor);
-int			parse_camera(t_scene *scene, int *cursor);
-int			parse_light(t_scene *scene, int *cursor);
-int			parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor);
-int			parse_plane(t_scene *scene, t_plane *plane, int *cursor);
-int			parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor);
+int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor);
+int			parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor);
+int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
 
+int			count_comas(char *buffer, int i);
 void		check_file_name(t_minirt *minirt, char *file_path);
 void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);

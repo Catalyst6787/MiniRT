@@ -21,6 +21,8 @@ if [ $# == 0 ]; then
 	printf "${BLUE}8 : shadows_2.rt\n${RESET}"
 	printf "${BLUE}9 : plane_debug.rt\n${RESET}"
 	printf "${BLUE}10 : plane_inter_shadow.rt\n${RESET}"
+	printf "${BLUE}11 : cylinder_debug.rt\n${RESET}"
+	printf "${BLUE}12 : cylinder_debug_2.rt\n${RESET}"
 
 	exit 1
 fi
@@ -48,5 +50,7 @@ elif [ $scene == 10 ]; then
 	./miniRT assets/scenes/plane_inter_shadow.rt
 elif [ $scene == 11 ]; then
 	./miniRT assets/scenes/cylinder_debug.rt
+elif [ $scene == 12 ]; then
+	./miniRT assets/scenes/cylinder_debug_2.rt
 fi
 
