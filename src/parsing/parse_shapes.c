@@ -66,6 +66,7 @@ int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *
 	cylinder->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->dir.w = 0;
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
+	cylinder->radius = cylinder->diameter / 2;
 	cylinder->height = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	cylinder->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;

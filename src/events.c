@@ -13,7 +13,7 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 
 void	arrows_handle(int keycode, t_minirt *minirt)
-{	
+{
 	if (keycode == UP)
 	{
 		ft_printf("[↑] pressed\n");
@@ -130,11 +130,20 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		ft_printf("[O] pressed\n");
 		event_turn_cylinders(minirt);
 	}
+	#ifdef _APPLE_
 	else if ((65360.5 <= keycode && keycode <= 65364) || keycode == 45 || keycode == 60.5)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
+	#endif
+	#ifndef _linux_
+	else if (123 <= keycode && keycode <= 126)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
+		arrows_handle(keycode, minirt);
+	}
+	#endif
 	else if (keycode == W || keycode == A || keycode == S || keycode == D || keycode == E || keycode == R)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;

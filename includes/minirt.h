@@ -33,8 +33,8 @@
 
 # define SPACE_SET = " \t\n"
 
-# define WIN_W 2000
-# define WIN_H 1000
+# define WIN_W 1280
+# define WIN_H 720
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
