@@ -53,6 +53,12 @@ int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *l
 	double	t0;
 	double	t1;
 
+	// double t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
+	// double x = ray->origin.x + t * ray->dir.x;
+	// double z = ray->origin.z + t * ray->dir.z;
+	// if (pow(x, 2) + pow(z, 2) > 1)
+	// 	return (1);
+
 	a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if (a > -(EPSILON) && a < EPSILON) // if a is approximately zero
 		return (0);

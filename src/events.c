@@ -13,7 +13,7 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 
 void	arrows_handle(int keycode, t_minirt *minirt)
-{
+{	
 	if (keycode == UP)
 	{
 		ft_printf("[↑] pressed\n");
@@ -97,14 +97,49 @@ void	number_handle(int keycode, t_minirt *minirt)
 	render_scene(minirt);
 }
 
+void	event_turn_cylinders(t_minirt *minirt)
+{
+	int	i;
+	int	light_sign;
+
+	i = 0;
+	light_sign = 1;
+	while (i < minirt->scene->nb_objects)
+	{
+		if (minirt->scene->objects[i].type == CYLINDER)
+		{
+			minirt->scene->light[0].pos.y += (0.4 * light_sign);
+			minirt->scene->light[0].pos.x += (0.4 * light_sign);
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0.05, 0, 0)));
+			minirt->scene->objects[i].inv = get_inversed_matrix(minirt->scene->objects[i].transform);
+			printf("light x : %.2f\n", minirt->scene->light[0].pos.x);
+			printf("light y : %.2f\n", minirt->scene->light[0].pos.y);
+		}
+		i++;
+	}
+	render_scene(minirt);
+}
+
 int	handle_keypress(int keycode, t_minirt *minirt)
 {
-	if (keycode == Q || keycode == ESC)
+
+	if (keycode == ESC)
 		end_mlx_loop(minirt->mlx);
-	if ((65360.5 <= keycode && keycode <= 65364) || keycode == 45 || keycode == 60.5)
+	else if (keycode == O && minirt->scene->nb_cylinder)
+	{
+		ft_printf("[O] pressed\n");
+		event_turn_cylinders(minirt);
+	}
+	else if ((65360.5 <= keycode && keycode <= 65364) || keycode == 45 || keycode == 60.5)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
+	}
 	else if (keycode == W || keycode == A || keycode == S || keycode == D || keycode == E || keycode == R)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		asdw_handle(keycode, minirt);
+	}
 	else if (keycode == SPACE)
 		event_print_debug(minirt);
 	else if (keycode == C)
@@ -113,19 +148,15 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		number_handle(keycode, minirt);
 	else if (keycode == Z)
 	{
-		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
-		{
-			ft_printf("[Z] pressed : render asked!\n");
-			minirt->render->pixel_size = 1;
-		}
-		else
-		{
-			ft_printf("[Z] pressed : pixel_size = %d\n", minirt->render->pixel_size);
-			minirt->render->pixel_size = PIXEL_SIZE_MULT;
-		}
+		clock_t		t;
+
+		ft_printf("[Z] pressed : render asked!\n");
+		minirt->render->pixel_size = 1;
+		t = clock();
 		render_scene(minirt);
-		if (minirt->render->pixel_size == 1)
-			ft_printf("Scene rendered.\n");
+		t = clock() - t;
+		double time_taken = ((double)t) / CLOCKS_PER_SEC;
+		printf("Scene rendered in %f seconds\n", time_taken);
 	}
 	else
 		ft_printf("unknow action: %d\n", keycode);

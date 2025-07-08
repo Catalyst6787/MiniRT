@@ -58,11 +58,9 @@ static void	put_pixel(t_minirt *minirt, int color, int x, int y)
 	int	y_off;
 
 	y_off = y;
-	// while (y_off < y + PIXEL_SIZE_MULT && y_off < minirt->scene->camera->vsize)
 	while (y_off < y + minirt->render->pixel_size && y_off < minirt->scene->camera->vsize)
 	{
 		x_off = x;
-		// while (x_off < x + PIXEL_SIZE_MULT  && x_off < minirt->scene->camera->hsize)
 		while (x_off < x + minirt->render->pixel_size  && x_off < minirt->scene->camera->hsize)
 		{
 			my_mlx_pixel_put(minirt, x_off, y_off, color);
@@ -79,7 +77,6 @@ int	render_scene(t_minirt *minirt)
 	t_ray	ray;
 
 	y = 0;
-
 	debug_print_objects_pointers(minirt->scene);
 	minirt->render->debug_y = 0;
 	if (!minirt)
@@ -93,11 +90,9 @@ int	render_scene(t_minirt *minirt)
 			// PRINT_DEBUG("(%d,%d) : ", x, y );
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
 			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
-			// x += PIXEL_SIZE_MULT;
 			x += minirt->render->pixel_size;
 			minirt->render->debug_x = x;
 		}
-		// y += PIXEL_SIZE_MULT;
 		y += minirt->render->pixel_size;
 		minirt->render->debug_y = y;
 	}

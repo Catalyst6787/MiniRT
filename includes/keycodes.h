@@ -17,6 +17,7 @@
 # define C 99
 # define D 100
 # define E 101
+# define O 111
 # define Q 113
 # define R 114
 # define S 115

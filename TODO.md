@@ -36,7 +36,7 @@ Other ideas :
 
 ### end
  - [ ] remove all asserts
- - [ ] remove time.h and timing in main
+ - [ ] remove time.h and timing in render.c
  - [ ] remove PRINT_DEBUG
 
 

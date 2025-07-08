@@ -41,9 +41,9 @@ void	set_cylinder_tranformation(t_cylinder *cy)
 				get_rotation_matrix(cy->dir),
 				get_scaling_matrix(
 					get_vec3(
-						cy->diameter / 2, //replace by radius if implemented
+						cy->radius, //replace by radius if implemented
 						cy->height,
-						cy->diameter / 2))));
+						cy->radius))));
 	cy->inv = get_inversed_matrix(cy->transform);
 }
 

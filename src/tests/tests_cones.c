@@ -71,7 +71,7 @@ int	get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 		list->inters[list->count].t = -(c) / (2 * b);
 		list->inters[list->count].obj = object;
 		list->count++;
-		return (printf("a = 0\n"), 1);
+		return (1);
 	}
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)
@@ -100,6 +100,20 @@ int	get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 	return (1);
 }
 
+t_vec3	get_cone_normal_at(const t_object *co, const t_vec3 world_point)
+{
+	t_vec3	object_point;
+	t_vec3	object_normal;
+	t_vec3	world_normal;
+
+	object_point = vec3_matrix_multiply(co->inv, world_point);
+	object_normal = vec3_vec_substraction(object_point, get_point3(0, 0, 0));
+	world_normal = vec3_matrix_multiply(
+			transpose_matrix(co->inv), object_normal);
+	world_normal.w = 0;
+	return (vec3_normalise(world_normal));
+}
+
 
 int			start_all_cones_tests(void)
 {
@@ -113,33 +127,38 @@ int			start_all_cones_tests(void)
 	create_object_from_cone(&cone_obj, cone);
 	list.capacity = 2;
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
-	// list.inters[0].t = 0;
+	list.inters[0].t = 0;
 
 	////////////	Test Intersections
 
-	// list.count = 0;
-	// ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// assert(list.inters[0].t == 5);
-	// assert(list.inters[1].t == 5);
+		////////	2 inter
+
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(0, 0, 1)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	assert(list.inters[0].t == 5);
+	assert(list.inters[1].t == 5);
 
 
-	// list.count = 0;
-	// ray = get_ray(get_point3(0, 0, -5), get_vec3(1, 1, 1));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// printf("Inter count : %d\n", list.count);
-	// printf("t0 : %.5f\n", list.inters[0].t);
-	// printf("t1 : %.5f\n", list.inters[1].t);
-	// assert(list.inters[0].t == 8.66025);
-	// assert(list.inters[1].t == 8.66025);
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(1, 1, 1)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	assert(list.inters[0].t == 8.6602540378443855);
+	assert(list.inters[1].t == 8.6602540378443855);
 
-	// list.count = 0;
-	// ray = get_ray(get_point3(1, 1, -5), get_vec3(-0.5, -1, 1));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// assert(list.inters[0].t == 4.55006);
-	// assert(list.inters[1].t == 49.44994);
+	list.count = 0;
+	ray = get_ray(get_point3(1, 1, -5), vec3_normalise(get_vec3(-0.5, -1, 1)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	assert(list.inters[0].t == 4.5500564575195277);
+	assert(list.inters[1].t == 49.449943542480469);
 
+		////////	1 inter
 
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -1), vec3_normalise(get_vec3(0, 1, 1)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	assert(list.inters[0].t == 0.35355339059327379);
+	assert(list.count == 1);
 
 
 	free(list.inters);

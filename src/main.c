@@ -4,12 +4,12 @@
 
 int	main(int ac, char **av)
 {
-	t_minirt		minirt;
+	t_minirt	minirt;
 	t_mlx_data	mlx;
 	t_img_data	img_st;
-	t_scene			scene;
-	t_render		render;
-	clock_t			t;
+	t_scene		scene;
+	t_render	render;
+	clock_t		t;
 
 	ft_memset(&minirt, 0, sizeof(t_minirt));
 	ft_memset(&mlx, 0, sizeof(t_mlx_data));
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
-	printf("rendered image in %f seconds\n", time_taken);
+	printf("Scene rendered in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
 	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");

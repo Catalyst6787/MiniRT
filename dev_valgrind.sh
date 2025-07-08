@@ -1,4 +1,3 @@
-make fclean
 make re
 valgrind --leak-check=full --show-leak-kinds=all --log-file=./log/valgrind.log ./miniRT assets/scenes/subject_example.rt
 # valgrind --leak-check=full --log-file=./log/valgrind.log ./miniRT assets/scenes/several_cylinders.rt
