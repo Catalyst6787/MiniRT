@@ -111,6 +111,22 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		print_camera_data(minirt);
 	else if (keycode >= 48 && keycode <= 57)
 		number_handle(keycode, minirt);
+	else if (keycode == Z)
+	{
+		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
+		{
+			ft_printf("[Z] pressed : render asked!\n");
+			minirt->render->pixel_size = 1;
+		}
+		else
+		{
+			ft_printf("[Z] pressed : pixel_size = %d\n", minirt->render->pixel_size);
+			minirt->render->pixel_size = PIXEL_SIZE_MULT;
+		}
+		render_scene(minirt);
+		if (minirt->render->pixel_size == 1)
+			ft_printf("Scene rendered.\n");
+	}
 	else
 		ft_printf("unknow action: %d\n", keycode);
 	return (0);

@@ -21,6 +21,7 @@
 # define R 114
 # define S 115
 # define W 119
+# define Z 122
 
 
 #endif

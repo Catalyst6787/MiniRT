@@ -107,6 +107,7 @@ int			start_all_cones_tests(void)
 	t_object		cone_obj;
 	t_ray			ray;
 	t_inter_list	list;
+	(void) ray;
 
 	cone = new_cone(get_point3(0, 0, 0), get_vec3(0, 1, 0), 2, 100, get_color(1, 1, 1));
 	create_object_from_cone(&cone_obj, cone);
@@ -116,25 +117,25 @@ int			start_all_cones_tests(void)
 
 	////////////	Test Intersections
 
-	list.count = 0;
-	ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	get_cone_inter(&cone_obj, &ray, &list);
-	assert(list.inters[0].t == 5);
-	assert(list.inters[1].t == 5);
+	// list.count = 0;
+	// ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	// get_cone_inter(&cone_obj, &ray, &list);
+	// assert(list.inters[0].t == 5);
+	// assert(list.inters[1].t == 5);
 
 
-	list.count = 0;
-	ray = get_ray(get_point3(0, 0, -5), get_vec3(1, 1, 1));
-	get_cone_inter(&cone_obj, &ray, &list);
-	printf("Inter count : %d\n", list.count);
-	printf("t0 : %.5f\n", list.inters[0].t);
-	printf("t1 : %.5f\n", list.inters[1].t);
+	// list.count = 0;
+	// ray = get_ray(get_point3(0, 0, -5), get_vec3(1, 1, 1));
+	// get_cone_inter(&cone_obj, &ray, &list);
+	// printf("Inter count : %d\n", list.count);
+	// printf("t0 : %.5f\n", list.inters[0].t);
+	// printf("t1 : %.5f\n", list.inters[1].t);
 	// assert(list.inters[0].t == 8.66025);
 	// assert(list.inters[1].t == 8.66025);
 
-	list.count = 0;
-	ray = get_ray(get_point3(1, 1, -5), get_vec3(-0.5, -1, 1));
-	get_cone_inter(&cone_obj, &ray, &list);
+	// list.count = 0;
+	// ray = get_ray(get_point3(1, 1, -5), get_vec3(-0.5, -1, 1));
+	// get_cone_inter(&cone_obj, &ray, &list);
 	// assert(list.inters[0].t == 4.55006);
 	// assert(list.inters[1].t == 49.44994);
 

@@ -37,7 +37,7 @@ typedef struct s_render
 	double			wall_size;
 	double			canva_height;
 	double			canva_width;
-	double			pixel_size;
+	// double			pixel_size;
 	double			half;
 	double			world_y;
 	double			world_x;
@@ -47,6 +47,7 @@ typedef struct s_render
 	t_inter_list	inter_list;
 	t_inter_list	shadow_list;
 	int				inter_count;
+	int				pixel_size;
 	int				debug_x;
 	int				debug_y;
 }					t_render;

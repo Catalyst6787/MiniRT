@@ -20,6 +20,7 @@
 		"cmath": "c",
 		"plane.h": "c",
 		"object.h": "c",
-		"limits": "c"
+		"limits": "c",
+		"cylinder.h": "c"
 	}
 }

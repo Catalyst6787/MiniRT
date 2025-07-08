@@ -21,6 +21,7 @@ int	main(int ac, char **av)
 	minirt.scene = &scene;
 	minirt.render = &render;
 	minirt.render->camera_center.w = 1;
+	minirt.render->pixel_size = PIXEL_SIZE_MULT;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
