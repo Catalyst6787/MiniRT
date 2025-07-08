@@ -52,9 +52,9 @@ int start_all_world_tests(void)
 	// get_sphere_inter(scene.spheres[1], r, &inter_list);
 	// original_ray = get_ray(scene.camera->pos, scene.camera->dir);
 	r = ray_transform(original_ray, scene.objects[0].inv);
-	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	get_sphere_inter(&scene.objects[0], &r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
-	get_sphere_inter(&scene.objects[1], r, &inter_list);
+	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 	sort_inter(&inter_list);
 
 	inter_list.inters[0].t = 4;
@@ -72,9 +72,9 @@ int start_all_world_tests(void)
 	inter_list.count = 0;
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
 	r = ray_transform(original_ray, scene.objects[0].inv);
-	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	get_sphere_inter(&scene.objects[0], &r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
-	get_sphere_inter(&scene.objects[1], r, &inter_list);
+	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 
 	inter_list.inters[0].t = 1;
 	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
@@ -92,9 +92,9 @@ int start_all_world_tests(void)
 	inter_list.count = 0;
 	original_ray = get_ray(scene.camera->view.from, scene.camera->view.to);
 	r = ray_transform(original_ray, scene.objects[0].inv);
-	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	get_sphere_inter(&scene.objects[0], &r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
-	get_sphere_inter(&scene.objects[1], r, &inter_list);
+	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 	sort_inter(&inter_list);
 
 	set_computations(&comp, &scene, &inter_list.inters[0], original_ray);
@@ -111,9 +111,9 @@ int start_all_world_tests(void)
 	scene.light->color = get_color(1, 1, 1);
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
 	r = ray_transform(original_ray, scene.objects[0].inv);
-	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	get_sphere_inter(&scene.objects[0], &r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
-	get_sphere_inter(&scene.objects[1], r, &inter_list);
+	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 	sort_inter(&inter_list);
 	inter_list.inters[0].obj = &scene.objects[1];
 	// scene.spheres[1]->color = get_color(1, 1, 1);
@@ -129,9 +129,9 @@ int start_all_world_tests(void)
 	inter_list.count = 0;
 	original_ray = get_ray(get_point3(0, 0, -5), get_vec3(0, 1 ,0));
 	r = ray_transform(original_ray, scene.objects[0].inv);
-	get_sphere_inter(&scene.objects[0], r, &inter_list);
+	get_sphere_inter(&scene.objects[0], &r, &inter_list);
 	r = ray_transform(original_ray, scene.objects[1].inv);
-	get_sphere_inter(&scene.objects[1], r, &inter_list);
+	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 	sort_inter(&inter_list);
 
 	if (inter_list.count)

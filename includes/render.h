@@ -59,12 +59,12 @@ t_inter	*get_hit(t_inter_list *lst);
 t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point);
 t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
 int		get_sphere_inter(const t_object *object,
-			const t_ray ray, t_inter_list *list);
+			const t_ray *ray, t_inter_list *list);
 int		get_plane_inter(const t_object *plane,
-			const t_ray ray, t_inter_list *list);
-int		get_cylinder_inter(const t_object *object, const t_ray ray, t_inter_list *list);
+			const t_ray *ray, t_inter_list *list);
+int		get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
 void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r);
-int		get_intersection(t_object *object, t_ray ray, t_inter_list *list);
+int		get_intersection(t_object *object, t_ray *ray, t_inter_list *list);
 int		is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
 
 

@@ -18,28 +18,28 @@ int			start_all_planes_tests(void)
 	
 	list.count = 0;
 	ray = get_ray(get_point3(0, 10, 0), get_vec3(0, 0, 1));
-	get_plane_inter(&plane_obj, ray, &list);
+	get_plane_inter(&plane_obj, &ray, &list);
 	assert(!list.inters[0].t);
 
 	////////////	Test Coplanar Ray
 
 	list.count = 0;
 	ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
-	get_plane_inter(&plane_obj, ray, &list);
+	get_plane_inter(&plane_obj, &ray, &list);
 	assert(!list.inters[0].t);
 
 	////////////	Test plane intersected from above
 
 	list.count = 0;
 	ray = get_ray(get_point3(0, 1, 0), get_vec3(0, -1, 0));
-	get_plane_inter(&plane_obj, ray, &list);
+	get_plane_inter(&plane_obj, &ray, &list);
 	assert(list.inters[0].t == 1);
 
 	////////////	Test plane intersected from bellow
 
 	list.count = 0;
 	ray = get_ray(get_point3(0, -1, 0), get_vec3(0, 1, 0));
-	get_plane_inter(&plane_obj, ray, &list);
+	get_plane_inter(&plane_obj, &ray, &list);
 	assert(list.inters[0].t == 1);
 
 	free(plane);

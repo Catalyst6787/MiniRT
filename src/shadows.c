@@ -35,7 +35,7 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	while (i < scene->nb_objects)
 	{
 		new_r = ray_transform(og_r, scene->objects[i].inv);
-		get_intersection(&scene->objects[i], new_r, &render->shadow_list);
+		get_intersection(&scene->objects[i], &new_r, &render->shadow_list);
 		i++;
 	}
 	sort_inter(&render->shadow_list);

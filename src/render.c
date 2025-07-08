@@ -36,7 +36,7 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	while (i < minirt->scene->nb_objects)
 	{
 		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
-		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
+		get_intersection(&minirt->scene->objects[i], &r, &minirt->render->inter_list);
 		i++;
 	}
 	sort_inter(&minirt->render->inter_list);

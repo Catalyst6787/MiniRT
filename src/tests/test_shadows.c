@@ -21,7 +21,7 @@ int	is_shadowed_tests(t_scene *scene, t_vec3 point)
 	r = get_ray(point, direction);
 	while (i < scene->nb_objects)
 	{
-		get_intersection(&scene->objects[i], r, &list);
+		get_intersection(&scene->objects[i], &r, &list);
 		i++;
 	}
 	i = 0;
@@ -143,7 +143,7 @@ int	start_all_shadows_tests(void)
 	list.count = 0;
 	while (i < scene.nb_objects)
 	{
-		get_intersection(&scene.objects[i], r, &list);
+		get_intersection(&scene.objects[i], &r, &list);
 		i++;
 	}
 	list.inters[0].obj = &scene.objects[1];

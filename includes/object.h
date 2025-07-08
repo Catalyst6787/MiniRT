@@ -5,7 +5,8 @@ typedef enum s_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_type;
 
 typedef struct s_cylinder_limits

@@ -185,6 +185,8 @@ int	start_all_tests(void)
 	printf("\nall planes test passed\n\n");
 	start_all_cylinders_tests();
 	printf("\nall cylinders test passed\n\n");
+	start_all_cones_tests();
+	printf("\nall cones test passed\n\n");
 	printf("\n%s", COLOR_RESET);
 	return (0);
 }

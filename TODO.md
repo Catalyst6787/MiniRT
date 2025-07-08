@@ -3,37 +3,36 @@ Simple C ray tracer.
 
 ### basic
 
- - [ ] parsing : filter number of coma
+- [ ] Inter should take *ray instead of ray
 
+
+- [X] parsing : filter number of coma
 
 - [X] Create Camera and iterate over pixels
-- [ ] Create scene and calculate intersections of rays and objects
-  - [ ] Sphere
+- [X] Create scene and calculate intersections of rays and objects
+  - [X] Sphere
     - [X] basic intersection
 	- [X] only spheres in front of cam
-	- [ ] shading
-	- [ ] light level
-	- [ ] ray rebound
-  - [ ] Cylinder
-  - [ ] Wall
+	- [X] shading
+	- [X] light level
+	- [X] ray rebound
+  - [X] Cylinder
+  - [X] Wall
 
 - [] Parsing
 	- [X] handle empty file
-
-- [ ] add double_is_equal() using epsilon
-- [ ] add vec3_is_equal() aswell
 
 
 ### bonuses list
 
  - [X] phong
  - [ ] colored and multi spot lighs
- - [ ] cube
+ - [ ] cube / cone
  - [ ] diffusion
  - [ ] multithreading
 
 Other ideas :
-	Patterns (perlin)
+ - [ ] Patterns (perlin)
 
 ### end
  - [ ] remove all asserts

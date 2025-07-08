@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int	get_sphere_inter(const t_object *object, const t_ray ray, t_inter_list *list)
+int	get_sphere_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 {
 	t_vec3	oc;
 	double	a;
@@ -10,9 +10,9 @@ int	get_sphere_inter(const t_object *object, const t_ray ray, t_inter_list *list
 
 	if (!list)
 		return (print_err(FILE, LINE, "get_sphere_inter: NULL pointer"), 1);
-	oc = vec3_vec_substraction(ray.origin, get_point3(0, 0, 0));
-	a = vec3_dot(ray.dir, ray.dir);
-	b = 2.0 * vec3_dot(ray.dir, oc);
+	oc = vec3_vec_substraction(ray->origin, get_point3(0, 0, 0));
+	a = vec3_dot(ray->dir, ray->dir);
+	b = 2.0 * vec3_dot(ray->dir, oc);
 	c = vec3_dot(oc, oc) - 1;
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)
@@ -29,20 +29,20 @@ int	get_sphere_inter(const t_object *object, const t_ray ray, t_inter_list *list
 	return (0);
 }
 
-int	get_plane_inter(const t_object *object, const t_ray ray, t_inter_list *list)
+int	get_plane_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 {
-	if (double_abs(ray.dir.y) < EPSILON)
+	if (double_abs(ray->dir.y) < EPSILON)
 		return (0);
 	if (list->count > list->capacity - 1)
 		return (print_err(FILE, LINE,
 				"get_plane_inter: no more space in list"), 1);
-	list->inters[list->count].t = (-(ray.origin.y) / ray.dir.y);
+	list->inters[list->count].t = (-(ray->origin.y) / ray->dir.y);
 	list->inters[list->count].obj = object;
 	list->count++;
 	return (0);
 }
 
-int	get_cylinder_inter(const t_object *object, const t_ray ray, t_inter_list *list)
+int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 {
 	double	a;
 	double	b;
@@ -53,11 +53,11 @@ int	get_cylinder_inter(const t_object *object, const t_ray ray, t_inter_list *li
 	double	t0;
 	double	t1;
 
-	a = pow(ray.dir.x, 2) + pow(ray.dir.z, 2);
+	a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if (a > -(EPSILON) && a < EPSILON) // if a is approximately zero
 		return (0);
-	b = 2 * ray.origin.x * ray.dir.x + 2 * ray.origin.z * ray.dir.z;
-	c = pow(ray.origin.x, 2) + pow(ray.origin.z, 2) - 1;
+	b = 2 * ray->origin.x * ray->dir.x + 2 * ray->origin.z * ray->dir.z;
+	c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1;
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)
 		return (0);
@@ -68,14 +68,14 @@ int	get_cylinder_inter(const t_object *object, const t_ray ray, t_inter_list *li
 	t1 = (-b + sqrtf(discriminant)) / (2.0 * a);
 	if (t0 > t1)
 		swap_doubles(&t0, &t1);
-	y0 = ray.origin.y + t0 * ray.dir.y;
+	y0 = ray->origin.y + t0 * ray->dir.y;
 	if (object->obj_data.cylinder.min < y0 && y0 < object->obj_data.cylinder.max)
 	{
 		list->inters[list->count].t = t0;
 		list->inters[list->count].obj = object;
 		list->count++;
 	}
-	y1 = ray.origin.y + t1 * ray.dir.y;
+	y1 = ray->origin.y + t1 * ray->dir.y;
 	if (object->obj_data.cylinder.min < y1 && y1 < object->obj_data.cylinder.max)
 	{
 		list->inters[list->count].t = t1;
@@ -85,7 +85,7 @@ int	get_cylinder_inter(const t_object *object, const t_ray ray, t_inter_list *li
 	return (1);
 }
 
-int	get_intersection(t_object *object, t_ray ray, t_inter_list *list)
+int	get_intersection(t_object *object, t_ray *ray, t_inter_list *list)
 {
 	if (object->type == SPHERE)
 		get_sphere_inter(object, ray, list);
