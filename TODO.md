@@ -3,8 +3,11 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] Inter should take *ray instead of ray
+- [ ] parsing need to work with tabs (or parse out the tabs)
+- [ ] why does dir.y cylinder doesnt do shit ?
+- [ ] make an input manager structure (also make modes)
 
+- [X] Inter should take *ray instead of ray
 
 - [X] parsing : filter number of coma
 

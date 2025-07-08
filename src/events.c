@@ -7,7 +7,6 @@ int	end_mlx_loop(t_mlx_data *mlx)
 	#ifndef __APPLE__
 	mlx_loop_end(mlx->mlx);
 	#endif
-
 	return (0);
 }
 
@@ -100,73 +99,150 @@ void	number_handle(int keycode, t_minirt *minirt)
 void	event_turn_cylinders(t_minirt *minirt)
 {
 	int	i;
-	int	light_sign;
+	int	pair;
 
+	pair = 0;
 	i = 0;
-	light_sign = 1;
 	while (i < minirt->scene->nb_objects)
 	{
 		if (minirt->scene->objects[i].type == CYLINDER)
 		{
-			minirt->scene->light[0].pos.y += (0.4 * light_sign);
-			minirt->scene->light[0].pos.x += (0.4 * light_sign);
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0.05, 0, 0)));
+			if (pair)
+			{
+				minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, 0, 0.1)));
+				pair = 0;
+			}
+			else
+			{
+				minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, 0, -0.1)));
+				pair = 1;
+			}
 			minirt->scene->objects[i].inv = get_inversed_matrix(minirt->scene->objects[i].transform);
-			printf("light x : %.2f\n", minirt->scene->light[0].pos.x);
-			printf("light y : %.2f\n", minirt->scene->light[0].pos.y);
 		}
 		i++;
 	}
 	render_scene(minirt);
 }
 
+
+void	event_sphere_shearing(t_minirt *minirt)
+{
+	int	i;
+	int	pair;
+	t_shear shear;
+
+	pair = 0;
+	i = 0;
+	while (i < minirt->scene->nb_objects)
+	{
+		if (minirt->scene->objects[i].type == SPHERE)
+		{
+			if (pair)
+			{
+				shear.xy = 0.1;
+				shear.xz = -0.1;
+				shear.yx = -0.2;
+				shear.yz = 0.2;
+				shear.zx = 0;
+				shear.zy = 0;
+				minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_shearing_matrix(shear));
+				pair = 0;
+			}
+			else
+			{
+				shear.xy = -0.1;
+				shear.xz = 0.1;
+				shear.yx = 0.2;
+				shear.yz = -0.2;
+				shear.zx = 0;
+				shear.zy = 0;
+				minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_shearing_matrix(shear));
+				pair = 1;
+			}
+			minirt->scene->objects[i].inv = get_inversed_matrix(minirt->scene->objects[i].transform);
+		}
+		i++;
+	}
+	render_scene(minirt);
+}
+
+void	event_render(t_minirt *minirt)
+{
+		clock_t	t;
+		double	time_taken;
+
+		ft_printf("Spacebar pressed : render asked!\n");
+		minirt->render->pixel_size = 1;
+		t = clock();
+		render_scene(minirt);
+		t = clock() - t;
+		time_taken = ((double)t) / CLOCKS_PER_SEC;
+		printf("Scene rendered in %f seconds\n", time_taken);
+}
+
+void	event_light_pos(t_minirt *minirt, int keycode)
+{
+	 if (keycode == U)
+		minirt->scene->light->pos.y += 0.2;
+	else if (keycode == H)
+		minirt->scene->light->pos.x -= 0.2;
+	else if (keycode == J)
+		minirt->scene->light->pos.y -= 0.2;
+	else if (keycode == K)
+		minirt->scene->light->pos.x += 0.2;
+	render_scene(minirt);
+}
+
 int	handle_keypress(int keycode, t_minirt *minirt)
 {
-
 	if (keycode == ESC)
 		end_mlx_loop(minirt->mlx);
 	else if (keycode == O && minirt->scene->nb_cylinder)
 	{
-		ft_printf("[O] pressed\n");
-		event_turn_cylinders(minirt);
+		printf("[O] pressed\n");
+		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
+			event_turn_cylinders(minirt);
 	}
-	#ifdef _APPLE_
+	else if (keycode == P && minirt->scene->nb_sphere)
+	{
+		printf("[P] pressed\n");
+		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
+			event_sphere_shearing(minirt);
+	}
+	else if (keycode == L && minirt->scene->nb_sphere)
+	{
+		printf("[L] pressed\n");
+	}
+	else if (minirt->render->pixel_size == PIXEL_SIZE_MULT
+			&& (keycode == U || keycode == H || keycode == J || keycode == K))
+		event_light_pos(minirt, keycode);
+	#ifdef _linux_
 	else if ((65360.5 <= keycode && keycode <= 65364) || keycode == 45 || keycode == 60.5)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
+	else if (keycode >= 48 && keycode <= 57)
+		number_handle(keycode, minirt);
 	#endif
-	#ifndef _linux_
-	else if (123 <= keycode && keycode <= 126)
+
+	#ifdef __APPLE__
+	else if ((123 <= keycode && keycode <= 126) || keycode == 24 || keycode == 27)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
 	#endif
+
 	else if (keycode == W || keycode == A || keycode == S || keycode == D || keycode == E || keycode == R)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		asdw_handle(keycode, minirt);
 	}
-	else if (keycode == SPACE)
+	else if (keycode == X)
 		event_print_debug(minirt);
-	else if (keycode == C)
-		print_camera_data(minirt);
-	else if (keycode >= 48 && keycode <= 57)
-		number_handle(keycode, minirt);
-	else if (keycode == Z)
-	{
-		clock_t		t;
-
-		ft_printf("[Z] pressed : render asked!\n");
-		minirt->render->pixel_size = 1;
-		t = clock();
-		render_scene(minirt);
-		t = clock() - t;
-		double time_taken = ((double)t) / CLOCKS_PER_SEC;
-		printf("Scene rendered in %f seconds\n", time_taken);
-	}
+	else if (keycode == SPACE)
+		event_render(minirt);
 	else
 		ft_printf("unknow action: %d\n", keycode);
 	return (0);
