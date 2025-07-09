@@ -28,6 +28,7 @@ typedef struct s_object
 	t_matrix		inv;
 	t_material		material;
 	t_original_obj	obj_data;
+	int				id;
 }				t_object;
 
 #endif

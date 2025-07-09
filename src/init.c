@@ -17,11 +17,13 @@ int	init_mlx(t_minirt *minirt)
 	img_st->addr = mlx_get_data_addr(img_st->img, &mlx->bits_per_pixel,
 			&mlx->line_length, &mlx->endian);
 	mlx->img_st = img_st;
+	mlx->selected_object = 0;
 	return (0);
 }
 
 int	init_events(t_minirt *minirt)
 {
+
 	mlx_hook(minirt->mlx->mlx_win, 2, 1L << 0, handle_keypress, minirt);
 	mlx_hook(minirt->mlx->mlx_win, 17, 1L << 0, end_mlx_loop, minirt->mlx);
 	mlx_hook(minirt->mlx->mlx_win, 4, 1L << 2, handle_mouseclick, minirt);

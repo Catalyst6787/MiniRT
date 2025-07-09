@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 	ft_memset(&img_st, 0, sizeof(t_img_data));
 	minirt.mlx = &mlx;
 	minirt.mlx->img_st = &img_st;
+	minirt.mlx->str_selected_object = NULL;
 	minirt.scene = &scene;
 	minirt.render = &render;
 	minirt.render->camera_center.w = 1;

@@ -13,16 +13,36 @@
 #  define PLUS 61
 #  define MINUS 45
 
+#  define PAV_UP 65431
+#  define PAV_DOWN 65433
+#  define PAV_LEFT 65430
+#  define PAV_RIGHT 65432
+
+#  define PAV_FRONT 65434
+#  define PAV_BACK 65435
+
+#  define PAV_PLUS 65451
+#  define PAV_MINUS 65453
 
 #  define A 97
 #  define C 99
 #  define D 100
 #  define E 101
+#  define F 102
+#  define G 103
+#  define H 104
+#  define I 105
+#  define J 106
+#  define K 107
+#  define L 108
 #  define O 111
+#  define P 112
 #  define Q 113
 #  define R 114
 #  define S 115
+#  define U 117
 #  define W 119
+#  define X 120
 #  define Z 122
 # endif
 

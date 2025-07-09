@@ -75,6 +75,8 @@ void	free_mlx(t_mlx_data *mlx)
 		mlx->mlx = NULL;
 		free(mlx->img_st);
 		mlx->img_st = NULL;
+		if (mlx->str_selected_object)
+			free(mlx->str_selected_object);
 	}
 }
 

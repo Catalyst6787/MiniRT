@@ -3,9 +3,11 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] parsing need to work with tabs (or parse out the tabs)
 - [ ] why does dir.y cylinder doesnt do shit ?
+- [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
 - [ ] make an input manager structure (also make modes)
+
+- [X] add the selected object feature (different from light ?)
 
 - [X] Inter should take *ray instead of ray
 
@@ -24,6 +26,18 @@ Simple C ray tracer.
 
 - [] Parsing
 	- [X] handle empty file
+
+### optional 
+
+- [ ] add a ratio to move object faster
+
+
+### cone
+
+- [ ] object_type_to_str
+- [ ] set_cone_tranformation
+- [ ] create_object_from_cone
+- [ ] parsing
 
 
 ### bonuses list

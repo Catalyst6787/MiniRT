@@ -119,4 +119,5 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);
+	set_selected_object_str(minirt, minirt->scene);
 }

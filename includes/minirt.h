@@ -64,6 +64,8 @@ typedef struct s_mlx_data
 	int			line_length;
 	int			endian;
 	t_img_data	*img_st;
+	int			selected_object;
+	char		*str_selected_object;
 }	t_mlx_data;
 
 typedef struct s_minirt
@@ -115,9 +117,9 @@ t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
 
 void		create_object_list(t_scene *scene);
-void		create_object_from_sphere(t_object *object, t_sphere *sphere);
-void		create_object_from_plane(t_object *object, t_plane *plane);
-void		create_object_from_cylinder(t_object *object, t_cylinder *cylinder);
+void		create_object_from_sphere(t_object *object, t_sphere *sphere, int id);
+void		create_object_from_plane(t_object *object, t_plane *plane, int id);
+void		create_object_from_cylinder(t_object *object, t_cylinder *cylinder, int id);
 
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
@@ -164,6 +166,7 @@ void		print_err(char *file, int line, char *s);
 int			get_max_int(int a, int b);
 int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
+char		*object_type_to_str(t_object *object, bool selected);
 
 /*                                 EVENTS                                  */
 
@@ -172,6 +175,15 @@ int			handle_keypress(int keycode, t_minirt *minirt);
 int			handle_mouseclick(int button, int x, int y, t_minirt *minirt);
 void		event_print_debug(t_minirt *minirt);
 void		print_camera_data(t_minirt *minirt);
+void		event_turn_cylinders(t_minirt *minirt);
+void		event_sphere_shearing(t_minirt *minirt);
+void		event_light_pos(t_minirt *minirt, int keycode);
+void		arrows_handle(int keycode, t_minirt *minirt);
+void		asdw_handle(int keycode, t_minirt *minirt);
+
+void		event_object_selection(t_minirt *minirt, t_scene *scene, int keycode);
+void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
+void		event_obj_pos(t_minirt *minirt, int keycode);
 
 /*                                 EXIT                                  */
 

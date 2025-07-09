@@ -59,7 +59,7 @@ int	start_all_cylinders_tests(void)
 	t_inter_list	list;
 
 	cy = new_cylinder(get_point3(0, 0, 0), get_vec3(0, 1, 0), 2, 100, get_color(1, 1, 1));
-	create_object_from_cylinder(&cy_object, cy);
+	create_object_from_cylinder(&cy_object, cy, 0);
 	cy_object.obj_data.cylinder.min = INT_MIN;
 	cy_object.obj_data.cylinder.max = INT_MAX;
 

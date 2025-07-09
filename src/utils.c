@@ -10,6 +10,34 @@ void	swap_doubles(double *a, double *b)
 	*b = temp;
 }
 
+
+/** Convert object type enum to string, the selected boolean
+ * is used to display "Selected : " before the type (used
+ * to print object selected window)
+ */
+char	*object_type_to_str(t_object *object, bool selected)
+{
+	if (object->type == SPHERE)
+	{
+		if (selected)
+			return (ft_strdup("Selected : sphere "));
+		return (ft_strdup("sphere "));
+	}
+	if (object->type == PLANE)
+	{
+		if (selected)
+			return (ft_strdup("Selected : plane "));
+		return (ft_strdup("plane "));
+	}
+	if (object->type == CYLINDER)
+	{
+		if (selected)
+			return (ft_strdup("Selected : cylinder "));
+		return (ft_strdup("cylinder "));
+	}
+	return (NULL);
+}
+
 void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 {
 	char	*dst;
