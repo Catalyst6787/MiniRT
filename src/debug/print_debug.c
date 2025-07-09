@@ -130,12 +130,6 @@ void	debug_print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->material.color.r, minirt->scene->cylinders[i]->material.color.g, minirt->scene->cylinders[i]->material.color.b);
 	}
 	i = 0;
-	while (i < minirt->scene->nb_objects)
-	{
-		PRINT_DEBUG("object[%d] type : %d\n", i, minirt->scene->objects[i].type);
-		PRINT_DEBUG("Adress : %p\n", (void*)&minirt->scene->objects[i]);
-		i++;
-	}
 	PRINT_DEBUG("\n");
 }
 
@@ -184,6 +178,26 @@ void	debug_print_inter_list(t_inter_list *list)
 	}
 }
 
+void	debug_print_matrice(t_matrix m, char *matrix_type)
+{
+	int	i;
+	int	j;
 
-// Sphere[0] : 0x619000002d80
-// Sphere[1] : 0x619000002ef8
+	i = 0;
+	PRINT_DEBUG("Print %s matrix :\n\n", matrix_type);
+	while (i < m.row)
+	{
+		j = 0;
+		PRINT_DEBUG("|");
+		while (j < m.col)
+		{
+			PRINT_DEBUG(" %.3f |", m.matrix[i][j]);
+			if (m.matrix[i][j] < 10.0 && m.matrix[i][j] >= 0.0)
+				PRINT_DEBUG(" ");
+			j++;
+		}
+		PRINT_DEBUG("\n");
+		i++;
+	}
+	PRINT_DEBUG("\n");
+}

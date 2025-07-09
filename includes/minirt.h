@@ -56,6 +56,14 @@ typedef struct s_img_data
 	char	*addr;
 }	t_img_data;
 
+typedef enum e_move_mode
+{
+	dir,
+	pos,
+	height
+}				t_move_mode;
+
+
 typedef struct s_mlx_data
 {
 	void		*mlx;
@@ -64,6 +72,7 @@ typedef struct s_mlx_data
 	int			line_length;
 	int			endian;
 	t_img_data	*img_st;
+	t_move_mode	move_mode;
 	int			selected_object;
 	char		*str_selected_object;
 }	t_mlx_data;
@@ -82,7 +91,7 @@ int			init_events(t_minirt *minirt);
 
 /*                                 PARSING                                  */
 
-void		parse_scene(t_minirt *minirt, char *file_path);
+void		parse_scene(t_minirt *minirt);
 void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 double		ato_buffer(char *ptr, int *cursor, int delim);
@@ -98,7 +107,7 @@ void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
 
 int			count_comas(char *buffer, int i);
-void		check_file_name(t_minirt *minirt, char *file_path);
+void		check_file_name(t_minirt *minirt);
 void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);
 void		char_error_check(t_minirt *minirt,
@@ -187,6 +196,7 @@ void		event_obj_pos(t_minirt *minirt, int keycode);
 
 /*                                 EXIT                                  */
 
+void		free_scene(t_scene *scene);
 int			quit(t_minirt *minirt, char *str);
 
 /*                                 DEBUG                                  */
@@ -198,6 +208,7 @@ void		debug_print_ray(t_ray *r);
 void		debug_print_objects_pointers(t_scene *scene);
 void		debug_print_inter_list(t_inter_list *list);
 void		debug_print_vec(t_vec3 *v, char *name);
+void		debug_print_matrice(t_matrix m, char *matrix_type);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
@@ -219,7 +230,7 @@ void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
 
 // sort intersections
-void	sort_inter(t_inter_list *inter_lst);
+void		sort_inter(t_inter_list *inter_lst);
 t_inter		*get_hit(t_inter_list *lst);
 t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
 t_ray		ray_for_pixel(t_camera camera, double px, double py);

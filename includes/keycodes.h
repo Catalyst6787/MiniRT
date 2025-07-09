@@ -23,6 +23,8 @@
 
 #  define PAV_PLUS 65451
 #  define PAV_MINUS 65453
+#  define PAV_MIDDLE 65437
+
 
 #  define A 97
 #  define C 99

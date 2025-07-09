@@ -18,6 +18,7 @@ int	init_mlx(t_minirt *minirt)
 			&mlx->line_length, &mlx->endian);
 	mlx->img_st = img_st;
 	mlx->selected_object = 0;
+	mlx->move_mode = pos;
 	return (0);
 }
 

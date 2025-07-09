@@ -44,6 +44,7 @@ int	get_plane_inter(const t_object *object, const t_ray *ray, t_inter_list *list
 
 int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 {
+	// t_vec3	oc;
 	double	a;
 	double	b;
 	double	c;
@@ -59,6 +60,7 @@ int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *l
 	// if (pow(x, 2) + pow(z, 2) > 1)
 	// 	return (1);
 
+	// oc = vec3_vec_substraction(ray->origin, get_point3(0, 0, 0));
 	a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if (a > -(EPSILON) && a < EPSILON) // if a is approximately zero
 		return (0);

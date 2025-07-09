@@ -11,6 +11,8 @@ int	main(int ac, char **av)
 	t_render	render;
 	clock_t		t;
 
+	if (ac != 2)
+		return (ft_printf("Usage: <scene.rt>\n"), 1);
 	ft_memset(&minirt, 0, sizeof(t_minirt));
 	ft_memset(&mlx, 0, sizeof(t_mlx_data));
 	ft_memset(&scene, 0, sizeof(t_scene));
@@ -20,15 +22,16 @@ int	main(int ac, char **av)
 	minirt.mlx->img_st = &img_st;
 	minirt.mlx->str_selected_object = NULL;
 	minirt.scene = &scene;
+	minirt.scene->filename = ft_strdup(av[1]);
+	if (!minirt.scene->filename)
+		quit(&minirt, MALLOC_ERR);
 	minirt.render = &render;
 	minirt.render->camera_center.w = 1;
 	minirt.render->pixel_size = PIXEL_SIZE_MULT;
 
-	if (ac != 2)
-		return (ft_printf("Usage: <scene.rt>\n"), 1);
 	if (start_all_tests())
 		quit(&minirt, TESTS_ERR);
-	parse_scene(&minirt, av[1]);
+	parse_scene(&minirt);
 
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);

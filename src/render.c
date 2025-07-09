@@ -77,7 +77,6 @@ int	render_scene(t_minirt *minirt)
 	t_ray	ray;
 
 	y = 0;
-	debug_print_objects_pointers(minirt->scene);
 	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");

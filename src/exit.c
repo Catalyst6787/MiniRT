@@ -58,6 +58,8 @@ void	free_scene(t_scene *scene)
 		free(scene->camera);
 	if (scene->buffer)
 		free(scene->buffer);
+	if (scene->filename)
+		free(scene->filename);
 }
 
 void	free_mlx(t_mlx_data *mlx)

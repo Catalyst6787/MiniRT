@@ -59,16 +59,34 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 
 void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 {
-	if (keycode == PAV_MINUS && minirt->mlx->selected_object > 0)
+	if (keycode == PAV_MINUS)
 	{
-		minirt->mlx->selected_object--;
+		if (minirt->mlx->selected_object == 0)
+			minirt->mlx->selected_object = minirt->scene->nb_objects - 1;
+		else if (minirt->mlx->selected_object > 0)
+			minirt->mlx->selected_object--;
 		set_selected_object_str(minirt, scene);
 	}
-	else if (keycode == PAV_PLUS && 
-		minirt->mlx->selected_object < minirt->scene->nb_objects - 1)
+	else if (keycode == PAV_PLUS)
 	{
-		minirt->mlx->selected_object++;
+		if (minirt->mlx->selected_object < minirt->scene->nb_objects - 1)
+			minirt->mlx->selected_object++;
+		else if (minirt->mlx->selected_object == minirt->scene->nb_objects - 1)
+			minirt->mlx->selected_object = 0;
 		set_selected_object_str(minirt, scene);
+	}
+	else if (keycode == PAV_MIDDLE)
+	{
+		if (minirt->mlx->move_mode == dir)
+		{
+			minirt->mlx->move_mode = pos;
+			printf("pos mode selected\n");
+		}
+		else if (minirt->mlx->move_mode == pos)
+		{
+			minirt->mlx->move_mode = dir;
+			printf("dir mode selected\n");
+		}
 	}
 	render_scene(minirt);
 }
@@ -102,22 +120,14 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		asdw_handle(keycode, minirt);
 	}
-	else if (keycode == U || keycode == H || keycode == J || keycode == K)
+	else if (keycode == U || keycode == H || keycode == J
+			|| keycode == K || keycode == I || keycode == O)
 		event_light_pos(minirt, keycode);
 	else if (65429.9 <= keycode && keycode <= 65435.5)
-	{
-		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		event_obj_pos(minirt, keycode);
-	}
-	else if (keycode == PAV_MINUS || keycode == PAV_PLUS)
+	else if (keycode == PAV_MINUS || keycode == PAV_PLUS || keycode == PAV_MIDDLE)
 	{
 		event_object_selection(minirt, minirt->scene, keycode);
-	}
-	else if (keycode == O && minirt->scene->nb_cylinder)
-	{
-		printf("[O] pressed\n");
-		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
-			event_turn_cylinders(minirt);
 	}
 	else if (keycode == P && minirt->scene->nb_sphere)
 	{
@@ -125,12 +135,17 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
 			event_sphere_shearing(minirt);
 	}
-	else if (keycode == L && minirt->scene->nb_sphere)
+	else if (keycode == L && minirt->scene->nb_cylinder)
 	{
-		printf("[L] pressed\n");
+			printf("[L] pressed\n");
+			if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
+				event_turn_cylinders(minirt);
 	}
 	else if (keycode == C)
 		event_print_debug(minirt);
+	else if (keycode == Q)
+	{
+	}
 	else if (keycode == SPACE)
 		event_render(minirt);
 	else

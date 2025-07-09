@@ -5,7 +5,7 @@ Simple C ray tracer.
 
 - [ ] why does dir.y cylinder doesnt do shit ?
 - [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
-- [ ] make an input manager structure (also make modes)
+
 
 - [X] add the selected object feature (different from light ?)
 
@@ -38,6 +38,7 @@ Simple C ray tracer.
 - [ ] set_cone_tranformation
 - [ ] create_object_from_cone
 - [ ] parsing
+- [ ] int	count_intersections
 
 
 ### bonuses list

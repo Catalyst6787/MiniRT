@@ -84,11 +84,11 @@ int	get_file_contents(int fd, char **file_contents)
 	return (0);
 }
 
-void	set_scene_buffer(t_minirt *minirt, char *file_path)
+void	set_scene_buffer(t_minirt *minirt)
 {
 	int		fd;
 
-	fd = open(file_path, O_RDONLY);
+	fd = open(minirt->scene->filename, O_RDONLY);
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);
 	get_file_contents(fd, &minirt->scene->buffer);
@@ -98,12 +98,12 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 		quit(minirt, EMPTY_FILE);
 }
 
-void	parse_scene(t_minirt *minirt, char *file_path)
+void	parse_scene(t_minirt *minirt)
 {
-	PRINT_DEBUG("\n%s\n\n", file_path);
+	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
-	check_file_name(minirt, file_path);
-	set_scene_buffer(minirt, file_path);
+	check_file_name(minirt);
+	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
 	check_characters_validity(minirt);
 	count_elements(minirt->scene);
@@ -115,9 +115,10 @@ void	parse_scene(t_minirt *minirt, char *file_path)
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
 	debug_print_scene_data(minirt);
-	print_scene_ok_message(file_path);
+	print_scene_ok_message(minirt->scene->filename);
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
+	debug_print_objects_pointers(minirt->scene);
 }
