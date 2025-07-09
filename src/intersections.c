@@ -35,7 +35,7 @@ int	get_plane_inter(const t_object *object, const t_ray *ray, t_inter_list *list
 		return (0);
 	if (list->count > list->capacity - 1)
 		return (print_err(FILE, LINE,
-				"get_plane_inter: no more space in list"), 1);
+			"get_plane_inter: no more space in list"), 1);
 	list->inters[list->count].t = (-(ray->origin.y) / ray->dir.y);
 	list->inters[list->count].obj = object;
 	list->count++;
@@ -95,11 +95,14 @@ int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *l
 
 int	get_intersection(t_object *object, t_ray *ray, t_inter_list *list)
 {
+
 	if (object->type == SPHERE)
 		get_sphere_inter(object, ray, list);
 	else if (object->type == PLANE)
 		get_plane_inter(object, ray, list);
 	else if (object->type == CYLINDER)
+	{
 		get_cylinder_inter(object, ray, list);
+	}
 	return (0);
 }

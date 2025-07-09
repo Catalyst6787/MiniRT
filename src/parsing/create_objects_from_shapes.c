@@ -15,8 +15,8 @@ void	create_object_from_plane(t_object *object, t_plane *plane, int id)
 	object->material = plane->material;
 	object->transform = plane->transform;
 	object->inv = plane->inv;
-	object->obj_data.plane_normal = vec3_matrix_multiply(object->transform,
-												get_vec3(0, 1, 0));
+	object->obj_data.plane_normal = vec3_normalise(vec3_matrix_multiply(object->transform,
+												get_vec3(0, 1, 0)));
 	object->id = id;
 }
 
