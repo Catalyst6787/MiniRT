@@ -116,9 +116,9 @@ void	parse_scene(t_minirt *minirt)
 	create_object_list(minirt->scene);
 	debug_print_scene_data(minirt);
 	print_scene_ok_message(minirt->scene->filename);
-	free(minirt->scene->buffer);
-	minirt->scene->buffer = NULL;
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);
+	free(minirt->scene->buffer);
+	minirt->scene->buffer = NULL;
 }

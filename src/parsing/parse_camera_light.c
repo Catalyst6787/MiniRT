@@ -17,7 +17,6 @@ int	count_comas(char *buffer, int i)
 }
 
 
-
 int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;

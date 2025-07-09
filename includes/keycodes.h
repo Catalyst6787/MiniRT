@@ -61,6 +61,18 @@
 #  define PLUS 24
 #  define MINUS 27
 
+#  define PAV_UP 65431
+#  define PAV_DOWN 65433
+#  define PAV_LEFT 65430
+#  define PAV_RIGHT 65432
+
+#  define PAV_FRONT 65434
+#  define PAV_BACK 65435
+
+#  define PAV_PLUS 65451
+#  define PAV_MINUS 65453
+#  define PAV_MIDDLE 65437
+
 
 
 #  define A 0

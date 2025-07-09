@@ -29,7 +29,7 @@ void	create_object_from_cylinder(t_object *object, t_cylinder *cylinder, int id)
 	// object->obj_data.cylinder.max = 0.5;
 	// object->obj_data.cylinder.min = -0.5;
 	object->obj_data.cylinder.max = cylinder->height / 2;
-	object->obj_data.cylinder.min = -(cylinder->height / 2);
+	object->obj_data.cylinder.min = -(cylinder->height) / 2;
 	object->id = id;
 }
 

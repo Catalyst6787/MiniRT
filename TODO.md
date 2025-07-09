@@ -3,12 +3,14 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] why does dir.y cylinder doesnt do shit ?
+- [ ] change rays to pointers
+- [ ] cone
+- [ ] start to think how to bonus
+- [ ] prepare the project to merge it on main
 - [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
 
-
+- [X] why does dir.y cylinder doesnt do shit ?
 - [X] add the selected object feature (different from light ?)
-
 - [X] Inter should take *ray instead of ray
 
 - [X] parsing : filter number of coma
@@ -27,7 +29,7 @@ Simple C ray tracer.
 - [] Parsing
 	- [X] handle empty file
 
-### optional 
+### optional
 
 - [ ] add a ratio to move object faster
 

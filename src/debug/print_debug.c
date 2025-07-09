@@ -143,21 +143,21 @@ void	debug_print_objects_pointers(t_scene *scene)
 	PRINT_DEBUG("Objects pointers :\n\n");
 	while (i < scene->nb_sphere && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Sphere[%d] : %p\n", i, (void *)&scene->objects[j]);
+		PRINT_DEBUG("Sphere[%d] : %p (object %d)\n", i, (void *)&scene->objects[j], j);
 		i++;
 		j++;
 	}
 	i = 0;
 	while (i < scene->nb_plane && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Plane[%d] : %p\n", i,  (void *)&scene->objects[j]);
+		PRINT_DEBUG("Plane[%d] : %p (object %d)\n", i,  (void *)&scene->objects[j], j);
 		i++;
 		j++;
 	}
 	i = 0;
 	while (i < scene->nb_cylinder && j < scene->nb_objects)
 	{
-		PRINT_DEBUG("Cylinder[%d] : %p\n", i, (void *)&scene->objects[j]);
+		PRINT_DEBUG("Cylinder[%d] : %p (object %d)\n", i, (void *)&scene->objects[j], j);
 		i++;
 		j++;
 	}

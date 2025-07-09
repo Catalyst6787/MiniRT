@@ -107,39 +107,39 @@ int	start_all_cylinders_tests(void)
 
 	// ////////////	Tests truncated Cylinders
 
-	// cy_object.obj_data.cylinder.min = 1;
-	// cy_object.obj_data.cylinder.max = 2;
+	cy_object.obj_data.cylinder.min = 1;
+	cy_object.obj_data.cylinder.max = 2;
 
-	// /* 1 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 1.5, 0), vec3_normalise(get_vec3(0.1, 1, 0)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(!list.count);
-	// /* 2 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 3, -5), get_vec3(0, 0, 1));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(!list.count);
-	// /* 3 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(!list.count);
-	// /* 4 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 2, -5), get_vec3(0, 0, 1));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(!list.count);
-	// /* 5 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 1, -5), get_vec3(0, 0, 1));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(!list.count);
-	// /* 6 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 1.5, -2), get_vec3(0, 0, 1));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count);
+	/* 1 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 1.5, 0), vec3_normalise(get_vec3(0.1, 1, 0)));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(!list.count);
+	/* 2 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 3, -5), get_vec3(0, 0, 1));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(!list.count);
+	/* 3 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(!list.count);
+	/* 4 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 2, -5), get_vec3(0, 0, 1));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(!list.count);
+	/* 5 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 1, -5), get_vec3(0, 0, 1));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(!list.count);
+	/* 6 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 1.5, -2), get_vec3(0, 0, 1));
+	test_get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count);
 
 	// ////////////	Caped Cylinders
 

@@ -2,13 +2,13 @@
 #include <float.h>
 #include <math.h>
 
-void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
+void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray *r)
 {
 	ft_memset(comp_out, 0, sizeof(t_comp));
-	comp_out->eyev =  vec3_reverse(r.dir);
+	comp_out->eyev =  vec3_reverse(r->dir);
 	comp_out->light = *scene->light;
 	comp_out->m = hit->obj->material;
-	comp_out->point = ray_at(hit->t, r);
+	comp_out->point = ray_at(hit->t, *r);
 	comp_out->normalv = get_object_normal_at(hit->obj, comp_out->point);
 	comp_out->t = hit->t;
 	comp_out->object = (t_object *)hit->obj;
@@ -25,7 +25,7 @@ void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 						vec3_double_multiplication(comp_out->normalv, EPSILON));
 }
 
-t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
+t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 {
 	int				i;
 	t_ray			r;
@@ -33,14 +33,26 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	t_comp			comp;
 
 	i = 0;
+	if (minirt->render->debug_x == 50 && minirt->render->debug_y == 50 )
+	{
+		PRINT_DEBUG("Unique Ray : ");
+		debug_print_ray(unique_ray);
+	}
 	while (i < minirt->scene->nb_objects)
 	{
-		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
+		r = ray_transform(*unique_ray, minirt->scene->objects[i].inv);
+		if (minirt->render->debug_x == 50 && minirt->render->debug_y == 50 )
+		{
+			PRINT_DEBUG("Transformed Ray : ");
+			debug_print_ray(&r);
+		}
 		get_intersection(&minirt->scene->objects[i], &r, &minirt->render->inter_list);
 		i++;
 	}
 	sort_inter(&minirt->render->inter_list);
 	hit = get_hit(&minirt->render->inter_list);
+	if (minirt->render->debug_x == 50 && minirt->render->debug_y == 50)
+		debug_print_inter_list(&minirt->render->inter_list);
 	if (!hit)
 		return (minirt->render->inter_list.count = 0, get_color(0, 0, 0));
 	else
@@ -80,17 +92,20 @@ int	render_scene(t_minirt *minirt)
 	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
+	for (int i = 0; i < minirt->scene->nb_objects; i++)
+		debug_print_matrice(minirt->scene->objects[i].transform, "inv matrice");
 	while (y < minirt->scene->camera->vsize)
 	{
 		x = 0;
 		minirt->render->debug_x = 0;
 		while (x < minirt->scene->camera->hsize)
 		{
-			// PRINT_DEBUG("(%d,%d) : ", x, y );
+			PRINT_DEBUG("(%d,%d) : ", x, y );
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
-			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
+			put_pixel(minirt, color_to_int(intersect_objects(minirt, &ray)), x, y);
 			x += minirt->render->pixel_size;
 			minirt->render->debug_x = x;
+			PRINT_DEBUG("\n");
 		}
 		y += minirt->render->pixel_size;
 		minirt->render->debug_y = y;
@@ -106,5 +121,5 @@ t_vec3	render_one_pixel_test(t_minirt *minirt, int x, int y)
 	t_ray	ray;
 
 	ray = ray_for_pixel(*minirt->scene->camera, x, y);
-	return (intersect_objects(minirt, ray));
+	return (intersect_objects(minirt, &ray));
 }
