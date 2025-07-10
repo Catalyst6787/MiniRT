@@ -1,10 +1,12 @@
 #include "minirt.h"
 
-int	parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor)
+int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 4)
+		quit(minirt, WRONG_SPH_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
 	sphere->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
@@ -21,11 +23,13 @@ int	parse_sphere(t_scene *scene, t_sphere *sphere, int *cursor)
 	//check
 }
 
-int	parse_plane(t_scene *scene, t_plane *plane, int *cursor)
+int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 6)
+		quit(minirt, WRONG_PLANE_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
 	plane->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
@@ -44,11 +48,13 @@ int	parse_plane(t_scene *scene, t_plane *plane, int *cursor)
 	//check
 }
 
-int	parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor)
+int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
+	if (count_comas(scene->buffer, i) != 6)
+		quit(minirt, WRONG_CYL_DATA);
 	while (!ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
 	cylinder->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
@@ -60,6 +66,7 @@ int	parse_cylinder(t_scene *scene, t_cylinder *cylinder, int *cursor)
 	cylinder->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->dir.w = 0;
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
+	cylinder->radius = cylinder->diameter / 2;
 	cylinder->height = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	cylinder->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;

@@ -1,20 +1,20 @@
 
 #include "minirt.h"
 
-void	check_file_name(t_minirt *minirt, char *file_path)
+void	check_file_name(t_minirt *minirt)
 {
 	int	i;
 
 	i = 0;
-	if (!ft_is_char_in_string(file_path, '.'))
+	if (!ft_is_char_in_string(minirt->scene->filename, '.'))
 		quit(minirt, EXT_MISSING_ERR);
-	while (file_path[i] && file_path[i] != '.')
+	while (minirt->scene->filename[i] && minirt->scene->filename[i] != '.')
 		i++;
-	if (file_path[++i] != 'r')
+	if (minirt->scene->filename[++i] != 'r')
 		quit(minirt, WRONG_EXT_ERR);
-	if (file_path[++i] != 't')
+	if (minirt->scene->filename[++i] != 't')
 		quit(minirt, WRONG_EXT_ERR);
-	if (file_path[++i])
+	if (minirt->scene->filename[++i])
 		quit(minirt, WRONG_EXT_ERR);
 }
 

@@ -24,7 +24,7 @@ void	count_elements(t_scene *scene)
 	scene->nb_objects = scene->nb_sphere + scene->nb_plane + scene->nb_cylinder; // add here the next objects
 }
 
-void	parse_objects(t_scene *scene)
+void	parse_objects(t_minirt *minirt, t_scene *scene)
 {
 	int	cursor;
 	int	s;
@@ -41,20 +41,20 @@ void	parse_objects(t_scene *scene)
 				&& ft_isspace(scene->buffer[cursor]))
 			cursor++;
 		if (scene->buffer[cursor] == 'A')
-			parse_ambiant_light(scene, &cursor);
+			parse_ambiant_light(minirt, scene, &cursor);
 		if (scene->buffer[cursor] == 'C')
-			parse_camera(scene, &cursor);
+			parse_camera(minirt, scene, &cursor);
 		if (scene->buffer[cursor] == 'L')
-			parse_light(scene, &cursor);
+			parse_light(minirt, scene, &cursor);
 		if (scene->buffer[cursor] == 's')
 			if (scene->buffer[++cursor] == 'p')
-				s += parse_sphere(scene, scene->spheres[s], &cursor);
+				s += parse_sphere(minirt, scene, scene->spheres[s], &cursor);
 		if (scene->buffer[cursor] == 'p')
 			if (scene->buffer[++cursor] == 'l')
-				p += parse_plane(scene, scene->planes[p], &cursor);
+				p += parse_plane(minirt, scene, scene->planes[p], &cursor);
 		if (scene->buffer[cursor] == 'c')
 			if (scene->buffer[++cursor] == 'y')
-				c += parse_cylinder(scene, scene->cylinders[c], &cursor);
+				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
 	}
 	/* should work if buffer_data checks correctly done*/
 }
@@ -84,11 +84,11 @@ int	get_file_contents(int fd, char **file_contents)
 	return (0);
 }
 
-void	set_scene_buffer(t_minirt *minirt, char *file_path)
+void	set_scene_buffer(t_minirt *minirt)
 {
 	int		fd;
 
-	fd = open(file_path, O_RDONLY);
+	fd = open(minirt->scene->filename, O_RDONLY);
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);
 	get_file_contents(fd, &minirt->scene->buffer);
@@ -98,25 +98,27 @@ void	set_scene_buffer(t_minirt *minirt, char *file_path)
 		quit(minirt, EMPTY_FILE);
 }
 
-void	parse_scene(t_minirt *minirt, char *file_path)
+void	parse_scene(t_minirt *minirt)
 {
-	PRINT_DEBUG("\n%s\n\n", file_path);
+	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
-	check_file_name(minirt, file_path);
-	set_scene_buffer(minirt, file_path);
+	check_file_name(minirt);
+	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
 	check_characters_validity(minirt);
 	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
-	parse_objects(minirt->scene);
+	parse_objects(minirt, minirt->scene);
 	set_objects_transformation(minirt->scene);
 	set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
 	debug_print_scene_data(minirt);
-	print_scene_ok_message(file_path);
+	print_scene_ok_message(minirt->scene->filename);
+	fill_intersection_table(minirt, minirt->render);
+	set_selected_object_str(minirt, minirt->scene);
+	debug_print_objects_pointers(minirt->scene);
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
-	fill_intersection_table(minirt, minirt->render);
 }

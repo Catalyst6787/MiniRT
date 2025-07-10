@@ -22,6 +22,7 @@ int	init_mlx(t_minirt *minirt)
 
 int	init_events(t_minirt *minirt)
 {
+
 	mlx_hook(minirt->mlx->mlx_win, 2, 1L << 0, handle_keypress, minirt);
 	mlx_hook(minirt->mlx->mlx_win, 17, 1L << 0, end_mlx_loop, minirt->mlx);
 	mlx_hook(minirt->mlx->mlx_win, 4, 1L << 2, handle_mouseclick, minirt);

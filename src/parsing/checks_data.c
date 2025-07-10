@@ -49,7 +49,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 	while (++i < scene->nb_plane)
 		if (!is_ok_dir(scene->planes[i]->dir)
 			|| !is_ok_color(scene->planes[i]->color))
-			quit(minirt, WRONG_PLAN_DATA);
+			quit(minirt, WRONG_PLANE_DATA);
 	i = -1;
 	while (++i < scene->nb_cylinder)
 		if (!is_ok_dir(scene->cylinders[i]->dir)

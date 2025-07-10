@@ -31,7 +31,7 @@ SRC					=	main.c \
 						fill_intersection_table.c \
 						debug.c \
 						double_utils.c \
-						events.c \
+						events.c events_camera_light.c event_obj_positions.c events_fun.c \
 						print_data.c \
 						exit.c \
 						get_debug_fd.c \
@@ -39,6 +39,7 @@ SRC					=	main.c \
 						print_debug.c \
 						rays.c \
 						render.c \
+						display_image.c \
 						normals.c \
 						lighting.c \
 						intersections.c \
@@ -60,7 +61,7 @@ SRC					=	main.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
 						test_lighting.c test_world.c test_shadows.c test_camera.c \
-						tests_planes.c tests_cylinders.c \
+						tests_planes.c tests_cylinders.c tests_cones.c \
 
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(notdir $(SRC:.c=.o)))
 

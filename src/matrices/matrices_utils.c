@@ -29,8 +29,7 @@ t_matrix	get_matrix(int row, int col, bool identity)
 	int			i;
 	int			j;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	if (row < 1 || row > 4 || col < 1 || col > 4)
 		return (print_err(FILE, LINE, "matrix size must be between 1 and 4"),
 			get_matrix(4, 4, 0));
@@ -39,16 +38,15 @@ t_matrix	get_matrix(int row, int col, bool identity)
 	new_matrix.col = col;
 	if (identity)
 	{
-		while (i < new_matrix.row)
+		while (++i < new_matrix.row)
 		{
+			j = 0;
 			while (j < new_matrix.col)
 			{
 				if (i == j)
 					new_matrix.matrix[i][j] = 1;
 				j++;
 			}
-			j = 0;
-			i++;
 		}
 	}
 	return (new_matrix);
@@ -81,11 +79,9 @@ void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
 {
 	if (i >= m->row || j >= m->col)
 	{
-		print_err(FILE, LINE, "matrix_set_elem, tried to set element outside of matrix");
+		print_err(FILE, LINE,
+			"matrix_set_elem,tried to set element outside of matrix");
 		return ;
 	}
 	m->matrix[i][j] = elem;
 }
-
-
-

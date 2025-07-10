@@ -78,3 +78,42 @@ void	event_print_debug(t_minirt *minirt)
 	print_plane_data(minirt);
 	print_cylinder_data(minirt);
 }
+
+void	print_inter(t_inter *inter)
+{
+	printf("inter: t=[%f], obj=[%p]\n", inter->t, (void *)inter->obj);
+}
+
+void	print_scene(t_minirt *minirt, bool asterix)
+{
+	if (asterix == true)
+	{
+		printf("\n* * * * * * * * * * * * * * * * * * * * * *\n");
+		printf("*                  Scene                  *");
+		printf("\n\n");
+	}
+	printf("\n");
+	printf("%s", minirt->scene->buffer);
+	printf("\n");
+	if (asterix == true)
+	{
+		printf("\n\n");
+		printf("*                                         *\n");
+		printf("* * * * * * * * * * * * * * * * * * * * * *\n\n");
+	}
+}
+
+void	print_inter_list(t_inter_list *list)
+{
+	int	i;
+
+	i = 0;
+	printf("Inter Count %d\n", list->count);
+	while (i < list->count)
+	{
+		printf("Inter obj [%d] : %p\n", i, (void *)list->inters[i].obj);
+		printf("Inter  [%d] : %.3f\n", i, list->inters[i].t);
+		i++;
+	}
+
+}

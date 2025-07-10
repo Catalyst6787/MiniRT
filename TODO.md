@@ -3,42 +3,68 @@ Simple C ray tracer.
 
 ### basic
 
- - [ ] parsing : filter number of coma
+- [ ] ui string window ratio ?
+- [ ] display last key pressed
+- [ ] cone
+- [ ] start to think how to bonus
+- [ ] prepare the project to merge it on main
+- [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
+- [ ] add height mode to pav num
 
+- [X] option to display the commands
+- [X] option to activate cone cap
+- [X] cylider caps
+- [X] change rays to pointers
+- [X] why does dir.y cylinder doesnt do shit ?
+- [X] add the selected object feature (different from light ?)
+- [X] Inter should take *ray instead of ray
+
+- [X] parsing : filter number of coma
 
 - [X] Create Camera and iterate over pixels
-- [ ] Create scene and calculate intersections of rays and objects
-  - [ ] Sphere
+- [X] Create scene and calculate intersections of rays and objects
+  - [X] Sphere
     - [X] basic intersection
 	- [X] only spheres in front of cam
-	- [ ] shading
-	- [ ] light level
-	- [ ] ray rebound
-  - [ ] Cylinder
-  - [ ] Wall
+	- [X] shading
+	- [X] light level
+	- [X] ray rebound
+  - [X] Cylinder
+  - [X] Wall
 
 - [] Parsing
 	- [X] handle empty file
 
-- [ ] add double_is_equal() using epsilon
-- [ ] add vec3_is_equal() aswell
+### optional
+
+- [ ] add a ratio to move object faster
+
+
+### cone
+
+- [ ] object_type_to_str
+- [ ] set_cone_tranformation
+- [ ] create_object_from_cone
+- [ ] parsing
+- [ ] int	count_intersections
 
 
 ### bonuses list
 
  - [X] phong
  - [ ] colored and multi spot lighs
- - [ ] cube
+ - [ ] cube / cone
  - [ ] diffusion
  - [ ] multithreading
 
 Other ideas :
-	Patterns (perlin)
+ - [ ] Patterns (perlin)
 
 ### end
  - [ ] remove all asserts
- - [ ] remove time.h and timing in main
+ - [ ] remove time.h and timing in render.c
  - [ ] remove PRINT_DEBUG
+ - [ ] do we need to check mlx init ?
 
 
 ### Completed Column ✓

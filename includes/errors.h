@@ -21,7 +21,7 @@
 # define WRONG_CAM_DATA "Error : wrong camera data\n"
 # define WRONG_LIGHT_DATA "Error : wrong light data\n"
 # define WRONG_SPH_DATA "Error : wrong sphere data\n"
-# define WRONG_PLAN_DATA "Error : wrong plane data\n"
+# define WRONG_PLANE_DATA "Error : wrong plane data\n"
 # define WRONG_CYL_DATA "Error : wrong cylinder data\n"
 
 # define MISSING_AMB_ERR "Error : scene missing ambiant light\n"

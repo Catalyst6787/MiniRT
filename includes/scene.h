@@ -50,6 +50,7 @@ typedef struct s_scene
 	t_plane		**planes;
 	t_cylinder	**cylinders;
 	t_object	*objects;
+	char		*filename;
 	char		*buffer;
 	int			nb_amb;
 	int			nb_cam;

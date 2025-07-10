@@ -2,10 +2,10 @@
 #include <float.h>
 #include <math.h>
 
-void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
+void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray *r)
 {
 	ft_memset(comp_out, 0, sizeof(t_comp));
-	comp_out->eyev =  vec3_reverse(r.dir);
+	comp_out->eyev =  vec3_reverse(r->dir);
 	comp_out->light = *scene->light;
 	comp_out->m = hit->obj->material;
 	comp_out->point = ray_at(hit->t, r);
@@ -25,7 +25,7 @@ void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray r)
 						vec3_double_multiplication(comp_out->normalv, EPSILON));
 }
 
-t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
+t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 {
 	int				i;
 	t_ray			r;
@@ -36,7 +36,7 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray unique_ray)
 	while (i < minirt->scene->nb_objects)
 	{
 		r = ray_transform(unique_ray, minirt->scene->objects[i].inv);
-		get_intersection(&minirt->scene->objects[i], r, &minirt->render->inter_list);
+		get_intersection(&minirt->scene->objects[i], &r, &minirt->render->inter_list);
 		i++;
 	}
 	sort_inter(&minirt->render->inter_list);
@@ -58,10 +58,10 @@ static void	put_pixel(t_minirt *minirt, int color, int x, int y)
 	int	y_off;
 
 	y_off = y;
-	while (y_off < y + PIXEL_SIZE_MULT && y_off < minirt->scene->camera->vsize)
+	while (y_off < y + minirt->render->pixel_size && y_off < minirt->scene->camera->vsize)
 	{
 		x_off = x;
-		while (x_off < x + PIXEL_SIZE_MULT  && x_off < minirt->scene->camera->hsize)
+		while (x_off < x + minirt->render->pixel_size  && x_off < minirt->scene->camera->hsize)
 		{
 			my_mlx_pixel_put(minirt, x_off, y_off, color);
 			x_off++;
@@ -77,7 +77,6 @@ int	render_scene(t_minirt *minirt)
 	t_ray	ray;
 
 	y = 0;
-	debug_print_objects_pointers(minirt->scene);
 	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
@@ -88,15 +87,21 @@ int	render_scene(t_minirt *minirt)
 		while (x < minirt->scene->camera->hsize)
 		{
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
-			put_pixel(minirt, color_to_int(intersect_objects(minirt, ray)), x, y);
-			x += PIXEL_SIZE_MULT;
+			put_pixel(minirt, color_to_int(intersect_objects(minirt, &ray)), x, y);
+			x += minirt->render->pixel_size;
 			minirt->render->debug_x = x;
 		}
-		y += PIXEL_SIZE_MULT;
+		y += minirt->render->pixel_size;
 		minirt->render->debug_y = y;
 	}
-	mlx_put_image_to_window(minirt->mlx->mlx,
-		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
+	display_image(minirt);
+	// mlx_put_image_to_window(minirt->mlx->mlx,
+	// 	minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
+	
+	// if (minirt->mlx->command_help)
+	// 	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win, WIN_W - (WIN_W / 5), 11, color_to_int(get_color(0.7, 0.7, 0.7)), COMMAND_INFO);
+	// mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win, 10, 11, color_to_int(get_color(0.7, 0.7, 0.7)), minirt->mlx->str_selected_object);
+	
 	return (0);
 }
 
@@ -105,5 +110,5 @@ t_vec3	render_one_pixel_test(t_minirt *minirt, int x, int y)
 	t_ray	ray;
 
 	ray = ray_for_pixel(*minirt->scene->camera, x, y);
-	return (intersect_objects(minirt, ray));
+	return (intersect_objects(minirt, &ray));
 }

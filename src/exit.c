@@ -58,6 +58,8 @@ void	free_scene(t_scene *scene)
 		free(scene->camera);
 	if (scene->buffer)
 		free(scene->buffer);
+	if (scene->filename)
+		free(scene->filename);
 }
 
 void	free_mlx(t_mlx_data *mlx)
@@ -78,6 +80,12 @@ void	free_mlx(t_mlx_data *mlx)
 	}
 }
 
+void	free_ui(t_ui *ui)
+{
+	if (ui->str_selected_object)
+		free(ui->str_selected_object);
+}
+
 
 int	quit(t_minirt *minirt, char *str)
 {
@@ -90,6 +98,8 @@ int	quit(t_minirt *minirt, char *str)
 			free_scene(minirt->scene);
 		if (minirt->render)
 			free_render(minirt->render);
+		if (minirt->ui)
+			free_ui(minirt->ui);
 	}
 	print_exit_info(str);
 	CLOSE_DEBUG_FD;

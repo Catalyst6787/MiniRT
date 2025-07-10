@@ -19,6 +19,8 @@
 		"stdbool.h": "c",
 		"cmath": "c",
 		"plane.h": "c",
-		"object.h": "c"
+		"object.h": "c",
+		"limits": "c",
+		"cylinder.h": "c"
 	}
 }

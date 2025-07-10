@@ -29,5 +29,6 @@ int			start_all_shadows_tests(void);
 int			start_all_camera_tests(void);
 int			start_all_planes_tests(void);
 int			start_all_cylinders_tests(void);
+int			start_all_cones_tests(void);
 
 #endif
