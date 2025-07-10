@@ -18,6 +18,10 @@ char	*trim_ato_ptr(char *ptr, int delim)
 	char	*dest;
 
 	i = 0;
+	if (delim == ' ')
+		while (ptr[i] && ptr[i] != delim && ptr[i] != '\t')
+			i++;
+	else
 	while (ptr[i] && ptr[i] != delim)
 		i++;
 	dest = ft_substr(ptr, 0, i);

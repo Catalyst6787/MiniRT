@@ -160,6 +160,8 @@ int			start_all_cones_tests(void)
 	assert(list.inters[0].t == 0.35355339059327379);
 	assert(list.count == 1);
 
+	//need to make cone max and min
+
 
 	free(list.inters);
 	free(cone);

@@ -37,9 +37,6 @@ void	set_plane_transformation(t_plane *pl)
 
 void	set_cylinder_tranformation(t_cylinder *cy)
 {
-
-	debug_print_matrice(get_rotation_matrix(cy->dir), "Rotation");
-
 	cy->transform = get_transformation(
 			get_translation_matrix(cy->pos),
 			get_rotation_matrix(convert_dir_to_euler(cy->dir)),

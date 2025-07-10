@@ -29,8 +29,6 @@ void	display_command_help(t_minirt *minirt, t_mlx_data *mlx)
 		mlx_pixel_put(mlx->mlx, mlx->mlx_win, 320, y, color);
 }
 
-
-
 void	display_image(t_minirt *minirt)
 {
 	mlx_put_image_to_window(minirt->mlx->mlx,
@@ -38,5 +36,4 @@ void	display_image(t_minirt *minirt)
 	if (minirt->ui->command_help)
 		display_command_help(minirt, minirt->mlx);
 	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,  WIN_W - 140, 18, color_to_int(minirt->ui->string_color), minirt->ui->str_selected_object);
-	
 }

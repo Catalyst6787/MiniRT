@@ -79,6 +79,7 @@
 
 
 #  define A 0
+#  define B 11
 #  define C 99
 #  define D 2
 #  define E 14
@@ -87,12 +88,14 @@
 #  define J 38
 #  define K 40
 #  define L 37
+#  define N 45
 #  define O 31
 #  define P 35
 #  define Q 113
 #  define R 15
 #  define S 1
 #  define U 32
+#  define V 9
 #  define W 13
 #  define X 7
 #  define Z 6

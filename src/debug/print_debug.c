@@ -44,11 +44,11 @@ void	debug_print_scene_data(t_minirt *minirt)
 	int i = -1;
 	PRINT_DEBUG("\n* * * * * * * * * * * * * * * * * * * * * *\n");
 	PRINT_DEBUG("*                  Scene                  *");
-	PRINT_DEBUG("\n\n");
+	PRINT_DEBUG("\n");
 	PRINT_DEBUG("\n");
 	PRINT_DEBUG("%s", minirt->scene->buffer);
 	PRINT_DEBUG("\n");
-	PRINT_DEBUG("\n\n");
+	PRINT_DEBUG("\n");
 	PRINT_DEBUG("*                                         *\n");
 	PRINT_DEBUG("* * * * * * * * * * * * * * * * * * * * * *\n\n");
 	PRINT_DEBUG("\n");

@@ -3,14 +3,15 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] ui string window ratio ?
-- [ ] display last key pressed
 - [ ] cone
+- [ ] display last key pressed
 - [ ] start to think how to bonus
-- [ ] prepare the project to merge it on main
-- [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
+- [ ] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
 - [ ] add height mode to pav num
 
+
+- [X] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
+- [X] prepare the project to merge it on main
 - [X] option to display the commands
 - [X] option to activate cone cap
 - [X] cylider caps
@@ -18,11 +19,14 @@ Simple C ray tracer.
 - [X] why does dir.y cylinder doesnt do shit ?
 - [X] add the selected object feature (different from light ?)
 - [X] Inter should take *ray instead of ray
-
 - [X] parsing : filter number of coma
 
+
+
+
 - [X] Create Camera and iterate over pixels
-- [X] Create scene and calculate intersections of rays and objects
+- [X] Create scene and calculate intersections of rays
+and objects
   - [X] Sphere
     - [X] basic intersection
 	- [X] only spheres in front of cam
