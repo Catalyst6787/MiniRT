@@ -35,27 +35,6 @@ void	set_plane_transformation(t_plane *pl)
 	pl->inv = get_inversed_matrix(pl->transform);
 }
 
-t_vec3 convert_dir_to_euler(t_vec3 dir)
-{
-	t_vec3 euler_angles;
-	double len_xz;
-
-	dir = vec3_normalise(dir);
-	euler_angles.y = atan2(dir.x, dir.z);
-	len_xz = sqrt(dir.x * dir.x + dir.z * dir.z);
-	if (len_xz < EPSILON)
-	{
-		if (dir.y > 0)
-			euler_angles.x = M_PI_2;
-		else
-			euler_angles.x = -M_PI_2;
-	}
-	else
-		euler_angles.x = atan2(dir.y, len_xz);
-	euler_angles.z = 0.0;
-	return (euler_angles);
-}
-
 void	set_cylinder_tranformation(t_cylinder *cy)
 {
 

@@ -44,6 +44,7 @@
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
+#  define M_PI_2 1.57079632679489661923
 # endif
 # define EPSILON 1.0E-5
 
@@ -161,6 +162,8 @@ t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
 t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir, double diameter, double height, t_vec3 color);
 void		free_sphere(t_object *object);
 
+int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
+
 /*                             Material Utils                               */
 
 t_material	get_material(void);
@@ -176,6 +179,7 @@ int			get_max_int(int a, int b);
 int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
 char		*object_type_to_str(t_object *object, bool selected);
+t_vec3		convert_dir_to_euler(t_vec3 dir);
 
 /*                                 EVENTS                                  */
 
@@ -209,6 +213,8 @@ void		debug_print_objects_pointers(t_scene *scene);
 void		debug_print_inter_list(t_inter_list *list);
 void		debug_print_vec(t_vec3 *v, char *name);
 void		debug_print_matrice(t_matrix m, char *matrix_type);
+
+void		print_inter(t_inter *inter);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
 void		print_ray(t_ray r);
@@ -217,6 +223,7 @@ void		print_render_pixel(t_vec3	pixel_center,
 				t_vec3	ray_direction,
 				t_ray	ray,
 				t_vec3	color);
+void		print_inter_list(t_inter_list *list);
 
 
 /*                                 DOUBLE UTILS                            */

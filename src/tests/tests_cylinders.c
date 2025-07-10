@@ -1,6 +1,44 @@
 #include "minirt.h"
 
-int	test_get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
+
+bool	check_cap(const t_ray *ray, double t)
+{
+	double x;
+	double z;
+	
+
+	x = ray->origin.x + t * ray->dir.x;
+	z = ray->origin.z + t * ray->dir.z;
+	return ((x * x + z * z) <= 1);
+}
+
+int	intersect_caps(const t_object *object, const t_ray *ray, t_inter_list *list)
+{
+	double	t;
+
+	if (!object->obj_data.cylinder.isclosed || (ray->dir.y > -(EPSILON) &&  ray->dir.y < EPSILON))
+		return (0);
+	t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
+	if (check_cap(ray, t))
+	{
+		list->inters[list->count].t = t;
+		list->inters[list->count].obj = object;
+		list->count++;
+		return (1);
+	}
+	t = (object->obj_data.cylinder.max - ray->origin.y) / ray->dir.y;
+	if (check_cap(ray, t))
+	{
+		list->inters[list->count].t = t;
+		list->inters[list->count].obj = object;
+		list->count++;
+		return (1);
+	}
+	return (0);
+}
+
+
+int	get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 {
 	double	a;
 	double	b;
@@ -11,24 +49,17 @@ int	test_get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_li
 	double	t0;
 	double	t1;
 
-	// double t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
-	// double x = ray->origin.x + t * ray->dir.x;
-	// double z = ray->origin.z + t * ray->dir.z;
-	// if (pow(x, 2) + pow(z, 2) > 1)
-	// 	return (1);
-
-
+	if (list->count > list->capacity - 2)
+		return (print_err(FILE, LINE,
+				"get_cylinder_inter: no more space in list"), 1);
 	a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if ((a > -(EPSILON) && a < EPSILON))
-		return (0);
+		intersect_caps(object, ray, list);
 	b = 2 * ray->origin.x * ray->dir.x + 2 * ray->origin.z * ray->dir.z;
 	c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1;
 	discriminant = (b * b) - (4 * a * c);
 	if (discriminant < 0)
 		return (0);
-	if (list->count > list->capacity - 2)
-		return (print_err(FILE, LINE,
-				"get_cylinder_inter: no more space in list"), 1);
 	t0 = (-b - sqrtf(discriminant)) / (2.0 * a);
 	t1 = (-b + sqrtf(discriminant)) / (2.0 * a);
 	if (t0 > t1)
@@ -47,8 +78,24 @@ int	test_get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_li
 		list->inters[list->count].obj = object;
 		list->count++;
 	}
-	return (1);
+	intersect_caps(object, ray, list);
+	return (0);
 }
+
+
+t_vec3	test_cylinder_normals(const t_object *cy, const t_vec3 world_point)
+{
+	double	dist;
+
+	dist = pow(world_point.x, 2) + pow(world_point.z, 2);
+	if (dist < 1 && world_point.y >= (cy->obj_data.cylinder.max - EPSILON))
+		return (get_vec3(0, 1, 0));
+	else if (dist < 1 && world_point.y <= (cy->obj_data.cylinder.min - EPSILON))
+		return (get_vec3(0, -1, 0));
+	return world_point;
+}
+
+
 
 
 int	start_all_cylinders_tests(void)
@@ -62,6 +109,7 @@ int	start_all_cylinders_tests(void)
 	create_object_from_cylinder(&cy_object, cy, 0);
 	cy_object.obj_data.cylinder.min = INT_MIN;
 	cy_object.obj_data.cylinder.max = INT_MAX;
+	cy_object.obj_data.cylinder.isclosed = 0;
 
 	list.capacity = 2;
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
@@ -71,37 +119,37 @@ int	start_all_cylinders_tests(void)
 
 	list.count = 0;
 	r = get_ray(get_point3(1, 0, 0), get_vec3(0, 1, 0));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.inters[0].t);
 
 	list.count = 0;
 	r = get_ray(get_point3(0, 0, 0), get_vec3(0, 1, 0));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.inters[0].t);
 
 	list.count = 0;
 	r = get_ray(get_point3(0, 0, -5), get_vec3(1, 1, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.inters[0].t);
 
 	////////////	Tests intersections
 
 	list.count = 0;
 	r = get_ray(get_point3(1, 0, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(list.inters[0].t == 5);
 	assert(list.inters[1].t == 5);
 
 	list.count = 0;
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 
 	assert(list.inters[0].t == 4);
 	assert(list.inters[1].t == 6);
 
 	list.count = 0;
 	r = get_ray(get_point3(0.5, 0, -5), vec3_normalise(get_vec3(0.1, 1, 1)));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(list.inters[0].t == 6.807981925946395);
 	assert(list.inters[1].t == 7.0887234304597859);
 
@@ -113,63 +161,72 @@ int	start_all_cylinders_tests(void)
 	/* 1 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 1.5, 0), vec3_normalise(get_vec3(0.1, 1, 0)));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.count);
 	/* 2 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 3, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.count);
 	/* 3 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 0, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.count);
 	/* 4 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 2, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.count);
 	/* 5 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 1, -5), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(!list.count);
 	/* 6 */
 	list.count = 0;
 	r = get_ray(get_point3(0, 1.5, -2), get_vec3(0, 0, 1));
-	test_get_cylinder_inter(&cy_object, &r, &list);
+	get_cylinder_inter(&cy_object, &r, &list);
 	assert(list.count);
 
-	// ////////////	Caped Cylinders
+	////////////	Caped Cylinders
 
-	// /* 1 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 3, 0), vec3_normalise(get_vec3(0, 0, 1)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count == 2);
-	// /* 2 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 3, -2), vec3_normalise(get_vec3(0, -1, 2)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count == 2);
-	// /* 3 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 4, -2), vec3_normalise(get_vec3(0, -1, 1)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count == 2);
-	// /* 4 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, 0, -2), vec3_normalise(get_vec3(0, 1, 2)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count == 2);
-	// /* 4 */
-	// list.count = 0;
-	// r = get_ray(get_point3(0, -1, -2), vec3_normalise(get_vec3(0, 1, 1)));
-	// test_get_cylinder_inter(&cy_object, &r, &list);
-	// assert(list.count == 2);
+	cy_object.obj_data.cylinder.isclosed = 1;
 
+	/* 1 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 3, 0), vec3_normalise(get_vec3(0, -1, 0)));
+	get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count == 2);
+	/* 2 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 3, -2), vec3_normalise(get_vec3(0, -1, 2)));
+	get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count == 2);
+	/* 3 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 4, -2), vec3_normalise(get_vec3(0, -1, 1)));
+	get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count == 2);
+	/* 4 */
+	list.count = 0;
+	r = get_ray(get_point3(0, 0, -2), vec3_normalise(get_vec3(0, 1, 2)));
+	get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count == 2);
+	/* 4 */
+	list.count = 0;
+	r = get_ray(get_point3(0, -1, -2), vec3_normalise(get_vec3(0, 1, 1)));
+	get_cylinder_inter(&cy_object, &r, &list);
+	assert(list.count == 2);
 
+	////////////	Cylinders normals
+
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0,1,0)),get_vec3(0, -1, 0)));
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0.5,1,0)),get_vec3(0, -1, 0)));
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0,1,0.5)),get_vec3(0, -1, 0)));
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0,2,0)),get_vec3(0, 1, 0)));
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0.5,2,0)),get_vec3(0, 1, 0)));
+	// assert(vec3_isequal(test_cylinder_normals(&cy_object, get_point3(0,2,0.5)),get_vec3(0, 1, 0)));
 
 
 

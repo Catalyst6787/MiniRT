@@ -4,7 +4,6 @@
 void	print_render_data(t_render *render)
 {
 	(void)render;
-	// PRINT_DEBUG("\n\n");
 }
 
 void	debug_print_ray(t_ray *r)
@@ -32,46 +31,6 @@ void	print_render_pixel(t_vec3	pixel_center,
 	PRINT_DEBUG("\n\n");
 }
 
-void	debug_print_inter(t_inter inter)
-{
-	printf("inter: t=[%f], obj=[%p]\n", inter.t, (void *)inter.obj);
-}
-
-
-
-// void	debug_print_inter_list(t_inter_list lst)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	printf("inter_lst of size %d:\n", lst.count);
-// 	while (i < lst.count)
-// 	{
-// 		printf("inter [%d]:	", i);
-// 		debug_print_inter(lst.inters[i]);
-// 		i++;
-// 	}
-
-// }
-
-void	print_scene(t_minirt *minirt, bool asterix)
-{
-	if (asterix == true)
-	{
-		printf("\n* * * * * * * * * * * * * * * * * * * * * *\n");
-		printf("*                  Scene                  *");
-		printf("\n\n");
-	}
-	printf("\n");
-	printf("%s", minirt->scene->buffer);
-	printf("\n");
-	if (asterix == true)
-	{
-		printf("\n\n");
-		printf("*                                         *\n");
-		printf("* * * * * * * * * * * * * * * * * * * * * *\n\n");
-	}
-}
 
 void	print_scene_ok_message(char *scene)
 {

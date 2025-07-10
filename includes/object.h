@@ -13,6 +13,7 @@ typedef struct s_cylinder_limits
 {
 	double	min;
 	double	max;
+	bool	isclosed;
 }				t_cylinder_limits;
 
 typedef union u_original_obj
