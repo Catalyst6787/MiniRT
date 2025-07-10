@@ -36,10 +36,32 @@ void	event_render(t_minirt *minirt)
 
 void	event_display_command_help(t_minirt *minirt)
 {
-	if (minirt->mlx->command_help)
-		minirt->mlx->command_help = 0;
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
+	if (minirt->ui->command_help)
+		minirt->ui->command_help = 0;
 	else
-		minirt->mlx->command_help = 1;
+		minirt->ui->command_help = 1;
+	render_scene(minirt);
+}
+
+void	event_change_string_color(t_minirt *minirt)
+{
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
+	if (!minirt->ui->color_id)
+	{
+		minirt->ui->string_color = get_color(0,0,0);
+		minirt->ui->color_id++;
+	}
+	else if (minirt->ui->color_id == 1)
+	{
+		minirt->ui->string_color = get_color(1,0,0);
+		minirt->ui->color_id++;
+	}
+	else if (minirt->ui->color_id == 2)
+	{
+		minirt->ui->string_color = get_color(1,1,1);
+		minirt->ui->color_id = 0;
+	}
 	render_scene(minirt);
 }
 
@@ -48,19 +70,19 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 	char	*tmp;
 	char	*nb;
 
-	tmp = object_type_to_str(&scene->objects[minirt->mlx->selected_object], 1);
+	tmp = object_type_to_str(&scene->objects[minirt->ui->selected_object], 1);
 	if (!tmp)
 		quit(minirt, MALLOC_ERR);
-	nb = ft_itoa(scene->objects[minirt->mlx->selected_object].id);
+	nb = ft_itoa(scene->objects[minirt->ui->selected_object].id);
 	if (!nb)
 	{
 		free(tmp);
 		quit(minirt, MALLOC_ERR);
 	}
-	minirt->mlx->str_selected_object = ft_strjoin (tmp, nb);
+	minirt->ui->str_selected_object = ft_strjoin (tmp, nb);
 	free(tmp);
 	free(nb);
-	if (!minirt->mlx->str_selected_object)
+	if (!minirt->ui->str_selected_object)
 		quit(minirt, MALLOC_ERR);
 	tmp = NULL;
 	nb = NULL;
@@ -70,30 +92,30 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 {
 	if (keycode == PAV_MINUS)
 	{
-		if (minirt->mlx->selected_object == 0)
-			minirt->mlx->selected_object = minirt->scene->nb_objects - 1;
-		else if (minirt->mlx->selected_object > 0)
-			minirt->mlx->selected_object--;
+		if (minirt->ui->selected_object == 0)
+			minirt->ui->selected_object = minirt->scene->nb_objects - 1;
+		else if (minirt->ui->selected_object > 0)
+			minirt->ui->selected_object--;
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_PLUS)
 	{
-		if (minirt->mlx->selected_object < minirt->scene->nb_objects - 1)
-			minirt->mlx->selected_object++;
-		else if (minirt->mlx->selected_object == minirt->scene->nb_objects - 1)
-			minirt->mlx->selected_object = 0;
+		if (minirt->ui->selected_object < minirt->scene->nb_objects - 1)
+			minirt->ui->selected_object++;
+		else if (minirt->ui->selected_object == minirt->scene->nb_objects - 1)
+			minirt->ui->selected_object = 0;
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_MIDDLE)
 	{
-		if (minirt->mlx->move_mode == dir)
+		if (minirt->ui->move_mode == dir)
 		{
-			minirt->mlx->move_mode = pos;
+			minirt->ui->move_mode = pos;
 			printf("pos mode selected\n");
 		}
-		else if (minirt->mlx->move_mode == pos)
+		else if (minirt->ui->move_mode == pos)
 		{
-			minirt->mlx->move_mode = dir;
+			minirt->ui->move_mode = dir;
 			printf("dir mode selected\n");
 		}
 	}
@@ -140,14 +162,15 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		event_sphere_shearing(minirt);
 	else if (keycode == L && minirt->scene->nb_cylinder)
 	{
-			printf("[L] pressed\n");
-			if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
-				event_turn_cylinders(minirt);
+		printf("[L] pressed\n");
+		event_turn_cylinders(minirt);
 	}
 	else if (keycode == V)
 		event_activate_cylinder_cap(minirt);
 	else if (keycode == B)
 		event_display_command_help(minirt);
+	else if (keycode == N)
+		event_change_string_color(minirt);
 	else if (keycode == C)
 		event_print_debug(minirt);
 	else if (keycode == Q)

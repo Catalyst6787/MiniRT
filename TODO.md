@@ -3,14 +3,15 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] option to display the commands
-- [ ] displat last key pressed
+- [ ] ui string window ratio ?
+- [ ] display last key pressed
 - [ ] cone
 - [ ] start to think how to bonus
 - [ ] prepare the project to merge it on main
 - [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
+- [ ] add height mode to pav num
 
-
+- [X] option to display the commands
 - [X] option to activate cone cap
 - [X] cylider caps
 - [X] change rays to pointers
@@ -63,6 +64,7 @@ Other ideas :
  - [ ] remove all asserts
  - [ ] remove time.h and timing in render.c
  - [ ] remove PRINT_DEBUG
+ - [ ] do we need to check mlx init ?
 
 
 ### Completed Column ✓

@@ -1,21 +1,6 @@
 #ifndef KEYCODE_H
 # define KEYCODE_H
 
-# define COMMAND_INFO "ASWDER : Cam position\nArrows : Cam direction\nHJUKOP : Light\n"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # ifdef __linux__
 #  define SPACE 32
 #  define ESC 65307
@@ -53,6 +38,7 @@
 #  define J 106
 #  define K 107
 #  define L 108
+#  define N 110
 #  define O 111
 #  define P 112
 #  define Q 113
@@ -112,4 +98,22 @@
 #  define Z 6
 
 # endif
+
+# define COMMAND_HELP_1 "ASWDER : Cam position"
+# define COMMAND_HELP_2 "Arrows : Cam direction"
+# define COMMAND_HELP_3 "HJUKOP : Light"
+# define COMMAND_HELP_4 "SPACE : Render"
+# define COMMAND_HELP_5 "Pav Num arrows : change object position / direction"
+# define COMMAND_HELP_6 "Pav Num 5 : change object move mode (dir / pos)"
+# define COMMAND_HELP_7 "Pav Num +- : change object to move"
+# define COMMAND_HELP_8 "C : print scene data"
+# define COMMAND_HELP_9 "B : display commmand help"
+# define COMMAND_HELP_10 "N : change onscreen string color"
+# define COMMAND_HELP_11 "V : cylinder cap on / off"
+# define COMMAND_HELP_12 "P : fun wth sphere shearing"
+# define COMMAND_HELP_13 "L : fun wth cylinder rotation"
+
+
+
+
 #endif

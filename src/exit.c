@@ -77,9 +77,13 @@ void	free_mlx(t_mlx_data *mlx)
 		mlx->mlx = NULL;
 		free(mlx->img_st);
 		mlx->img_st = NULL;
-		if (mlx->str_selected_object)
-			free(mlx->str_selected_object);
 	}
+}
+
+void	free_ui(t_ui *ui)
+{
+	if (ui->str_selected_object)
+		free(ui->str_selected_object);
 }
 
 
@@ -94,6 +98,8 @@ int	quit(t_minirt *minirt, char *str)
 			free_scene(minirt->scene);
 		if (minirt->render)
 			free_render(minirt->render);
+		if (minirt->ui)
+			free_ui(minirt->ui);
 	}
 	print_exit_info(str);
 	CLOSE_DEBUG_FD;

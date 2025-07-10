@@ -5,6 +5,7 @@ void	event_activate_cylinder_cap(t_minirt *minirt)
 	int	i;
 
 	i = 0;
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	while (i < minirt->scene->nb_objects)
 	{
 		if (minirt->scene->objects[i].type == CYLINDER)
@@ -26,6 +27,7 @@ void	event_turn_cylinders(t_minirt *minirt)
 
 	pair = 0;
 	i = 0;
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	while (i < minirt->scene->nb_objects)
 	{
 		if (minirt->scene->objects[i].type == CYLINDER)

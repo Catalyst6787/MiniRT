@@ -73,14 +73,12 @@ typedef struct s_mlx_data
 	int			line_length;
 	int			endian;
 	t_img_data	*img_st;
-	t_move_mode	move_mode;
-	int			selected_object;
-	char		*str_selected_object;
-	bool		command_help;
 }	t_mlx_data;
 
 typedef struct s_ui
 {
+	int			color_id;
+	t_vec3		string_color;
 	t_move_mode	move_mode;
 	int			selected_object;
 	char		*str_selected_object;

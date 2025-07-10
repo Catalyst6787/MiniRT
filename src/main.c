@@ -6,9 +6,10 @@ void	init_ui(t_ui *ui)
 {
 	ui->str_selected_object = NULL;
 	ui->selected_object = 0;
-	ui->command_help = 0;
+	ui->command_help = 1;
 	ui->move_mode = pos;
-	// ui->
+	ui->color_id = 0;
+	ui->string_color = get_color(1, 1, 1);
 }
 
 
@@ -40,7 +41,7 @@ int	main(int ac, char **av)
 	minirt.render->camera_center.w = 1;
 	minirt.render->pixel_size = PIXEL_SIZE_MULT;
 	minirt.ui = &ui;
-	init_ui(&minirt);
+	init_ui(minirt.ui);
 
 	if (start_all_tests())
 		quit(&minirt, TESTS_ERR);
