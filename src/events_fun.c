@@ -1,5 +1,24 @@
 #include "minirt.h"
 
+void	event_activate_cylinder_cap(t_minirt *minirt)
+{
+	int	i;
+
+	i = 0;
+	while (i < minirt->scene->nb_objects)
+	{
+		if (minirt->scene->objects[i].type == CYLINDER)
+		{
+			if (minirt->scene->objects[i].obj_data.cylinder.isclosed)
+				minirt->scene->objects[i].obj_data.cylinder.isclosed = 0;
+			else
+				minirt->scene->objects[i].obj_data.cylinder.isclosed = 1;
+		}
+		i++;
+	}
+	render_scene(minirt);
+}
+
 void	event_turn_cylinders(t_minirt *minirt)
 {
 	int	i;
@@ -34,6 +53,7 @@ void	event_sphere_shearing(t_minirt *minirt)
 	int	pair;
 	t_shear shear;
 
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	pair = 0;
 	i = 0;
 	while (i < minirt->scene->nb_objects)

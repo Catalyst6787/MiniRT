@@ -76,13 +76,24 @@ typedef struct s_mlx_data
 	t_move_mode	move_mode;
 	int			selected_object;
 	char		*str_selected_object;
+	bool		command_help;
 }	t_mlx_data;
+
+typedef struct s_ui
+{
+	t_move_mode	move_mode;
+	int			selected_object;
+	char		*str_selected_object;
+	bool		command_help;
+
+}				t_ui;
 
 typedef struct s_minirt
 {
 	t_mlx_data	*mlx;
 	t_scene		*scene;
 	t_render	*render;
+	t_ui		*ui;
 }				t_minirt;
 
 /*                                 INIT                                  */
@@ -136,6 +147,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
 
+void		display_image(t_minirt *minirt);
 t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
@@ -147,6 +159,7 @@ int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
 t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
 void		swap_inters(t_inter *a, t_inter *b);
+t_vec3		get_cylinder_normal_at(const t_object *cy, const t_vec3 world_point);
 
 /*                             COLOR UTILS                                  */
 
@@ -197,6 +210,7 @@ void		asdw_handle(int keycode, t_minirt *minirt);
 void		event_object_selection(t_minirt *minirt, t_scene *scene, int keycode);
 void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
 void		event_obj_pos(t_minirt *minirt, int keycode);
+void		event_activate_cylinder_cap(t_minirt *minirt);
 
 /*                                 EXIT                                  */
 

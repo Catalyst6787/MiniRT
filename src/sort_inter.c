@@ -35,7 +35,7 @@ static void	quicksort(t_inter_list *arr, int low, int high)
 {
 	int	pi;
 
-	if (low < high)
+	if (low <= high)
 	{
 		pi = partition(arr, low, high);
 		quicksort(arr, low, pi -1);

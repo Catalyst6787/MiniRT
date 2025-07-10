@@ -22,16 +22,25 @@ void	number_handle(int keycode, t_minirt *minirt)
 
 void	event_render(t_minirt *minirt)
 {
-		clock_t	t;
-		double	time_taken;
+	clock_t	t;
+	double	time_taken;
 
-		ft_printf("Spacebar pressed : render asked!\n");
-		minirt->render->pixel_size = 1;
-		t = clock();
-		render_scene(minirt);
-		t = clock() - t;
-		time_taken = ((double)t) / CLOCKS_PER_SEC;
-		printf("Scene rendered in %f seconds\n", time_taken);
+	ft_printf("Spacebar pressed : render asked!\n");
+	minirt->render->pixel_size = 1;
+	t = clock();
+	render_scene(minirt);
+	t = clock() - t;
+	time_taken = ((double)t) / CLOCKS_PER_SEC;
+	printf("Scene rendered in %f seconds\n", time_taken);
+}
+
+void	event_display_command_help(t_minirt *minirt)
+{
+	if (minirt->mlx->command_help)
+		minirt->mlx->command_help = 0;
+	else
+		minirt->mlx->command_help = 1;
+	render_scene(minirt);
 }
 
 void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
@@ -126,21 +135,19 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 	else if (65429.9 <= keycode && keycode <= 65435.5)
 		event_obj_pos(minirt, keycode);
 	else if (keycode == PAV_MINUS || keycode == PAV_PLUS || keycode == PAV_MIDDLE)
-	{
 		event_object_selection(minirt, minirt->scene, keycode);
-	}
 	else if (keycode == P && minirt->scene->nb_sphere)
-	{
-		printf("[P] pressed\n");
-		if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
-			event_sphere_shearing(minirt);
-	}
+		event_sphere_shearing(minirt);
 	else if (keycode == L && minirt->scene->nb_cylinder)
 	{
 			printf("[L] pressed\n");
 			if (minirt->render->pixel_size == PIXEL_SIZE_MULT)
 				event_turn_cylinders(minirt);
 	}
+	else if (keycode == V)
+		event_activate_cylinder_cap(minirt);
+	else if (keycode == B)
+		event_display_command_help(minirt);
 	else if (keycode == C)
 		event_print_debug(minirt);
 	else if (keycode == Q)

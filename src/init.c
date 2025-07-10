@@ -17,8 +17,6 @@ int	init_mlx(t_minirt *minirt)
 	img_st->addr = mlx_get_data_addr(img_st->img, &mlx->bits_per_pixel,
 			&mlx->line_length, &mlx->endian);
 	mlx->img_st = img_st;
-	mlx->selected_object = 0;
-	mlx->move_mode = pos;
 	return (0);
 }
 

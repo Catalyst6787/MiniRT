@@ -3,12 +3,16 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] cylider caps
+- [ ] option to display the commands
+- [ ] displat last key pressed
 - [ ] cone
 - [ ] start to think how to bonus
 - [ ] prepare the project to merge it on main
 - [ ] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
 
+
+- [X] option to activate cone cap
+- [X] cylider caps
 - [X] change rays to pointers
 - [X] why does dir.y cylinder doesnt do shit ?
 - [X] add the selected object feature (different from light ?)

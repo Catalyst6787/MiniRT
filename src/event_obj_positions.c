@@ -14,7 +14,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(0, 0.1, 0)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(0, 0.1, 0))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, 0.1, 0)));
 	}
 	else if (keycode == PAV_DOWN)
 	{
@@ -22,7 +22,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(0, -0.1, 0)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(0, -0.1, 0))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, -0.1, 0)));
 	}
 	else if (keycode == PAV_LEFT)
 	{
@@ -30,7 +30,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(-0.1, 0, 0)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(-0.1, 0, 0))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(-0.1, 0, 0)));
 	}
 	else if (keycode == PAV_RIGHT)
 	{
@@ -38,7 +38,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(0.1, 0, 0)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(0.1, 0, 0))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0.1, 0, 0)));
 	}
 	else if (keycode == PAV_FRONT)
 	{
@@ -46,7 +46,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(0, 0, 0.1)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(0, 0, 0.1))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, 0, 0.1)));
 	}
 	else if (keycode == PAV_BACK)
 	{
@@ -54,7 +54,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		if (minirt->mlx->move_mode == pos)
 			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_translation_matrix(get_vec3(0, 0, -0.1)));
 		else if (minirt->mlx->move_mode == dir)
-			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(convert_dir_to_euler(get_vec3(0, 0, -0.1))));
+			minirt->scene->objects[i].transform = multiply_matrix(minirt->scene->objects[i].transform, get_rotation_matrix(get_vec3(0, 0, -0.1)));
 	}
 	minirt->scene->objects[i].inv = get_inversed_matrix(minirt->scene->objects[i].transform);
 	render_scene(minirt);

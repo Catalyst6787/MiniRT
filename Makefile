@@ -39,6 +39,7 @@ SRC					=	main.c \
 						print_debug.c \
 						rays.c \
 						render.c \
+						display_image.c \
 						normals.c \
 						lighting.c \
 						intersections.c \

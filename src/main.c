@@ -2,6 +2,17 @@
 #include "minirt.h"
 #include "vec3.h"
 
+void	init_ui(t_ui *ui)
+{
+	ui->str_selected_object = NULL;
+	ui->selected_object = 0;
+	ui->command_help = 0;
+	ui->move_mode = pos;
+	// ui->
+}
+
+
+
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
@@ -9,6 +20,7 @@ int	main(int ac, char **av)
 	t_img_data	img_st;
 	t_scene		scene;
 	t_render	render;
+	t_ui		ui;
 	clock_t		t;
 
 	if (ac != 2)
@@ -20,7 +32,6 @@ int	main(int ac, char **av)
 	ft_memset(&img_st, 0, sizeof(t_img_data));
 	minirt.mlx = &mlx;
 	minirt.mlx->img_st = &img_st;
-	minirt.mlx->str_selected_object = NULL;
 	minirt.scene = &scene;
 	minirt.scene->filename = ft_strdup(av[1]);
 	if (!minirt.scene->filename)
@@ -28,6 +39,8 @@ int	main(int ac, char **av)
 	minirt.render = &render;
 	minirt.render->camera_center.w = 1;
 	minirt.render->pixel_size = PIXEL_SIZE_MULT;
+	minirt.ui = &ui;
+	init_ui(&minirt);
 
 	if (start_all_tests())
 		quit(&minirt, TESTS_ERR);

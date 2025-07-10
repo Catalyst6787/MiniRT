@@ -1,6 +1,21 @@
 #ifndef KEYCODE_H
 # define KEYCODE_H
 
+# define COMMAND_INFO "ASWDER : Cam position\nArrows : Cam direction\nHJUKOP : Light\n"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ifdef __linux__
 #  define SPACE 32
 #  define ESC 65307
@@ -27,6 +42,7 @@
 
 
 #  define A 97
+#  define B 98
 #  define C 99
 #  define D 100
 #  define E 101
@@ -43,6 +59,7 @@
 #  define R 114
 #  define S 115
 #  define U 117
+#  define V 118
 #  define W 119
 #  define X 120
 #  define Z 122
