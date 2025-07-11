@@ -83,7 +83,6 @@ typedef struct s_ui
 	int			selected_object;
 	char		*str_selected_object;
 	bool		command_help;
-
 }				t_ui;
 
 typedef struct s_minirt
@@ -104,7 +103,10 @@ int			init_events(t_minirt *minirt);
 void		parse_scene(t_minirt *minirt);
 void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
+int			get_file_contents(int fd, char **file_contents);
+void		set_scene_buffer(t_minirt *minirt);
 double		ato_buffer(char *ptr, int *cursor, int delim);
+
 
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
@@ -117,6 +119,7 @@ void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
 
 int			count_comas(char *buffer, int i);
+int			count_spaces_in_line(char *buffer, int i);
 void		check_file_name(t_minirt *minirt);
 void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);

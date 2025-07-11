@@ -23,13 +23,13 @@ void	single_elements_check(t_minirt *minirt, t_scene *scene)
 	if (scene->nb_amb == 0)
 		quit(minirt, MISSING_AMB_ERR);
 	else if (scene->nb_amb > 1)
-		quit(minirt, TOO_MUCH_AMB_ERR);
+		quit(minirt, TOO_MANY_AMB_ERR);
 	else if (scene->nb_cam == 0)
 		quit(minirt, MISSING_CAM_ERR);
 	else if (scene->nb_cam > 1)
-		quit(minirt, TOO_MUCH_CAM_ERR);
+		quit(minirt, TOO_MANY_CAM_ERR);
 	else if (scene->nb_light == 0)
 		quit(minirt, MISSING_LIGHT_ERR);
 	else if (scene->nb_light > 1)
-		quit(minirt, TOO_MUCH_LIGHT_ERR);
+		quit(minirt, TOO_MANY_LIGHT_ERR);
 }

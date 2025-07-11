@@ -28,9 +28,9 @@
 # define MISSING_CAM_ERR "Error : scene missing camera\n"
 # define MISSING_LIGHT_ERR "Error : scene missing light\n"
 
-# define TOO_MUCH_AMB_ERR "Error : more than one ambiant light detected\n"
-# define TOO_MUCH_CAM_ERR "Error : more than one camera detected\n"
-# define TOO_MUCH_LIGHT_ERR "Error : more than one light source detected(delete later for bonuses)\n"
+# define TOO_MANY_AMB_ERR "Error : more than one ambiant light detected\n"
+# define TOO_MANY_CAM_ERR "Error : more than one camera detected\n"
+# define TOO_MANY_LIGHT_ERR "Error : more than one light source detected(delete later for bonuses)\n"
 
 # define MLX_ERR "Error : mlx initialization failed\n"
 # define RENDER_INIT_ERR "Error : render initialization failed\n"

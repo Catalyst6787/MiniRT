@@ -9,6 +9,10 @@ Simple C ray tracer.
 - [ ] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
 - [ ] add height mode to pav num
 
+	### when bonus
+
+	- [ ] change single_elements_check
+
 
 - [X] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
 - [X] prepare the project to merge it on main
@@ -65,6 +69,7 @@ Other ideas :
  - [ ] Patterns (perlin)
 
 ### end
+ 
  - [ ] remove all asserts
  - [ ] remove time.h and timing in render.c
  - [ ] remove PRINT_DEBUG

@@ -16,14 +16,47 @@ int	count_comas(char *buffer, int i)
 	return (count);
 }
 
+int	count_spaces_in_line(char *buffer, int i)
+{
+	int	count;
+
+	count = 0;
+	while (!ft_isspace(buffer[i]))
+		i++;
+	while (ft_isspace(buffer[i]))
+		i++;
+	while (buffer[i] && buffer[i] != '\n')
+	{
+		while (buffer[i] && !ft_isspace(buffer[i]))
+			i++;
+		if (buffer[i] == '\t' || buffer[i] == ' ')
+		{
+			while (buffer[i] && ft_isspace(buffer[i]))
+				i++;
+			count++;
+		}
+		if (buffer[i] == '\n')
+			break ;
+		i++;
+	}
+	if (buffer[i] == '\n' && ft_isspace(buffer[i - 1]))
+		count--;
+	return (count);
+}
+
 
 int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 2)
+
+	if (count_comas(scene->buffer, i) != 2
+		|| count_spaces_in_line(scene->buffer, i) != 1)
+	{
+		printf("d = %d\n", count_spaces_in_line(scene->buffer, i));
 		quit(minirt, WRONG_AMB_DATA);
+	}
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]))
 		i++;
 	scene->ambient->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
@@ -41,7 +74,8 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 4)
+	if (count_comas(scene->buffer, i) != 4
+		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_CAM_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
@@ -70,7 +104,8 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 4)
+	if (count_comas(scene->buffer, i) != 4
+		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_LIGHT_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;

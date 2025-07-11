@@ -5,7 +5,8 @@ int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 4)
+	if (count_comas(scene->buffer, i) != 4
+		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_SPH_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
@@ -28,7 +29,8 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 6)
+	if (count_comas(scene->buffer, i) != 6
+		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_PLANE_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;
@@ -53,7 +55,8 @@ int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 6)
+	if (count_comas(scene->buffer, i) != 6
+		|| count_spaces_in_line(scene->buffer, i) != 4)
 		quit(minirt, WRONG_CYL_DATA);
 	while (!ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
 		i++;

@@ -110,7 +110,6 @@ int	start_all_cylinders_tests(void)
 	list.count = 0;
 	r = get_ray(get_point3(0, 4, -2), vec3_normalise(get_vec3(0, -1, 1)));
 	get_cylinder_inter(&cy_object, &r, &list);
-	print_inter_list(&list);
 	assert(list.count == 2);
 	/* 4 */
 	list.count = 0;

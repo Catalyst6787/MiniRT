@@ -56,46 +56,6 @@ void	parse_objects(t_minirt *minirt, t_scene *scene)
 			if (scene->buffer[++cursor] == 'y')
 				c += parse_cylinder(minirt, scene, scene->cylinders[c], &cursor);
 	}
-	/* should work if buffer_data checks correctly done*/
-}
-
-
-int	get_file_contents(int fd, char **file_contents)
-{
-	char	*buf;
-	char	*tmp;
-
-	buf = NULL;
-	tmp = NULL;
-	buf = get_next_line(fd);
-	while (buf)
-	{
-		if (*file_contents)
-			tmp = *file_contents;
-		*file_contents = ft_strjoin(*file_contents, buf);
-		if (tmp)
-			free(tmp);
-		tmp = NULL;
-		free(buf);
-		buf = get_next_line(fd);
-	}
-	if (!*file_contents)
-		return (1);
-	return (0);
-}
-
-void	set_scene_buffer(t_minirt *minirt)
-{
-	int		fd;
-
-	fd = open(minirt->scene->filename, O_RDONLY);
-	if (fd < 0)
-		quit(minirt, FILE_OPEN_ERR);
-	get_file_contents(fd, &minirt->scene->buffer);
-	if (close(fd) == -1)
-		quit(minirt, CLOSING_FILE_ERR);
-	if (!minirt->scene->buffer)
-		quit(minirt, EMPTY_FILE);
 }
 
 void	parse_scene(t_minirt *minirt)
