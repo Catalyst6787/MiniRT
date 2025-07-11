@@ -159,6 +159,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 void		display_image(t_minirt *minirt);
 t_inter		get_inter(void);
+int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);

@@ -44,4 +44,3 @@ void	set_cylinder_tranformation(t_cylinder *cy)
 			get_scaling_matrix(get_vec3(cy->radius, cy->height, cy->radius)));
 	cy->inv = get_inversed_matrix(cy->transform);
 }
-

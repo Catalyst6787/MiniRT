@@ -36,16 +36,6 @@ double	vec3_dot(const t_vec3 vec3_u, const t_vec3 vec3_v)
 		+ (vec3_u.z * vec3_v.z));
 }
 
-int	vec3_isequal(const t_vec3 vec3_a, const t_vec3	vec3_b)
-{
-	if (double_isequal(vec3_a.x, vec3_b.x)
-		&& double_isequal(vec3_a.y, vec3_b.y)
-		&& double_isequal(vec3_a.z, vec3_b.z)
-		&& double_isequal(vec3_a.w, vec3_b.w))
-		return (1);
-	return (0);
-}
-
 // order matters! vec3_cross(a, b) != vec3_cross(b, a).
 t_vec3	vec3_cross(const t_vec3 a, const t_vec3 b)
 {

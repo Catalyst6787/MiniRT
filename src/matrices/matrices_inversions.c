@@ -105,8 +105,8 @@ t_matrix	get_inversed_matrix(t_matrix m)
 		j = 0;
 		while (j < m.col)
 		{
-			inversed_matrix.matrix[i][j] =
-				get_determinant(get_submatrice(m, j, i)) / determinant;
+			inversed_matrix.matrix[i][j]
+				= get_determinant(get_submatrice(m, j, i)) / determinant;
 			if ((i + j) % 2 == 1)
 				inversed_matrix.matrix[i][j] *= (-1);
 			j++;

@@ -45,6 +45,7 @@ SRC					=	main.c \
 						normals.c \
 						lighting.c \
 						intersections.c \
+						intersections_cylinder.c \
 						sort_inter.c \
 						special_scenes.c \
 						render_utils.c \
@@ -59,7 +60,7 @@ SRC					=	main.c \
 						utils.c \
 						color_operations.c \
 						free_utils.c \
-						vec3_basic_op.c vec3_complex_operations.c \
+						vec3_basic_op.c vec3_complex_operations.c vec3_utils.c vec3_seters_geters.c \
 						tests.c tests_color.c tests_matrices.c tests_rays.c \
 						test_intersections.c test_normals.c test_reflections.c \
 						test_lighting.c test_world.c test_shadows.c test_camera.c \
