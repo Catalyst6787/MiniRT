@@ -1,8 +1,8 @@
 #ifndef MATRICE_H
 # define MATRICE_H
 
-#include <stdbool.h>
-#include "vec3.h"
+# include <stdbool.h>
+# include "vec3.h"
 
 typedef struct s_matrix
 {
@@ -53,7 +53,6 @@ t_matrix		get_shearing_matrix(t_shear	params);
 ///////			All
 t_matrix		get_transformation(t_matrix translation,
 					t_matrix rotation, t_matrix shearing, t_matrix scaling);
-
 
 ////////		Rotation
 t_matrix		get_rotation_matrix_x(double r);

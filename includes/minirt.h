@@ -30,7 +30,6 @@
 # include "test.h"
 # include "debug.h"
 
-
 # define SPACE_SET = " \t\n"
 
 # define WIN_W 1280
@@ -63,7 +62,6 @@ typedef enum e_move_mode
 	pos,
 	height
 }				t_move_mode;
-
 
 typedef struct s_mlx_data
 {
@@ -107,7 +105,6 @@ int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
-
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
@@ -134,7 +131,6 @@ void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
 
-
 t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 void		set_pixel_size(t_camera *camera);
@@ -147,7 +143,6 @@ void		create_object_from_sphere(t_object *object,
 void		create_object_from_plane(t_object *object, t_plane *plane, int id);
 void		create_object_from_cylinder(t_object *object,
 				t_cylinder *cylinder, int id);
-
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
@@ -248,7 +243,6 @@ void		print_render_pixel(t_vec3	pixel_center,
 				t_ray	ray,
 				t_vec3	color);
 void		print_inter_list(t_inter_list *list);
-
 
 /*                                 DOUBLE UTILS                            */
 

@@ -10,7 +10,6 @@ t_vec3	vec3_reverse(t_vec3 vec)
 
 /*************** SETERS | GETERS ****************/
 
-
 int	set_color(t_vec3 *v, double r, double g, double b)
 {
 	v->r = r;
@@ -29,7 +28,6 @@ t_vec3	get_color(double r, double g, double b)
 	c.w = 0;
 	return (c);
 }
-
 
 t_vec3	get_vec3(double x, double y, double z)
 {
@@ -64,9 +62,7 @@ t_vec3	vec3_dup(t_vec3 to_dup)
 	return (vec3);
 }
 
-
 /************** 2 VECTORS OPERATIONS ****************/
-
 
 t_vec3	vec3_vec_addition(t_vec3 v1, t_vec3 v2)
 {
@@ -121,7 +117,6 @@ t_vec3	vec3_vec_division(t_vec3 v1, t_vec3 v2)
 	v.w = 0;
 	return (v);
 }
-
 
 t_vec3	vec3_double_multiplication(t_vec3 src, double n)
 {

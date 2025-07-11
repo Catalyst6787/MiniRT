@@ -80,5 +80,4 @@ void	set_computations(t_comp *comp_out,
 int		get_intersection(t_object *object, t_ray *ray, t_inter_list *list);
 int		is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
 
-
 #endif

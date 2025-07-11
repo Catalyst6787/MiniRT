@@ -40,7 +40,6 @@ typedef struct s_light
 	t_vec3		color;
 }	t_light;
 
-
 typedef struct s_scene
 {
 	t_ambient	*ambient;
@@ -60,7 +59,5 @@ typedef struct s_scene
 	int			nb_cylinder;
 	int			nb_objects;
 }	t_scene;
-
-
 
 #endif
