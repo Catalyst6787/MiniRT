@@ -18,7 +18,6 @@ void	event_light_pos(t_minirt *minirt, int keycode)
 	render_scene(minirt);
 }
 
-
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == UP)

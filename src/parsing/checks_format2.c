@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 void	check_file_name(t_minirt *minirt)

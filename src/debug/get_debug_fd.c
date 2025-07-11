@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 int	get_debug_fd(void)

@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 #include "vec3.h"
 

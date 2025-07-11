@@ -1,5 +1,5 @@
-
 #include "minirt.h"
+#include "vec3.h"
 
 t_vec3	vec3_reverse(t_vec3 vec)
 {
@@ -107,7 +107,7 @@ t_vec3	vec3_vec_multiplication(t_vec3 v1, t_vec3 v2)
 
 t_vec3	vec3_vec_division(t_vec3 v1, t_vec3 v2)
 {
-	t_vec3 v;
+	t_vec3	v;
 
 	if (v1.w || v1.w)
 		print_err(FILE, LINE, "vec3_vec_division, trying to multiply a point");
@@ -120,7 +120,7 @@ t_vec3	vec3_vec_division(t_vec3 v1, t_vec3 v2)
 
 t_vec3	vec3_double_multiplication(t_vec3 src, double n)
 {
-	t_vec3 v;
+	t_vec3	v;
 
 	if (src.w)
 		print_err(FILE, LINE,
@@ -134,7 +134,7 @@ t_vec3	vec3_double_multiplication(t_vec3 src, double n)
 
 t_vec3	vec3_double_division(t_vec3 src, double n)
 {
-	t_vec3 v;
+	t_vec3	v;
 
 	if (src.w)
 		print_err(FILE, LINE,

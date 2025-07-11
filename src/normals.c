@@ -51,8 +51,6 @@ t_vec3	get_plane_normal_at(const t_object *pl, const t_vec3 world_point)
 	return (vec3_normalise(world_normal));
 }
 
-
-
 t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point)
 {
 	if (obj->type == SPHERE)

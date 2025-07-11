@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 int	debug_print_keycode(int keycode)
@@ -6,15 +5,6 @@ int	debug_print_keycode(int keycode)
 	ft_printf("keycode: %d\n", keycode);
 	return (0);
 }
-
-// void	debug_pixel(const t_ray *r)
-// {
-// 	ft_printf("DEBUG PIXEL:\n x=%d, y%d.\n", DEBUG_PIXEL_I, DEBUG_PIXEL_J);
-// 	ft_printf("t_ray:\n	origin: ");
-// 	vec3_debug_print(r->origin);
-// 	ft_printf("t_ray:\n	direction: ");
-// 	vec3_debug_print(r->dir);
-// }
 
 void	debug_aff_image(t_minirt *minirt)
 {
@@ -43,4 +33,3 @@ void	debug_aff_image(t_minirt *minirt)
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 }
-

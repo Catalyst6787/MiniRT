@@ -43,11 +43,11 @@ int	get_plane_inter(const t_object *object,
 	list->count++;
 	return (0);
 }
+
 bool	check_cap(const t_ray *ray, double t)
 {
 	double	x;
 	double	z;
-
 
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;
@@ -81,7 +81,6 @@ int	intersect_caps(const t_object *object, const t_ray *ray, t_inter_list *list)
 	}
 	return (hit_added);
 }
-
 
 static int	store_cylinder_inter(t_cylinder_inter *d, const t_object *object,
 				const t_ray *ray, t_inter_list *list)
@@ -133,7 +132,6 @@ int	get_cylinder_inter(const t_object *object,
 	d.t1 = (-d.b + sqrtf(d.discriminant)) / (2.0 * d.a);
 	return (store_cylinder_inter(&d, object, ray, list));
 }
-
 
 int	get_intersection(t_object *object, t_ray *ray, t_inter_list *list)
 {

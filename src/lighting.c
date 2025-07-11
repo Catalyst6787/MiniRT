@@ -56,8 +56,6 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
 	t_vec3	light_vector;
 	t_vec3	ambient;
 
-
-
 	effective_color = vec3_vec_multiplication(comp->m.color, comp->light.color);
 	effective_color
 		= vec3_double_multiplication(effective_color, comp->light.brightness);

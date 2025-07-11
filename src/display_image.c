@@ -45,5 +45,4 @@ void	display_image(t_minirt *minirt)
 	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
 		WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
 		minirt->ui->str_selected_object);
-
 }
