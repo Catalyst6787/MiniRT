@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include "vec3.h"
 
 void	scene_1(t_minirt *minirt)
 {
@@ -17,6 +18,7 @@ void	scene_1(t_minirt *minirt)
 	minirt->render->inter_list.count = 0;
 	minirt->render->shadow_list.count = 0;
 	minirt->scene->ambient->brightness = 0.1;
+	minirt->scene->light->color = get_color(1, 1, 1);
 	while(i < 6)
 	{
 		minirt->scene->objects[i].type = SPHERE;
