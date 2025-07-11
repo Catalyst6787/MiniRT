@@ -64,6 +64,12 @@ typedef enum e_move_mode
 	height
 }				t_move_mode;
 
+typedef struct s_parsing_helper
+{
+	int	s;
+	int	p;
+	int	c;
+}				t_parsing_helper;
 
 typedef struct s_mlx_data
 {
@@ -107,7 +113,7 @@ int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
-
+void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
@@ -141,12 +147,14 @@ void		set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
 
+void		objects_alloc(t_minirt *minirt, t_scene *scene);
 void		create_object_list(t_scene *scene);
 void		create_object_from_sphere(t_object *object,
 				t_sphere *sphere, int id);
 void		create_object_from_plane(t_object *object, t_plane *plane, int id);
 void		create_object_from_cylinder(t_object *object,
 				t_cylinder *cylinder, int id);
+
 
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);

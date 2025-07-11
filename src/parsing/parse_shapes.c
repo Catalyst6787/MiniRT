@@ -1,6 +1,9 @@
 #include "minirt.h"
 
-int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor)
+int	parse_sphere(t_minirt *minirt,
+				t_scene *scene,
+				t_sphere *sphere,
+				int *cursor)
 {
 	int	i;
 
@@ -8,7 +11,8 @@ int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor
 	if (count_comas(scene->buffer, i) != 4
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_SPH_DATA);
-	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
+	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
+		&& scene->buffer[i] != '-')
 		i++;
 	sphere->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
 	sphere->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
@@ -21,7 +25,6 @@ int	parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor
 	sphere->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
-	//check
 }
 
 int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
@@ -32,7 +35,8 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	if (count_comas(scene->buffer, i) != 6
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_PLANE_DATA);
-	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
+	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
+		&& scene->buffer[i] != '-')
 		i++;
 	plane->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
@@ -47,10 +51,12 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	plane->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
-	//check
 }
 
-int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor)
+int	parse_cylinder(t_minirt *minirt,
+					t_scene *scene,
+					t_cylinder *cylinder,
+					int *cursor)
 {
 	int	i;
 
@@ -76,5 +82,4 @@ int	parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *
 	cylinder->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
-	//check
 }

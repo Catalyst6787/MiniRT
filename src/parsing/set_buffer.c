@@ -61,7 +61,6 @@ void	strcpy_filter_comments(char *s1, char *s2)
 	s1[j] = '\0';
 }
 
-
 void	filter_buffer(t_minirt *minirt)
 {
 	int		len;
@@ -72,7 +71,7 @@ void	filter_buffer(t_minirt *minirt)
 	if (!tmp)
 		quit(minirt, MALLOC_ERR);
 	free(minirt->scene->buffer);
-	minirt->scene->buffer = malloc(sizeof(char) * (len + 1));	
+	minirt->scene->buffer = malloc(sizeof(char) * (len + 1));
 	if (!minirt->scene->buffer)
 	{
 		free(tmp);
@@ -81,7 +80,6 @@ void	filter_buffer(t_minirt *minirt)
 	strcpy_filter_comments(minirt->scene->buffer, tmp);
 	free(tmp);
 }
-
 
 void	set_scene_buffer(t_minirt *minirt)
 {

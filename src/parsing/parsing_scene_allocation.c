@@ -18,13 +18,14 @@ void	spheres_alloc(t_minirt *minirt, t_scene *scene)
 	int	i;
 
 	i = -1;
-	minirt->scene->spheres = malloc(sizeof(t_sphere *) * (scene->nb_sphere + 1));
+	minirt->scene->spheres
+		= malloc(sizeof(t_sphere *) * (scene->nb_sphere + 1));
 	if (!scene->spheres && scene->nb_sphere)
 		quit(minirt, MALLOC_ERR);
 	while (++i < scene->nb_sphere)
 	{
 		scene->spheres[i] = malloc(sizeof(t_sphere));
-		if(!scene->spheres[i])
+		if (!scene->spheres[i])
 		{
 			while (--i >= 0)
 				free(scene->spheres[i]);
@@ -45,7 +46,7 @@ void	planes_alloc(t_minirt *minirt, t_scene *scene)
 	while (++i < scene->nb_plane)
 	{
 		scene->planes[i] = malloc(sizeof(t_plane));
-		if(!scene->planes[i])
+		if (!scene->planes[i])
 		{
 			while (--i >= 0)
 				free(scene->planes[i]);
@@ -66,7 +67,7 @@ void	cylinders_alloc(t_minirt *minirt, t_scene *scene)
 	while (++i < scene->nb_cylinder)
 	{
 		scene->cylinders[i] = malloc(sizeof(t_cylinder));
-		if(!scene->cylinders[i])
+		if (!scene->cylinders[i])
 		{
 			while (--i >= 0)
 				free(scene->cylinders[i]);
@@ -74,13 +75,6 @@ void	cylinders_alloc(t_minirt *minirt, t_scene *scene)
 		}
 	}
 	scene->cylinders[i] = NULL;
-}
-
-void	objects_alloc(t_minirt *minirt, t_scene *scene)
-{
-	scene->objects = malloc(sizeof(t_object) * (scene->nb_objects + 1));
-	if (!scene->objects && scene->nb_objects)
-		quit(minirt, MALLOC_ERR);
 }
 
 void	alloc_elements(t_minirt *minirt, t_scene *scene)

@@ -9,6 +9,10 @@ Simple C ray tracer.
 - [ ] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
 - [ ] add height mode to pav num
 
+	### norminette
+
+	-  function parse_camera : too long, put the end in another place than parsing
+
 	### when bonus
 
 	- [ ] change single_elements_check

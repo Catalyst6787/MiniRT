@@ -36,7 +36,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 	i = -1;
 	if (!is_ok_ratio(scene->ambient->brightness)
 		|| !is_ok_color(scene->ambient->color))
-		quit(minirt, WRONG_AMB_DATA);;
+		quit(minirt, WRONG_AMB_DATA);
 	if (scene->camera->fov < 0.0 || 180.0 < scene->camera->fov)
 		quit(minirt, WRONG_CAM_DATA);
 	if (!is_ok_ratio(scene->light->brightness)
@@ -56,4 +56,3 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 			|| !is_ok_color(scene->cylinders[i]->color))
 			quit(minirt, WRONG_CYL_DATA);
 }
-

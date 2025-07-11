@@ -37,8 +37,16 @@ static void	set_cylinders_transformation(t_scene *scene)
 	}
 }
 
+static void	set_camera_transformation(t_scene *scene)
+{
+	set_pixel_size(scene->camera);
+	scene->camera->transform = get_orientation_matrix(scene->camera->view);
+	scene->camera->inv = get_inversed_matrix(scene->camera->transform);
+}
+
 void	set_objects_transformation(t_scene *scene)
 {
+	set_camera_transformation(scene);
 	set_spheres_transformation(scene);
 	set_planes_transformation(scene);
 	set_cylinders_transformation(scene);

@@ -1,5 +1,12 @@
 #include "minirt.h"
 
+void	objects_alloc(t_minirt *minirt, t_scene *scene)
+{
+	scene->objects = malloc(sizeof(t_object) * (scene->nb_objects + 1));
+	if (!scene->objects && scene->nb_objects)
+		quit(minirt, MALLOC_ERR);
+}
+
 void	move_cursor(char *str, int *cursor, char c)
 {
 	int	i;
@@ -14,7 +21,7 @@ void	move_cursor(char *str, int *cursor, char c)
 
 char	*trim_ato_ptr(char *ptr, int delim)
 {
-	int	i;
+	int		i;
 	char	*dest;
 
 	i = 0;
@@ -22,8 +29,8 @@ char	*trim_ato_ptr(char *ptr, int delim)
 		while (ptr[i] && ptr[i] != delim && ptr[i] != '\t')
 			i++;
 	else
-	while (ptr[i] && ptr[i] != delim)
-		i++;
+		while (ptr[i] && ptr[i] != delim)
+			i++;
 	dest = ft_substr(ptr, 0, i);
 	return (dest);
 }

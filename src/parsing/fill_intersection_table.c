@@ -33,10 +33,12 @@ static void	fill_inter_objects(t_render *render, t_scene *scene)
 void	fill_intersection_table(t_minirt *minirt, t_render *render)
 {
 	render->inter_count = count_intersections(minirt->scene);
-	render->inter_list.inters = malloc(sizeof(t_inter) * render->inter_count + 1);
+	render->inter_list.inters
+		= malloc(sizeof(t_inter) * render->inter_count + 1);
 	if (!render->inter_list.inters)
 		quit(minirt, MALLOC_ERR);
-	render->shadow_list.inters = malloc(sizeof(t_inter) * render->inter_count + 1);
+	render->shadow_list.inters
+		= malloc(sizeof(t_inter) * render->inter_count + 1);
 	if (!render->shadow_list.inters)
 		quit(minirt, MALLOC_ERR);
 	ft_memset(render->inter_list.inters, 0, render->inter_count);

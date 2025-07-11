@@ -44,13 +44,11 @@ int	count_spaces_in_line(char *buffer, int i)
 	return (count);
 }
 
-
 int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 {
 	int	i;
 
 	i = *cursor + 1;
-
 	if (count_comas(scene->buffer, i) != 2
 		|| count_spaces_in_line(scene->buffer, i) != 1)
 	{
@@ -66,7 +64,6 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->ambient->color.w = 0;
 	*cursor = i;
 	return (1);
-	//check
 }
 
 int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
@@ -77,7 +74,8 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	if (count_comas(scene->buffer, i) != 4
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_CAM_DATA);
-	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
+	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
+		&& scene->buffer[i] != '-')
 		i++;
 	scene->camera->view.from.x = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
@@ -91,12 +89,8 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->camera->hsize = WIN_W;
 	scene->camera->vsize = WIN_H;
 	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
-	set_pixel_size(scene->camera);
-	scene->camera->transform = get_orientation_matrix(scene->camera->view);
-	scene->camera->inv = get_inversed_matrix(scene->camera->transform);
 	*cursor = i;
 	return (1);
-	//check
 }
 
 int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
@@ -107,7 +101,8 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	if (count_comas(scene->buffer, i) != 4
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_LIGHT_DATA);
-	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
+	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
+		&& scene->buffer[i] != '-')
 		i++;
 	scene->light->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->light->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
@@ -120,5 +115,4 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->light->color.w = 0;
 	*cursor = i;
 	return (1);
-	//check
 }
