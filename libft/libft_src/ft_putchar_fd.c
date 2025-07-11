@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 18:07:48 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/07 18:14:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/07/11 16:35:03 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
-	int err;
-	
+	int	err;
+
 	err = write(fd, &c, 1);
 	(void)err;
 }
