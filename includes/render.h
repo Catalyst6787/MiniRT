@@ -51,7 +51,18 @@ typedef struct s_render
 	int				debug_y;
 }					t_render;
 
-
+typedef struct s_cylinder_inter
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
+	double	y0;
+	double	y1;
+	double	t0;
+	double	t1;
+	int		nb_inter;
+}	t_cylinder_inter;
 
 // sort intersections
 void	sort_inter(t_inter_list *inter_lst);

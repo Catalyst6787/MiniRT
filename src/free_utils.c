@@ -3,7 +3,7 @@
 void	free_sphere(t_object *object)
 {
 	if (!object)
-		return;
+		return ;
 	free_and_null((void **)&object);
 }
 
