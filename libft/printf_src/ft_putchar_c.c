@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:56:45 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/15 17:58:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/07/11 16:35:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_putchar_c(char c)
 {
-	int err;
+	int	err;
+
 	err = write(1, &c, 1);
 	(void)err;
 	return (1);

@@ -14,27 +14,32 @@ t_inter	*get_shadow_hit(t_inter_list *lst, t_object *object)
 	return (NULL);
 }
 
+static void	check_each_object(t_render *render, t_scene *scene,
+	t_comp *comp, t_vec3 direction)
+{
+	int		i;
+	t_ray	new_r;
+
+	i = 0;
+	while (i < scene->nb_objects)
+	{
+		new_r = ray_transform(
+				get_ray(comp->over_point, direction),
+				scene->objects[i].inv);
+		get_intersection(&scene->objects[i], &new_r, &render->shadow_list);
+		i++;
+	}
+}
+
 int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 {
 	t_vec3			v;
 	double			distance;
-	t_vec3			direction;
-	t_ray			og_r;
-	t_ray			new_r;
-	int				i;
 	t_inter			*hit;
 
-	i = 0;
 	v = vec3_vec_substraction(scene->light->pos, comp->over_point);
 	distance = vec3_exact_length(v);
-	direction = vec3_normalise(v);
-	og_r = get_ray(comp->over_point, direction);
-	while (i < scene->nb_objects)
-	{
-		new_r = ray_transform(&og_r, scene->objects[i].inv);
-		get_intersection(&scene->objects[i], &new_r, &render->shadow_list);
-		i++;
-	}
+	check_each_object(render, scene, comp, vec3_normalise(v));
 	sort_inter(&render->shadow_list);
 	hit = get_hit(&render->shadow_list);
 	render->shadow_list.count = 0;

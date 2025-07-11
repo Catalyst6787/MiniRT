@@ -12,8 +12,8 @@ void	swap_doubles(double *a, double *b)
 
 t_vec3 convert_dir_to_euler(t_vec3 dir)
 {
-	t_vec3 euler_angles;
-	double len_xz;
+	t_vec3	euler_angles;
+	double	len_xz;
 
 	dir = vec3_normalise(dir);
 	euler_angles.y = atan2(dir.x, dir.z);
@@ -86,7 +86,6 @@ void	free_and_null(void	**ptr)
 	free(*ptr);
 	ptr = NULL;
 }
-
 
 void	print_err(char *file, int line, char *s)
 {

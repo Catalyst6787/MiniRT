@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:15 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/07/03 12:20:20 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:34:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	ft_intlen(int n)
 	}
 	return (i);
 }
+
 double	get_right(char *str)
 {
 	double	right;
@@ -54,7 +55,7 @@ double	ft_atof(char *str)
 		return (0);
 	i = 0;
 	sign = 1;
-	if(str[i] == '-' && str[i + 1] == '0')
+	if (str[i] == '-' && str[i + 1] == '0')
 		sign = -1;
 	result = (double)ft_atoi(str);
 	decimal_point = ft_strchr(str, '.');
