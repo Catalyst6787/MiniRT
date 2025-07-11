@@ -104,6 +104,7 @@ static void	switch_pav_mode(t_minirt *minirt)
 
 void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 {
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == PAV_MINUS)
 	{
 		if (minirt->ui->selected_object == 0)
