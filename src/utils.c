@@ -1,5 +1,5 @@
-
 #include "minirt.h"
+#include "vec3.h"
 
 void	swap_doubles(double *a, double *b)
 {
@@ -10,7 +10,7 @@ void	swap_doubles(double *a, double *b)
 	*b = temp;
 }
 
-t_vec3 convert_dir_to_euler(t_vec3 dir)
+t_vec3	convert_dir_to_euler(t_vec3 dir)
 {
 	t_vec3	euler_angles;
 	double	len_xz;

@@ -146,5 +146,4 @@ void	print_inter_list(t_inter_list *list)
 		printf("Inter  [%d] : %.3f\n", i, list->inters[i].t);
 		i++;
 	}
-
 }

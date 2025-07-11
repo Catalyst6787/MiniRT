@@ -1,4 +1,3 @@
-
 #include "libft.h"
 #include "minirt.h"
 
@@ -87,7 +86,6 @@ void	free_ui(t_ui *ui)
 	if (ui->str_selected_object)
 		free(ui->str_selected_object);
 }
-
 
 int	quit(t_minirt *minirt, char *str)
 {

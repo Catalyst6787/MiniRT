@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 void	print_render_data(t_render *render)

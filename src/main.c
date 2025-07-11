@@ -12,8 +12,6 @@ void	init_ui(t_ui *ui)
 	ui->string_color = get_color(1, 1, 1);
 }
 
-
-
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
@@ -42,19 +40,15 @@ int	main(int ac, char **av)
 	minirt.render->pixel_size = PIXEL_SIZE_MULT;
 	minirt.ui = &ui;
 	init_ui(minirt.ui);
-
 	if (start_all_tests())
 		quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
-
 	if (WIN_H < 10 || WIN_W < 10)
 		quit(&minirt, WIN_SIZE_ERR);
 	init_mlx(&minirt);
 	init_events(&minirt);
 	t = clock(); // REMOVE from non-bonus
-
 	render_scene(&minirt);
-
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
 	printf("Scene rendered in %f seconds\n", time_taken);

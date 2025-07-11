@@ -1,5 +1,5 @@
-
 #include "minirt.h"
+#include "vec3.h"
 
 t_vec3	vec3_vec_addition(t_vec3 v1, t_vec3 v2)
 {

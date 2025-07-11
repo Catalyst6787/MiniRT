@@ -13,4 +13,3 @@ int	free_render(t_render *render)
 	free(render->shadow_list.inters);
 	return (0);
 }
-

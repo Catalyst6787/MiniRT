@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 int	end_mlx_loop(t_mlx_data *mlx)
@@ -126,7 +125,7 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 	render_scene(minirt);
 }
 
-static void handle_arrows_mac_linux(int keycode, t_minirt *minirt)
+static void	handle_arrows_mac_linux(int keycode, t_minirt *minirt)
 {
 	#ifdef __linux__
 	if ((65360.5 <= keycode && keycode <= 65364))
@@ -206,4 +205,3 @@ int	handle_mouseclick(int button, int x, int y, t_minirt *minirt)
 	ft_printf("Mouseclick at: x=%d, y=%d, Button:%d\n", x, y, button);
 	return (0);
 }
-
