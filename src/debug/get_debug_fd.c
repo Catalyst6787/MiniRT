@@ -3,7 +3,7 @@
 
 int	get_debug_fd(void)
 {
-	static int fd = -1;
+	static int	fd = -1;
 
 	if (fd == -1)
 	{

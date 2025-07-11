@@ -12,7 +12,7 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 void	number_handle(int keycode, t_minirt *minirt)
 {
-	int number;
+	int	number;
 
 	number = keycode - 48;
 	printf("special scene: %d loading...\n", number);
@@ -49,17 +49,17 @@ void	event_change_string_color(t_minirt *minirt)
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (!minirt->ui->color_id)
 	{
-		minirt->ui->string_color = get_color(0,0,0);
+		minirt->ui->string_color = get_color(0, 0, 0);
 		minirt->ui->color_id++;
 	}
 	else if (minirt->ui->color_id == 1)
 	{
-		minirt->ui->string_color = get_color(1,0,0);
+		minirt->ui->string_color = get_color(1, 0, 0);
 		minirt->ui->color_id++;
 	}
 	else if (minirt->ui->color_id == 2)
 	{
-		minirt->ui->string_color = get_color(1,1,1);
+		minirt->ui->string_color = get_color(1, 1, 1);
 		minirt->ui->color_id = 0;
 	}
 	render_scene(minirt);
@@ -86,7 +86,21 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 		quit(minirt, MALLOC_ERR);
 	tmp = NULL;
 	nb = NULL;
-}	
+}
+
+static void	switch_pav_mode(t_minirt *minirt)
+{
+	if (minirt->ui->move_mode == dir)
+	{
+		minirt->ui->move_mode = pos;
+		printf("pos mode selected\n");
+	}
+	else if (minirt->ui->move_mode == pos)
+	{
+		minirt->ui->move_mode = dir;
+		printf("dir mode selected\n");
+	}
+}
 
 void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 {
@@ -108,56 +122,33 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_MIDDLE)
-	{
-		if (minirt->ui->move_mode == dir)
-		{
-			minirt->ui->move_mode = pos;
-			printf("pos mode selected\n");
-		}
-		else if (minirt->ui->move_mode == pos)
-		{
-			minirt->ui->move_mode = dir;
-			printf("dir mode selected\n");
-		}
-	}
+		switch_pav_mode(minirt);
 	render_scene(minirt);
 }
 
-
-int	handle_keypress(int keycode, t_minirt *minirt)
+static void handle_arrows_mac_linux(int keycode, t_minirt *minirt)
 {
-	if (keycode == ESC)
-		end_mlx_loop(minirt->mlx);
-
 	#ifdef __linux__
-	else if ((65360.5 <= keycode && keycode <= 65364))
+	if ((65360.5 <= keycode && keycode <= 65364))
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
-	else if (keycode >= 48 && keycode <= 57)
-		number_handle(keycode, minirt);
 	#endif
 	#ifdef __APPLE__
-	else if ((123 <= keycode && keycode <= 126) || keycode == 24 || keycode == 27)
+	if ((123 <= keycode && keycode <= 126)
+		|| keycode == 24 || keycode == 27)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
 	#endif
+}
 
-	else if (keycode == W || keycode == A || keycode == S || keycode == D
-			|| keycode == E || keycode == R || keycode == Z || keycode == X)
-	{
-		minirt->render->pixel_size = PIXEL_SIZE_MULT;
-		asdw_handle(keycode, minirt);
-	}
-	else if (keycode == U || keycode == H || keycode == J
-			|| keycode == K || keycode == I || keycode == O)
-		event_light_pos(minirt, keycode);
-	else if (65429.9 <= keycode && keycode <= 65435.5)
-		event_obj_pos(minirt, keycode);
-	else if (keycode == PAV_MINUS || keycode == PAV_PLUS || keycode == PAV_MIDDLE)
+static void	handle_extra(int keycode, t_minirt *minirt)
+{
+	if (keycode == PAV_MINUS || keycode == PAV_PLUS
+		|| keycode == PAV_MIDDLE)
 		event_object_selection(minirt, minirt->scene, keycode);
 	else if (keycode == P && minirt->scene->nb_sphere)
 		event_sphere_shearing(minirt);
@@ -181,6 +172,31 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		event_render(minirt);
 	else
 		ft_printf("unknow action: %d\n", keycode);
+}
+
+int	handle_keypress(int keycode, t_minirt *minirt)
+{
+	if (keycode == ESC)
+		end_mlx_loop(minirt->mlx);
+	handle_arrows_mac_linux(keycode, minirt);
+	if (keycode >= 48 && keycode <= 57)
+		number_handle(keycode, minirt);
+	else if (keycode == W || keycode == A || keycode == S || keycode == D)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
+		asdw_handle(keycode, minirt);
+	}
+	else if (keycode == E || keycode == R || keycode == Z || keycode == X)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
+		erzx_handle(keycode, minirt);
+	}
+	else if (keycode == U || keycode == H || keycode == J
+		|| keycode == K || keycode == I || keycode == O)
+		event_light_pos(minirt, keycode);
+	else if (65429.9 <= keycode && keycode <= 65435.5)
+		event_obj_pos(minirt, keycode);
+	handle_extra(keycode, minirt);
 	return (0);
 }
 

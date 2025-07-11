@@ -37,7 +37,6 @@ typedef struct s_render
 	double			wall_size;
 	double			canva_height;
 	double			canva_width;
-	// double			pixel_size;
 	double			half;
 	double			world_y;
 	double			world_x;
@@ -63,8 +62,10 @@ int		get_sphere_inter(const t_object *object,
 			const t_ray *ray, t_inter_list *list);
 int		get_plane_inter(const t_object *plane,
 			const t_ray *ray, t_inter_list *list);
-int		get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
-void	set_computations(t_comp *comp_out, t_scene *scene, t_inter *hit, t_ray *r);
+int		get_cylinder_inter(const t_object *object,
+			const t_ray *ray, t_inter_list *list);
+void	set_computations(t_comp *comp_out,
+			t_scene *scene, t_inter *hit, t_ray *r);
 int		get_intersection(t_object *object, t_ray *ray, t_inter_list *list);
 int		is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
 

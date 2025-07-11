@@ -14,18 +14,15 @@ t_matrix	get_orientation_matrix(t_view view)
 	orientation.matrix[0][0] = left.x;
 	orientation.matrix[0][1] = left.y;
 	orientation.matrix[0][2] = left.z;
-	// orientation.matrix[0][3] = 0;
 	orientation.matrix[1][0] = true_up.x;
 	orientation.matrix[1][1] = true_up.y;
 	orientation.matrix[1][2] = true_up.z;
-	// orientation.matrix[1][3] = 0;
 	orientation.matrix[2][0] = -(forward.x);
 	orientation.matrix[2][1] = -(forward.y);
 	orientation.matrix[2][2] = -(forward.z);
-	// orientation.matrix[2][3] = 1;
 	orientation = multiply_matrix(orientation,
 			get_translation_matrix(get_vec3(-(view.from.x),
-											-(view.from.y),
-											-(view.from.z))));
+					-(view.from.y),
+					-(view.from.z))));
 	return (orientation);
 }

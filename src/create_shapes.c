@@ -36,7 +36,8 @@ t_plane	*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color)
 	return (plane);
 }
 
-t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir, double diameter, double height, t_vec3 color)
+t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir,
+	double diameter, double height, t_vec3 color)
 {
 	t_cylinder	*cylinder;
 

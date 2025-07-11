@@ -20,34 +20,8 @@ void	print_exit_info(char *str)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-void	free_scene(t_scene *scene)
+static void	free_extra(t_scene *scene)
 {
-	int	i;
-
-	i = -1;
-	if (scene->spheres)
-	{
-		while (++i < scene->nb_sphere)
-			free(scene->spheres[i]);
-		free(scene->spheres[i]);
-		free(scene->spheres);
-	}
-	i = -1;
-	if (scene->planes)
-	{
-		while (++i < scene->nb_plane)
-			free(scene->planes[i]);
-		free(scene->planes[i]);
-		free(scene->planes);
-	}
-	i = -1;
-	if (scene->cylinders)
-	{
-		while (++i < scene->nb_cylinder)
-			free(scene->cylinders[i]);
-		free(scene->cylinders[i]);
-		free(scene->cylinders);
-	}
 	if (scene->objects)
 		free(scene->objects);
 	if (scene->light)
@@ -60,6 +34,34 @@ void	free_scene(t_scene *scene)
 		free(scene->buffer);
 	if (scene->filename)
 		free(scene->filename);
+}
+
+void	free_scene(t_scene *scene)
+{
+	int	i;
+
+	i = -1;
+	if (scene->spheres)
+	{
+		while (++i <= scene->nb_sphere)
+			free(scene->spheres[i]);
+		free(scene->spheres);
+	}
+	i = -1;
+	if (scene->planes)
+	{
+		while (++i <= scene->nb_plane)
+			free(scene->planes[i]);
+		free(scene->planes);
+	}
+	i = -1;
+	if (scene->cylinders)
+	{
+		while (++i <= scene->nb_cylinder)
+			free(scene->cylinders[i]);
+		free(scene->cylinders);
+	}
+	free_extra(scene);
 }
 
 void	free_mlx(t_mlx_data *mlx)

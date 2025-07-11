@@ -40,6 +40,7 @@ void	debug_aff_image(t_minirt *minirt)
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(minirt->mlx->mlx, minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
+	mlx_put_image_to_window(minirt->mlx->mlx,
+		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 }
 
