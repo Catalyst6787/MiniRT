@@ -34,20 +34,19 @@ SRC					=	main.c \
 						debug.c \
 						double_utils.c \
 						events.c events_camera_light.c event_obj_positions.c events_fun.c \
-						print_data.c \
+						print_data.c print_more_data.c \
 						exit.c \
 						get_debug_fd.c \
 						init.c \
 						print_debug.c \
 						rays.c \
-						render.c \
+						render.c hit.c\
 						display_image.c \
 						normals.c \
 						lighting.c \
 						intersections.c \
 						intersections_cylinder.c \
 						sort_inter.c \
-						special_scenes.c \
 						render_utils.c \
 						shadows.c \
 						create_shapes.c \
@@ -75,6 +74,8 @@ vpath %.c $(SRC_DIR):$(SRC_DIR)/rays
 vpath %.c $(SRC_DIR):$(SRC_DIR)/tests
 vpath %.c $(SRC_DIR):$(SRC_DIR)/colors
 vpath %.c $(SRC_DIR):$(SRC_DIR)/matrices
+vpath %.c $(SRC_DIR):$(SRC_DIR)/print
+vpath %.c $(SRC_DIR):$(SRC_DIR)/render
 
 PURPLE = \033[0;34m
 GREEN = \033[0;32m
@@ -117,6 +118,14 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/colors/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/matrices/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/print/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/render/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
 	$(CC) $(CFLAGS) -c $< -o $@
 

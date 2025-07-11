@@ -9,16 +9,6 @@ int	end_mlx_loop(t_mlx_data *mlx)
 	return (0);
 }
 
-void	number_handle(int keycode, t_minirt *minirt)
-{
-	int	number;
-
-	number = keycode - 48;
-	printf("special scene: %d loading...\n", number);
-	load_special_scene(number, minirt);
-	render_scene(minirt);
-}
-
 void	event_render(t_minirt *minirt)
 {
 	clock_t	t;
@@ -178,9 +168,7 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 	if (keycode == ESC)
 		end_mlx_loop(minirt->mlx);
 	handle_arrows_mac_linux(keycode, minirt);
-	if (keycode >= 48 && keycode <= 57)
-		number_handle(keycode, minirt);
-	else if (keycode == W || keycode == A || keycode == S || keycode == D)
+	if (keycode == W || keycode == A || keycode == S || keycode == D)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		asdw_handle(keycode, minirt);

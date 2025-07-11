@@ -55,24 +55,20 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 	minirt->render->shadow_list.count = 0;
 }
 
-static void	put_pixel(t_minirt *minirt, int color, int x, int y)
+t_ray	ray_for_pixel(t_camera camera, double px, double py)
 {
-	int	x_off;
-	int	y_off;
+	double	xoffset;
+	double	yoffset;
+	double	world_x;
+	double	world_y;
+	t_vec3	pixel;
 
-	y_off = y;
-	while (y_off < y + minirt->render->pixel_size
-		&& y_off < minirt->scene->camera->vsize)
-	{
-		x_off = x;
-		while (x_off < x + minirt->render->pixel_size
-			&& x_off < minirt->scene->camera->hsize)
-		{
-			my_mlx_pixel_put(minirt, x_off, y_off, color);
-			x_off++;
-		}
-		y_off++;
-	}
+	xoffset = (px + 0.5) * camera.pixel_size;
+	yoffset = (py + 0.5) * camera.pixel_size;
+	world_x = camera.half_width - xoffset;
+	world_y = camera.half_height - yoffset;
+	pixel = vec3_matrix_multiply(camera.inv, get_point3(world_x, world_y, -1));
+	return (get_origin_direction(camera, pixel));
 }
 
 int	render_scene(t_minirt *minirt)
@@ -102,12 +98,4 @@ int	render_scene(t_minirt *minirt)
 	}
 	display_image(minirt);
 	return (0);
-}
-
-t_vec3	render_one_pixel_test(t_minirt *minirt, int x, int y)
-{
-	t_ray	ray;
-
-	ray = ray_for_pixel(*minirt->scene->camera, x, y);
-	return (intersect_objects(minirt, &ray));
 }
