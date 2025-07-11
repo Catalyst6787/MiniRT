@@ -14,5 +14,4 @@ typedef struct s_cylinder
 	t_material	material;
 }	t_cylinder;
 
-
 #endif

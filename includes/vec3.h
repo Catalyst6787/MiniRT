@@ -1,7 +1,6 @@
 #ifndef VEC3_H
 # define VEC3_H
 
-
 typedef union s_vec3
 {
 	struct
@@ -46,6 +45,5 @@ int		vec3_isequal(const t_vec3 vec3_a, const t_vec3 vec3_b);
 t_vec3	vec3_cross(const t_vec3 vec3_a, const t_vec3 vec3_b);
 
 /*                                 UTILS                                  */
-
 
 #endif

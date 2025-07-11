@@ -1,5 +1,5 @@
-#ifndef KEYCODE_H
-# define KEYCODE_H
+#ifndef KEYCODES_H
+# define KEYCODES_H
 
 # ifdef __linux__
 #  define SPACE 32
@@ -24,7 +24,6 @@
 #  define PAV_PLUS 65451
 #  define PAV_MINUS 65453
 #  define PAV_MIDDLE 65437
-
 
 #  define A 97
 #  define B 98
@@ -76,8 +75,6 @@
 #  define PAV_MINUS 65453
 #  define PAV_MIDDLE 65437
 
-
-
 #  define A 0
 #  define B 11
 #  define C 99
@@ -115,8 +112,5 @@
 # define COMMAND_HELP_11 "V : cylinder cap on / off"
 # define COMMAND_HELP_12 "P : fun wth sphere shearing"
 # define COMMAND_HELP_13 "L : fun wth cylinder rotation"
-
-
-
 
 #endif

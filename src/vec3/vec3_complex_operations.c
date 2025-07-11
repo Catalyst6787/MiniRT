@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 // good for quick length comparison, less precise but faster than

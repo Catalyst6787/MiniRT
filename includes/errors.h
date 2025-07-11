@@ -1,8 +1,6 @@
 #ifndef ERRORS_H
 # define ERRORS_H
 
-
-
 # define FILE_OPEN_ERR "Error : couldn't open file\n"
 # define MALLOC_ERR "Malloc error.\n"
 # define EMPTY_FILE_ERR "Error : empty file\n"
@@ -30,7 +28,7 @@
 
 # define TOO_MANY_AMB_ERR "Error : more than one ambiant light detected\n"
 # define TOO_MANY_CAM_ERR "Error : more than one camera detected\n"
-# define TOO_MANY_LIGHT_ERR "Error : more than one light source detected(delete later for bonuses)\n"
+# define TOO_MANY_LIGHT_ERR "Error : more than one light source detected\n"
 
 # define MLX_ERR "Error : mlx initialization failed\n"
 # define RENDER_INIT_ERR "Error : render initialization failed\n"
@@ -39,7 +37,7 @@
 
 # define IMAGE_ERR "Error : mlx image initialization failed\n"
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
-# define PIXEL_PUT_ERR "Error : my_mlx_pixel_put: Tried to set pixel outside of window, quitting\n"
+# define PIXEL_PUT_ERR "Error : Tried to set pixel outside of window, quitting\n"
 
 # define NORMAL_TYPE_NDEF "Error : get_object_normal_at object type not defined"
 
