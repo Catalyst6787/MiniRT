@@ -83,5 +83,4 @@ t_vec3	int_to_color(int int_color);
 # define CRESET "\033[0m"
 # define COLOR_RESET "\033[0m"
 
-
 #endif
