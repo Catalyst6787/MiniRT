@@ -11,9 +11,8 @@ t_material	get_material(void)
 t_material	get_default_material(t_vec3 color, t_scene *scene)
 {
 	t_material	material;
-	(void) scene;
 
-	// material = get_material();
+	(void) scene;
 	ft_memset(&material, 0, sizeof(t_material));
 	material.color = color;
 	material.color.w = 0;

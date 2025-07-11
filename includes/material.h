@@ -1,7 +1,6 @@
 #ifndef MATERIAL_H
 # define MATERIAL_H
 
-
 typedef struct s_material
 {
 	t_vec3	color;

@@ -11,5 +11,4 @@ typedef struct s_plane
 	t_material	material;
 }	t_plane;
 
-
 #endif
