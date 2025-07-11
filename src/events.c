@@ -86,7 +86,7 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 		quit(minirt, MALLOC_ERR);
 	tmp = NULL;
 	nb = NULL;
-}	
+}
 
 void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 {
@@ -145,11 +145,15 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 	}
 	#endif
 
-	else if (keycode == W || keycode == A || keycode == S || keycode == D
-			|| keycode == E || keycode == R || keycode == Z || keycode == X)
+	else if (keycode == W || keycode == A || keycode == S || keycode == D)
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		asdw_handle(keycode, minirt);
+	}
+	else if (keycode == E || keycode == R || keycode == Z || keycode == X)
+	{
+		minirt->render->pixel_size = PIXEL_SIZE_MULT;
+		erzx_handle(keycode, minirt);
 	}
 	else if (keycode == U || keycode == H || keycode == J
 			|| keycode == K || keycode == I || keycode == O)

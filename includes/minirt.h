@@ -109,9 +109,12 @@ double		ato_buffer(char *ptr, int *cursor, int delim);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_sphere(t_minirt *minirt, t_scene *scene, t_sphere *sphere, int *cursor);
-int			parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor);
-int			parse_cylinder(t_minirt *minirt, t_scene *scene, t_cylinder *cylinder, int *cursor);
+int			parse_sphere(t_minirt *minirt,
+				t_scene *scene, t_sphere *sphere, int *cursor);
+int			parse_plane(t_minirt *minirt,
+				t_scene *scene, t_plane *plane, int *cursor);
+int			parse_cylinder(t_minirt *minirt,
+				t_scene *scene, t_cylinder *cylinder, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
@@ -131,14 +134,16 @@ void		check_characters_validity(t_minirt *minirt);
 
 t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
-void			set_pixel_size(t_camera *camera);
+void		set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
 
 void		create_object_list(t_scene *scene);
-void		create_object_from_sphere(t_object *object, t_sphere *sphere, int id);
+void		create_object_from_sphere(t_object *object,
+				t_sphere *sphere, int id);
 void		create_object_from_plane(t_object *object, t_plane *plane, int id);
-void		create_object_from_cylinder(t_object *object, t_cylinder *cylinder, int id);
+void		create_object_from_cylinder(t_object *object,
+				t_cylinder *cylinder, int id);
 
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
@@ -150,14 +155,14 @@ t_inter		get_inter(void);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
-// t_vec3		get_lighting(t_comp comp, bool in_shadow);
 t_vec3		get_lighting(t_comp *comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
 t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
 void		swap_inters(t_inter *a, t_inter *b);
-t_vec3		get_cylinder_normal_at(const t_object *cy, const t_vec3 world_point);
+t_vec3		get_cylinder_normal_at(const t_object *cy,
+				const t_vec3 world_point);
 
 /*                             COLOR UTILS                                  */
 
@@ -170,10 +175,12 @@ t_vec3		int_to_color(int int_color);
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
 t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
-t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir, double diameter, double height, t_vec3 color);
+t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir,
+				double diameter, double height, t_vec3 color);
 void		free_sphere(t_object *object);
 
-int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
+int			get_cylinder_inter(const t_object *object,
+				const t_ray *ray, t_inter_list *list);
 
 /*                             Material Utils                               */
 
@@ -203,9 +210,11 @@ void		event_turn_cylinders(t_minirt *minirt);
 void		event_sphere_shearing(t_minirt *minirt);
 void		event_light_pos(t_minirt *minirt, int keycode);
 void		arrows_handle(int keycode, t_minirt *minirt);
-void		asdw_handle(int keycode, t_minirt *minirt);
+int			asdw_handle(int keycode, t_minirt *minirt);
+void		erzx_handle(int keycode, t_minirt *minirt);
 
-void		event_object_selection(t_minirt *minirt, t_scene *scene, int keycode);
+void		event_object_selection(t_minirt *minirt,
+				t_scene *scene, int keycode);
 void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
 void		event_obj_pos(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);

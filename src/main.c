@@ -51,7 +51,7 @@ int	main(int ac, char **av)
 		quit(&minirt, WIN_SIZE_ERR);
 	init_mlx(&minirt);
 	init_events(&minirt);
-	t = clock();
+	t = clock(); // REMOVE from non-bonus
 
 	render_scene(&minirt);
 

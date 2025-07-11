@@ -1,7 +1,5 @@
 #include "minirt.h"
 
-/**If size of m == 3, n = 2
- */
 t_matrix	get_submatrice(t_matrix m, int row, int col)
 {
 	int				i_sub;
@@ -10,25 +8,23 @@ t_matrix	get_submatrice(t_matrix m, int row, int col)
 	int				j;
 	t_matrix		submatrice;
 
-	i_sub = 0;
+	i_sub = -1;
 	i = 0;
 	submatrice = get_matrix(m.row - 1, m.col - 1, 0);
-	while (i_sub < submatrice.row)
+	while (++i_sub < submatrice.row)
 	{
 		if (i == row)
 			i++;
-		j_sub = 0;
+		j_sub = -1;
 		j = 0;
-		while (j_sub < submatrice.col)
+		while (++j_sub < submatrice.col)
 		{
 			if (j == col)
 				j++;
 			submatrice.matrix[i_sub][j_sub] = m.matrix[i][j];
 			j++;
-			j_sub++;
 		}
 		i++;
-		i_sub++;
 	}
 	return (submatrice);
 }
