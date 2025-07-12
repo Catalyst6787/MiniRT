@@ -33,9 +33,9 @@ SRC					=	main.c \
 						fill_intersection_table.c \
 						debug.c \
 						double_utils.c \
-						events.c events_camera_light.c event_obj_positions.c events_fun.c \
+						events.c events_camera_light.c event_obj_positions.c events_fun.c events_keys.c events_select.c \
 						print_data.c print_more_data.c \
-						exit.c \
+						exit.c exit2.c \
 						get_debug_fd.c \
 						init.c \
 						print_debug.c \
@@ -56,7 +56,7 @@ SRC					=	main.c \
 						matrices_translations.c matrices_transpositions.c  matrices_utils.c matrices_shearing.c \
 						matrices_orientations.c \
 						transformations.c \
-						utils.c \
+						utils.c utils2.c \
 						color_operations.c \
 						free_utils.c \
 						vec3_basic_op.c vec3_complex_operations.c vec3_utils.c vec3_seters_geters.c \

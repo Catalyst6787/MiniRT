@@ -1,4 +1,3 @@
-
 #include "minirt.h"
 
 void	count_elements(t_scene *scene)

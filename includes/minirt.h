@@ -216,6 +216,9 @@ t_vec3		convert_dir_to_euler(t_vec3 dir);
 /*                                 EVENTS                                  */
 
 int			end_mlx_loop(t_mlx_data *mlx);
+void		event_render(t_minirt *minirt);
+void		event_display_command_help(t_minirt *minirt);
+void		event_change_string_color(t_minirt *minirt);
 int			handle_keypress(int keycode, t_minirt *minirt);
 int			handle_mouseclick(int button, int x, int y, t_minirt *minirt);
 void		event_print_debug(t_minirt *minirt);
@@ -236,6 +239,7 @@ void		event_activate_cylinder_cap(t_minirt *minirt);
 /*                                 EXIT                                  */
 
 void		free_scene(t_scene *scene);
+void	print_exit_info(char *str);
 int			quit(t_minirt *minirt, char *str);
 
 /*                                 DEBUG                                  */
