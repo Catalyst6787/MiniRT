@@ -64,6 +64,7 @@ SRC = main.c \
 VPATH = $(SRC_DIR):$(addprefix $(SRC_DIR)/,$(SUBDIRS))
 OBJ_DIR = objects
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+DEP_FILES = $(SRC_OBJ:.o=.d)  # Dependency files
 
 PURPLE = \033[0;34m
 GREEN = \033[0;32m
@@ -79,7 +80,9 @@ $(NAME): $(SRC_OBJ) $(LIBFT) $(MLX)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $<...$(RESET)\n"
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+
+-include $(DEP_FILES)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
@@ -91,10 +94,9 @@ $(MLX):
 	@$(MAKE) -C $(dir $(MLX))
 
 clean:
-	@printf "$(RED)Cleaning object files...$(RESET)\n"
-	$(RM) $(OBJ_DIR)/*.o
+	@printf "$(RED)Cleaning object and dependency files...$(RESET)\n"
+	$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d
 	@$(MAKE) -C ./libft clean
-	@$(MAKE) -C $(dir $(MLX)) clean
 
 fclean: clean
 	@printf "$(RED)Removing executables and objects directory...$(RESET)\n"
