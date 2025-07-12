@@ -15,6 +15,7 @@ mlx_macos/libmlx.a
 
 # Executable
 miniRT
+miniRT_bonus
 
 # Debug files
 *.dSYM/
