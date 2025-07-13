@@ -88,7 +88,8 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->camera->view.up = get_vec3(0, 1, 0);
 	scene->camera->hsize = WIN_W;
 	scene->camera->vsize = WIN_H;
-	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n');
+	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n')
+		* M_PI / 180;
 	*cursor = i;
 	return (1);
 }
