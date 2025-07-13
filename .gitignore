@@ -6,6 +6,7 @@
 
 # Object files
 objects/
+objects_bonus/
 libft/libft.a
 libft/obj/
 minilibx-linux/obj
