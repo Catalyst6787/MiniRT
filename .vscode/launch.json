@@ -17,7 +17,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT",
-			"args": ["assets/scenes/plane_debug_2.rt"],
+			"args": ["assets/scenes/ten_spheres.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
