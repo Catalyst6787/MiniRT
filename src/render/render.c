@@ -1,6 +1,4 @@
 #include "minirt.h"
-#include <float.h>
-#include <math.h>
 
 void	set_computations(t_comp *comp_out,
 		t_scene *scene, t_inter *hit, t_ray *r)
