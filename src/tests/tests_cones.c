@@ -101,14 +101,16 @@ void	create_object_from_cone(t_object *object, t_cone *cone)
 // }
 
 
-bool	check_cone_cap(const t_ray *ray, double t)
+bool	check_cone_cap(const t_object *object, const t_ray *ray, double t)
 {
 	double	x;
 	double	z;
+	double	y_cap;
 
+	y_cap = (object->obj_data.cylinder.max - object->obj_data.cylinder.min) / 2;
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;
-	return ((x * x + z * z) <= 1);
+	return ((x * x + z * z) <= (y_cap * y_cap));
 }
 
 int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *list)
@@ -121,7 +123,7 @@ int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *
 		|| (ray->dir.y > -(EPSILON) && ray->dir.y < EPSILON))
 		return (0);
 	t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
-	if (check_cone_cap(ray, t))
+	if (check_cone_cap(object, ray, t))
 	{
 		list->inters[list->count].t = t;
 		list->inters[list->count].obj = object;
@@ -129,7 +131,7 @@ int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *
 		hit_added++;
 	}
 	t = (object->obj_data.cylinder.max - ray->origin.y) / ray->dir.y;
-	if (check_cone_cap(ray, t))
+	if (check_cone_cap(object,ray, t))
 	{
 		list->inters[list->count].t = t;
 		list->inters[list->count].obj = object;
@@ -177,17 +179,15 @@ int	get_cone_inter(const t_object *object,
 	d.a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
 	d.b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
 	d.c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
-	if (d.a > -(EPSILON) && d.a < EPSILON && d.b) // if a is approximately zero
+	if (d.a > -(EPSILON) && d.a < EPSILON && !object->obj_data.cylinder.isclosed) 
 	{
-		if (!d.b)
+		if (d.b > -(EPSILON) && d.b < EPSILON)
 			return (0);
 		list->inters[list->count].t = -(d.c) / (2 * d.b);
 		list->inters[list->count].obj = object;
 		list->count++;
 		return (1);
 	}
-	// d.b = 2 * ray->origin.x * ray->dir.x + 2 * ray->origin.z * ray->dir.z;
-	// d.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1;
 	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
 	if (d.discriminant < 0)
 		return (intersect_cone_caps(object, ray, list));
