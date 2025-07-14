@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include <stdio.h>
 
 void	print_cylinder_data(t_minirt *minirt)
 {
@@ -25,6 +26,26 @@ void	print_cylinder_data(t_minirt *minirt)
 	}
 }
 
+void	print_light_data(t_minirt *minirt)
+{
+	int	i;
+
+	i = -1;
+	while (++i < minirt->scene->nb_light)
+	{
+		printf("Light[%d/%d] :\n\n", i + 1, minirt->scene->nb_light);
+		printf("	x y z : %.2f %.2f %.2f\n",
+			minirt->scene->lights[i]->pos.x,
+			minirt->scene->lights[i]->pos.y,
+			minirt->scene->lights[i]->pos.z);
+		printf("	r g b : %f %f %f\n",
+			minirt->scene->lights[i]->color.r,
+			minirt->scene->lights[i]->color.g,
+			minirt->scene->lights[i]->color.b);
+		printf("	brightness: %f\n", minirt->scene->lights[i]->brightness);
+	}
+}
+
 void	event_print_debug(t_minirt *minirt)
 {
 	printf("\n");
@@ -36,13 +57,7 @@ void	event_print_debug(t_minirt *minirt)
 		minirt->scene->ambient->color.b);
 	print_camera_data(minirt);
 	printf("Light(s) :\n\n");
-	printf("	x y z : %.2f %.2f %.2f\n",
-		minirt->scene->light->pos.x,
-		minirt->scene->light->pos.y,
-		minirt->scene->light->pos.z);
-	printf("	Ratio : %.2f\n", minirt->scene->light->brightness);
-	printf("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->light->color.r,
-		minirt->scene->light->color.g, minirt->scene->light->color.b);
+	print_light_data(minirt);
 	print_spheres_data(minirt);
 	print_plane_data(minirt);
 	print_cylinder_data(minirt);

@@ -2,20 +2,23 @@
 
 void	event_light_pos(t_minirt *minirt, int keycode)
 {
-	minirt->render->pixel_size = PIXEL_SIZE_MULT;
-	if (keycode == U)
-		minirt->scene->light->pos.y += 0.2;
-	else if (keycode == H)
-		minirt->scene->light->pos.x -= 0.2;
-	else if (keycode == J)
-		minirt->scene->light->pos.y -= 0.2;
-	else if (keycode == K)
-		minirt->scene->light->pos.x += 0.2;
-	else if (keycode == I)
-		minirt->scene->light->pos.z -= 0.2;
-	else if (keycode == O)
-		minirt->scene->light->pos.z += 0.2;
-	render_scene(minirt);
+	printf("rework light pos to move multiple lights with select like for object\n");
+	(void)minirt;
+	(void)keycode;
+	// minirt->render->pixel_size = PIXEL_SIZE_MULT;
+	// if (keycode == U)
+	// 	minirt->scene->light->pos.y += 0.2;
+	// else if (keycode == H)
+	// 	minirt->scene->light->pos.x -= 0.2;
+	// else if (keycode == J)
+	// 	minirt->scene->light->pos.y -= 0.2;
+	// else if (keycode == K)
+	// 	minirt->scene->light->pos.x += 0.2;
+	// else if (keycode == I)
+	// 	minirt->scene->light->pos.z -= 0.2;
+	// else if (keycode == O)
+	// 	minirt->scene->light->pos.z += 0.2;
+	// render_scene(minirt);
 }
 
 void	arrows_handle(int keycode, t_minirt *minirt)

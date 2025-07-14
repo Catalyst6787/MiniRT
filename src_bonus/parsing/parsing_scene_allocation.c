@@ -1,16 +1,37 @@
 #include "minirt.h"
+#include "scene.h"
 
-void	cam_light_alloc(t_minirt *minirt)
+void	cam_ambiant_alloc(t_minirt *minirt)
 {
 	minirt->scene->ambient = malloc(sizeof(t_ambient));
 	if (!minirt->scene->ambient)
 		quit(minirt, MALLOC_ERR);
-	minirt->scene->light = malloc(sizeof(t_light));
-	if (!minirt->scene->light)
-		quit(minirt, MALLOC_ERR);
 	minirt->scene->camera = malloc(sizeof(t_camera));
 	if (!minirt->scene->camera)
 		quit(minirt, MALLOC_ERR);
+}
+
+
+void	lights_alloc(t_minirt *minirt, t_scene *scene)
+{
+	int	i;
+
+	i = -1;
+	minirt->scene->lights
+		= malloc(sizeof(t_light *) * (scene->nb_light + 1));
+	if (!scene->lights && scene->nb_light)
+		quit(minirt, MALLOC_ERR);
+	while (++i < scene->nb_light)
+	{
+		scene->lights[i] = malloc(sizeof(t_light));
+		if (!scene->lights[i])
+		{
+			while (--i >= 0)
+				free(scene->lights[i]);
+			quit(minirt, MALLOC_ERR);
+		}
+	}
+	scene->lights[i] = NULL;
 }
 
 void	spheres_alloc(t_minirt *minirt, t_scene *scene)
@@ -79,7 +100,8 @@ void	cylinders_alloc(t_minirt *minirt, t_scene *scene)
 
 void	alloc_elements(t_minirt *minirt, t_scene *scene)
 {
-	cam_light_alloc(minirt);
+	cam_ambiant_alloc(minirt);
+	lights_alloc(minirt, scene);
 	spheres_alloc(minirt, scene);
 	planes_alloc(minirt, scene);
 	cylinders_alloc(minirt, scene);

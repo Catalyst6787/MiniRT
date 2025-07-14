@@ -44,7 +44,7 @@ typedef struct s_scene
 {
 	t_ambient	*ambient;
 	t_camera	*camera;
-	t_light		*light;
+	t_light		**lights;
 	t_sphere	**spheres;
 	t_plane		**planes;
 	t_cylinder	**cylinders;
