@@ -3,19 +3,15 @@ Simple C ray tracer.
 
 ### basic
 
+- [ ] parsing problem if more than one zero after the coma
+- [ ] add height mode to pav num
 - [ ] cone
 - [ ] display last key pressed
 - [ ] start to think how to bonus
 - [ ] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
-- [ ] add height mode to pav num
+- [ ] add size mode to pav num
 
-	### norminette
 
-	-  function parse_camera : too long, put the end in another place than parsing
-
-	### when bonus
-
-	- [ ] change single_elements_check
 
 
 - [X] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)

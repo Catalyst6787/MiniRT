@@ -11,6 +11,10 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_rotation_matrix(get_vec3(0, 0.1, 0)));
+	else if (minirt->ui->move_mode == size)
+		minirt->scene->objects[i].transform
+			= multiply_matrix(minirt->scene->objects[i].transform,
+				get_scaling_matrix(get_vec3(1.1, 1.1, 1.1)));
 }
 
 static void	handle_pav_down(t_minirt *minirt, int i)
@@ -24,6 +28,10 @@ static void	handle_pav_down(t_minirt *minirt, int i)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_rotation_matrix(get_vec3(0, -0.1, 0)));
+	else if (minirt->ui->move_mode == size)
+		minirt->scene->objects[i].transform
+			= multiply_matrix(minirt->scene->objects[i].transform,
+				get_scaling_matrix(get_vec3(0.9, 0.9, 0.9)));
 }
 
 static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)

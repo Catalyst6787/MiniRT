@@ -52,53 +52,153 @@ void	create_object_from_cone(t_object *object, t_cone *cone)
 
 }
 
-int	get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
-{
-	double	a;
-	double	b;
-	double	c;
-	double	discriminant;
-	double	y0;
-	double	y1;
-	double	t0;
-	double	t1;
+// int	get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
+// {
+// 	double	a;
+// 	double	b;
+// 	double	c;
+// 	double	discriminant;
+// 	double	y0;
+// 	double	y1;
+// 	double	t0;
+// 	double	t1;
 
-	a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
-	b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
-	c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
-	if (a > -(EPSILON) && a < EPSILON && b) // if a is approximately zero
+// 	a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
+// 	b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
+// 	c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
+// 	if (a > -(EPSILON) && a < EPSILON && b) // if a is approximately zero
+// 	{
+// 		list->inters[list->count].t = -(c) / (2 * b);
+// 		list->inters[list->count].obj = object;
+// 		list->count++;
+// 		return (1);
+// 	}
+// 	discriminant = (b * b) - (4 * a * c);
+// 	if (discriminant < 0)
+// 		return (0);
+// 	if (list->count > list->capacity - 2)
+// 		return (print_err(FILE, LINE,
+// 				"get_cylinder_inter: no more space in list"), 1);
+// 	t0 = (-b - sqrtf(discriminant)) / (2.0 * a);
+// 	t1 = (-b + sqrtf(discriminant)) / (2.0 * a);
+// 	if (t0 > t1)
+// 		swap_doubles(&t0, &t1);
+// 	y0 = ray->origin.y + t0 * ray->dir.y;
+// 	if (object->obj_data.cylinder.min < y0 && y0 < object->obj_data.cylinder.max)
+// 	{
+// 		list->inters[list->count].t = t0;
+// 		list->inters[list->count].obj = object;
+// 		list->count++;
+// 	}
+// 	y1 = ray->origin.y + t1 * ray->dir.y;
+// 	if (object->obj_data.cylinder.min < y1 && y1 < object->obj_data.cylinder.max)
+// 	{
+// 		list->inters[list->count].t = t1;
+// 		list->inters[list->count].obj = object;
+// 		list->count++;
+// 	}
+// 	return (1);
+// }
+
+
+bool	check_cone_cap(const t_ray *ray, double t)
+{
+	double	x;
+	double	z;
+
+	x = ray->origin.x + t * ray->dir.x;
+	z = ray->origin.z + t * ray->dir.z;
+	return ((x * x + z * z) <= 1);
+}
+
+int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *list)
+{
+	double	t;
+	int		hit_added;
+
+	hit_added = 0;
+	if (!object->obj_data.cylinder.isclosed
+		|| (ray->dir.y > -(EPSILON) && ray->dir.y < EPSILON))
+		return (0);
+	t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
+	if (check_cone_cap(ray, t))
 	{
-		list->inters[list->count].t = -(c) / (2 * b);
+		list->inters[list->count].t = t;
+		list->inters[list->count].obj = object;
+		list->count++;
+		hit_added++;
+	}
+	t = (object->obj_data.cylinder.max - ray->origin.y) / ray->dir.y;
+	if (check_cone_cap(ray, t))
+	{
+		list->inters[list->count].t = t;
+		list->inters[list->count].obj = object;
+		list->count++;
+		hit_added++;
+	}
+	return (hit_added);
+}
+
+static int	store_cone_inter(t_cylinder_inter *d, const t_object *object,
+				const t_ray *ray, t_inter_list *list)
+{
+	if (d->t0 > d->t1)
+		swap_doubles(&d->t0, &d->t1);
+	d->y0 = ray->origin.y + d->t0 * ray->dir.y;
+	if (object->obj_data.cylinder.min < d->y0
+		&& d->y0 < object->obj_data.cylinder.max)
+	{
+		list->inters[list->count].t = d->t0;
+		list->inters[list->count].obj = object;
+		list->count++;
+		d->nb_inter++;
+	}
+	if (d->nb_inter == 2)
+		return (0);
+	d->y1 = ray->origin.y + d->t1 * ray->dir.y;
+	if (object->obj_data.cylinder.min < d->y1
+		&& d->y1 < object->obj_data.cylinder.max)
+	{
+		list->inters[list->count].t = d->t1;
+		list->inters[list->count].obj = object;
+		list->count++;
+	}
+	return (0);
+}
+
+int	get_cone_inter(const t_object *object,
+	const t_ray *ray, t_inter_list *list)
+{
+	t_cylinder_inter	d;
+
+	if (list->count > list->capacity - 2)
+		return (print_err(FILE, LINE,
+				"get_cylinder_inter: no more space in list"), 1);
+	d.a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
+	d.b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
+	d.c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
+	if (d.a > -(EPSILON) && d.a < EPSILON && d.b) // if a is approximately zero
+	{
+		if (!d.b)
+			return (0);
+		list->inters[list->count].t = -(d.c) / (2 * d.b);
 		list->inters[list->count].obj = object;
 		list->count++;
 		return (1);
 	}
-	discriminant = (b * b) - (4 * a * c);
-	if (discriminant < 0)
+	// d.b = 2 * ray->origin.x * ray->dir.x + 2 * ray->origin.z * ray->dir.z;
+	// d.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1;
+	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
+	if (d.discriminant < 0)
+		return (intersect_cone_caps(object, ray, list));
+	d.nb_inter = intersect_cone_caps(object, ray, list);
+	if (d.nb_inter == 2)
 		return (0);
-	if (list->count > list->capacity - 2)
-		return (print_err(FILE, LINE,
-				"get_cylinder_inter: no more space in list"), 1);
-	t0 = (-b - sqrtf(discriminant)) / (2.0 * a);
-	t1 = (-b + sqrtf(discriminant)) / (2.0 * a);
-	if (t0 > t1)
-		swap_doubles(&t0, &t1);
-	y0 = ray->origin.y + t0 * ray->dir.y;
-	if (object->obj_data.cylinder.min < y0 && y0 < object->obj_data.cylinder.max)
-	{
-		list->inters[list->count].t = t0;
-		list->inters[list->count].obj = object;
-		list->count++;
-	}
-	y1 = ray->origin.y + t1 * ray->dir.y;
-	if (object->obj_data.cylinder.min < y1 && y1 < object->obj_data.cylinder.max)
-	{
-		list->inters[list->count].t = t1;
-		list->inters[list->count].obj = object;
-		list->count++;
-	}
-	return (1);
+	d.t0 = (-d.b - sqrtf(d.discriminant)) / (2.0 * d.a);
+	d.t1 = (-d.b + sqrtf(d.discriminant)) / (2.0 * d.a);
+	return (store_cone_inter(&d, object, ray, list));
 }
+
 
 t_vec3	get_cone_normal_at(const t_object *co, const t_vec3 world_point)
 {
@@ -115,6 +215,8 @@ t_vec3	get_cone_normal_at(const t_object *co, const t_vec3 world_point)
 }
 
 
+
+
 int			start_all_cones_tests(void)
 {
 	t_cone			*cone;
@@ -123,15 +225,16 @@ int			start_all_cones_tests(void)
 	t_inter_list	list;
 	(void) ray;
 
-	cone = new_cone(get_point3(0, 0, 0), get_vec3(0, 1, 0), 2, 100, get_color(1, 1, 1));
+	cone = new_cone(get_point3(0, 0, 0), get_vec3(0, 1, 0), 1, 100, get_color(1, 1, 1));
 	create_object_from_cone(&cone_obj, cone);
+	cone_obj.obj_data.cylinder.isclosed = 0;
 	list.capacity = 2;
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
 	list.inters[0].t = 0;
 
-	////////////	Test Intersections
+	//////////	Test Intersections
 
-		////////	2 inter
+		//////	2 inter
 
 	list.count = 0;
 	ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(0, 0, 1)));
@@ -157,11 +260,32 @@ int			start_all_cones_tests(void)
 	list.count = 0;
 	ray = get_ray(get_point3(0, 0, -1), vec3_normalise(get_vec3(0, 1, 1)));
 	get_cone_inter(&cone_obj, &ray, &list);
+
 	assert(list.inters[0].t == 0.35355339059327379);
 	assert(list.count == 1);
 
-	//need to make cone max and min
+	//////////	Test End Cap
 
+	cone_obj.obj_data.cylinder.isclosed = 1;
+	cone_obj.obj_data.cylinder.max = 0.5;
+	cone_obj.obj_data.cylinder.min = -0.5;
+
+	
+	// list.count = 0;
+	// ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(0, 1, 0)));
+	// get_cone_inter(&cone_obj, &ray, &list);
+	// assert(list.count == 0);
+
+	// list.count = 0;
+	// ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 1)));
+	// get_cone_inter(&cone_obj, &ray, &list);
+	// print_inter_list(&list);
+	// assert(list.count == 2);
+
+	// list.count = 0;
+	// ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 0)));
+	// get_cone_inter(&cone_obj, &ray, &list);
+	// assert(list.count == 4);
 
 	free(list.inters);
 	free(cone);

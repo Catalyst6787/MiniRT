@@ -15,7 +15,6 @@ typedef struct s_cone
 }				t_cone;
 
 
-
 t_cone	*new_cone(t_vec3 pos, t_vec3 dir, double diameter, double height, t_vec3 color)
 {
 	t_cone	*cone;
@@ -66,7 +65,7 @@ int	get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list)
 	a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
 	b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
 	c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
-	if (a > -(EPSILON) && a < EPSILON && b) // if a is approximately zero
+	if (a > -(EPSILON) && a < EPSILON && b)
 	{
 		list->inters[list->count].t = -(c) / (2 * b);
 		list->inters[list->count].obj = object;
@@ -156,7 +155,6 @@ int			start_all_cones_tests(void)
 
 	list.count = 0;
 	ray = get_ray(get_point3(0, 0, -1), vec3_normalise(get_vec3(0, 1, 1)));
-	get_cone_inter(&cone_obj, &ray, &list);
 	assert(list.inters[0].t == 0.35355339059327379);
 	assert(list.count == 1);
 

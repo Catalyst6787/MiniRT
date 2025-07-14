@@ -2,15 +2,20 @@
 
 static void	switch_pav_mode(t_minirt *minirt)
 {
-	if (minirt->ui->move_mode == dir)
-	{
-		minirt->ui->move_mode = pos;
-		printf("pos mode selected\n");
-	}
-	else if (minirt->ui->move_mode == pos)
+	if (minirt->ui->move_mode == pos)
 	{
 		minirt->ui->move_mode = dir;
 		printf("dir mode selected\n");
+	}
+	else if (minirt->ui->move_mode == dir)
+	{
+		minirt->ui->move_mode = size;
+		printf("size mode selected\n");
+	}
+	else if (minirt->ui->move_mode == size)
+	{
+		minirt->ui->move_mode = pos;
+		printf("pos mode selected\n");
 	}
 }
 

@@ -60,7 +60,7 @@ typedef enum e_move_mode
 {
 	dir,
 	pos,
-	height
+	size
 }				t_move_mode;
 
 typedef struct s_parsing_helper
