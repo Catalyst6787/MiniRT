@@ -4,8 +4,6 @@ static void	free_extra(t_scene *scene)
 {
 	if (scene->objects)
 		free(scene->objects);
-	if (scene->light)
-		free(scene->light);
 	if (scene->ambient)
 		free(scene->ambient);
 	if (scene->camera)
@@ -20,6 +18,13 @@ void	free_scene(t_scene *scene)
 {
 	int	i;
 
+	i = -1;
+	if (scene->lights)
+	{
+		while (++i <= scene->nb_light)
+			free(scene->lights[i]);
+		free(scene->lights);
+	}
 	i = -1;
 	if (scene->spheres)
 	{

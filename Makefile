@@ -66,8 +66,6 @@ SRC = main.c \
 
 BONUS_SRC = $(SRC) # add more here
 
-VPATH = $(SRC_DIR):$(addprefix $(SRC_DIR)/,$(SUBDIRS))
-BONUS_VPATH = $(BONUS_DIR):$(addprefix $(BONUS_DIR)/,$(BONUS_SUBDIRS))
 OBJ_DIR = objects
 BONUS_OBJ_DIR = objects_bonus
 SRC_OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
@@ -94,11 +92,19 @@ $(BONUS_NAME): $(BONUS_OBJ) $(LIBFT) $(MLX)
 	@printf "$(PURPLE)Linking $(BONUS_NAME)...$(RESET)\n"
 	$(CC) $(CFLAGS) $(BONUS_OBJ) $(LDFLAGS) -o $(BONUS_NAME) -I ./includes_bonus
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@printf "$(PURPLE)Compiling $< (main)...$(RESET)\n"
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -I ./includes
 
-$(BONUS_OBJ_DIR)/%.o: %.c | $(BONUS_OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/*/%.c | $(OBJ_DIR)
+	@printf "$(PURPLE)Compiling $< (main)...$(RESET)\n"
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -I ./includes
+
+$(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c | $(BONUS_OBJ_DIR)
+	@printf "$(PURPLE)Compiling $< (bonus)...$(RESET)\n"
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -I ./includes_bonus
+
+$(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/*/%.c | $(BONUS_OBJ_DIR)
 	@printf "$(PURPLE)Compiling $< (bonus)...$(RESET)\n"
 	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@ -I ./includes_bonus
 

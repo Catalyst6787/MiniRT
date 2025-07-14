@@ -29,6 +29,4 @@ void	single_elements_check(t_minirt *minirt, t_scene *scene)
 		quit(minirt, TOO_MANY_CAM_ERR);
 	else if (scene->nb_light == 0)
 		quit(minirt, MISSING_LIGHT_ERR);
-	else if (scene->nb_light > 1)
-		quit(minirt, TOO_MANY_LIGHT_ERR);
 }

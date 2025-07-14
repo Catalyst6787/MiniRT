@@ -1,4 +1,6 @@
 #include "minirt.h"
+#include "scene.h"
+#include <stdlib.h>
 
 int	is_shadowed_tests(t_scene *scene, t_vec3 point)
 {
@@ -15,7 +17,7 @@ int	is_shadowed_tests(t_scene *scene, t_vec3 point)
 	list.inters = malloc(sizeof(t_inter) * list.capacity);
 	list.count = 0;
 	i = 0;
-	v = vec3_vec_substraction(scene->light->pos, point);
+	v = vec3_vec_substraction(scene->lights[0]->pos, point);
 	distance = vec3_exact_length(v);
 	direction = vec3_normalise(v);
 	r = get_ray(point, direction);
@@ -34,7 +36,8 @@ int	is_shadowed_tests(t_scene *scene, t_vec3 point)
 
 void	set_default_world(t_scene *scene)
 {
-	scene->light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
+	scene->lights = malloc(sizeof(t_light *));
+	scene->lights[0] = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
 	scene->spheres = malloc(sizeof(t_sphere) * 2);
 	scene->spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
 	scene->spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
@@ -55,7 +58,8 @@ void	set_default_world(t_scene *scene)
 void	set_rendering_shadow_world(t_scene *scene)
 {
 	ft_memset(scene, 0, sizeof(t_scene));
-	scene->light = new_light(get_point3(0, 0, -10), get_color(1, 1, 1));
+	scene->lights = malloc(sizeof(t_light *));
+	scene->lights[0] = new_light(get_point3(0, 0, -10), get_color(1, 1, 1));
 	scene->spheres = malloc(sizeof(t_sphere) * 2);
 	scene->spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
 	scene->spheres[1] = new_sphere(get_point3(0, 0, 10), 1, get_color(1, 1, 1));
@@ -100,9 +104,9 @@ int	start_all_shadows_tests(void)
 
 	comp.eyev = get_vec3(0, 0, -1);
 	comp.normalv = get_vec3(0, 0, -1);
-	scene.light->pos = get_point3(0, 0, -10);
-	scene.light->color = get_color(1, 1, 1);
-	comp.light = *scene.light;
+	scene.lights[0]->pos = get_point3(0, 0, -10);
+	scene.lights[0]->color = get_color(1, 1, 1);
+	comp.light = *scene.lights[0];
 	comp.point = get_point3(0, 0, 0);  //don't know about this one
 
 	comp.m = get_default_material(get_color(1, 1, 1), &scene);
@@ -114,7 +118,8 @@ int	start_all_shadows_tests(void)
 
 	////////////	is_shadowed tests
 
-	free(scene.light);
+	free(scene.lights[0]);
+	free(scene.lights);
 	free(scene.spheres[0]);
 	free(scene.spheres[1]);
 	free(scene.spheres);
@@ -132,7 +137,8 @@ int	start_all_shadows_tests(void)
 
 	////////////	Tests rendering shadows
 
-	free(scene.light);
+	free(scene.lights[0]);
+	free(scene.lights);
 	free(scene.spheres[0]);
 	free(scene.spheres[1]);
 	free(scene.spheres);
@@ -150,7 +156,7 @@ int	start_all_shadows_tests(void)
 	}
 	list.inters[0].obj = &scene.objects[1];
 	list.inters[0].t = 4;
-	set_computations(&comp, &scene, &list.inters[0], &r);
+	set_computations(&comp, scene.lights[0], &list.inters[0], &r);
 	// color = shade_hit(&scene, &comp); //this works if in_shadow is true (will be implemented later in tests) !!!
 	// assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
 
@@ -176,7 +182,7 @@ int	start_all_shadows_tests(void)
 	list.inters[0].obj = scene.objects;
 	list.inters[0].t = 5;
 
-	set_computations(&comp, &scene, &list.inters[0], &r);
+	set_computations(&comp, scene.lights[0], &list.inters[0], &r);
 	assert(comp.over_point.z < (-EPSILON / 2));
 	assert(comp.point.z > (comp.over_point.z));
 
@@ -184,7 +190,8 @@ int	start_all_shadows_tests(void)
 	free(list.inters);
 	free(scene.spheres);
 	free(scene.objects);
-	free(scene.light);
+	free(scene.lights[0]);
+	free(scene.lights);
 
 	return (0);
 }

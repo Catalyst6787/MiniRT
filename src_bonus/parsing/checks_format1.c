@@ -21,25 +21,26 @@ void	char_error_check(t_minirt *minirt,
 void	check_each_lines(t_minirt *minirt, char *buffer)
 {
 	int		i;
-	char	c;
+	// char	c;
 
 	i = 0;
 	while (ft_isspace(buffer[i]))
 		i++;
-	c = buffer[i++];
+	// c = buffer[i++];
 	while (buffer[i])
 	{
-		if (buffer[i] == c)
-			quit(minirt, CHAR_DOUBLE);
+		// if (buffer[i] == c)
+		// 	quit(minirt, CHAR_DOUBLE);
 		if (buffer[i] == '\n' && !ft_isspace(buffer[i])
 			&& !ft_isspace(buffer[i + 1]))
 		{
 			while (buffer[i] || ft_isspace(buffer[i]))
 				i++;
-			c = buffer[i++];
+			// c = buffer[i++];
 		}
 		i++;
 	}
+	(void)minirt;
 }
 
 void	check_object_format(t_minirt *minirt, char *buffer)

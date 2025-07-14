@@ -65,6 +65,7 @@ typedef enum e_move_mode
 
 typedef struct s_parsing_helper
 {
+	int	l;
 	int	s;
 	int	p;
 	int	c;
@@ -116,7 +117,7 @@ double		ato_buffer(char *ptr, int *cursor, int delim);
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_light(t_minirt *minirt, t_scene *scene, t_light *light, int *cursor);
 int			parse_sphere(t_minirt *minirt,
 				t_scene *scene, t_sphere *sphere, int *cursor);
 int			parse_plane(t_minirt *minirt,
