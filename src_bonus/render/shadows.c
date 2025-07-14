@@ -37,7 +37,7 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	double			distance;
 	t_inter			*hit;
 
-	v = vec3_vec_substraction(scene->light->pos, comp->over_point);
+	v = vec3_vec_substraction(comp->light.pos, comp->over_point);
 	distance = vec3_exact_length(v);
 	check_each_object(render, scene, comp, vec3_normalise(v));
 	sort_inter(&render->shadow_list);

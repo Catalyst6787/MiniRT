@@ -39,9 +39,11 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		quit(minirt, WRONG_AMB_DATA);
 	if (scene->camera->fov < 0.0 || 180.0 < scene->camera->fov)
 		quit(minirt, WRONG_CAM_DATA);
-	if (!is_ok_ratio(scene->light->brightness)
-		|| !is_ok_color(scene->light->color))
-		quit(minirt, WRONG_LIGHT_DATA);
+	while (++i < scene->nb_light)
+		if (!is_ok_ratio(scene->lights[i]->brightness)
+			|| !is_ok_color(scene->lights[i]->color))
+			quit(minirt, WRONG_LIGHT_DATA);
+	i = -1;
 	while (++i < scene->nb_sphere)
 		if (!is_ok_color(scene->spheres[i]->color))
 			quit(minirt, WRONG_SPH_DATA);

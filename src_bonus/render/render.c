@@ -1,11 +1,12 @@
 #include "minirt.h"
+#include "vec3.h"
 
 void	set_computations(t_comp *comp_out,
-		t_scene *scene, t_inter *hit, t_ray *r)
+		t_light *light, t_inter *hit, t_ray *r)
 {
 	ft_memset(comp_out, 0, sizeof(t_comp));
 	comp_out->eyev = vec3_reverse(r->dir);
-	comp_out->light = *scene->light;
+	comp_out->light = *light;
 	comp_out->m = hit->obj->material;
 	comp_out->point = ray_at(hit->t, r);
 	comp_out->normalv = get_object_normal_at(hit->obj, comp_out->point);
@@ -30,6 +31,7 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 	t_ray			r;
 	t_inter			*hit;
 	t_comp			comp;
+	t_vec3			color;
 
 	i = 0;
 	while (i < minirt->scene->nb_objects)
@@ -43,14 +45,17 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		return (minirt->render->inter_list.count = 0, get_color(0, 0, 0));
-	else
+	i = 0;
+	color = get_vec3(0, 0, 0);
+	while (i < minirt->scene->nb_light)
 	{
-		set_computations(&comp, minirt->scene, hit, unique_ray);
-		return (minirt->render->inter_list.count = 0,
-			shade_hit(minirt->render, minirt->scene, &comp));
+		set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
+		color = vec3_vec_addition(color, shade_hit(minirt->render, minirt->scene, &comp));
+		minirt->render->shadow_list.count = 0;
+		i++;
 	}
 	minirt->render->inter_list.count = 0;
-	minirt->render->shadow_list.count = 0;
+	return (color);
 }
 
 t_ray	ray_for_pixel(t_camera camera, double px, double py)

@@ -13,7 +13,7 @@ static void	parse_buffer(t_minirt *minirt,
 	if (scene->buffer[i] == 'C')
 		parse_camera(minirt, scene, &i);
 	if (scene->buffer[i] == 'L')
-		parse_light(minirt, scene, &i);
+		s->l += parse_light(minirt, scene, scene->lights[s->l], &i);
 	if (scene->buffer[i] == 's')
 		if (scene->buffer[++i] == 'p')
 			s->s += parse_sphere(minirt, scene, scene->spheres[s->s], &i);
@@ -31,6 +31,7 @@ void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 	int					cursor;
 	t_parsing_helper	shape;
 
+	shape.l = 0;
 	shape.s = 0;
 	shape.c = 0;
 	shape.p = 0;

@@ -1,8 +1,10 @@
 #include "matrice.h"
 #include "minirt.h"
+#include "scene.h"
 #include "vec3.h"
 #include <assert.h>
 #include <math.h>
+#include <stdlib.h>
 
 int start_all_world_tests(void)
 {
@@ -21,7 +23,9 @@ int start_all_world_tests(void)
 	scene.nb_plane = 0;
 	scene.nb_cylinder = 0;
 	scene.nb_objects = 2;
-	scene.light = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
+	scene.nb_light = 1;
+	scene.lights = malloc(sizeof(t_light *));
+	scene.lights[0] = new_light(get_point3(-10, 10, -10), get_color(1, 1, 1));
 	scene.spheres[0] = new_sphere(get_point3(0, 0, 0), 1, get_color(0.8, 1.0, 0.6));
 	scene.spheres[1] = new_sphere(get_point3(0, 0, 0), 1, get_color(1, 1, 1));
 	scene.spheres[0]->material = get_default_material(get_color(0.8, 1.0, 0.6), &scene);
@@ -55,7 +59,7 @@ int start_all_world_tests(void)
 	sort_inter(&inter_list);
 
 	inter_list.inters[0].t = 4;
-	set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+	set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 
 	assert(comp.t == 4);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, -1)));
@@ -74,7 +78,7 @@ int start_all_world_tests(void)
 	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 
 	inter_list.inters[0].t = 1;
-	set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+	set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 
 	assert(comp.t == 1);
 	assert(vec3_isequal(comp.point, get_point3(0, 0, 1)));
@@ -94,7 +98,7 @@ int start_all_world_tests(void)
 	get_sphere_inter(&scene.objects[1], &r, &inter_list);
 	sort_inter(&inter_list);
 
-	set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+	set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.38066, 0.47583, 0.2855)));
 
@@ -104,8 +108,8 @@ int start_all_world_tests(void)
 
 
 	inter_list.count = 0;
-	scene.light->pos = get_point3(0, 0.25, 0);
-	scene.light->color = get_color(1, 1, 1);
+	scene.lights[0]->pos = get_point3(0, 0.25, 0);
+	scene.lights[0]->color = get_color(1, 1, 1);
 	original_ray = get_ray(get_point3(0, 0, 0), get_vec3(0, 0, 1));
 	r = ray_transform(original_ray, scene.objects[0].inv);
 	get_sphere_inter(&scene.objects[0], &r, &inter_list);
@@ -115,7 +119,7 @@ int start_all_world_tests(void)
 	inter_list.inters[0].obj = &scene.objects[1];
 	// scene.spheres[1]->color = get_color(1, 1, 1);
 	inter_list.inters[0].t = 0.5;
-	set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+	set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 	comp.t = 0.5;
 	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, get_vec3(0.90498, 0.90498, 0.90498)));
@@ -133,7 +137,7 @@ int start_all_world_tests(void)
 
 	if (inter_list.count)
 	{
-		set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+		set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 		c = get_lighting(&comp, 0);
 	}
 	else
@@ -146,7 +150,7 @@ int start_all_world_tests(void)
 	scene.objects[0].material.ambient = 1;
 	scene.objects[1].material.ambient = 1;
 	original_ray = get_ray(get_point3(0, 0, 0.75), get_vec3(0, 0 ,-1));
-	set_computations(&comp, &scene, &inter_list.inters[0], &original_ray);
+	set_computations(&comp, scene.lights[0], &inter_list.inters[0], &original_ray);
 	c = get_lighting(&comp, 0);
 	assert(vec3_isequal(c, scene.objects[1].material.color));
 
@@ -184,7 +188,8 @@ int start_all_world_tests(void)
 	////////////	Free
 
 
-	free(scene.light);
+	free(scene.lights[0]);
+	free(scene.lights);
 	free(inter_list.inters);
 	free(scene.spheres[0]);
 	free(scene.spheres[1]);
