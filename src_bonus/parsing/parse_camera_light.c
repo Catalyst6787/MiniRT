@@ -60,8 +60,8 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 		i++;
 	scene->ambient->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->ambient->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	scene->ambient->color.b = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	scene->ambient->color.g = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	scene->ambient->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	scene->ambient->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	scene->ambient->color.w = 0;
 	*cursor = i;
 	return (1);
