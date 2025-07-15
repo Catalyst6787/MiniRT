@@ -179,7 +179,7 @@ int	get_cone_inter(const t_object *object,
 	d.a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
 	d.b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
 	d.c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
-	if (d.a > -(EPSILON) && d.a < EPSILON && !object->obj_data.cylinder.isclosed) 
+	if (d.a > -(EPSILON) && d.a < EPSILON && !object->obj_data.cylinder.isclosed)
 	{
 		if (d.b > -(EPSILON) && d.b < EPSILON)
 			return (0);
@@ -270,22 +270,23 @@ int			start_all_cones_tests(void)
 	cone_obj.obj_data.cylinder.max = 0.5;
 	cone_obj.obj_data.cylinder.min = -0.5;
 
-	
-	// list.count = 0;
-	// ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(0, 1, 0)));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// assert(list.count == 0);
 
-	// list.count = 0;
-	// ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 1)));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// print_inter_list(&list);
-	// assert(list.count == 2);
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -5), vec3_normalise(get_vec3(0, 1, 0)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	assert(list.count == 0);
 
-	// list.count = 0;
-	// ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 0)));
-	// get_cone_inter(&cone_obj, &ray, &list);
-	// assert(list.count == 4);
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 1)));
+	get_cone_inter(&cone_obj, &ray, &list);
+	print_inter_list(&list);
+	assert(list.count == 2);
+
+	list.count = 0;
+	ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 0)));
+	get_cone_inter(&cone_obj, &ray, &list);
+
+	assert(list.count == 4);
 
 	free(list.inters);
 	free(cone);

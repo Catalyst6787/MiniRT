@@ -127,7 +127,7 @@ clean:
 	$(RM) $(OBJ_DIR)/*.o $(OBJ_DIR)/*.d
 	$(RM) $(BONUS_OBJ_DIR)/*.o $(BONUS_OBJ_DIR)/*.d
 	@$(MAKE) -C ./libft clean
-	@$(MAKE) -C $(dir $(MLX)) clean
+	# @$(MAKE) -C $(dir $(MLX)) clean
 
 fclean: clean
 	@printf "$(RED)Removing executables and objects directories...$(RESET)\n"
@@ -144,7 +144,7 @@ valgrind: all
 
 valgrindbonus: bonus
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(BONUS_NAME)
-	
+
 run: all
 	@./$(NAME)
 

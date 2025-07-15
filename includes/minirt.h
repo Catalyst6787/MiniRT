@@ -32,8 +32,8 @@
 
 # define SPACE_SET = " \t\n"
 
-# define WIN_W 3840
-# define WIN_H 2160
+# define WIN_W 1280
+# define WIN_H 720
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10

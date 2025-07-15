@@ -5,7 +5,7 @@
 			"name": "debug mac",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/miniRT",
+			"program": "${workspaceFolder}/miniRT_bonus",
 			"args": ["assets/scenes/wrong_obj_format.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
