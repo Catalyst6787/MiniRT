@@ -22,9 +22,9 @@ int	count_spaces_in_line(char *buffer, int i)
 	int	count;
 
 	count = 0;
-	while (!ft_isspace(buffer[i]))
+	while (buffer [i] && !ft_isspace(buffer[i]))
 		i++;
-	while (ft_isspace(buffer[i]))
+	while (buffer [i] && ft_isspace(buffer[i]))
 		i++;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -36,7 +36,7 @@ int	count_spaces_in_line(char *buffer, int i)
 				i++;
 			count++;
 		}
-		if (buffer[i] == '\n')
+		if (!buffer[i] || buffer[i] == '\n')
 			break ;
 		i++;
 	}

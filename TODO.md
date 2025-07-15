@@ -6,9 +6,7 @@ Simple C ray tracer.
 
 Debug ./dev.sh 17
 
-- [ ] ./dev.sh 16 not working
 - [ ] parsing problem if more than one zero after the coma
-- [ ] cone
 - [ ] vec3_basic op use pointers
 - [ ] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 
@@ -20,6 +18,8 @@ Debug ./dev.sh 17
 - [ ] display last key pressed
 
 
+- [X] cone
+- [X] ./dev.sh 16 not working
 - [X] add size mode to pav num
 - [X] start to think how to bonus
 - [X] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
