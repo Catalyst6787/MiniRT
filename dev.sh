@@ -27,6 +27,7 @@ if [ $# == 0 ]; then
 	printf "${BLUE}14 : cylinder_turn_animation.rt\n${RESET}"
 	printf "${BLUE}15 : sphere_animation.rt\n${RESET}"
 	printf "${BLUE}16 : plane_debug_2.rt\n${RESET}"
+	printf "${BLUE}17 : cone_debug.rt\n${RESET}"
 	exit 1
 fi
 
@@ -63,5 +64,7 @@ elif [ $scene == 15 ]; then
 	./miniRT_bonus assets/scenes/sphere_animation.rt
 elif [ $scene == 16 ]; then
 	./miniRT_bonus assets/scenes/plane_debug_2.rt
+elif [ $scene == 17 ]; then
+	./miniRT_bonus assets/scenes/cone_debug.rt
 fi
 

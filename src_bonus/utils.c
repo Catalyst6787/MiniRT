@@ -54,6 +54,12 @@ char	*object_type_to_str(t_object *object, bool selected)
 			return (ft_strdup("Selected : cylinder "));
 		return (ft_strdup("cylinder "));
 	}
+	if (object->type == CONE)
+	{
+		if (selected)
+			return (ft_strdup("Selected : cone "));
+		return (ft_strdup("cone "));
+	}
 	return (NULL);
 }
 

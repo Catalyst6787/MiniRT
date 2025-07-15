@@ -5,6 +5,7 @@
 # include "sphere.h"
 # include "cylinder.h"
 # include "plane.h"
+# include "cone.h"
 # include "vec3.h"
 
 typedef struct s_ambient
@@ -48,6 +49,7 @@ typedef struct s_scene
 	t_sphere	**spheres;
 	t_plane		**planes;
 	t_cylinder	**cylinders;
+	t_cone		**cones;
 	t_object	*objects;
 	char		*filename;
 	char		*buffer;
@@ -57,6 +59,7 @@ typedef struct s_scene
 	int			nb_sphere;
 	int			nb_plane;
 	int			nb_cylinder;
+	int			nb_cone;
 	int			nb_objects;
 }	t_scene;
 

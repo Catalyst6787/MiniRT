@@ -29,7 +29,7 @@ int	is_ok_ratio(double var)
 	return (1);
 }
 
-void	check_data_validity(t_minirt *minirt, t_scene *scene)
+static void	check_elements(t_minirt *minirt, t_scene *scene)
 {
 	int	i;
 
@@ -43,6 +43,13 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		if (!is_ok_ratio(scene->lights[i]->brightness)
 			|| !is_ok_color(scene->lights[i]->color))
 			quit(minirt, WRONG_LIGHT_DATA);
+}
+
+void	check_data_validity(t_minirt *minirt, t_scene *scene)
+{
+	int	i;
+
+	check_elements(minirt, scene);
 	i = -1;
 	while (++i < scene->nb_sphere)
 		if (!is_ok_color(scene->spheres[i]->color))
@@ -57,4 +64,9 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		if (!is_ok_dir(scene->cylinders[i]->dir)
 			|| !is_ok_color(scene->cylinders[i]->color))
 			quit(minirt, WRONG_CYL_DATA);
+	i = -1;
+	while (++i < scene->nb_cone)
+		if (!is_ok_dir(scene->cones[i]->dir)
+			|| !is_ok_color(scene->cones[i]->color))
+			quit(minirt, WRONG_CONE_DATA);
 }

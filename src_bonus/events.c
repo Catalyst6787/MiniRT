@@ -69,7 +69,7 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 		free(tmp);
 		quit(minirt, MALLOC_ERR);
 	}
-	minirt->ui->str_selected_object = ft_strjoin (tmp, nb);
+	minirt->ui->str_selected_object = ft_strjoin(tmp, nb);
 	free(tmp);
 	free(nb);
 	if (!minirt->ui->str_selected_object)

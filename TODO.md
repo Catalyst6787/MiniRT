@@ -3,17 +3,26 @@ Simple C ray tracer.
 
 ### basic
 
+
+Debug ./dev.sh 17
+
+- [ ] ./dev.sh 16 not working
 - [ ] parsing problem if more than one zero after the coma
-- [ ] add height mode to pav num
 - [ ] cone
+- [ ] vec3_basic op use pointers
+- [ ] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
+
+
+### optional
+
+- [ ] add a ratio to move object faster
+- [ ] add height mode to pav num
 - [ ] display last key pressed
-- [ ] start to think how to bonus
-- [ ] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
-- [ ] add size mode to pav num
 
 
-
-
+- [X] add size mode to pav num
+- [X] start to think how to bonus
+- [X] parsing case : pl 0,0,5 1 0,1,0 255,255,255 (count number of numbers)
 - [X] parsing need to work with tabs (or parse out the tabs) (add in in move cursor)
 - [X] prepare the project to merge it on main
 - [X] option to display the commands
@@ -43,19 +52,6 @@ and objects
 - [] Parsing
 	- [X] handle empty file
 
-### optional
-
-- [ ] add a ratio to move object faster
-
-
-### cone
-
-- [ ] object_type_to_str
-- [ ] set_cone_tranformation
-- [ ] create_object_from_cone
-- [ ] parsing
-- [ ] int	count_intersections
-
 
 ### bonuses list
 
@@ -69,7 +65,7 @@ Other ideas :
  - [ ] Patterns (perlin)
 
 ### end
- 
+
  - [ ] remove all asserts
  - [ ] remove time.h and timing in render.c
  - [ ] remove PRINT_DEBUG

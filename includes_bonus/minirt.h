@@ -65,10 +65,11 @@ typedef enum e_move_mode
 
 typedef struct s_parsing_helper
 {
-	int	l;
-	int	s;
-	int	p;
-	int	c;
+	int			l;
+	int			s;
+	int			p;
+	int			cy;
+	int			co;
 }				t_parsing_helper;
 
 typedef struct s_mlx_data
@@ -124,6 +125,8 @@ int			parse_plane(t_minirt *minirt,
 				t_scene *scene, t_plane *plane, int *cursor);
 int			parse_cylinder(t_minirt *minirt,
 				t_scene *scene, t_cylinder *cylinder, int *cursor);
+int			parse_cone(t_minirt *minirt,
+				t_scene *scene, t_cone *cone, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
@@ -154,6 +157,8 @@ void		create_object_from_sphere(t_object *object,
 void		create_object_from_plane(t_object *object, t_plane *plane, int id);
 void		create_object_from_cylinder(t_object *object,
 				t_cylinder *cylinder, int id);
+void		create_object_from_cone(t_object *object,
+				t_cone *cone, int id);
 
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
@@ -164,6 +169,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 void		display_image(t_minirt *minirt);
 t_inter		get_inter(void);
 int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
+int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
@@ -279,6 +285,7 @@ int			double_isequal(double a, double b);
 void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
+void		set_cone_tranformation(t_cone *co);
 
 // sort intersections
 void		sort_inter(t_inter_list *inter_lst);

@@ -25,4 +25,10 @@ void	set_objects_material(t_scene *scene)
 			= get_default_material(scene->planes[i]->color, scene);
 		i++;
 	}
+	while (i < scene->nb_cone)
+	{
+		scene->cones[i]->material
+			= get_default_material(scene->cones[i]->color, scene);
+		i++;
+	}
 }

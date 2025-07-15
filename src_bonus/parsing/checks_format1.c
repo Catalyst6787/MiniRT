@@ -53,7 +53,8 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 		if ((buffer[i] == 's' && buffer[i + 1] != 'p')
 			|| (i > 0 && buffer[i] == 'p' && buffer[i + 1] != 'l'
 				&& buffer[i - 1] != 's')
-			|| (buffer[i] == 'c' && buffer[i + 1] != 'y')
+			|| (buffer[i] == 'c'
+				&& buffer[i + 1] != 'y' && buffer[i + 1] != 'o')
 			|| ((buffer[i] == 'C' || buffer[i] == 'L'
 					|| buffer[i] == 'A') && buffer[i + 1] != ' '
 				&& buffer[i + 1] != '\t'))
@@ -61,7 +62,8 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 		if ((buffer[i] == 'l' && !ft_isspace(buffer[i + 1]))
 			|| (i > 0 && buffer[i] == 'p' && buffer[i - 1] == 's'
 				&& !ft_isspace(buffer[i + 1]))
-			|| (buffer[i] == 'y' && !ft_isspace(buffer[i + 1])))
+			|| (buffer[i] == 'y' && !ft_isspace(buffer[i + 1]))
+			|| (buffer[i] == 'o' && !ft_isspace(buffer[i + 1])))
 			quit(minirt, CHAR_ERR);
 		i++;
 	}
@@ -84,7 +86,7 @@ void	check_file_not_empty(t_minirt *minirt)
 
 void	check_characters_validity(t_minirt *minirt)
 {
-	const char	alpha_set[] = "ACLsplcy";
+	const char	alpha_set[] = "ACLsplcyo";
 	const char	sign_set[] = " \n	.,-+";
 	int			i;
 

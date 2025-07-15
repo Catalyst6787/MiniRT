@@ -35,6 +35,20 @@ void	create_object_from_cylinder(t_object *object,
 	object->id = id;
 }
 
+void	create_object_from_cone(t_object *object,
+									t_cone *cone,
+									int id)
+{
+	object->type = CONE;
+	object->material = cone->material;
+	object->transform = cone->transform;
+	object->inv = cone->inv;
+	object->obj_data.cylinder.max = cone->height / 2;
+	object->obj_data.cylinder.min = -(cone->height) / 2;
+	object->obj_data.cylinder.isclosed = 1;
+	object->id = id;
+}
+
 void	create_object_list(t_scene *scene)
 {
 	int	i;
@@ -59,6 +73,13 @@ void	create_object_list(t_scene *scene)
 	while (i < scene->nb_cylinder && j < scene->nb_objects)
 	{
 		create_object_from_cylinder(&scene->objects[j], scene->cylinders[i], i);
+		i++;
+		j++;
+	}
+	i = 0;
+	while (i < scene->nb_cone && j < scene->nb_objects)
+	{
+		create_object_from_cone(&scene->objects[j], scene->cones[i], i);
 		i++;
 		j++;
 	}

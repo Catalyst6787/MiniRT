@@ -52,5 +52,7 @@ int	get_intersection(t_object *object, t_ray *ray, t_inter_list *list)
 		get_plane_inter(object, ray, list);
 	else if (object->type == CYLINDER)
 		get_cylinder_inter(object, ray, list);
+	else if (object->type == CONE)
+		get_cone_inter(object, ray, list);
 	return (0);
 }

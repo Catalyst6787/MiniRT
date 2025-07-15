@@ -17,11 +17,16 @@ void	count_elements(t_scene *scene)
 			scene->nb_sphere++;
 		else if (scene->buffer[i] == 'p' && scene->buffer[++i] == 'l')
 			scene->nb_plane++;
-		else if (scene->buffer[i] == 'c' && scene->buffer[++i] == 'y')
-			scene->nb_cylinder++;
+		else if (scene->buffer[i] == 'c')
+		{
+			if (scene->buffer[++i] == 'y')
+				scene->nb_cylinder++;
+			else if (scene->buffer[i] == 'o')
+				scene->nb_cone++;
+		}
 	}
 	scene->nb_objects = scene->nb_sphere + scene->nb_plane
-		+ scene->nb_cylinder;
+		+ scene->nb_cylinder + scene->nb_cone;
 }
 
 void	parse_scene(t_minirt *minirt)

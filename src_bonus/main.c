@@ -59,7 +59,6 @@ int	main(int ac, char **av)
 		quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
-	init_events(&minirt);
 	t = clock();
 	render_scene(&minirt);
 	t = clock() - t;

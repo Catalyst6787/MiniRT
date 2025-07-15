@@ -37,6 +37,18 @@ static void	set_cylinders_transformation(t_scene *scene)
 	}
 }
 
+static void	set_cones_transformation(t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < scene->nb_cone)
+	{
+		set_cone_tranformation(scene->cones[i]);
+		i++;
+	}
+}
+
 static void	set_camera_transformation(t_scene *scene)
 {
 	set_pixel_size(scene->camera);
@@ -50,4 +62,5 @@ void	set_objects_transformation(t_scene *scene)
 	set_spheres_transformation(scene);
 	set_planes_transformation(scene);
 	set_cylinders_transformation(scene);
+	set_cones_transformation(scene);
 }

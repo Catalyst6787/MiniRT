@@ -11,7 +11,6 @@ void	cam_ambiant_alloc(t_minirt *minirt)
 		quit(minirt, MALLOC_ERR);
 }
 
-
 void	lights_alloc(t_minirt *minirt, t_scene *scene)
 {
 	int	i;
@@ -98,6 +97,27 @@ void	cylinders_alloc(t_minirt *minirt, t_scene *scene)
 	scene->cylinders[i] = NULL;
 }
 
+void	cones_alloc(t_minirt *minirt, t_scene *scene)
+{
+	int	i;
+
+	i = -1;
+	scene->cones = malloc(sizeof(t_cone *) * (scene->nb_cone + 1));
+	if (!scene->cones && scene->nb_cone)
+		quit(minirt, MALLOC_ERR);
+	while (++i < scene->nb_cone)
+	{
+		scene->cones[i] = malloc(sizeof(t_cone));
+		if (!scene->cones[i])
+		{
+			while (--i >= 0)
+				free(scene->cones[i]);
+			quit(minirt, MALLOC_ERR);
+		}
+	}
+	scene->cones[i] = NULL;
+}
+
 void	alloc_elements(t_minirt *minirt, t_scene *scene)
 {
 	cam_ambiant_alloc(minirt);
@@ -105,5 +125,6 @@ void	alloc_elements(t_minirt *minirt, t_scene *scene)
 	spheres_alloc(minirt, scene);
 	planes_alloc(minirt, scene);
 	cylinders_alloc(minirt, scene);
+	cones_alloc(minirt, scene);
 	objects_alloc(minirt, scene);
 }

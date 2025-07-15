@@ -21,8 +21,12 @@ static void	parse_buffer(t_minirt *minirt,
 		if (scene->buffer[++i] == 'l')
 			s->p += parse_plane(minirt, scene, scene->planes[s->p], &i);
 	if (scene->buffer[i] == 'c')
+	{
 		if (scene->buffer[++i] == 'y')
-			s->c += parse_cylinder(minirt, scene, scene->cylinders[s->c], &i);
+			s->cy += parse_cylinder(minirt, scene, scene->cylinders[s->cy], &i);
+		else if (scene->buffer[i] == 'o')
+			s->co += parse_cone(minirt, scene, scene->cones[s->co], &i);
+	}
 	*cursor = i;
 }
 
@@ -33,7 +37,8 @@ void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 
 	shape.l = 0;
 	shape.s = 0;
-	shape.c = 0;
+	shape.cy = 0;
+	shape.co = 0;
 	shape.p = 0;
 	cursor = 0;
 	while (scene->buffer[cursor])

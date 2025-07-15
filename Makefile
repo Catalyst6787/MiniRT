@@ -63,7 +63,8 @@ SRC = main.c \
     test_lighting.c test_world.c test_shadows.c test_camera.c \
       tests_planes.c tests_cylinders.c tests_cones.c test_cubes.c
 
-BONUS_SRC = $(SRC) # add more here
+BONUS_SRC =	$(SRC) \
+			intersections_cone.c
 
 OBJ_DIR = objects
 BONUS_OBJ_DIR = objects_bonus

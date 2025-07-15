@@ -84,7 +84,16 @@ void	debug_print_scene_data(t_minirt *minirt)
 		PRINT_DEBUG("	Height : %.2f\n", minirt->scene->cylinders[i]->height);
 		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cylinders[i]->material.color.r, minirt->scene->cylinders[i]->material.color.g, minirt->scene->cylinders[i]->material.color.b);
 	}
-	i = 0;
+	i = -1;
+	while (++i < minirt->scene->nb_cone)
+	{
+		PRINT_DEBUG("Cone[%d/%d] :\n\n", i + 1, minirt->scene->nb_cone);
+		PRINT_DEBUG("	pos : %.2f %.2f %.2f\n", minirt->scene->cones[i]->pos.x, minirt->scene->cones[i]->pos.y, minirt->scene->cones[i]->pos.z);
+		PRINT_DEBUG("	dir : %.2f %.2f %.2f\n", minirt->scene->cones[i]->dir.x, minirt->scene->cones[i]->dir.y, minirt->scene->cones[i]->dir.z);
+		PRINT_DEBUG("	Diameter : %.2f\n", minirt->scene->cones[i]->diameter);
+		PRINT_DEBUG("	Height : %.2f\n", minirt->scene->cones[i]->height);
+		PRINT_DEBUG("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->cones[i]->material.color.r, minirt->scene->cones[i]->material.color.g, minirt->scene->cones[i]->material.color.b);
+	}
 	PRINT_DEBUG("\n");
 }
 
