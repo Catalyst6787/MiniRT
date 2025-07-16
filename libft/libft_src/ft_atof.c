@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 11:49:15 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/07/11 16:34:40 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/07/16 17:16:39 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,26 @@ double	get_right(char *str)
 	double	right;
 	int		len;
 	int		i;
+	int		count_zeros;
 
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	count_zeros = i;
 	right = (double)ft_atoi(str);
 	len = ft_intlen((int)right);
-	i = -1;
-	while (++i < len)
+	i = 0;
+	while (i < count_zeros)
+	{
 		right *= 0.1;
+		i++;
+	}
+	i = 0;
+	while (i < len)
+	{
+		right *= 0.1;
+		i++;
+	}
 	return (right);
 }
 

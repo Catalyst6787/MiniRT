@@ -60,7 +60,8 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 			|| (buffer[i] == 'y' && !ft_isspace(buffer[i + 1]))
 			|| (buffer[i] == 'o' && !ft_isspace(buffer[i + 1])))
 			quit(minirt, CHAR_ERR);
-		if (buffer[i] == ',' && ft_isspace(buffer[i + 1]))
+		if ((buffer[i] == ',' && ft_isspace(buffer[i + 1]))
+			|| (buffer[i] == '.' && buffer[i + 1] == '.'))
 			quit(minirt, FORMAT_ERR);
 		i++;
 	}

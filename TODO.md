@@ -3,8 +3,7 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] parsing problem if more than one zero after the coma
-- [ ] vec3_basic op use pointers
+- [ ] parsing problem if more than one zero after the coma (try also with 2 dots)
 
 
 ### optional
@@ -14,6 +13,7 @@ Simple C ray tracer.
 - [ ] display last key pressed
 
 
+- [X] vec3_basic op use pointers (actually a mess because of the functions calls as parameters)
 - [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 - [X] cone
 - [X] ./dev.sh 16 not working

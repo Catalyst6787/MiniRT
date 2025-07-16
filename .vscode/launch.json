@@ -6,7 +6,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT_bonus",
-			"args": ["assets/scenes/plane_debug.rt"],
+			"args": ["assets/scenes/cone_debug.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
