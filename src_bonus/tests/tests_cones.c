@@ -83,7 +83,6 @@ int			start_all_cones_tests(void)
 	list.count = 0;
 	ray = get_ray(get_point3(0, 0, -0.25), vec3_normalise(get_vec3(0, 1, 1)));
 	get_cone_inter(&cone_obj, &ray, &list);
-	print_inter_list(&list);
 	assert(list.count == 2);
 
 	list.count = 0;
