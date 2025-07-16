@@ -45,7 +45,7 @@ static t_vec3	get_lighting_extra(t_comp *comp,
 		if (reflect_dot_eye <= 0)
 			specular = get_color(0, 0, 0);
 		else
-			specular = get_specular(reflect_dot_eye, comp);
+			specular = vec3_double_multiplication(get_specular(reflect_dot_eye, comp), comp->light.brightness);
 	}
 	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
 }
@@ -61,7 +61,7 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
 		= vec3_double_multiplication(effective_color, comp->light.brightness);
 	light_vector
 		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
-	ambient = vec3_vec_multiplication(effective_color, comp->m.ambient_color);
+	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
 	if (in_shadow)
 		return (ambient);

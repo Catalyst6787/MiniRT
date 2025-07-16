@@ -47,9 +47,10 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)
 		return (minirt->render->inter_list.count = 0, get_color(0, 0, 0));
 	i = 0;
 	color = get_vec3(0, 0, 0);
+	set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
 	while (i < minirt->scene->nb_light)
 	{
-		set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
+		comp.light = *minirt->scene->lights[i];
 		color = vec3_vec_addition(color, shade_hit(minirt->render, minirt->scene, &comp));
 		minirt->render->shadow_list.count = 0;
 		i++;
