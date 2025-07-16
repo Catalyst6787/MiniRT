@@ -21,22 +21,17 @@ void	char_error_check(t_minirt *minirt,
 void	check_each_lines(t_minirt *minirt, char *buffer)
 {
 	int		i;
-	// char	c;
 
 	i = 0;
 	while (ft_isspace(buffer[i]))
 		i++;
-	// c = buffer[i++];
 	while (buffer[i])
 	{
-		// if (buffer[i] == c)
-		// 	quit(minirt, CHAR_DOUBLE);
 		if (buffer[i] == '\n' && !ft_isspace(buffer[i])
 			&& !ft_isspace(buffer[i + 1]))
 		{
 			while (buffer[i] || ft_isspace(buffer[i]))
 				i++;
-			// c = buffer[i++];
 		}
 		i++;
 	}
@@ -65,6 +60,8 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 			|| (buffer[i] == 'y' && !ft_isspace(buffer[i + 1]))
 			|| (buffer[i] == 'o' && !ft_isspace(buffer[i + 1])))
 			quit(minirt, CHAR_ERR);
+		if (buffer[i] == ',' && ft_isspace(buffer[i + 1]))
+			quit(minirt, FORMAT_ERR);
 		i++;
 	}
 }

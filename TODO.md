@@ -3,12 +3,8 @@ Simple C ray tracer.
 
 ### basic
 
-
-Debug ./dev.sh 17
-
 - [ ] parsing problem if more than one zero after the coma
 - [ ] vec3_basic op use pointers
-- [ ] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 
 
 ### optional
@@ -18,6 +14,7 @@ Debug ./dev.sh 17
 - [ ] display last key pressed
 
 
+- [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 - [X] cone
 - [X] ./dev.sh 16 not working
 - [X] add size mode to pav num

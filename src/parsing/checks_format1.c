@@ -62,6 +62,8 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 				&& !ft_isspace(buffer[i + 1]))
 			|| (buffer[i] == 'y' && !ft_isspace(buffer[i + 1])))
 			quit(minirt, CHAR_ERR);
+		if (buffer[i] == ',' && ft_isspace(buffer[i + 1]))
+			quit(minirt, FORMAT_ERR);
 		i++;
 	}
 }
