@@ -51,7 +51,7 @@ void	set_default_world(t_scene *scene)
 	scene->spheres[1]->inv = get_inversed_matrix(scene->spheres[1]->transform);
 	scene->nb_sphere = 2;
 	scene->nb_objects = 2;
-	scene->objects = malloc(sizeof(t_object) * 2);
+	scene->objects = malloc(sizeof(t_object) * 10); // added space for more objects if needed
 	create_object_list(scene);
 }
 

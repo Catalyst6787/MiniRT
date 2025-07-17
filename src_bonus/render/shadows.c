@@ -48,10 +48,10 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	return (false);
 }
 
-t_vec3	shade_hit(t_render *render, t_scene *scene, t_comp *comp)
+t_vec3	shade_hit(t_render *render, t_scene *scene, t_comp *comp, t_minirt *minirt)
 {
 	bool	shadowed;
 
 	shadowed = is_shadowed(render, scene, comp);
-	return (get_lighting(comp, shadowed));
+	return (get_lighting(comp, shadowed, minirt));
 }

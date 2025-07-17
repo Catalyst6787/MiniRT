@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include "vec3.h"
 
 t_light	get_light(t_vec3 pos, double brightness, t_vec3 color)
 {
@@ -50,7 +51,7 @@ static t_vec3	get_lighting_extra(t_comp *comp,
 	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
 }
 
-t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
+t_vec3	get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt)
 {
 	t_vec3	effective_color;
 	t_vec3	light_vector;
@@ -64,8 +65,9 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
 	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
 	if (in_shadow)
-		return (ambient);
+		return (vec3_vec_addition(ambient, reflected_color(comp, minirt)));
 	else
-		return (
-			get_lighting_extra(comp, light_vector, effective_color, ambient));
+		return (vec3_vec_addition(
+			get_lighting_extra(comp, light_vector, effective_color, ambient),
+			reflected_color(comp, minirt)));
 }

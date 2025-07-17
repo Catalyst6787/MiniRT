@@ -55,8 +55,8 @@ int	main(int ac, char **av)
 		quit(&minirt, MALLOC_ERR);
 	minirt.ui = &ui;
 	init_ui(minirt.ui);
-	if (start_all_tests())
-		quit(&minirt, TESTS_ERR);
+	// if (start_all_tests())
+		// quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	t = clock();

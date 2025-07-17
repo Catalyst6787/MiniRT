@@ -28,7 +28,6 @@
 # include "render.h"
 # include "keycodes.h"
 # include "colors.h"
-# include "test.h"
 # include "debug.h"
 
 # define SPACE_SET = " \t\n"
@@ -174,17 +173,19 @@ int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *lis
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
-t_vec3		get_lighting(t_comp *comp, bool in_shadow);
+t_vec3		get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
-t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
+t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp, t_minirt *minirt);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 				const t_vec3 world_point);
 
 // HIT
 t_inter		*get_hit(t_inter_list *lst);
+t_vec3		intersect_objects(t_minirt *minirt, t_ray *unique_ray);
+
 
 /*                             COLOR UTILS                                  */
 
@@ -291,12 +292,54 @@ void		set_cone_tranformation(t_cone *co);
 // sort intersections
 void		sort_inter(t_inter_list *inter_lst);
 t_inter		*get_hit(t_inter_list *lst);
-t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
 t_ray		get_origin_direction(t_camera camera, t_vec3 pixel);
 void		put_pixel(t_minirt *minirt, int color, int x, int y);
 t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
 
+// reflections
+t_vec3		reflected_color(t_comp *comp, t_minirt *minirt);
+t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
+
+//// TESTS
+int			start_all_tests(void);
+int			test_tuple_point(void);
+int			test_tuple_vector(void);
+int			test_adding_tuples(void);
+int			test_subtraction_tuples(void);
+int			test_scalar_multiplication(void);
+int			test_scalar_division(void);
+int			test_vec_normalize(void);
+
+t_matrix	get_arb_matrix(int row, int col,
+				double a0, double a1, double a2, double a3,
+				double b0, double b1, double b2, double b3,
+				double c0, double c1, double c2, double c3,
+				double d0, double d1, double d2, double d3);
+
+void		test_color_mult(t_vec3 *color, int i, int j);
+int			start_all_matrix_tests(void);
+int			start_all_ray_tests(void);
+int			start_all_intersection_tests(void);
+int			start_all_normals_tests(void);
+int			start_all_reflection_tests(void);
+int			start_all_lighting_tests(void);
+int			start_all_world_tests(void);
+int			start_all_shadows_tests(void);
+int			start_all_camera_tests(void);
+int			start_all_planes_tests(void);
+int			start_all_cylinders_tests(void);
+int			start_all_cones_tests(void);
+int			start_all_cubes_tests(void);
+void		set_default_world(t_scene *scene);
+
+
+/// COLORS
+
+t_vec3	color_int_multiplication(t_vec3 c0, int n);
+t_vec3	color_color_multiplication(t_vec3 c1, t_vec3 c2);
+int		color_to_int(t_vec3 color);
+t_vec3	int_to_color(int int_color);
 
 
 #endif
