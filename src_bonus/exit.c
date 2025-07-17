@@ -46,6 +46,13 @@ void	free_scene(t_scene *scene)
 			free(scene->cylinders[i]);
 		free(scene->cylinders);
 	}
+	i = -1;
+	if (scene->cones)
+	{
+		while (++i <= scene->nb_cone)
+			free(scene->cones[i]);
+		free(scene->cones);
+	}
 	free_extra(scene);
 }
 

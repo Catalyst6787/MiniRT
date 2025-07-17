@@ -21,6 +21,7 @@
 # include "sphere.h"
 # include "plane.h"
 # include "cylinder.h"
+# include "cone.h"
 # include "object.h"
 # include "scene.h"
 # include "errors.h"

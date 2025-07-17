@@ -1,13 +1,6 @@
 #ifndef SCENE_H
 # define SCENE_H
 
-# include "matrice.h"
-# include "sphere.h"
-# include "cylinder.h"
-# include "plane.h"
-# include "cone.h"
-# include "vec3.h"
-
 typedef struct s_ambient
 {
 	double		brightness;

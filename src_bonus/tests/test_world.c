@@ -1,9 +1,14 @@
+#include "libft.h"
 #include "matrice.h"
 #include "minirt.h"
+#include "object.h"
+#include "ray.h"
+#include "render.h"
 #include "scene.h"
 #include "vec3.h"
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int start_all_world_tests(void)
@@ -187,6 +192,25 @@ int start_all_world_tests(void)
 	assert(matrix_isequal(orientation, result));
 	////////////	Free
 
+
+	/// Test Reflections
+
+	t_plane	*plane = new_plane(get_point3(0, 0, 0), get_vec3(0, 1, 0), get_vec3(0, 0, 0));
+	t_object	obj_plane;
+	ft_memset(&obj_plane, 0, sizeof(t_object));
+	create_object_from_plane(&obj_plane, plane, 0);
+
+	r = get_ray(get_point3(0, 1, -1), get_vec3(0, -sqrtf(2)/2, sqrtf(2)/2));
+	inter_list.count = 0;
+	inter_list.capacity = 1;
+	get_intersection(&obj_plane, &r, &inter_list);
+	t_inter *hit = get_hit(&inter_list);
+	set_computations(&comp, scene.lights[0], hit, &r);
+
+	assert(vec3_isequal(comp.reflectv, get_vec3(0, sqrtf(2)/2, sqrtf(2)/2)));
+	printf("test get_computation sets the reflectv vector\n");
+	free(plane);
+	plane = NULL;
 
 	free(scene.lights[0]);
 	free(scene.lights);

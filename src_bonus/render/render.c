@@ -23,6 +23,7 @@ void	set_computations(t_comp *comp_out,
 	}
 	comp_out->over_point = vec3_vec_addition(comp_out->point,
 			vec3_double_multiplication(comp_out->normalv, EPSILON));
+	comp_out->reflectv = get_reflection(r->dir, comp_out->normalv);
 }
 
 t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray)

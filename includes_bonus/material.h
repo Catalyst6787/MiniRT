@@ -9,6 +9,7 @@ typedef struct s_material
 	double	diffuse;
 	double	specular;
 	double	shininess;
+	double	reflective;
 }	t_material;
 
 #endif
