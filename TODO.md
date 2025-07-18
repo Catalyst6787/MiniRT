@@ -1,9 +1,20 @@
 # MiniRT
 Simple C ray tracer.
 
+
+### multithreading
+
+ - [ ] include pthread
+ - [ ] 8 threads
+ - [ ] make a table of from/to intervals
+ - [ ] launch render for each x interval
+
+
+
 ### basic
 
-- [ ] parsing problem if more than one zero after the coma (try also with 2 dots)
+
+- [X] parsing problem if more than one zero after the coma (try also with 2 dots)
 
 
 ### optional

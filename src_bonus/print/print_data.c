@@ -6,11 +6,11 @@ void	print_vec3(t_vec3 vec, char *vec_name)
 		vec_name, vec.x, vec.y, vec.z, vec.w);
 }
 
-void	print_ray(t_ray r)
+void	print_ray(t_ray *r)
 {
 	printf("Ray Origin : (%.4f, %.4f, %.4f)\n",
-		r.origin.x, r.origin.y, r.origin.z);
-	printf("Ray Direction : (%.4f, %.4f, %.4f)\n", r.dir.x, r.dir.y, r.dir.z);
+		r->origin.x, r->origin.y, r->origin.z);
+	printf("Ray Direction : (%.4f, %.4f, %.4f)\n", r->dir.x, r->dir.y, r->dir.z);
 }
 
 void	print_camera_data(t_minirt *minirt)

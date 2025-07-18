@@ -104,3 +104,11 @@ int	render_scene(t_minirt *minirt)
 	display_image(minirt);
 	return (0);
 }
+
+int	start_render(t_minirt *minirt)
+{
+	if (MULTI_THREADING)
+		return (start_threads(minirt));
+	return (render_scene(minirt));
+}
+

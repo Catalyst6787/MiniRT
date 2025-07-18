@@ -22,5 +22,6 @@
 		"object.h": "c",
 		"limits": "c",
 		"cylinder.h": "c"
-	}
+	},
+	"C_Cpp.default.compilerPath": "/usr/bin/clang"
 }

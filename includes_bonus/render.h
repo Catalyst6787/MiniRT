@@ -1,8 +1,9 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-#include "vec3.h"
+# include "vec3.h"
 # include <stdbool.h>
+#include <pthread.h>
 
 typedef struct s_comp
 {
@@ -51,6 +52,8 @@ typedef struct s_render
 	int				pixel_size;
 	int				debug_x;
 	int				debug_y;
+	pthread_mutex_t	printf_mtx;
+	pthread_mutex_t	putpixel_mtx;
 }					t_render;
 
 typedef struct s_cylinder_inter
@@ -67,19 +70,19 @@ typedef struct s_cylinder_inter
 }	t_cylinder_inter;
 
 // sort intersections
-void	sort_inter(t_inter_list *inter_lst);
-t_inter	*get_hit(t_inter_list *lst);
-t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point);
-t_vec3	get_reflection(t_vec3 in, t_vec3 normal);
-int		get_sphere_inter(const t_object *object,
-			const t_ray *ray, t_inter_list *list);
-int		get_plane_inter(const t_object *plane,
-			const t_ray *ray, t_inter_list *list);
-int		get_cylinder_inter(const t_object *object,
-			const t_ray *ray, t_inter_list *list);
-void	set_computations(t_comp *comp_out,
-			t_light *light, t_inter *hit, t_ray *r);
-int		get_intersection(t_object *object, t_ray *ray, t_inter_list *list);
-int		is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
+void		sort_inter(t_inter_list *inter_lst);
+t_inter		*get_hit(t_inter_list *lst);
+t_vec3		get_object_normal_at(const t_object *obj, const t_vec3 world_point);
+t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
+int			get_sphere_inter(const t_object *object,
+				const t_ray *ray, t_inter_list *list);
+int			get_plane_inter(const t_object *plane,
+				const t_ray *ray, t_inter_list *list);
+int			get_cylinder_inter(const t_object *object,
+				const t_ray *ray, t_inter_list *list);
+void		set_computations(t_comp *comp_out,
+				t_light *light, t_inter *hit, t_ray *r);
+int			get_intersection(t_object *object, t_ray *ray, t_inter_list *list);
+int			is_shadowed(t_render *render, t_scene *scene, t_comp *comp);
 
 #endif

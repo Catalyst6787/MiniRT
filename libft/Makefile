@@ -6,7 +6,7 @@
 #    By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 16:03:02 by lfaure            #+#    #+#              #
-#    Updated: 2025/07/03 12:17:06 by alvan-de         ###   ########.fr        #
+#    Updated: 2025/07/18 12:15:08 by alvan-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PRINTF_PATH = ./printf_src
 HEADER = ./includes
 OBJ_PATH = ./obj
 
-FLAG = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -g
+FLAG = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -fPIE -g
 OPTION = -c -I $(HEADER)
 
 SRCS = \

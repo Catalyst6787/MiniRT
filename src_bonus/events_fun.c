@@ -18,7 +18,7 @@ void	event_activate_cylinder_cap(t_minirt *minirt)
 		}
 		i++;
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 void	event_turn_cylinders(t_minirt *minirt)
@@ -47,7 +47,7 @@ void	event_turn_cylinders(t_minirt *minirt)
 				= get_inversed_matrix(minirt->scene->objects[i].transform);
 		}
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 static t_shear	get_shear_val(bool pos)
@@ -89,5 +89,5 @@ void	event_sphere_shearing(t_minirt *minirt)
 		}
 		i++;
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }

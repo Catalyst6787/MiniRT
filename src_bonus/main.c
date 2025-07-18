@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	t = clock();
-	render_scene(&minirt);
+	start_render(&minirt);
 	t = clock() - t;
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
 	printf("Scene rendered in %f seconds\n", time_taken);
