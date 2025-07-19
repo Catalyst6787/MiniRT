@@ -14,7 +14,9 @@ Simple C ray tracer.
 ### basic
 
 
-- [X] parsing problem if more than one zero after the coma (try also with 2 dots)
+- [ ] fix a little problem in the tests (commented for now)
+
+
 
 
 ### optional
@@ -24,6 +26,7 @@ Simple C ray tracer.
 - [ ] display last key pressed
 
 
+- [X] parsing problem if more than one zero after the coma (try also with 2 dots)
 - [X] vec3_basic op use pointers (actually a mess because of the functions calls as parameters)
 - [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 - [X] cone

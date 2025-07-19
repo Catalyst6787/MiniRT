@@ -42,7 +42,7 @@
 # define DEBUG 0
 
 # define PIXEL_SIZE_MULT 1 // size of pixels, 1 is normal
-# define NB_THREADS 4
+# define NB_THREADS 8
 # define MULTI_THREADING 0
 
 # ifndef M_PI
@@ -110,9 +110,6 @@ typedef struct s_thread_data
 	int				end;
 	pthread_t		thread;
 	t_minirt		*minirt;
-	pthread_mutex_t	inter_mutex;
-	pthread_mutex_t	shade_mutex;
-	pthread_mutex_t	ray_mutex;
 }				t_thread_data;
 
 
@@ -182,6 +179,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 int			render_scene(t_minirt *minirt);
 int			start_render(t_minirt *minirt);
 void		display_image(t_minirt *minirt);
+int			count_intersections(t_scene *scene);
 t_inter		get_inter(void);
 int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
 int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
@@ -195,10 +193,11 @@ t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 	const t_vec3 world_point);
-	t_inter		*get_hit(t_inter_list *lst);
-	
+t_inter		*get_hit(t_inter_list *lst);
+
 int			start_threads(t_minirt *minirt);
 void		*th_render_scene(void *minirt_arg);
+t_vec3		th_shade_hit(t_scene *scene, t_comp *comp,  t_inter_list *shadow_list);
 
 /*                             COLOR UTILS                                  */
 

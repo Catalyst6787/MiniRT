@@ -63,7 +63,7 @@ SRC = main.c \
 BONUS_SRC =	$(SRC) \
 			intersections_cone.c \
 			threads.c \
-			th_render.c \
+			th_render.c th_shadow.c \
 			tests.c tests_color.c tests_matrices.c tests_rays.c \
 			test_intersections.c test_normals.c test_reflections.c \
 			test_lighting.c test_world.c test_shadows.c test_camera.c \
