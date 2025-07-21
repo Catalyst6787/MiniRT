@@ -76,9 +76,9 @@ void	*th_render_scene(void *th_arg)
 			ray = ray_for_pixel(*th->minirt->scene->camera, x, y);
 			put_pixel(th->minirt,
 				color_to_int(th_intersect_objects(th->minirt, &ray, th, &inter_list, &shadow_list)), x, y);
-			x ++;
+			x+= th->minirt->render->pixel_size;;
 		}
-		y ++;
+		y+= th->minirt->render->pixel_size;
 	}
 	free(inter_list.inters);
 	free(shadow_list.inters);

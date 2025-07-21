@@ -32,17 +32,17 @@
 # include "debug.h"
 # include "pthread.h"
 
-# define SPACE_SET = " \t\n"
+# define SPACE_SET `= " \t\n"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 3840
+# define WIN_H 2160
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
-# define PIXEL_SIZE_MULT 1 // size of pixels, 1 is normal
-# define NB_THREADS 8
+# define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
+# define NB_THREADS 16
 # define MULTI_THREADING 1
 
 # ifndef M_PI
