@@ -81,13 +81,6 @@ double	get_determinant(t_matrix m)
 			"Error : wrong size to get determinant"), 0);
 }
 
-bool	matrix_is_invertible(t_matrix m)
-{
-	if (double_isequal(get_determinant(m), 0))
-		return (0);
-	return (1);
-}
-
 t_matrix	get_inversed_matrix(t_matrix m)
 {
 	t_matrix	inversed_matrix;
@@ -95,7 +88,7 @@ t_matrix	get_inversed_matrix(t_matrix m)
 	int			i;
 	int			j;
 
-	if (!matrix_is_invertible(m))
+	if (double_isequal(get_determinant(m), 0))
 		return (print_err(FILE, LINE, "non-invertible matrix"), m);
 	inversed_matrix = get_matrix(m.row, m.col, 0);
 	determinant = get_determinant(m);

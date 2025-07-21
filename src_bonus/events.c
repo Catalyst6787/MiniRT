@@ -16,8 +16,7 @@ void	event_render(t_minirt *minirt)
 
 	ft_printf("Spacebar pressed : render asked!\n");
 	minirt->render->pixel_size = 1;
-	// minirt->ui->command_help = false;
-	t = clock(); // REMOVE FROM NON-BONUS
+	t = clock();
 	start_render(minirt);
 	t = clock() - t;
 	time_taken = ((double)t) / CLOCKS_PER_SEC;

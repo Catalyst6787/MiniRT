@@ -9,7 +9,7 @@ void	event_activate_cylinder_cap(t_minirt *minirt)
 	while (i < minirt->scene->nb_objects)
 	{
 		if (minirt->scene->objects[i].type == CYLINDER
-				|| minirt->scene->objects[i].type == CONE)
+			|| minirt->scene->objects[i].type == CONE)
 		{
 			if (minirt->scene->objects[i].obj_data.cylinder.isclosed)
 				minirt->scene->objects[i].obj_data.cylinder.isclosed = 0;

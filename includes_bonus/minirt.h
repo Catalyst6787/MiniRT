@@ -32,10 +32,10 @@
 # include "debug.h"
 # include "pthread.h"
 
-# define SPACE_SET `= " \t\n"
+# define SPACE_SET " \t\n"
 
-# define WIN_W 3840
-# define WIN_H 2160
+# define WIN_W 1280
+# define WIN_H 720
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
@@ -112,7 +112,6 @@ typedef struct s_thread_data
 	t_minirt		*minirt;
 }				t_thread_data;
 
-
 /*                                 INIT                                  */
 
 int			init_mlx(t_minirt *minirt);
@@ -130,7 +129,10 @@ double		ato_buffer(char *ptr, int *cursor, int delim);
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_light(t_minirt *minirt, t_scene *scene, t_light *light, int *cursor);
+int			parse_light(t_minirt *minirt,
+				t_scene *scene,
+				t_light *light,
+				int *cursor);
 int			parse_sphere(t_minirt *minirt,
 				t_scene *scene, t_sphere *sphere, int *cursor);
 int			parse_plane(t_minirt *minirt,
@@ -181,10 +183,13 @@ int			start_render(t_minirt *minirt);
 void		display_image(t_minirt *minirt);
 int			count_intersections(t_scene *scene);
 t_inter		get_inter(void);
-int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
-int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
+int			get_cylinder_inter(const t_object *object,
+				const t_ray *ray,
+				t_inter_list *list);
+int			get_cone_inter(const t_object *object,
+				const t_ray *ray,
+				t_inter_list *list);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
-// t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
 t_vec3		get_lighting(t_comp *comp, bool in_shadow);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
@@ -192,15 +197,16 @@ t_matrix	get_orientation_matrix(t_view view);
 t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
-	const t_vec3 world_point);
+				const t_vec3 world_point);
 t_inter		*get_hit(t_inter_list *lst);
 void		print_borders(t_mlx_data *mlx, int color);
 void		display_command_help(t_minirt *minirt, t_mlx_data *mlx);
 
-
 int			start_threads(t_minirt *minirt);
 void		*th_render_scene(void *minirt_arg);
-t_vec3		th_shade_hit(t_scene *scene, t_comp *comp,  t_inter_list *shadow_list);
+t_vec3		th_shade_hit(t_scene *scene,
+				t_comp *comp,
+				t_inter_list *shadow_list);
 
 /*                             COLOR UTILS                                  */
 
@@ -213,8 +219,11 @@ t_vec3		int_to_color(int int_color);
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
 t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
-t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir,
-				double diameter, double height, t_vec3 color);
+t_cylinder	*new_cylinder(t_vec3 pos, 
+				t_vec3 dir,
+				double diameter,
+				double height,
+				t_vec3 color);
 void		free_sphere(t_object *object);
 
 int			get_cylinder_inter(const t_object *object,
@@ -263,7 +272,7 @@ void		event_activate_cylinder_cap(t_minirt *minirt);
 /*                                 EXIT                                  */
 
 void		free_scene(t_scene *scene);
-void	print_exit_info(char *str);
+void		print_exit_info(char *str);
 int			quit(t_minirt *minirt, char *str);
 
 /*                                 DEBUG                                  */
@@ -312,7 +321,5 @@ t_ray		get_origin_direction(t_camera camera, t_vec3 pixel);
 void		put_pixel(t_minirt *minirt, int color, int x, int y);
 t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
-
-
 
 #endif

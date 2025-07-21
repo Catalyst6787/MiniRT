@@ -3,7 +3,7 @@
 
 # include "vec3.h"
 # include <stdbool.h>
-#include <pthread.h>
+# include <pthread.h>
 
 typedef struct s_comp
 {

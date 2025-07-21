@@ -21,43 +21,43 @@ LIBFT = ./libft/libft.a
 SRC_DIR = src
 BONUS_DIR = src_bonus
 SUBDIRS = parsing vec3 debug rays tests colors matrices print render
-BONUS_SUBDIRS = $(SUBDIRS) # add more here
-SRC = main.c \
-    parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
-    parse_scene_elements.c \
-    set_buffer.c \
-    checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
-    transform_objects.c set_objects_material.c create_objects_from_shapes.c \
-    fill_intersection_table.c \
-    debug.c \
-    double_utils.c \
-    events.c events_camera_light.c event_obj_positions.c events_fun.c events_keys.c events_select.c \
-    print_data.c print_more_data.c \
-    exit.c exit2.c \
-    get_debug_fd.c \
-    init.c \
-    print_debug.c \
-    rays.c \
-    render.c hit.c \
-    display_image.c \
-    normals.c \
-    lighting.c \
-    intersections.c \
-    intersections_cylinder.c \
-    sort_inter.c \
-    render_utils.c \
-    shadows.c \
-    create_shapes.c \
-    material.c \
-    new_elements.c \
-    matrices_inversions.c matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
-    matrices_translations.c matrices_transpositions.c matrices_utils.c matrices_shearing.c \
-    matrices_orientations.c \
-    transformations.c \
-    utils.c utils2.c \
-    color_operations.c \
-    free_utils.c \
-    vec3_basic_op.c vec3_complex_operations.c vec3_utils.c vec3_seters_geters.c \
+BONUS_SUBDIRS = $(SUBDIRS) threads # add more here
+SRC =	main.c \
+		parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
+		parse_scene_elements.c \
+		set_buffer.c \
+		checks_data.c checks_format1.c checks_format2.c parsing_utils.c \
+		transform_objects.c set_objects_material.c create_objects_from_shapes.c \
+		fill_intersection_table.c \
+		debug.c \
+		double_utils.c \
+		events.c events_camera_light.c event_obj_positions.c events_fun.c events_keys.c events_select.c \
+		print_data.c print_more_data.c \
+		exit.c exit2.c \
+		get_debug_fd.c \
+		init.c \
+		print_debug.c \
+		rays.c \
+		render.c hit.c \
+		display_image.c \
+		normals.c \
+		lighting.c \
+		intersections.c \
+		intersections_cylinder.c \
+		sort_inter.c \
+		render_utils.c \
+		shadows.c \
+		create_shapes.c \
+		material.c \
+		new_elements.c \
+		matrices_inversions.c matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
+		matrices_translations.c matrices_transpositions.c matrices_utils.c matrices_shearing.c \
+		matrices_orientations.c \
+		transformations.c \
+		utils.c utils2.c \
+		color_operations.c \
+		free_utils.c \
+		vec3_basic_op.c vec3_complex_operations.c vec3_utils.c vec3_seters_geters.c \
 
 
 BONUS_SRC =	$(SRC) \

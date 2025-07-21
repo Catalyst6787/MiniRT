@@ -1,23 +1,10 @@
 # MiniRT
 Simple C ray tracer.
 
-
-### multithreading
-
- - [ ] include pthread
- - [ ] 8 threads
- - [ ] make a table of from/to intervals
- - [ ] launch render for each x interval
-
-
-
 ### basic
 
-
+- [ ] if he time allow it, be able to move light (event)
 - [ ] fix a little problem in the tests (commented for now)
-
-
-
 
 ### optional
 
@@ -67,10 +54,10 @@ and objects
 ### bonuses list
 
  - [X] phong
- - [ ] colored and multi spot lighs
- - [ ] cube / cone
+ - [X] colored and multi spot lighs
+ - [X] cube / cone
  - [ ] diffusion
- - [ ] multithreading
+ - [X] multithreading
 
 Other ideas :
  - [ ] Patterns (perlin)
