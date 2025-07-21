@@ -1,5 +1,17 @@
 #include "minirt.h"
 
+void	th_display_image(t_minirt *minirt)
+{
+	mlx_put_image_to_window(minirt->mlx->mlx,
+		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
+	if (minirt->ui->command_help)
+		display_command_help(minirt, minirt->mlx);
+	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
+		WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
+		minirt->ui->str_selected_object);
+}
+
+
 int	start_threads(t_minirt *minirt)
 {
 	t_thread_data	thread[NB_THREADS];
@@ -29,7 +41,7 @@ int	start_threads(t_minirt *minirt)
 		pthread_join(thread[i].thread, NULL);
 		i++;
 	}
-	display_image(minirt);
+	th_display_image(minirt);
 	t = clock() - t;
 	printf("Scene rendered in %f seconds\n", (((double)t) / CLOCKS_PER_SEC) / NB_THREADS);
 	return (0);

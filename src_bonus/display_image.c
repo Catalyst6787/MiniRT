@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static void	print_borders(t_mlx_data *mlx, int color)
+void	print_borders(t_mlx_data *mlx, int color)
 {
 	int	x;
 	int	y;

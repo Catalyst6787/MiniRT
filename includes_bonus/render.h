@@ -52,10 +52,6 @@ typedef struct s_render
 	int				pixel_size;
 	int				debug_x;
 	int				debug_y;
-	pthread_mutex_t	inter_mtx;
-	pthread_mutex_t	putpixel_mtx;
-	pthread_mutex_t	ray_mtx;
-	pthread_mutex_t	print_mtx;
 }					t_render;
 
 typedef struct s_cylinder_inter

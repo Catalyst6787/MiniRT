@@ -43,7 +43,7 @@
 
 # define PIXEL_SIZE_MULT 1 // size of pixels, 1 is normal
 # define NB_THREADS 8
-# define MULTI_THREADING 0
+# define MULTI_THREADING 1
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -194,6 +194,9 @@ void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 	const t_vec3 world_point);
 t_inter		*get_hit(t_inter_list *lst);
+void		print_borders(t_mlx_data *mlx, int color);
+void		display_command_help(t_minirt *minirt, t_mlx_data *mlx);
+
 
 int			start_threads(t_minirt *minirt);
 void		*th_render_scene(void *minirt_arg);

@@ -47,7 +47,7 @@ t_vec3	th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *
 	{
 		comp.light = *minirt->scene->lights[i];
 		color = vec3_vec_addition(color, th_shade_hit(minirt->scene, &comp, shadow_list));
-		minirt->render->shadow_list.count = 0;
+		shadow_list->count = 0;
 		i++;
 	}
 	inter_list->count = 0;
@@ -80,5 +80,7 @@ void	*th_render_scene(void *th_arg)
 		}
 		y ++;
 	}
+	free(inter_list.inters);
+	free(shadow_list.inters);
 	return (NULL);
 }
