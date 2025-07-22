@@ -29,6 +29,7 @@ if [ $# == 0 ]; then
 	printf "${BLUE}16 : plane_debug_2.rt\n${RESET}"
 	printf "${BLUE}17 : cone_debug.rt\n${RESET}"
 	printf "${BLUE}18 : several_planes.rt\n${RESET}"
+	printf "${BLUE}19 : snooker.rt\n${RESET}"
 	exit 1
 fi
 
@@ -69,5 +70,7 @@ elif [ $scene == 17 ]; then
 	./miniRT_bonus assets/scenes/cone_debug.rt
 elif [ $scene == 18 ]; then
 	./miniRT_bonus assets/scenes/several_planes.rt
+elif [ $scene == 19 ]; then
+	./miniRT_bonus assets/scenes/snooker.rt
 fi
 
