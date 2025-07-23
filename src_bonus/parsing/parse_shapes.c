@@ -45,6 +45,7 @@ int	parse_plane(t_minirt *minirt, t_scene *scene, t_plane *plane, int *cursor)
 	plane->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
 	plane->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	check_direction_vector(minirt, &plane->dir);
 	plane->dir.w = 0;
 	plane->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	plane->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
@@ -73,6 +74,7 @@ int	parse_cylinder(t_minirt *minirt,
 	cylinder->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
 	cylinder->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	check_direction_vector(minirt, &cylinder->dir);
 	cylinder->dir.w = 0;
 	cylinder->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	cylinder->radius = cylinder->diameter / 2;
@@ -104,6 +106,7 @@ int	parse_cone(t_minirt *minirt,
 	cone->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
 	cone->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
 	cone->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	check_direction_vector(minirt, &cone->dir);
 	cone->dir.w = 0;
 	cone->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
 	cone->radius = cone->diameter / 2;

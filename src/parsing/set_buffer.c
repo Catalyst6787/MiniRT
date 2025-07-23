@@ -61,13 +61,36 @@ void	strcpy_filter_comments(char *s1, char *s2)
 	s1[j] = '\0';
 }
 
+char	*str_dup_no_tab(char *src)
+{
+	int		len;
+	char	*nstr;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(src);
+	nstr = (char *)malloc(sizeof(*src) * (len + 1));
+	if (!nstr)
+		return (NULL);
+	while (src[i])
+	{
+		if (src[i] == '\t')
+			nstr[i] = ' ';
+		else
+			nstr[i] = src[i];
+		i++;
+	}
+	nstr[i] = '\0';
+	return (nstr);
+}
+
 void	filter_buffer(t_minirt *minirt)
 {
 	int		len;
 	char	*tmp;
 
 	len = count_char_whithout_comments(minirt->scene->buffer);
-	tmp = ft_strdup(minirt->scene->buffer);
+	tmp = str_dup_no_tab(minirt->scene->buffer);
 	if (!tmp)
 		quit(minirt, MALLOC_ERR);
 	free(minirt->scene->buffer);

@@ -7,15 +7,15 @@ void	objects_alloc(t_minirt *minirt, t_scene *scene)
 		quit(minirt, MALLOC_ERR);
 }
 
-void	move_cursor(char *str, int *cursor, char c)
+void	move_cursor(char *buffer, int *cursor, char c)
 {
 	int	i;
 
 	i = *cursor;
-	while (*str && *str != c && ++i)
-		str++;
-	while (*str && *str == c && ++i)
-		str++;
+	while (*buffer && *buffer != c && ++i)
+		buffer++;
+	while (*buffer && *buffer == c && ++i)
+		buffer++;
 	*cursor = i;
 }
 

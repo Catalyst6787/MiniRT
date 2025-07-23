@@ -157,8 +157,8 @@ void		char_error_check(t_minirt *minirt,
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
-
-t_light		*new_light(t_vec3 pos, t_vec3 color);
+void		check_direction_vector(t_minirt *minirt, t_vec3 *dir);
+	t_light *new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 void		set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);

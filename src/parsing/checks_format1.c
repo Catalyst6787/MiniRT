@@ -29,6 +29,8 @@ void	check_each_lines(t_minirt *minirt, char *buffer)
 	c = buffer[i++];
 	while (buffer[i])
 	{
+		if (buffer[i] == 34 || buffer[i] == 39)
+			quit(minirt, FORMAT_ERR);
 		if (buffer[i] == c)
 			quit(minirt, CHAR_DOUBLE);
 		if (buffer[i] == '\n' && !ft_isspace(buffer[i])

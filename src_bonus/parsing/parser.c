@@ -41,11 +41,11 @@ void	parse_scene(t_minirt *minirt)
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);
 	parse_scene_elements(minirt, minirt->scene);
+	debug_print_scene_data(minirt);
 	set_objects_transformation(minirt->scene);
 	set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
-	debug_print_scene_data(minirt);
 	print_scene_ok_message(minirt->scene->filename);
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);

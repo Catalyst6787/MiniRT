@@ -17,7 +17,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT_bonus",
-			"args": ["assets/scenes/subject_example.rt"],
+			"args": ["assets/scenes/cylinder_debug.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
