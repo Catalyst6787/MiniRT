@@ -109,6 +109,8 @@ void	set_scene_buffer(t_minirt *minirt)
 {
 	int		fd;
 
+	if (open (minirt->scene->filename, __O_DIRECTORY) != -1)
+		quit(minirt, DIRECTORY_ERR);
 	fd = open(minirt->scene->filename, O_RDONLY);
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);

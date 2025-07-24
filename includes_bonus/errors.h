@@ -2,6 +2,7 @@
 # define ERRORS_H
 
 # define FILE_OPEN_ERR "Error : couldn't open file\n"
+# define DIRECTORY_ERR "Error : argument is a directory\n"
 # define MALLOC_ERR "Malloc error.\n"
 # define EMPTY_FILE_ERR "Error : empty file\n"
 # define READ_ERR "Error reading the file\n"
