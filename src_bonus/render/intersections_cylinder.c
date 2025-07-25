@@ -73,7 +73,7 @@ int get_cylinder_inter(const t_object *object,
 	d.nb_inter = 0;
 	hits_added = 0;
 	if (list->count > list->capacity - 2)
-		return (print_err(FILE, LINE, "get_cylinder_inter: no more space in list"), 0);
+		return (print_err(__FILE__, LINE, "get_cylinder_inter: no more space in list"), 0);
 	d.a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if (d.a > -(EPSILON) && d.a < EPSILON)
 	{

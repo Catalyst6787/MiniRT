@@ -89,6 +89,6 @@ t_vec3	get_object_normal_at(const t_object *obj, const t_vec3 world_point)
 		return (get_cylinder_normal_at(obj, world_point));
 	if (obj->type == CONE)
 		return (get_cone_normal_at(obj, world_point));
-	print_err(FILE, LINE, "get_object_normal : object type not set");
+	print_err(__FILE__, LINE, "get_object_normal : object type not set");
 	return (get_vec3(0, 0, 0));
 }

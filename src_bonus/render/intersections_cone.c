@@ -76,7 +76,7 @@ int	get_cone_inter(const t_object *object,
 
 	hits_added = 0;
 	if (list->count > list->capacity - 2)
-		return (print_err(FILE, LINE,
+		return (print_err(__FILE__, LINE,
 				"get_cylinder_inter: no more space in list"), 1);
 	d.a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
 	d.b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;

@@ -6,11 +6,13 @@
 # include <sys/errno.h>
 # include <stdbool.h>
 # include <string.h>
+# include <stdlib.h>
 # include <time.h>
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <assert.h>
+# include <unistd.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -47,6 +49,7 @@
 # define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
 # define NB_THREADS 16
 # define MULTI_THREADING 1
+# define GENERATE_SCENE 0
 
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
@@ -54,7 +57,7 @@
 # endif
 # define EPSILON 1.0E-5
 
-# define FILE __FILE__
+// # define FILE __FILE__
 # define LINE __LINE__
 
 typedef struct s_img_data
@@ -107,6 +110,16 @@ typedef struct s_minirt
 	t_ui		*ui;
 }				t_minirt;
 
+////	Bonuses		////
+
+typedef struct s_rand {
+	int		nb_lights;
+	int		nb_obj;
+	double	lights_ratio[4];
+	bool	is_plane;
+}				t_rand;
+
+
 typedef struct s_thread_data
 {
 	int				start;
@@ -114,6 +127,8 @@ typedef struct s_thread_data
 	pthread_t		thread;
 	t_minirt		*minirt;
 }				t_thread_data;
+
+
 
 /*                                 INIT                                  */
 
@@ -271,6 +286,17 @@ void		event_object_selection(t_minirt *minirt,
 void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
 void		event_obj_pos(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
+
+/*                              GENERATOR                                */
+
+void		generate_random_scene();
+void		gen_print_lights(FILE *file, t_rand *rand);
+void		gen_print_sphere(FILE *file);
+void		gen_print_plane(FILE *file, t_rand *rand);
+void		gen_print_cylinder_cones(FILE *file, char c);
+int			generate_random_int(int min, int max);
+double		generate_random_double(double min, double max);
+
 
 /*                                 EXIT                                  */
 

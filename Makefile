@@ -64,6 +64,7 @@ BONUS_SRC =	$(SRC) \
 			intersections_cone.c \
 			threads.c \
 			th_render.c th_shadow.c \
+			scene_generator.c scene_generator_print.c \
 			tests.c tests_color.c tests_matrices.c tests_rays.c \
 			test_intersections.c test_normals.c test_reflections.c \
 			test_lighting.c test_world.c test_shadows.c test_camera.c \
@@ -148,6 +149,9 @@ valgrind: all
 
 valgrindbonus: bonus
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(BONUS_NAME)
+
+generate: bonus
+	./$(BONUS_NAME) assets/scenes/random_generation.rt
 
 run: all
 	@./$(NAME)

@@ -112,6 +112,7 @@ void	set_scene_buffer(t_minirt *minirt)
 	if (open (minirt->scene->filename, __O_DIRECTORY) != -1)
 		quit(minirt, DIRECTORY_ERR);
 	fd = open(minirt->scene->filename, O_RDONLY);
+	perror("fd");
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);
 	get_file_contents(fd, &minirt->scene->buffer);

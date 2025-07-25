@@ -3,16 +3,12 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] problem :
-
-L  0,0,-10   0.5  255,255,255
-``
-pl 0,0,0 0,1,0   59,255,100
+- [ ] problem with cone normals
 
 
-- [ ] euler is false
-- [ ] if he time allow it, be able to move light (event)
+- [ ] euler ?
 - [ ] fix a little problem in the tests (commented for now)
+- [ ] if he time allow it, be able to move light (event)
 
 ### optional
 

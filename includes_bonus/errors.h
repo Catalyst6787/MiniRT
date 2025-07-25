@@ -17,7 +17,7 @@
 # define SCENE_ONLY_WS_ERR "Error : scene only contains whitespaces\n"
 # define CHAR_DOUBLE "Error : double character found in scene\n"
 
-# define DIR_ERR "Error : direction vector = 0\n"
+# define DIRECTION_ERR "Error : direction vector = 0\n"
 
 # define WRONG_AMB_DATA "Error : wrong ambient light data\n"
 # define WRONG_CAM_DATA "Error : wrong camera data\n"
