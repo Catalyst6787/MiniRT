@@ -36,10 +36,12 @@
 
 # define SPACE_SET " \t\n"
 
-// # define WIN_W 3840
-// # define WIN_H 2160
-# define WIN_W 1920
-# define WIN_H 1080
+# define WIN_W 3840
+# define WIN_H 2160
+// # define WIN_W 1920
+// # define WIN_H 1080
+// # define WIN_W 1280
+// # define WIN_H 720
 
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
@@ -225,6 +227,7 @@ void		*th_render_scene(void *minirt_arg);
 t_vec3		th_shade_hit(t_scene *scene,
 				t_comp *comp,
 				t_inter_list *shadow_list);
+void		th_display_image(t_minirt *minirt);
 
 /*                             COLOR UTILS                                  */
 

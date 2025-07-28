@@ -74,7 +74,7 @@ void	generate_random_scene()
 	gen_print_lights(file, &rand);
 	while (rand.nb_obj >= 0)
 	{
-		obj_type = generate_random_int(0, 4);
+		obj_type = generate_random_int(0, 3);
 		if (obj_type == 0)
 			gen_print_sphere(file);
 		else if (obj_type == 1 && !rand.is_plane)

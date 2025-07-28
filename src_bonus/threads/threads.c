@@ -5,12 +5,13 @@ void	th_display_image(t_minirt *minirt)
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 	if (minirt->ui->command_help)
+	{
 		display_command_help(minirt, minirt->mlx);
-	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
-		WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
-		minirt->ui->str_selected_object);
+		mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
+			WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
+			minirt->ui->str_selected_object);
+	}
 }
-
 
 void	start_thread(t_minirt *minirt, t_thread_data *thread, int i, int *count)
 {
@@ -25,10 +26,10 @@ void	start_thread(t_minirt *minirt, t_thread_data *thread, int i, int *count)
 	while (i == (NB_THREADS - 1) && thread[i].end < (WIN_W - 1))
 		thread[i].end ++;
 	c = c + diff;
-	pthread_create(&thread[i].thread, NULL, th_render_scene, &thread[i]);
+	if (pthread_create(&thread[i].thread, NULL, th_render_scene, &thread[i]) == -1)
+		quit(minirt, TH_ERR);
 	*count = c;
 }
-
 
 int	start_threads(t_minirt *minirt)
 {
@@ -51,8 +52,8 @@ int	start_threads(t_minirt *minirt)
 		pthread_join(thread[i].thread, NULL);
 		i++;
 	}
-	th_display_image(minirt);
 	t = clock() - t;
+	th_display_image(minirt);
 	printf("Scene rendered in %f seconds\n",
 			(((double)t) / CLOCKS_PER_SEC) / NB_THREADS);
 	return (0);
