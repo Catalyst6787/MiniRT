@@ -1,6 +1,4 @@
-#include "matrice.h"
 #include "minirt.h"
-#include "vec3.h"
 
 void	init_ui(t_ui *ui)
 {
