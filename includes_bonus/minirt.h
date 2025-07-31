@@ -36,10 +36,10 @@
 
 # define SPACE_SET " \t\n"
 
-# define WIN_W 3840
-# define WIN_H 2160
-// # define WIN_W 1920
-// # define WIN_H 1080
+// # define WIN_W 3840
+// # define WIN_H 2160
+# define WIN_W 1920
+# define WIN_H 1080
 // # define WIN_W 1280
 // # define WIN_H 720
 
