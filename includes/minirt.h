@@ -38,6 +38,7 @@
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
+# define REFLECTION_MAX_DEPTH 10
 
 # define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
 

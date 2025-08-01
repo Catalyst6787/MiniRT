@@ -173,18 +173,18 @@ int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *lis
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
-t_vec3		get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt);
+t_vec3		get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, unsigned int depth);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
-t_vec3		shade_hit(t_render *render, t_scene *scene, t_comp *comp, t_minirt *minirt);
+t_vec3		shade_hit(t_comp *comp, t_minirt *minirt, unsigned int depth);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 				const t_vec3 world_point);
 
 // HIT
 t_inter		*get_hit(t_inter_list *lst);
-t_vec3		intersect_objects(t_minirt *minirt, t_ray *unique_ray);
+t_vec3		intersect_objects(t_minirt *minirt, t_ray *unique_ray, unsigned int depth);
 
 
 /*                             COLOR UTILS                                  */
@@ -298,7 +298,7 @@ t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
 
 // reflections
-t_vec3		reflected_color(t_comp *comp, t_minirt *minirt);
+t_vec3		reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth);
 t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
 
 //// TESTS
