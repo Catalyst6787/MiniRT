@@ -112,7 +112,7 @@ int	start_all_shadows_tests(void)
 	comp.m = get_default_material(get_color(1, 1, 1), &scene);
 
 	in_shadow = true;
-	color = get_lighting(&comp, in_shadow);
+	color = get_lighting(&comp, in_shadow, NULL, 0);
 	assert(vec3_isequal(color, get_vec3(0.1, 0.1, 0.1)));
 
 

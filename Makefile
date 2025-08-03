@@ -62,11 +62,11 @@ SRC = main.c \
 
 BONUS_SRC =	$(SRC) \
 			intersections_cone.c \
-			reflection.c
-			# tests.c tests_color.c tests_matrices.c tests_rays.c \
-			# test_intersections.c test_normals.c test_reflections.c \
-			# test_lighting.c test_world.c test_shadows.c test_camera.c \
-			# tests_planes.c tests_cylinders.c tests_cones.c test_cubes.c \
+			reflection.c \
+			tests.c tests_color.c tests_matrices.c tests_rays.c \
+			test_intersections.c test_normals.c test_reflections.c \
+			test_lighting.c test_world.c test_shadows.c test_camera.c \
+			tests_planes.c tests_cylinders.c tests_cones.c test_cubes.c \
 
 
 OBJ_DIR = objects

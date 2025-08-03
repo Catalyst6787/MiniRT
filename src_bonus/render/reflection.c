@@ -5,7 +5,7 @@ t_vec3	reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth)
 	t_ray	reflect_ray;
 	t_vec3	color;
 
-	if (depth == REFLECTION_MAX_DEPTH)
+	if (depth == REFLECTION_MAX_DEPTH || !minirt)
 		return(get_color(0, 0, 0));
 	minirt->render->inter_list.count = 0;
 	minirt->render->shadow_list.count = 0;
