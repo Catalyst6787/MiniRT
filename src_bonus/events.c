@@ -16,9 +16,8 @@ void	event_render(t_minirt *minirt)
 
 	ft_printf("Spacebar pressed : render asked!\n");
 	minirt->render->pixel_size = 1;
-	// minirt->ui->command_help = false;
-	t = clock(); // REMOVE FROM NON-BONUS
-	render_scene(minirt);
+	t = clock();
+	start_render(minirt);
 	t = clock() - t;
 	time_taken = ((double)t) / CLOCKS_PER_SEC;
 	printf("Scene rendered in %f seconds\n", time_taken);
@@ -31,7 +30,7 @@ void	event_display_command_help(t_minirt *minirt)
 		minirt->ui->command_help = 0;
 	else
 		minirt->ui->command_help = 1;
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 void	event_change_string_color(t_minirt *minirt)
@@ -52,7 +51,7 @@ void	event_change_string_color(t_minirt *minirt)
 		minirt->ui->string_color = get_color(1, 1, 1);
 		minirt->ui->color_id = 0;
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 void	set_selected_object_str(t_minirt *minirt, t_scene *scene)

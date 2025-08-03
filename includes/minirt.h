@@ -140,6 +140,7 @@ void		char_error_check(t_minirt *minirt,
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
+void		check_direction_vector(t_minirt *minirt, t_vec3 *dir);
 
 t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);

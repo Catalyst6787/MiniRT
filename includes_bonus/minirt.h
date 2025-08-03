@@ -6,11 +6,13 @@
 # include <sys/errno.h>
 # include <stdbool.h>
 # include <string.h>
+# include <stdlib.h>
 # include <time.h>
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <assert.h>
+# include <unistd.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -29,17 +31,26 @@
 # include "keycodes.h"
 # include "colors.h"
 # include "debug.h"
+# include "pthread.h"
 
-# define SPACE_SET = " \t\n"
+# define SPACE_SET " \t\n"
 
-# define WIN_W 1280
-# define WIN_H 720
+// # define WIN_W 3840
+// # define WIN_H 2160
+# define WIN_W 1920
+# define WIN_H 1080
+// # define WIN_W 1280
+// # define WIN_H 720
+
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
 # define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
+# define NB_THREADS 16
+# define MULTI_THREADING 0
+# define GENERATE_SCENE 0
 
 # define REFLECTION_MAX_DEPTH 10
 # ifndef M_PI
@@ -48,7 +59,7 @@
 # endif
 # define EPSILON 1.0E-5
 
-# define FILE __FILE__
+// # define FILE __FILE__
 # define LINE __LINE__
 
 typedef struct s_img_data
@@ -101,6 +112,27 @@ typedef struct s_minirt
 	t_ui		*ui;
 }				t_minirt;
 
+////	Bonuses		////
+
+typedef struct s_rand {
+	int		nb_lights;
+	int		nb_obj;
+	double	lights_ratio[4];
+	bool	is_plane;
+}				t_rand;
+
+
+typedef struct s_thread_data
+{
+	int				start;
+	int				end;
+	pthread_t		thread;
+	t_minirt		*minirt;
+	t_inter_list inter_list;
+	t_inter_list shadow_list;
+}				t_thread_data;
+
+
 
 /*                                 INIT                                  */
 
@@ -119,7 +151,10 @@ double		ato_buffer(char *ptr, int *cursor, int delim);
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
-int			parse_light(t_minirt *minirt, t_scene *scene, t_light *light, int *cursor);
+int			parse_light(t_minirt *minirt,
+				t_scene *scene,
+				t_light *light,
+				int *cursor);
 int			parse_sphere(t_minirt *minirt,
 				t_scene *scene, t_sphere *sphere, int *cursor);
 int			parse_plane(t_minirt *minirt,
@@ -144,8 +179,8 @@ void		char_error_check(t_minirt *minirt,
 void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
-
-t_light		*new_light(t_vec3 pos, t_vec3 color);
+void		check_direction_vector(t_minirt *minirt, t_vec3 *dir);
+	t_light *new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 void		set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
@@ -165,16 +200,20 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
 
-
-
-void		display_image(t_minirt *minirt);
-t_inter		get_inter(void);
-int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
-int			get_cone_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
-t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
 t_vec3		get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, unsigned int depth);
+int			start_render(t_minirt *minirt);
+void		display_image(t_minirt *minirt);
+int			count_intersections(t_scene *scene);
+t_inter		get_inter(void);
+int			get_cylinder_inter(const t_object *object,
+				const t_ray *ray,
+				t_inter_list *list);
+int			get_cone_inter(const t_object *object,
+				const t_ray *ray,
+				t_inter_list *list);
+t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
@@ -182,11 +221,22 @@ t_vec3		shade_hit(t_comp *comp, t_minirt *minirt, unsigned int depth);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 				const t_vec3 world_point);
-
-// HIT
 t_inter		*get_hit(t_inter_list *lst);
 t_vec3		intersect_objects(t_minirt *minirt, t_ray *unique_ray, unsigned int depth);
+void		print_borders(t_mlx_data *mlx, int color);
+void		display_command_help(t_minirt *minirt, t_mlx_data *mlx);
 
+int			start_threads(t_minirt *minirt);
+void		*th_render_scene(void *minirt_arg);
+// t_vec3		th_shade_hit(t_minirt *minirt,
+// 				t_comp *comp,
+// 				t_inter_list *shadow_list,
+// 				unsigned int depth);
+t_vec3		th_get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth);
+t_vec3		th_reflected_color(t_comp *comp, t_minirt *minirt, t_thread_data *th, unsigned int depth);
+void		th_display_image(t_minirt *minirt);
+t_vec3	th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *th, unsigned int depth);
+int				th_is_shadowed(t_scene *scene, t_comp *comp, t_inter_list *shadow_list);
 
 /*                             COLOR UTILS                                  */
 
@@ -199,8 +249,11 @@ t_vec3		int_to_color(int int_color);
 
 t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
 t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
-t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir,
-				double diameter, double height, t_vec3 color);
+t_cylinder	*new_cylinder(t_vec3 pos, 
+				t_vec3 dir,
+				double diameter,
+				double height,
+				t_vec3 color);
 void		free_sphere(t_object *object);
 
 int			get_cylinder_inter(const t_object *object,
@@ -246,10 +299,21 @@ void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
 void		event_obj_pos(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
 
+/*                              GENERATOR                                */
+
+void		generate_random_scene();
+void		gen_print_lights(FILE *file, t_rand *rand);
+void		gen_print_sphere(FILE *file);
+void		gen_print_plane(FILE *file, t_rand *rand);
+void		gen_print_cylinder_cones(FILE *file, char c);
+int			generate_random_int(int min, int max);
+double		generate_random_double(double min, double max);
+
+
 /*                                 EXIT                                  */
 
 void		free_scene(t_scene *scene);
-void	print_exit_info(char *str);
+void		print_exit_info(char *str);
 int			quit(t_minirt *minirt, char *str);
 
 /*                                 DEBUG                                  */
@@ -267,7 +331,7 @@ void		print_inter(t_inter *inter);
 void		print_scene(t_minirt *minirt, bool asterix);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
-void		print_ray(t_ray r);
+void		print_ray(t_ray *r);
 void		print_plane_data(t_minirt *minirt);
 void		print_spheres_data(t_minirt *minirt);
 void		print_cylinder_data(t_minirt *minirt);

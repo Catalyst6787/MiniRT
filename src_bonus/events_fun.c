@@ -9,7 +9,7 @@ void	event_activate_cylinder_cap(t_minirt *minirt)
 	while (i < minirt->scene->nb_objects)
 	{
 		if (minirt->scene->objects[i].type == CYLINDER
-				|| minirt->scene->objects[i].type == CONE)
+			|| minirt->scene->objects[i].type == CONE)
 		{
 			if (minirt->scene->objects[i].obj_data.cylinder.isclosed)
 				minirt->scene->objects[i].obj_data.cylinder.isclosed = 0;
@@ -18,7 +18,7 @@ void	event_activate_cylinder_cap(t_minirt *minirt)
 		}
 		i++;
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 void	event_turn_cylinders(t_minirt *minirt)
@@ -47,7 +47,7 @@ void	event_turn_cylinders(t_minirt *minirt)
 				= get_inversed_matrix(minirt->scene->objects[i].transform);
 		}
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 static t_shear	get_shear_val(bool pos)
@@ -89,5 +89,5 @@ void	event_sphere_shearing(t_minirt *minirt)
 		}
 		i++;
 	}
-	render_scene(minirt);
+	start_render(minirt);
 }

@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static void	print_borders(t_mlx_data *mlx, int color)
+void	print_borders(t_mlx_data *mlx, int color)
 {
 	int	x;
 	int	y;
@@ -41,8 +41,10 @@ void	display_image(t_minirt *minirt)
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
 	if (minirt->ui->command_help)
+	{
 		display_command_help(minirt, minirt->mlx);
-	mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
-		WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
-		minirt->ui->str_selected_object);
+		mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
+			WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
+			minirt->ui->str_selected_object);
+	}
 }

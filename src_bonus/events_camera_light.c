@@ -47,7 +47,7 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
 		= get_inversed_matrix(minirt->scene->camera->transform);
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 void	erzx_handle(int keycode, t_minirt *minirt)
@@ -71,7 +71,7 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
 		= get_inversed_matrix(minirt->scene->camera->transform);
-	render_scene(minirt);
+	start_render(minirt);
 }
 
 int	asdw_handle(int keycode, t_minirt *minirt)
@@ -100,5 +100,5 @@ int	asdw_handle(int keycode, t_minirt *minirt)
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
 		= get_inversed_matrix(minirt->scene->camera->transform);
-	return (ft_printf("[%c] pressed\n", keycode - 32), render_scene(minirt));
+	return (ft_printf("[%c] pressed\n", keycode - 32), start_render(minirt));
 }

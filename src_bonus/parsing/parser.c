@@ -33,6 +33,8 @@ void	parse_scene(t_minirt *minirt)
 {
 	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
+	if (!ft_strncmp(minirt->scene->filename, "assets/scenes/random_generation.rt", 21))
+		generate_random_scene();
 	check_file_name(minirt);
 	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
@@ -45,8 +47,8 @@ void	parse_scene(t_minirt *minirt)
 	set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
-	debug_print_scene_data(minirt);
 	print_scene_ok_message(minirt->scene->filename);
+	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);

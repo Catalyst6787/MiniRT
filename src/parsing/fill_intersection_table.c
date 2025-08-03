@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-static int	count_intersections(t_scene *scene)
+int	count_intersections(t_scene *scene)
 {
 	int	count;
 

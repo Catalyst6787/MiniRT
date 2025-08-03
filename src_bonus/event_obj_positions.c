@@ -108,5 +108,5 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		handle_pav_front_back(minirt, i, keycode);
 	minirt->scene->objects[i].inv
 		= get_inversed_matrix(minirt->scene->objects[i].transform);
-	render_scene(minirt);
+	start_render(minirt);
 }

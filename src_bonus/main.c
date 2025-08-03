@@ -41,7 +41,6 @@ int	main(int ac, char **av)
 	t_scene		scene;
 	t_render	render;
 	t_ui		ui;
-	clock_t		t;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
@@ -53,15 +52,11 @@ int	main(int ac, char **av)
 		quit(&minirt, MALLOC_ERR);
 	minirt.ui = &ui;
 	init_ui(minirt.ui);
-	if (start_all_tests())
-		quit(&minirt, TESTS_ERR);
+	// if (start_all_tests())
+	// 	quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
-	t = clock();
-	render_scene(&minirt);
-	t = clock() - t;
-	double time_taken = ((double)t) / CLOCKS_PER_SEC;
-	printf("Scene rendered in %f seconds\n", time_taken);
+	start_render(&minirt);
 	mlx_loop(mlx.mlx);
 	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");

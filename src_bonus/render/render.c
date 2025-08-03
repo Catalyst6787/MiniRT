@@ -106,3 +106,17 @@ int	render_scene(t_minirt *minirt)
 	display_image(minirt);
 	return (0);
 }
+
+int	start_render(t_minirt *minirt)
+{
+	clock_t		t;
+
+	if (MULTI_THREADING)
+		return (start_threads(minirt));
+	t = clock();
+	render_scene(minirt);
+	t = clock() - t;
+	printf("Scene rendered in %f seconds\n", ((double)t) / CLOCKS_PER_SEC);
+	return (0);
+}
+

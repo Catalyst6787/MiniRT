@@ -3,8 +3,12 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] parsing problem if more than one zero after the coma (try also with 2 dots)
+- [ ] problem with cone normals
 
+
+- [ ] euler ?
+- [ ] fix a little problem in the tests (commented for now)
+- [ ] if he time allow it, be able to move light (event)
 
 ### optional
 
@@ -13,6 +17,7 @@ Simple C ray tracer.
 - [ ] display last key pressed
 
 
+- [X] parsing problem if more than one zero after the coma (try also with 2 dots)
 - [X] vec3_basic op use pointers (actually a mess because of the functions calls as parameters)
 - [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
 - [X] cone
@@ -53,10 +58,10 @@ and objects
 ### bonuses list
 
  - [X] phong
- - [ ] colored and multi spot lighs
- - [ ] cube / cone
+ - [X] colored and multi spot lighs
+ - [X] cube / cone
  - [ ] diffusion
- - [ ] multithreading
+ - [X] multithreading
 
 Other ideas :
  - [ ] Patterns (perlin)

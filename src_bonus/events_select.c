@@ -40,5 +40,5 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 	}
 	else if (keycode == PAV_MIDDLE)
 		switch_pav_mode(minirt);
-	render_scene(minirt);
+	start_render(minirt);
 }

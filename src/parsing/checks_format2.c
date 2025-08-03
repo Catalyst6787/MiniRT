@@ -1,5 +1,11 @@
 #include "minirt.h"
 
+void	check_direction_vector(t_minirt *minirt, t_vec3 *dir)
+{
+	if (dir->x + dir->y + dir->z == 0)
+		quit(minirt, DIRECTION_ERR);
+}
+
 void	check_file_name(t_minirt *minirt)
 {
 	int	i;

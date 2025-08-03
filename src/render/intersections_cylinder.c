@@ -70,6 +70,7 @@ int	get_cylinder_inter(const t_object *object,
 {
 	t_cylinder_inter	d;
 
+	d.nb_inter = 0;
 	if (list->count > list->capacity - 2)
 		return (print_err(FILE, LINE,
 				"get_cylinder_inter: no more space in list"), 1);

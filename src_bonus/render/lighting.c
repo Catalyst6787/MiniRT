@@ -71,3 +71,24 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt, unsigned int
 			get_lighting_extra(comp, light_vector, effective_color, ambient),
 			reflected_color(comp, minirt, depth)));
 }
+
+t_vec3	th_get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth)
+{
+	t_vec3	effective_color;
+	t_vec3	light_vector;
+	t_vec3	ambient;
+
+	effective_color = vec3_vec_multiplication(comp->m.color, comp->light.color);
+	effective_color
+		= vec3_double_multiplication(effective_color, comp->light.brightness);
+	light_vector
+		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
+	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
+	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
+	if (in_shadow)
+		return (vec3_vec_addition(ambient, th_reflected_color(comp, minirt, th, depth)));
+	else
+		return (vec3_vec_addition(
+			get_lighting_extra(comp, light_vector, effective_color, ambient),
+			th_reflected_color(comp, minirt, th, depth)));
+}

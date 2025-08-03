@@ -21,6 +21,8 @@
 		"plane.h": "c",
 		"object.h": "c",
 		"limits": "c",
-		"cylinder.h": "c"
-	}
+		"cylinder.h": "c",
+		"types.h": "c"
+	},
+	"C_Cpp.default.compilerPath": "/usr/bin/clang"
 }
