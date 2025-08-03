@@ -41,6 +41,7 @@
 
 # define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
 
+# define REFLECTION_MAX_DEPTH 10
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 #  define M_PI_2 1.57079632679489661923

@@ -1,16 +1,11 @@
-#include "colors.h"
 #include "minirt.h"
-#include "ray.h"
-#include "render.h"
-#include "scene.h"
-#include "vec3.h"
 
 t_vec3	reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth)
 {
 	t_ray	reflect_ray;
 	t_vec3	color;
 
-	if (depth == 10)
+	if (depth == REFLECTION_MAX_DEPTH)
 		return(get_color(0, 0, 0));
 	minirt->render->inter_list.count = 0;
 	minirt->render->shadow_list.count = 0;
