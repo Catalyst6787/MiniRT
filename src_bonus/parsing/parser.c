@@ -29,6 +29,22 @@ void	count_elements(t_scene *scene)
 		+ scene->nb_cylinder + scene->nb_cone;
 }
 
+void	test_light_sum(t_scene *scene)
+{
+	int		i;
+	double	tot;
+	
+	i = 0;
+	tot = scene->ambient->brightness;
+	while (i < scene->nb_light)
+	{
+		tot += scene->lights[i]->brightness;
+		i++;
+	}
+	if (tot > 1)
+		printf("%sWarning, sum of lights > 1!%s", RED, CRESET);
+}
+
 void	parse_scene(t_minirt *minirt)
 {
 	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
@@ -52,6 +68,7 @@ void	parse_scene(t_minirt *minirt)
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);
+	test_light_sum(minirt->scene);
 	// free(minirt->scene->buffer);
 	// minirt->scene->buffer = NULL;
 }

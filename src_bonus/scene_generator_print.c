@@ -11,14 +11,14 @@ void	save_random_scene(t_minirt *minirt)
 		if (filename[16] == ':')
 		{
 			filename[16] = '0';
-			filename[17]++;
+			filename[15]++;
 		}
-		if (filename[17] == ':')
+		if (filename[15] == ':')
 		{
-			filename[17] = '0';
-			filename[18]++;
+			filename[15] = '0';
+			filename[14]++;
 		}
-		if (filename[18] == ':')
+		if (filename[14] == ':')
 		{
 			printf("%sCan't save scene, no more space!%s\n", RED, CRESET);
 			return ;
@@ -28,6 +28,7 @@ void	save_random_scene(t_minirt *minirt)
 	if (fd == -1)
 	{
 		printf("%sError creating file%s\n", RED, CRESET);
+		strerror(errno);
 		return ;
 	}
 	if (write(fd, minirt->scene->buffer, ft_strlen(minirt->scene->buffer)) == -1)

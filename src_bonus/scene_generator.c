@@ -13,7 +13,7 @@ int	generate_random_int(int min, int max)
 
 double	generate_random_double(double min, double max)
 {
-	return min + (double)rand() / RAND_MAX * (max - min);
+	return (min + (double)rand() / RAND_MAX * (max - min));
 }
 
 void	normalize_lights(t_rand *rand)
@@ -78,7 +78,7 @@ void	generate_random_scene()
 		if (obj_type == 0)
 			gen_print_sphere(file);
 		else if (obj_type == 1 && !rand.is_plane)
-			gen_print_plane(file, &rand, 0);
+			gen_print_plane(file, &rand, true);
 		else if (obj_type == 2)
 			gen_print_cylinder_cones(file, 'y');
 		else if (obj_type == 3)

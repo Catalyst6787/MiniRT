@@ -60,7 +60,6 @@
 # endif
 # define EPSILON 1.0E-5
 
-// # define FILE __FILE__
 # define LINE __LINE__
 
 typedef struct s_img_data

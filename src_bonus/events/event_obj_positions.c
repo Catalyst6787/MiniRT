@@ -3,8 +3,21 @@
 static void	handle_pav_up(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y++\n", i);
+	printf("Objects : %d\n", minirt->scene->nb_objects);
 	if (minirt->ui->move_mode == pos)
+	{
+		if (minirt->scene->nb_objects == minirt->ui->selected_object)
+		{
+			if (minirt->scene->ambient->brightness <= 0.9)
+			{
+				minirt->scene->ambient->brightness += 0.1;
+				set_objects_material(minirt->scene);
+				create_object_array(minirt->scene);
+			}
+			return ;
+		}
 		minirt->scene->objects[i].translation.matrix[1][3] += 0.1;
+	}
 	else if (minirt->ui->move_mode == dir)
 	{
 		if (minirt->scene->objects[i].type == SPHERE)
@@ -28,7 +41,21 @@ static void	handle_pav_down(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y--\n", i);
 	if (minirt->ui->move_mode == pos)
+	{
+		
+		if (minirt->scene->nb_objects == minirt->ui->selected_object)
+		{
+			if (minirt->scene->ambient->brightness >= 0.1)
+			{
+				minirt->scene->ambient->brightness -= 0.1;
+				set_objects_material(minirt->scene);
+				create_object_array(minirt->scene);
+				return ;
+			}
+			return ;
+		}
 		minirt->scene->objects[i].translation.matrix[1][3] -= 0.1;
+	}
 	else if (minirt->ui->move_mode == dir)
 	{
 		if (minirt->scene->objects[i].type == SPHERE)
@@ -138,7 +165,8 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 		handle_pav_left_right(minirt, i, keycode);
 	else if (keycode == PAV_FRONT || keycode == PAV_BACK)
 		handle_pav_front_back(minirt, i, keycode);
-	minirt->scene->objects[i].inv
-		= get_inversed_matrix(minirt->scene->objects[i].transform);
+	if (i != minirt->scene->nb_objects)
+		minirt->scene->objects[i].inv
+			= get_inversed_matrix(minirt->scene->objects[i].transform);
 	start_render(minirt);
 }

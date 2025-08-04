@@ -58,10 +58,18 @@ void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 {
 	char	*tmp;
 	char	*nb;
-
-	tmp = object_type_to_str(&scene->objects[minirt->ui->selected_object], 1);
+	
+	if (minirt->ui->selected_object == scene->nb_objects)
+	{
+		minirt->ui->str_selected_object = ft_strdup("Selected : ambiant");
+		if (!minirt->ui->str_selected_object)
+			quit(minirt, MALLOC_ERR);
+		return ;
+	}
+	if (minirt->ui->selected_object < scene->nb_objects)
+		tmp = object_type_to_str(&scene->objects[minirt->ui->selected_object], 1);
 	if (!tmp)
-		quit(minirt, MALLOC_ERR);
+			quit(minirt, MALLOC_ERR);
 	nb = ft_itoa(scene->objects[minirt->ui->selected_object].id);
 	if (!nb)
 	{

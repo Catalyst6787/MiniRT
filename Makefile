@@ -21,7 +21,7 @@ LIBFT = ./libft/libft.a
 SRC_DIR = src
 BONUS_DIR = src_bonus
 SUBDIRS = parsing vec3 debug rays tests colors matrices print render
-BONUS_SUBDIRS = $(SUBDIRS) threads # add more here
+BONUS_SUBDIRS = $(SUBDIRS) threads events # add more here
 SRC =	main.c \
 		parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
 		parse_scene_elements.c \

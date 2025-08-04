@@ -6,19 +6,21 @@ void	event_light_pos(t_minirt *minirt, int keycode)
 	(void)minirt;
 	(void)keycode;
 	// minirt->render->pixel_size = PIXEL_SIZE_MULT;
-	// if (keycode == U)
-	// 	minirt->scene->light->pos.y += 0.2;
-	// else if (keycode == H)
-	// 	minirt->scene->light->pos.x -= 0.2;
-	// else if (keycode == J)
-	// 	minirt->scene->light->pos.y -= 0.2;
-	// else if (keycode == K)
-	// 	minirt->scene->light->pos.x += 0.2;
-	// else if (keycode == I)
-	// 	minirt->scene->light->pos.z -= 0.2;
-	// else if (keycode == O)
-	// 	minirt->scene->light->pos.z += 0.2;
-	// render_scene(minirt);
+	if (!minirt->scene->nb_light)
+		return ;
+	if (keycode == U)
+		minirt->scene->lights[0]->pos.y += 0.2;
+	else if (keycode == H)
+		minirt->scene->lights[0]->pos.x -= 0.2;
+	else if (keycode == J)
+		minirt->scene->lights[0]->pos.y -= 0.2;
+	else if (keycode == K)
+		minirt->scene->lights[0]->pos.x += 0.2;
+	else if (keycode == I)
+		minirt->scene->lights[0]->pos.z -= 0.2;
+	else if (keycode == O)
+		minirt->scene->lights[0]->pos.z += 0.2;
+	start_render(minirt);
 }
 
 void	arrows_handle(int keycode, t_minirt *minirt)
