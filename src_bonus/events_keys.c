@@ -68,7 +68,8 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		event_light_pos(minirt, keycode);
 	else if (65429.9 <= keycode && keycode <= 65435.5)
 		event_obj_pos(minirt, keycode);
-	handle_extra(keycode, minirt);
+	else
+		handle_extra(keycode, minirt);
 	return (0);
 }
 
