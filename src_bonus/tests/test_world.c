@@ -46,7 +46,7 @@ int start_all_world_tests(void)
 	r = get_ray(scene.camera->view.from, scene.camera->view.to);
 	// scene.camera = new_camera(get_point3(0, 0, -5), get_vec3(0, 0, 1));
 	scene.objects = malloc(sizeof(t_object) * 2);
-	create_object_list(&scene);
+	create_object_array(&scene);
 	// r = get_ray(scene.camera->pos, scene.camera->dir);
 	inter_list.capacity = 4;
 	inter_list.inters = malloc(sizeof(t_inter) * inter_list.capacity);

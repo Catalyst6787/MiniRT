@@ -52,7 +52,7 @@ void	set_default_world(t_scene *scene)
 	scene->nb_sphere = 2;
 	scene->nb_objects = 2;
 	scene->objects = malloc(sizeof(t_object) * 10); // added space for more objects if needed
-	create_object_list(scene);
+	create_object_array(scene);
 }
 
 void	set_rendering_shadow_world(t_scene *scene)
@@ -70,7 +70,7 @@ void	set_rendering_shadow_world(t_scene *scene)
 	scene->nb_sphere = 2;
 	scene->nb_objects = 2;
 	scene->objects = malloc(sizeof(t_object) * 2);
-	create_object_list(scene);
+	create_object_array(scene);
 }
 
 // void	set_rendering_shadow_world_2(t_scene *scene)
@@ -177,7 +177,7 @@ int	start_all_shadows_tests(void)
 	scene.nb_sphere = 1;
  	scene.nb_objects = 1;
 	scene.objects = malloc(sizeof(t_object));
-	create_object_list(&scene);
+	create_object_array(&scene);
 
 	list.inters[0].obj = scene.objects;
 	list.inters[0].t = 5;

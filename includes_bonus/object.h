@@ -25,6 +25,10 @@ typedef union u_original_obj
 typedef struct s_object
 {
 	t_type			type;
+	t_matrix		translation;
+	t_matrix		rotation;
+	t_matrix		shearing;
+	t_matrix		scaling;
 	t_matrix		transform;
 	t_matrix		inv;
 	t_material		material;

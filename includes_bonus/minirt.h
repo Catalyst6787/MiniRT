@@ -180,14 +180,17 @@ void		single_elements_check(t_minirt *minirt, t_scene *scene);
 void		count_elements(t_scene *scene);
 void		check_characters_validity(t_minirt *minirt);
 void		check_direction_vector(t_minirt *minirt, t_vec3 *dir);
-	t_light *new_light(t_vec3 pos, t_vec3 color);
+t_light		*new_light(t_vec3 pos, t_vec3 color);
 t_ambient	*new_ambiant(t_vec3 color);
 void		set_pixel_size(t_camera *camera);
+
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
+void		set_camera_transformation(t_scene *scene);
 
 void		objects_alloc(t_minirt *minirt, t_scene *scene);
-void		create_object_list(t_scene *scene);
+t_matrix	get_object_transformation(t_object *obj);
+void		create_object_array(t_scene *scene);
 void		create_object_from_sphere(t_object *object,
 				t_sphere *sphere, int id);
 void		create_object_from_plane(t_object *object, t_plane *plane, int id);
@@ -196,6 +199,8 @@ void		create_object_from_cylinder(t_object *object,
 void		create_object_from_cone(t_object *object,
 				t_cone *cone, int id);
 
+
+	
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
@@ -235,8 +240,8 @@ void		*th_render_scene(void *minirt_arg);
 t_vec3		th_get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth);
 t_vec3		th_reflected_color(t_comp *comp, t_minirt *minirt, t_thread_data *th, unsigned int depth);
 void		th_display_image(t_minirt *minirt);
-t_vec3	th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *th, unsigned int depth);
-int				th_is_shadowed(t_scene *scene, t_comp *comp, t_inter_list *shadow_list);
+t_vec3		th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *th, unsigned int depth);
+int			th_is_shadowed(t_scene *scene, t_comp *comp, t_inter_list *shadow_list);
 
 /*                             COLOR UTILS                                  */
 
