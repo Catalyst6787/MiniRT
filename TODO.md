@@ -60,7 +60,9 @@ and objects
  - [X] phong
  - [X] colored and multi spot lighs
  - [X] cube / cone
- - [ ] diffusion
+ - [ ] (diffusion)
+ - [X] reflections
+ - [ ] refraction
  - [X] multithreading
 
 Other ideas :
