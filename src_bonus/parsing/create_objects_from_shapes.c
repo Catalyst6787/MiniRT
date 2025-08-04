@@ -16,8 +16,9 @@ void	create_object_from_sphere(t_object *obj, t_sphere *s, int id)
 void	create_object_from_plane(t_object *obj, t_plane *pl, int id)
 {
 	obj->type = PLANE;
+	obj->dir = pl->dir;
 	obj->translation = get_translation_matrix(pl->pos);
-	obj->rotation = get_rotation_matrix(convert_dir_to_euler(pl->dir));
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(obj->dir));
 	obj->shearing = get_matrix(4, 4, 1);
 	obj->scaling = get_matrix(4, 4, 1);
 	obj->transform = get_object_transformation(obj);
@@ -34,8 +35,9 @@ void	create_object_from_cylinder(t_object *obj,
 									int id)
 {
 	obj->type = CYLINDER;
+	obj->dir = cy->dir;
 	obj->translation = get_translation_matrix(cy->pos);
-	obj->rotation = get_rotation_matrix(convert_dir_to_euler(cy->dir));
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(obj->dir));
 	obj->shearing = get_matrix(4, 4, 1);
 	obj->scaling = get_scaling_matrix(get_vec3(cy->radius, cy->height, cy->radius));
 	obj->transform = get_object_transformation(obj);
@@ -52,8 +54,9 @@ void	create_object_from_cone(t_object *obj,
 									int id)
 {
 	obj->type = CONE;
+	obj->dir = co->dir;
 	obj->translation = get_translation_matrix(co->pos);
-	obj->rotation = get_rotation_matrix(convert_dir_to_euler(co->dir));
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(obj->dir));
 	obj->shearing = get_matrix(4, 4, 1);
 	obj->scaling = get_scaling_matrix(get_vec3(co->radius, co->height, co->radius));
 	obj->material = co->material;

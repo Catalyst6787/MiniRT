@@ -4,9 +4,7 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y++\n", i);
 	if (minirt->ui->move_mode == pos)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_translation_matrix(get_vec3(0, 0.1, 0)));
+		minirt->scene->objects[i].translation.matrix[1][3] += 0.1;
 	else if (minirt->ui->move_mode == dir)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
@@ -15,15 +13,14 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_scaling_matrix(get_vec3(1.1, 1.1, 1.1)));
+	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
 static void	handle_pav_down(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y--\n", i);
 	if (minirt->ui->move_mode == pos)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_translation_matrix(get_vec3(0, -0.1, 0)));
+		minirt->scene->objects[i].translation.matrix[1][3] -= 0.1;
 	else if (minirt->ui->move_mode == dir)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
@@ -32,6 +29,7 @@ static void	handle_pav_down(t_minirt *minirt, int i)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_scaling_matrix(get_vec3(0.9, 0.9, 0.9)));
+	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
 static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
@@ -40,9 +38,7 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 	{
 		printf("Object[%d] x--\n", i);
 		if (minirt->ui->move_mode == pos)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_translation_matrix(get_vec3(-0.1, 0, 0)));
+			minirt->scene->objects[i].translation.matrix[0][3] -= 0.1;
 		else if (minirt->ui->move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
@@ -52,14 +48,13 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 	{
 		printf("Object[%d] x++\n", i);
 		if (minirt->ui->move_mode == pos)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_translation_matrix(get_vec3(0.1, 0, 0)));
+			minirt->scene->objects[i].translation.matrix[0][3] += 0.1;
 		else if (minirt->ui->move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(0.1, 0, 0)));
 	}
+	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
 static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
@@ -68,9 +63,7 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 	{
 		printf("Object[%d] z++\n", i);
 		if (minirt->ui->move_mode == pos)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_translation_matrix(get_vec3(0, 0, 0.1)));
+			minirt->scene->objects[i].translation.matrix[2][3] += 0.1;
 		else if (minirt->ui->move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
@@ -80,14 +73,13 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 	{
 		printf("Object[%d] z--\n", i);
 		if (minirt->ui->move_mode == pos)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_translation_matrix(get_vec3(0, 0, -0.1)));
+			minirt->scene->objects[i].translation.matrix[2][3] -= 0.1;
 		else if (minirt->ui->move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(0, 0, -0.1)));
 	}
+	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
 // Maybe to make this work, the rotation matrix
