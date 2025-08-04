@@ -49,7 +49,7 @@
 
 # define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
 # define NB_THREADS 16
-# define MULTI_THREADING 0
+# define MULTI_THREADING 1
 # define GENERATE_SCENE 0
 
 # define REFLECTION_MAX_DEPTH 10
