@@ -35,7 +35,7 @@ void	create_object_from_cylinder(t_object *obj,
 									int id)
 {
 	obj->type = CYLINDER;
-	obj->dir = cy->dir;
+	obj->dir = get_vec3(cy->dir.x, cy->dir.y, cy->dir.z);
 	obj->translation = get_translation_matrix(cy->pos);
 	obj->rotation = get_rotation_matrix(convert_dir_to_euler(obj->dir));
 	obj->shearing = get_matrix(4, 4, 1);

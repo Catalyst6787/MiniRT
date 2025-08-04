@@ -40,7 +40,6 @@ void	put_pixel(t_minirt *minirt, int color, int x, int y)
 	int	x_off;
 	int	y_off;
 
-	// printf("x = %d\ny = %d\n\n", x, y);
 	y_off = y;
 	while (y_off < y + minirt->render->pixel_size
 		&& y_off < minirt->scene->camera->vsize)

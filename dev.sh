@@ -35,42 +35,42 @@ fi
 
 
 if [ $scene == 1 ]; then
-	./miniRT_bonus assets/scenes/subject_example.rt
+	./miniRT_bonus scenes/subject_example.rt
 elif [ $scene == 2 ]; then
-	./miniRT_bonus assets/scenes/subject_disorder.rt
+	./miniRT_bonus scenes/subject_disorder.rt
 elif [ $scene == 3 ]; then
-	./miniRT_bonus assets/scenes/one_sphere.rt
+	./miniRT_bonus scenes/one_sphere.rt
 elif [ $scene == 4 ]; then
-	./miniRT_bonus assets/scenes/several_cylinders.rt
+	./miniRT_bonus scenes/several_cylinders.rt
 elif [ $scene == 5 ]; then
-	./miniRT_bonus assets/scenes/scene_3spheres.rt
+	./miniRT_bonus scenes/scene_3spheres.rt
 elif [ $scene == 6 ]; then
-	./miniRT_bonus assets/scenes/ten_spheres.rt
+	./miniRT_bonus scenes/ten_spheres.rt
 elif [ $scene == 7 ]; then
-	./miniRT_bonus assets/scenes/shadows.rt
+	./miniRT_bonus scenes/shadows.rt
 elif [ $scene == 8 ]; then
-	./miniRT_bonus assets/scenes/shadows_2.rt
+	./miniRT_bonus scenes/shadows_2.rt
 elif [ $scene == 9 ]; then
-	./miniRT_bonus assets/scenes/plane_debug.rt
+	./miniRT_bonus scenes/plane_debug.rt
 elif [ $scene == 10 ]; then
-	./miniRT_bonus assets/scenes/plane_inter_shadow.rt
+	./miniRT_bonus scenes/plane_inter_shadow.rt
 elif [ $scene == 11 ]; then
-	./miniRT_bonus assets/scenes/cylinder_debug.rt
+	./miniRT_bonus scenes/cylinder_debug.rt
 elif [ $scene == 12 ]; then
-	./miniRT_bonus assets/scenes/cylinder_debug_2.rt
+	./miniRT_bonus scenes/cylinder_debug_2.rt
 elif [ $scene == 13 ]; then
-	./miniRT_bonus assets/scenes/cylinder_debug_3.rt
+	./miniRT_bonus scenes/cylinder_debug_3.rt
 elif [ $scene == 14 ]; then
-	./miniRT_bonus assets/scenes/cylinder_turn_animation.rt
+	./miniRT_bonus scenes/cylinder_turn_animation.rt
 elif [ $scene == 15 ]; then
-	./miniRT_bonus assets/scenes/sphere_animation.rt
+	./miniRT_bonus scenes/sphere_animation.rt
 elif [ $scene == 16 ]; then
-	./miniRT_bonus assets/scenes/plane_debug_2.rt
+	./miniRT_bonus scenes/plane_debug_2.rt
 elif [ $scene == 17 ]; then
-	./miniRT_bonus assets/scenes/cone_debug.rt
+	./miniRT_bonus scenes/cone_debug.rt
 elif [ $scene == 18 ]; then
-	./miniRT_bonus assets/scenes/several_planes.rt
+	./miniRT_bonus scenes/several_planes.rt
 elif [ $scene == 19 ]; then
-	./miniRT_bonus assets/scenes/snooker.rt
+	./miniRT_bonus scenes/snooker.rt
 fi
 

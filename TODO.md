@@ -4,6 +4,7 @@ Simple C ray tracer.
 ### basic
 
 - [ ] problem with cone normals
+- [ ] do light events
 
 
 - [ ] euler ?
@@ -15,6 +16,7 @@ Simple C ray tracer.
 - [ ] add a ratio to move object faster
 - [ ] add height mode to pav num
 - [ ] display last key pressed
+- [ ] display % of the scene calculated
 
 
 - [X] parsing problem if more than one zero after the coma (try also with 2 dots)

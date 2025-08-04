@@ -152,7 +152,7 @@ valgrindbonus: bonus
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(BONUS_NAME)
 
 generate: bonus
-	./$(BONUS_NAME) assets/scenes/random_generation.rt
+	./$(BONUS_NAME) scenes/random_generation.rt
 
 run: all
 	@./$(NAME)

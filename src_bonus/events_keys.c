@@ -40,8 +40,7 @@ static void	handle_extra(int keycode, t_minirt *minirt)
 	else if (keycode == C)
 		event_print_debug(minirt);
 	else if (keycode == Q)
-	{
-	}
+		save_random_scene(minirt);
 	else if (keycode == SPACE)
 		event_render(minirt);
 	else

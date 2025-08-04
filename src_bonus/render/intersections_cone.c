@@ -5,10 +5,12 @@ bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 {
 	double	x;
 	double	z;
+	(void)y_cap;
 
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;
-	return ((x * x + z * z) <= (y_cap * y_cap));
+	return ((x * x + z * z) <= 1);
+	// return ((x * x + z * z) <= (y_cap * y_cap));
 }
 
 int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *list)

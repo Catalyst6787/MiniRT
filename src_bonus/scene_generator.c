@@ -64,7 +64,7 @@ void	generate_random_scene()
 	t_rand	rand;
 	int		obj_type;
 	
-	file = fopen("assets/scenes/random_generation.rt", "w");
+	file = fopen("scenes/random_generation.rt", "w");
 	fprintf(file, "C	0,0,-10 0,0,1 70\n");
 	initialize_random_seed();
 	rand.nb_lights = generate_random_int(2, 4);
@@ -78,7 +78,7 @@ void	generate_random_scene()
 		if (obj_type == 0)
 			gen_print_sphere(file);
 		else if (obj_type == 1 && !rand.is_plane)
-			gen_print_plane(file, &rand);
+			gen_print_plane(file, &rand, 0);
 		else if (obj_type == 2)
 			gen_print_cylinder_cones(file, 'y');
 		else if (obj_type == 3)

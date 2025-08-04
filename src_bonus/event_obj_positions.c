@@ -6,13 +6,21 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 	if (minirt->ui->move_mode == pos)
 		minirt->scene->objects[i].translation.matrix[1][3] += 0.1;
 	else if (minirt->ui->move_mode == dir)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_rotation_matrix(get_vec3(0, 0.1, 0)));
+	{
+		if (minirt->scene->objects[i].type == SPHERE)
+			return ;
+		if (minirt->scene->objects[i].dir.y <= 1)
+		{
+			minirt->scene->objects[i].dir.y += 0.01;
+			minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+		}
+	}
 	else if (minirt->ui->move_mode == size)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_scaling_matrix(get_vec3(1.1, 1.1, 1.1)));
+	{
+		minirt->scene->objects[i].scaling.matrix[0][0] += 0.05; 
+		minirt->scene->objects[i].scaling.matrix[1][1] += 0.05; 
+		minirt->scene->objects[i].scaling.matrix[2][2] += 0.05; 
+	}
 	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
@@ -22,13 +30,21 @@ static void	handle_pav_down(t_minirt *minirt, int i)
 	if (minirt->ui->move_mode == pos)
 		minirt->scene->objects[i].translation.matrix[1][3] -= 0.1;
 	else if (minirt->ui->move_mode == dir)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_rotation_matrix(get_vec3(0, -0.1, 0)));
+	{
+		if (minirt->scene->objects[i].type == SPHERE)
+			return ;
+		if (minirt->scene->objects[i].dir.y >= -1)
+		{
+			minirt->scene->objects[i].dir.y -= 0.01;
+			minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+		}
+	}
 	else if (minirt->ui->move_mode == size)
-		minirt->scene->objects[i].transform
-			= multiply_matrix(minirt->scene->objects[i].transform,
-				get_scaling_matrix(get_vec3(0.9, 0.9, 0.9)));
+	{
+		minirt->scene->objects[i].scaling.matrix[0][0] -= 0.05; 
+		minirt->scene->objects[i].scaling.matrix[1][1] -= 0.05; 
+		minirt->scene->objects[i].scaling.matrix[2][2] -= 0.05; 
+	}
 	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
@@ -40,9 +56,15 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 		if (minirt->ui->move_mode == pos)
 			minirt->scene->objects[i].translation.matrix[0][3] -= 0.1;
 		else if (minirt->ui->move_mode == dir)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_rotation_matrix(get_vec3(-0.1, 0, 0)));
+		{
+			if (minirt->scene->objects[i].type == SPHERE)
+				return ;
+			if (minirt->scene->objects[i].dir.x >= -1)
+			{
+				minirt->scene->objects[i].dir.x -= 0.01;
+				minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+			}
+		}
 	}
 	else if (keycode == PAV_RIGHT)
 	{
@@ -50,9 +72,15 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 		if (minirt->ui->move_mode == pos)
 			minirt->scene->objects[i].translation.matrix[0][3] += 0.1;
 		else if (minirt->ui->move_mode == dir)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_rotation_matrix(get_vec3(0.1, 0, 0)));
+		{
+			if (minirt->scene->objects[i].type == SPHERE)
+				return ;
+			if (minirt->scene->objects[i].dir.x <= 1)
+			{
+				minirt->scene->objects[i].dir.x += 0.01;
+				minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+			}
+		}
 	}
 	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
@@ -65,9 +93,15 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 		if (minirt->ui->move_mode == pos)
 			minirt->scene->objects[i].translation.matrix[2][3] += 0.1;
 		else if (minirt->ui->move_mode == dir)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_rotation_matrix(get_vec3(0, 0, 0.1)));
+		{
+			if (minirt->scene->objects[i].type == SPHERE)
+				return ;
+			if (minirt->scene->objects[i].dir.z <= 1)
+			{
+				minirt->scene->objects[i].dir.z += 0.01;
+				minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+			}
+		}
 	}
 	else if (keycode == PAV_BACK)
 	{
@@ -75,9 +109,15 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 		if (minirt->ui->move_mode == pos)
 			minirt->scene->objects[i].translation.matrix[2][3] -= 0.1;
 		else if (minirt->ui->move_mode == dir)
-			minirt->scene->objects[i].transform
-				= multiply_matrix(minirt->scene->objects[i].transform,
-					get_rotation_matrix(get_vec3(0, 0, -0.1)));
+		{
+			if (minirt->scene->objects[i].type == SPHERE)
+				return ;
+			if (minirt->scene->objects[i].dir.z >= -1)
+			{
+				minirt->scene->objects[i].dir.z -= 0.01;
+				minirt->scene->objects[i].rotation = get_rotation_matrix(convert_dir_to_euler(minirt->scene->objects[i].dir));
+			}
+		}
 	}
 	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }

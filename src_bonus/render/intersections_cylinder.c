@@ -90,6 +90,5 @@ int get_cylinder_inter(const t_object *object,
 		hits_added += store_cylinder_inter(&d, object, ray, list);
 	}
 	hits_added += intersect_caps(object, ray, list);
-
 	return (hits_added);
 }

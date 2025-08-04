@@ -13,6 +13,7 @@
 # include <fcntl.h>
 # include <assert.h>
 # include <unistd.h>
+# include <dirent.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -309,10 +310,12 @@ void		event_activate_cylinder_cap(t_minirt *minirt);
 void		generate_random_scene();
 void		gen_print_lights(FILE *file, t_rand *rand);
 void		gen_print_sphere(FILE *file);
-void		gen_print_plane(FILE *file, t_rand *rand);
+void		gen_print_plane(FILE *file, t_rand *rand, bool chaos);
 void		gen_print_cylinder_cones(FILE *file, char c);
 int			generate_random_int(int min, int max);
 double		generate_random_double(double min, double max);
+
+void		save_random_scene(t_minirt *minirt);
 
 
 /*                                 EXIT                                  */

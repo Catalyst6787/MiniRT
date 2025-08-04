@@ -14,7 +14,6 @@ t_vec3	convert_dir_to_euler(t_vec3 dir)
 	t_vec3	euler_angles;
 	double	len_xz;
 
-	dir = vec3_normalise(dir);
 	euler_angles.y = atan2(dir.x, dir.z);
 	len_xz = sqrt(dir.x * dir.x + dir.z * dir.z);
 	if (len_xz < EPSILON)

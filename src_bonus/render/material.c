@@ -21,6 +21,6 @@ t_material	get_default_material(t_vec3 color, t_scene *scene)
 	material.diffuse = 0.9;
 	material.specular = 0.9;
 	material.shininess = 200.0;
-	material.reflective = 0.3;
+	material.reflective = 0.6;
 	return (material);
 }
