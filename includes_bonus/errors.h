@@ -50,4 +50,7 @@
 
 # define TESTS_ERR "Error : Test(s) failed\n"
 
+# define NO_OBJ_DETAILS "Error : must define object data"
+# define WRONG_OBJ "Error : obj doesnt exist"
+
 #endif

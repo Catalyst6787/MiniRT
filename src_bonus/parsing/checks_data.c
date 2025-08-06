@@ -51,22 +51,7 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 
 	check_elements(minirt, scene);
 	i = -1;
-	while (++i < scene->nb_sphere)
-		if (!is_ok_color(scene->spheres[i]->color))
+	while (++i < scene->nb_objects)
+		if (!is_ok_color(scene->objects[i].material.color))
 			quit(minirt, WRONG_SPH_DATA);
-	i = -1;
-	while (++i < scene->nb_plane)
-		if (!is_ok_dir(scene->planes[i]->dir)
-			|| !is_ok_color(scene->planes[i]->color))
-			quit(minirt, WRONG_PLANE_DATA);
-	i = -1;
-	while (++i < scene->nb_cylinder)
-		if (!is_ok_dir(scene->cylinders[i]->dir)
-			|| !is_ok_color(scene->cylinders[i]->color))
-			quit(minirt, WRONG_CYL_DATA);
-	i = -1;
-	while (++i < scene->nb_cone)
-		if (!is_ok_dir(scene->cones[i]->dir)
-			|| !is_ok_color(scene->cones[i]->color))
-			quit(minirt, WRONG_CONE_DATA);
 }

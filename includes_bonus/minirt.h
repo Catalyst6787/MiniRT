@@ -155,14 +155,15 @@ int			parse_light(t_minirt *minirt,
 				t_scene *scene,
 				t_light *light,
 				int *cursor);
-int			parse_sphere(t_minirt *minirt,
-				t_scene *scene, t_sphere *sphere, int *cursor);
-int			parse_plane(t_minirt *minirt,
-				t_scene *scene, t_plane *plane, int *cursor);
-int			parse_cylinder(t_minirt *minirt,
-				t_scene *scene, t_cylinder *cylinder, int *cursor);
-int			parse_cone(t_minirt *minirt,
-				t_scene *scene, t_cone *cone, int *cursor);
+// int			parse_sphere(t_minirt *minirt,
+// 				t_scene *scene, t_sphere *sphere, int *cursor);
+// int			parse_plane(t_minirt *minirt,
+// 				t_scene *scene, t_plane *plane, int *cursor);
+// int			parse_cylinder(t_minirt *minirt,
+// 				t_scene *scene, t_cylinder *cylinder, int *cursor);
+// int			parse_cone(t_minirt *minirt,
+// 				t_scene *scene, t_cone *cone, int *cursor);
+int			parse_object(t_minirt *minirt, t_object *obj, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
@@ -280,7 +281,7 @@ int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
 char		*object_type_to_str(t_object *object, bool selected);
 t_vec3		convert_dir_to_euler(t_vec3 dir);
-
+t_vec3		ato_vec3(char *s, int *cursor);
 /*                                 EVENTS                                  */
 
 int			end_mlx_loop(t_mlx_data *mlx);

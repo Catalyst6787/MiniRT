@@ -68,38 +68,38 @@ void	create_object_from_cone(t_object *obj,
 	obj->id = id;
 }
 
-void	create_object_array(t_scene *scene)
-{
-	int	i;
-	int	j;
+// void	create_object_array(t_scene *scene)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	j = 0;
-	while (i < scene->nb_sphere && j < scene->nb_objects)
-	{
-		create_object_from_sphere(&scene->objects[j], scene->spheres[i], i);
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_plane && j < scene->nb_objects)
-	{
-		create_object_from_plane(&scene->objects[j], scene->planes[i], i);
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_cylinder && j < scene->nb_objects)
-	{
-		create_object_from_cylinder(&scene->objects[j], scene->cylinders[i], i);
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_cone && j < scene->nb_objects)
-	{
-		create_object_from_cone(&scene->objects[j], scene->cones[i], i);
-		i++;
-		j++;
-	}
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (i < scene->nb_sphere && j < scene->nb_objects)
+// 	{
+// 		create_object_from_sphere(&scene->objects[j], scene->spheres[i], i);
+// 		i++;
+// 		j++;
+// 	}
+// 	i = 0;
+// 	while (i < scene->nb_plane && j < scene->nb_objects)
+// 	{
+// 		create_object_from_plane(&scene->objects[j], scene->planes[i], i);
+// 		i++;
+// 		j++;
+// 	}
+// 	i = 0;
+// 	while (i < scene->nb_cylinder && j < scene->nb_objects)
+// 	{
+// 		create_object_from_cylinder(&scene->objects[j], scene->cylinders[i], i);
+// 		i++;
+// 		j++;
+// 	}
+// 	i = 0;
+// 	while (i < scene->nb_cone && j < scene->nb_objects)
+// 	{
+// 		create_object_from_cone(&scene->objects[j], scene->cones[i], i);
+// 		i++;
+// 		j++;
+// 	}
+// }

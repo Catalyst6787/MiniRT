@@ -1,4 +1,6 @@
+#include "libft.h"
 #include "minirt.h"
+#include "vec3.h"
 
 void	free_and_null(void	**ptr)
 {
@@ -35,4 +37,18 @@ int	get_min_int(int a, int b)
 	if (a <= b)
 		return (a);
 	return (b);
+}
+
+// return a vector (w = 0), set w to 1 for a point
+t_vec3	ato_vec3(char *s, int *cursor)
+{
+	t_vec3	v;
+
+	while (ft_isspace(s[*cursor]))
+		cursor++;
+	v.x = ato_buffer(s, cursor, ',');
+	v.y = ato_buffer(s, cursor, ',');
+	v.z = ato_buffer(s, cursor, ',');
+	v.w = 0;
+	return(v);
 }

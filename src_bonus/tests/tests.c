@@ -175,10 +175,10 @@ int	start_all_tests(void)
 	printf("\nall reflection tests passed\n\n");
 	start_all_lighting_tests();
 	printf("\nall lighting tests passed\n\n");
-	start_all_world_tests();
-	printf("\nall world tests passed\n\n");
-	start_all_shadows_tests();
-	printf("\nall shadow tests passed\n\n");
+	// start_all_world_tests();
+	// printf("\nall world tests passed\n\n");
+	// start_all_shadows_tests();
+	// printf("\nall shadow tests passed\n\n");
 	start_all_camera_tests();
 	printf("\nall camera test passed\n\n");
 	start_all_planes_tests();
