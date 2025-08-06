@@ -2,21 +2,11 @@
 
 static void	handle_arrows_mac_linux(int keycode, t_minirt *minirt)
 {
-	#ifdef __linux__
 	if ((65360.5 <= keycode && keycode <= 65364))
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
-	#endif
-	#ifdef __APPLE__
-	if ((123 <= keycode && keycode <= 126)
-		|| keycode == 24 || keycode == 27)
-	{
-		minirt->render->pixel_size = PIXEL_SIZE_MULT;
-		arrows_handle(keycode, minirt);
-	}
-	#endif
 }
 
 static void	handle_extra(int keycode, t_minirt *minirt)
@@ -27,10 +17,7 @@ static void	handle_extra(int keycode, t_minirt *minirt)
 	else if (keycode == P && minirt->scene->nb_sphere)
 		event_sphere_shearing(minirt);
 	else if (keycode == L && minirt->scene->nb_cylinder)
-	{
-		printf("[L] pressed\n");
 		event_turn_cylinders(minirt);
-	}
 	else if (keycode == V)
 		event_activate_cylinder_cap(minirt);
 	else if (keycode == B)
@@ -43,8 +30,10 @@ static void	handle_extra(int keycode, t_minirt *minirt)
 		save_random_scene(minirt);
 	else if (keycode == SPACE)
 		event_render(minirt);
+	else if (keycode == 91 || keycode == 93)
+		event_reflections(minirt, keycode);
 	else
-		ft_printf("unknow action: %d\n", keycode);
+		ft_printf("Keycode: %d\n", keycode);
 }
 
 int	handle_keypress(int keycode, t_minirt *minirt)

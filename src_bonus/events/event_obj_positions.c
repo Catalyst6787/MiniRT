@@ -6,7 +6,7 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 	printf("Objects : %d\n", minirt->scene->nb_objects);
 	if (minirt->ui->move_mode == pos)
 	{
-		if (minirt->scene->nb_objects == minirt->ui->selected_object)
+		if (minirt->scene->nb_objects + minirt->scene->nb_light  == minirt->ui->selected_object)
 		{
 			if (minirt->scene->ambient->brightness <= 0.9)
 			{

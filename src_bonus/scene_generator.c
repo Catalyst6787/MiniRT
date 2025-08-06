@@ -78,7 +78,7 @@ void	generate_random_scene()
 		if (obj_type == 0)
 			gen_print_sphere(file);
 		else if (obj_type == 1 && !rand.is_plane)
-			gen_print_plane(file, &rand, true);
+			gen_print_plane(file, &rand, false);
 		else if (obj_type == 2)
 			gen_print_cylinder_cones(file, 'y');
 		else if (obj_type == 3)

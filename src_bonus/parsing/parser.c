@@ -42,7 +42,7 @@ void	test_light_sum(t_scene *scene)
 		i++;
 	}
 	if (tot > 1)
-		printf("%sWarning, sum of lights > 1!%s", RED, CRESET);
+		printf("%sWarning, sum of lights > 1!\n%s", RED, CRESET);
 }
 
 void	parse_scene(t_minirt *minirt)

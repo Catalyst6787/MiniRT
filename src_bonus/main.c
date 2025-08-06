@@ -14,6 +14,7 @@ void	init_render(t_render *render)
 {
 	render->camera_center.w = 1;
 	render->pixel_size = PIXEL_SIZE_MULT;
+	render->max_depth = REFLECTION_MAX_DEPTH;
 }
 
 void	init_minirt(t_minirt *minirt,

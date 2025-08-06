@@ -52,6 +52,7 @@ typedef struct s_render
 	int				pixel_size;
 	int				debug_x;
 	int				debug_y;
+	unsigned int	max_depth;
 }					t_render;
 
 typedef struct s_cylinder_inter

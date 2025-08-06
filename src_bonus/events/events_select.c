@@ -25,16 +25,16 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 	if (keycode == PAV_MINUS)
 	{
 		if (minirt->ui->selected_object == 0)
-			minirt->ui->selected_object = scene->nb_objects;
+			minirt->ui->selected_object = scene->nb_objects + scene->nb_light - 1;
 		else if (minirt->ui->selected_object > 0)
 			minirt->ui->selected_object--;
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_PLUS)
 	{
-		if (minirt->ui->selected_object < scene->nb_objects)
+		if (minirt->ui->selected_object < scene->nb_objects + scene->nb_light)
 			minirt->ui->selected_object++;
-		else if (minirt->ui->selected_object == scene->nb_objects)
+		else if (minirt->ui->selected_object == scene->nb_objects + scene->nb_light - 1)
 			minirt->ui->selected_object = 0;
 		set_selected_object_str(minirt, scene);
 	}

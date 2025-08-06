@@ -1,11 +1,37 @@
 #include "minirt.h"
 
+void	event_reflections(t_minirt *minirt, int keycode)
+{
+	if (keycode == 91)
+	{
+		if (minirt->render->max_depth > 0)
+		{
+			minirt->render->pixel_size = PIXEL_SIZE_MULT;
+			minirt->render->max_depth --;
+			printf("Max depth --\n");
+			start_render(minirt);
+		}
+	}
+	if (keycode == 93)
+	{
+		if (minirt->render->max_depth < 20)
+		{
+			minirt->render->pixel_size = PIXEL_SIZE_MULT;
+			minirt->render->max_depth ++;
+			printf("Max depth ++\n");
+			start_render(minirt);
+		}
+	}	
+
+}
+
+
 void	event_light_pos(t_minirt *minirt, int keycode)
 {
 	printf("rework light pos to move multiple lights with select like for object\n");
 	(void)minirt;
 	(void)keycode;
-	// minirt->render->pixel_size = PIXEL_SIZE_MULT;
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (!minirt->scene->nb_light)
 		return ;
 	if (keycode == U)

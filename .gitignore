@@ -48,3 +48,6 @@ log/debug.csv
 compile_commands.json
 
 shell.nix
+
+ekho*
+sound_vizualizer.c

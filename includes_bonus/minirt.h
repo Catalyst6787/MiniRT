@@ -14,6 +14,7 @@
 # include <assert.h>
 # include <unistd.h>
 # include <dirent.h>
+#include <sys/time.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -278,7 +279,7 @@ void		print_err(char *file, int line, char *s);
 int			get_max_int(int a, int b);
 int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
-char		*object_type_to_str(t_object *object, bool selected);
+char		*object_type_to_str(t_object *object);
 t_vec3		convert_dir_to_euler(t_vec3 dir);
 
 /*                                 EVENTS                                  */
@@ -294,6 +295,7 @@ void		print_camera_data(t_minirt *minirt);
 void		event_turn_cylinders(t_minirt *minirt);
 void		event_sphere_shearing(t_minirt *minirt);
 void		event_light_pos(t_minirt *minirt, int keycode);
+void		event_reflections(t_minirt *minirt, int keycode);
 void		arrows_handle(int keycode, t_minirt *minirt);
 int			asdw_handle(int keycode, t_minirt *minirt);
 void		erzx_handle(int keycode, t_minirt *minirt);
