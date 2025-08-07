@@ -71,6 +71,8 @@ void	free_ui(t_ui *ui)
 {
 	if (ui->str_selected_object)
 		free(ui->str_selected_object);
+	if (ui->str_mode)
+		free(ui->str_mode);
 }
 
 int	quit(t_minirt *minirt, char *str)

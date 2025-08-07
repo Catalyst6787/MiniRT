@@ -1,8 +1,11 @@
 #include "minirt.h"
 
-void	init_ui(t_ui *ui)
+void	init_ui(t_minirt *minirt, t_ui *ui)
 {
 	ui->str_selected_object = NULL;
+	ui->str_mode = ft_strdup("Mode : position");
+	if (!ui->str_mode)
+		quit(minirt, MALLOC_ERR);
 	ui->selected_object = 0;
 	ui->command_help = 1;
 	ui->move_mode = pos;
@@ -53,12 +56,13 @@ int	main(int ac, char **av)
 	if (!minirt.scene->filename)
 		quit(&minirt, MALLOC_ERR);
 	minirt.ui = &ui;
-	init_ui(minirt.ui);
+	init_ui(&minirt, minirt.ui);
 	// if (start_all_tests())
 	// 	quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	start_render(&minirt);
+	printf("%sInitial scene rendered!%s\n\n", GREEN, CRESET);
 	mlx_loop(mlx.mlx);
 	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");

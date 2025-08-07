@@ -73,7 +73,8 @@ typedef enum e_move_mode
 {
 	dir,
 	pos,
-	size
+	size,
+	color
 }				t_move_mode;
 
 typedef struct s_parsing_helper
@@ -102,6 +103,7 @@ typedef struct s_ui
 	t_move_mode	move_mode;
 	int			selected_object;
 	char		*str_selected_object;
+	char		*str_mode;
 	bool		command_help;
 }				t_ui;
 
@@ -126,15 +128,11 @@ typedef struct s_rand {
 typedef struct s_thread_data
 {
 	int				id;
-	int				start;
-	int				end;
 	pthread_t		thread;
 	t_minirt		*minirt;
 	t_inter_list inter_list;
 	t_inter_list shadow_list;
 }				t_thread_data;
-
-
 
 /*                                 INIT                                  */
 

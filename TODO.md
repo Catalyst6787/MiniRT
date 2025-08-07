@@ -3,13 +3,13 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] problem with cone normals
 - [ ] do light events
-
+- [ ] add colour to pav mode ?
+- [ ] norminette
+- [ ] project finished!
 
 - [ ] euler ?
 - [ ] fix a little problem in the tests (commented for now)
-- [ ] if he time allow it, be able to move light (event)
 
 ### optional
 
@@ -19,6 +19,8 @@ Simple C ray tracer.
 - [ ] display % of the scene calculated
 
 
+- [X] add pav mode str
+- [X] problem with cone normals
 - [X] parsing problem if more than one zero after the coma (try also with 2 dots)
 - [X] vec3_basic op use pointers (actually a mess because of the functions calls as parameters)
 - [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210
