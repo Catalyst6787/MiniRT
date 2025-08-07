@@ -149,9 +149,7 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 	minirt->scene->objects[i].transform = get_object_transformation(&minirt->scene->objects[i]);
 }
 
-// Maybe to make this work, the rotation matrix
-// must be placed before the scaling matrix
-void	event_obj_pos(t_minirt *minirt, int keycode)
+void	event_object_position(t_minirt *minirt, int keycode)
 {
 	int	i;
 

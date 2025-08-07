@@ -41,15 +41,16 @@ void	test_light_sum(t_scene *scene)
 		tot += scene->lights[i]->brightness;
 		i++;
 	}
-	if (tot > 1)
-		printf("%sWarning, sum of lights > 1!\n%s", RED, CRESET);
+	if (tot > 1.0)
+		printf("%sWarning, sum of lights > 1!%s\n", RED, CRESET);
 }
 
 void	parse_scene(t_minirt *minirt)
 {
 	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
-	if (!ft_strncmp(minirt->scene->filename, "scenes/random_generation.rt", 21))
+	if (!ft_strncmp(minirt->scene->filename,
+			"scenes/random_generation.rt", 21))
 		generate_random_scene();
 	check_file_name(minirt);
 	set_scene_buffer(minirt);
@@ -69,6 +70,4 @@ void	parse_scene(t_minirt *minirt)
 	set_selected_object_str(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);
 	test_light_sum(minirt->scene);
-	// free(minirt->scene->buffer);
-	// minirt->scene->buffer = NULL;
 }

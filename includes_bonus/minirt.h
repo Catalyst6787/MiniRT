@@ -125,6 +125,7 @@ typedef struct s_rand {
 
 typedef struct s_thread_data
 {
+	int				id;
 	int				start;
 	int				end;
 	pthread_t		thread;
@@ -199,7 +200,6 @@ void		create_object_from_cylinder(t_object *object,
 				t_cylinder *cylinder, int id);
 void		create_object_from_cone(t_object *object,
 				t_cone *cone, int id);
-
 
 	
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
@@ -302,8 +302,8 @@ void		erzx_handle(int keycode, t_minirt *minirt);
 
 void		event_object_selection(t_minirt *minirt,
 				t_scene *scene, int keycode);
-void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
-void		event_obj_pos(t_minirt *minirt, int keycode);
+int			set_selected_object_str(t_minirt *minirt, t_scene *scene);
+void		event_object_position(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
 
 /*                              GENERATOR                                */
@@ -317,7 +317,6 @@ int			generate_random_int(int min, int max);
 double		generate_random_double(double min, double max);
 
 void		save_random_scene(t_minirt *minirt);
-
 
 /*                                 EXIT                                  */
 
@@ -357,13 +356,15 @@ void		print_inter_list(t_inter_list *list);
 double		double_abs(double d);
 int			double_isequal(double a, double b);
 
-///				Transformation
+/*                                TRANSFORMATIONS                          */
+
 void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
 void		set_cone_tranformation(t_cone *co);
 
 // sort intersections
+
 void		sort_inter(t_inter_list *inter_lst);
 t_inter		*get_hit(t_inter_list *lst);
 t_ray		get_origin_direction(t_camera camera, t_vec3 pixel);
@@ -372,10 +373,12 @@ t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
 
 // reflections
+
 t_vec3		reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth);
 t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
 
 //// TESTS
+
 int			start_all_tests(void);
 int			test_tuple_point(void);
 int			test_tuple_vector(void);

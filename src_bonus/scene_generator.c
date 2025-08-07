@@ -1,11 +1,5 @@
 #include "minirt.h"
 
-
-void initialize_random_seed()
-{
-	srand(time(NULL));
-}
-
 int	generate_random_int(int min, int max)
 {
 	 return (rand() % (max - min + 1)) + min;
@@ -49,6 +43,7 @@ void	fill_lights_ratio(t_rand *rand)
 	int	i;
 
 	i = 0;
+	rand->nb_lights = generate_random_int(2, 4);
 	while (i < rand->nb_lights)
 	{
 		rand->lights_ratio[i] = generate_random_double(0.1, 1);
@@ -56,7 +51,6 @@ void	fill_lights_ratio(t_rand *rand)
 	}
 	normalize_lights(rand);
 }
-
 
 void	generate_random_scene()
 {
@@ -66,9 +60,8 @@ void	generate_random_scene()
 	
 	file = fopen("scenes/random_generation.rt", "w");
 	fprintf(file, "C	0,0,-10 0,0,1 70\n");
-	initialize_random_seed();
-	rand.nb_lights = generate_random_int(2, 4);
-	rand.nb_obj = generate_random_int(3, 15);
+	srand(time(NULL));
+	rand.nb_obj = generate_random_int(3, 12);
 	rand.is_plane = 0;
 	fill_lights_ratio(&rand);
 	gen_print_lights(file, &rand);

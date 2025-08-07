@@ -68,11 +68,3 @@ void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 		quit(minirt, PIXEL_PUT_ERR);
 }
 
-void	free_tab(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr && arr[i])
-		free(arr[i++]);
-}

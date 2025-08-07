@@ -8,9 +8,17 @@ int	end_mlx_loop(t_mlx_data *mlx)
 
 void	event_render(t_minirt *minirt)
 {
+	struct timeval	start_time;
+	struct timeval	end_time; 
+
 	ft_printf("Spacebar pressed : render asked!\n");
 	minirt->render->pixel_size = 1;
+	gettimeofday(&start_time, NULL);
 	start_render(minirt);
+	gettimeofday(&end_time, NULL);
+	printf("Scene rendered in %f seconds\n",
+		(end_time.tv_sec - start_time.tv_sec) +
+		(end_time.tv_usec - start_time.tv_usec) / 1e6);
 }
 
 void	event_display_command_help(t_minirt *minirt)
@@ -42,42 +50,4 @@ void	event_change_string_color(t_minirt *minirt)
 		minirt->ui->color_id = 0;
 	}
 	start_render(minirt);
-}
-
-void	set_selected_object_str(t_minirt *minirt, t_scene *scene)
-{
-	char	*tmp;
-	char	*nb;
-	
-	if (minirt->ui->selected_object == scene->nb_objects + scene->nb_light)
-	{
-		minirt->ui->str_selected_object = ft_strdup("Selected : ambiant");
-		if (!minirt->ui->str_selected_object)
-			quit(minirt, MALLOC_ERR);
-		return ;
-	}
-	if (minirt->ui->selected_object >= scene->nb_objects)
-	{
-		tmp = ft_strdup("Selected : light ");
-		nb = ft_itoa(minirt->ui->selected_object - scene->nb_objects);
-	}
-	else if (minirt->ui->selected_object < scene->nb_objects)
-	{
-		tmp = object_type_to_str(&scene->objects[minirt->ui->selected_object]);
-		nb = ft_itoa(scene->objects[minirt->ui->selected_object].id);
-	}
-	if (!tmp)
-			quit(minirt, MALLOC_ERR);
-	if (!nb)
-	{
-		free(tmp);
-		quit(minirt, MALLOC_ERR);
-	}
-	minirt->ui->str_selected_object = ft_strjoin(tmp, nb);
-	free(tmp);
-	free(nb);
-	if (!minirt->ui->str_selected_object)
-		quit(minirt, MALLOC_ERR);
-	tmp = NULL;
-	nb = NULL;
 }

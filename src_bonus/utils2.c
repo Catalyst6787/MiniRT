@@ -1,10 +1,6 @@
 #include "minirt.h"
 
-void	free_and_null(void	**ptr)
-{
-	free(*ptr);
-	ptr = NULL;
-}
+
 
 void	print_err(char *file, int line, char *s)
 {

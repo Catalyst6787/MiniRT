@@ -36,12 +36,9 @@ int	start_threads(t_minirt *minirt)
 	t_thread_data	thread[NB_THREADS];
 	int				i;
 	int				count;
-	struct timeval	start_time;
-	struct timeval	end_time; 
 
 	i = 0;
 	count = 0;
-	gettimeofday(&start_time, NULL);
 	while (i < NB_THREADS)
 	{
 		start_thread(minirt, thread, i, &count);
@@ -53,10 +50,6 @@ int	start_threads(t_minirt *minirt)
 		pthread_join(thread[i].thread, NULL);
 		i++;
 	}
-	gettimeofday(&end_time, NULL);
 	th_display_image(minirt);
-	printf("Scene rendered in %f seconds using multithreading\n",
-			(end_time.tv_sec - start_time.tv_sec) +
-			(end_time.tv_usec - start_time.tv_usec) / 1e6);
 	return (0);
 }

@@ -71,7 +71,6 @@ void	*th_render_scene(void *th_arg)
 	t_thread_data	*th;
 
 	th = (t_thread_data *)th_arg;
-	// th_fill_intersection_table(th->minirt, &th->inter_list, &th->shadow_list);
 	th->inter_list.inters = malloc(sizeof(t_inter) * count_intersections(th->minirt->scene) + 1);
 	th->inter_list.capacity = count_intersections(th->minirt->scene);
 	th->shadow_list.inters = malloc(sizeof(t_inter) * count_intersections(th->minirt->scene) + 1);

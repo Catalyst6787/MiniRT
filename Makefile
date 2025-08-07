@@ -31,7 +31,7 @@ SRC =	main.c \
 		fill_intersection_table.c \
 		debug.c \
 		double_utils.c \
-		events.c events_camera_light.c event_obj_positions.c events_fun.c events_keys.c events_select.c \
+		events.c events_camera.c events_object_positions.c events_fun.c events_keys.c events_object_selection.c \
 		print_data.c print_more_data.c \
 		exit.c exit2.c \
 		get_debug_fd.c \
