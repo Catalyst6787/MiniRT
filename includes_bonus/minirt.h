@@ -71,10 +71,12 @@ typedef struct s_img_data
 
 typedef enum e_move_mode
 {
-	dir,
 	pos,
+	dir,
 	size,
-	color
+	red,
+	green,
+	blue
 }				t_move_mode;
 
 typedef struct s_parsing_helper

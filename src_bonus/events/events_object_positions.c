@@ -16,7 +16,10 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 			}
 			return ;
 		}
-		minirt->scene->objects[i].translation.matrix[1][3] += 0.1;
+		else if (minirt->ui->selected_object < minirt->scene->nb_objects)
+			minirt->scene->objects[i].translation.matrix[1][3] += 0.1;
+		else
+			minirt->scene->lights[minirt->ui->selected_object - minirt->scene->nb_objects]->pos.y ++;
 	}
 	else if (minirt->ui->move_mode == dir)
 	{

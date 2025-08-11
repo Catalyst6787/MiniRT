@@ -51,24 +51,24 @@ static void	switch_pav_mode(t_minirt *minirt)
 {
 	if (minirt->ui->str_mode)
 		free_and_null((void**)&minirt->ui->str_mode);
-	if (minirt->ui->move_mode == pos)
-	{
-		minirt->ui->move_mode = dir;
+	if (minirt->ui->move_mode == 5)
+		minirt->ui->move_mode = 0;
+	else
+		minirt->ui->move_mode ++;
+	if (minirt->ui->move_mode == dir)
 		minirt->ui->str_mode = ft_strdup("Mode : direction");
-	}
-	else if (minirt->ui->move_mode == dir)
-	{
-		minirt->ui->move_mode = size;
-		minirt->ui->str_mode = ft_strdup("Mode : size");
-	}
-	else if (minirt->ui->move_mode == size)
-	{
-		minirt->ui->move_mode = pos;
+	else if (minirt->ui->move_mode == pos)
 		minirt->ui->str_mode = ft_strdup("Mode : position");
-	}
+	else if (minirt->ui->move_mode == size)
+		minirt->ui->str_mode = ft_strdup("Mode : size");
+	else if (minirt->ui->move_mode == red)
+		minirt->ui->str_mode = ft_strdup("Mode : red");
+	else if (minirt->ui->move_mode == green)
+		minirt->ui->str_mode = ft_strdup("Mode : green");
+	else if (minirt->ui->move_mode == blue)
+		minirt->ui->str_mode = ft_strdup("Mode : blue");
 	if (!minirt->ui->str_mode)
 		quit(minirt, MALLOC_ERR);
-
 }
 
 void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
