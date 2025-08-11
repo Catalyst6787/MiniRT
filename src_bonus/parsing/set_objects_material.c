@@ -9,6 +9,7 @@ void	set_object_ambient_light(t_scene *scene)
 	while (i < scene->nb_objects)
 	{
 		scene->objects[i].material.ambient = scene->ambient->brightness;
+		scene->objects[i].material.ambient_color = scene->ambient->color;
 		i++;
 	}
 }

@@ -318,7 +318,8 @@ void		event_activate_cylinder_cap(t_minirt *minirt);
 
 void		change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i);
 void		change_element_direction(t_minirt *minirt, t_ui *ui, int keycode, int i);
-void		change_element_size(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_size(t_scene *scene, int keycode, int i);
+void		change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i);
 
 /*                              GENERATOR                                */
 
