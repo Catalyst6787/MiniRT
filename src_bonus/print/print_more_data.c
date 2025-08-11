@@ -42,7 +42,7 @@ void	print_light_data(t_minirt *minirt)
 			minirt->scene->lights[i]->color.r,
 			minirt->scene->lights[i]->color.g,
 			minirt->scene->lights[i]->color.b);
-		printf("	brightness: %f\n", minirt->scene->lights[i]->brightness);
+		printf("	brightness: %f\n\n", minirt->scene->lights[i]->brightness);
 	}
 }
 

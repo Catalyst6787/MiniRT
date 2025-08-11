@@ -67,7 +67,7 @@ void	parse_scene(t_minirt *minirt)
 	print_scene_ok_message(minirt->scene->filename);
 	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);
-	set_selected_object_str(minirt, minirt->scene);
+	set_selected_object_data(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);
 	test_light_sum(minirt->scene);
 }

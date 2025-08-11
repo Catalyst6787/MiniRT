@@ -1,5 +1,18 @@
 #include "minirt.h"
 
+// Used for events
+void	set_object_ambient_light(t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < scene->nb_objects)
+	{
+		scene->objects[i].material.ambient = scene->ambient->brightness;
+		i++;
+	}
+}
+
 void	set_objects_material(t_scene *scene)
 {
 	int	i;

@@ -3,7 +3,11 @@ Simple C ray tracer.
 
 ### basic
 
-- [ ] do light events
+- [ ] dev.sh 1 : problem when size of the sphere is too big and render (free() : invalid size)
+
+- [ ] Handle light brightness pavnum
+- [ ] Handle cyl/con height and radius pavnum
+- [X] do light events
 - [ ] add colour to pav mode ?
 - [ ] norminette
 - [ ] project finished!

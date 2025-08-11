@@ -39,7 +39,7 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		|| keycode == PAV_MIDDLE)
 		event_object_selection(minirt, minirt->scene, keycode);
 	else if (PAV_LEFT <= keycode && keycode <= PAV_BACK)
-		event_object_position(minirt, keycode);
+		event_handle_pavnum(minirt, keycode);
 	else if (keycode == L_BRACKET || keycode == R_BRACKET)
 		event_reflections(minirt, keycode);
 	else

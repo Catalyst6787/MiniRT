@@ -7,6 +7,7 @@ void	init_ui(t_minirt *minirt, t_ui *ui)
 	if (!ui->str_mode)
 		quit(minirt, MALLOC_ERR);
 	ui->selected_object = 0;
+	ui->selected_type = OBJ;
 	ui->command_help = 1;
 	ui->move_mode = pos;
 	ui->color_id = 0;

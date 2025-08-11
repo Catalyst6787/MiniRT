@@ -79,6 +79,14 @@ typedef enum e_move_mode
 	blue
 }				t_move_mode;
 
+typedef enum e_selected
+{
+	OBJ,
+	LIGHT,
+	AMB
+}				t_selected;
+
+
 typedef struct s_parsing_helper
 {
 	int			l;
@@ -104,6 +112,7 @@ typedef struct s_ui
 	t_vec3		string_color;
 	t_move_mode	move_mode;
 	int			selected_object;
+	t_selected	selected_type;
 	char		*str_selected_object;
 	char		*str_mode;
 	bool		command_help;
@@ -168,6 +177,7 @@ int			parse_cone(t_minirt *minirt,
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
+void		set_object_ambient_light(t_scene *scene);
 
 int			count_comas(char *buffer, int i);
 int			count_spaces_in_line(char *buffer, int i);
@@ -302,9 +312,13 @@ void		erzx_handle(int keycode, t_minirt *minirt);
 
 void		event_object_selection(t_minirt *minirt,
 				t_scene *scene, int keycode);
-int			set_selected_object_str(t_minirt *minirt, t_scene *scene);
-void		event_object_position(t_minirt *minirt, int keycode);
+int			set_selected_object_data(t_minirt *minirt, t_scene *scene);
+void		event_handle_pavnum(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
+
+void		change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_direction(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_size(t_minirt *minirt, t_ui *ui, int keycode, int i);
 
 /*                              GENERATOR                                */
 

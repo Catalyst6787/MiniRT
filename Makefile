@@ -66,6 +66,7 @@ BONUS_SRC =	$(SRC) \
 			threads.c \
 			th_render.c th_shadow.c \
 			scene_generator.c scene_generator_print.c \
+			events_change_color.c events_change_direction.c events_change_position.c events_change_size.c \
 			tests.c tests_color.c tests_matrices.c tests_rays.c \
 			test_intersections.c test_normals.c test_reflections.c \
 			test_lighting.c test_world.c test_shadows.c test_camera.c \

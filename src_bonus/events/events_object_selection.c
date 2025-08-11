@@ -29,7 +29,7 @@ void	select_objects(t_minirt *minirt, t_scene *scene, char **tmp, char **nb)
 	}
 }
 
-int	set_selected_object_str(t_minirt *minirt, t_scene *scene)
+int	set_selected_object_data(t_minirt *minirt, t_scene *scene)
 {
 	char	*tmp;
 	char	*nb;
@@ -37,13 +37,20 @@ int	set_selected_object_str(t_minirt *minirt, t_scene *scene)
 	if (minirt->ui->str_selected_object)
 		free_and_null((void**)&minirt->ui->str_selected_object);
 	if (minirt->ui->selected_object == scene->nb_objects + scene->nb_light)
+	{
+		minirt->ui->selected_type = AMB;
 		return (select_ambient(minirt));
+	}
 	select_objects(minirt, minirt->scene, &tmp, &nb);
 	minirt->ui->str_selected_object = ft_strjoin(tmp, nb);
 	free(tmp);
 	free(nb);
 	if (!minirt->ui->str_selected_object)
 		quit(minirt, MALLOC_ERR);
+	if (minirt->ui->selected_object < scene->nb_objects)
+		minirt->ui->selected_type = OBJ;
+	else
+		minirt->ui->selected_type = LIGHT;
 	return (0);
 }
 
@@ -80,8 +87,7 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 			minirt->ui->selected_object = scene->nb_objects + scene->nb_light;
 		else if (minirt->ui->selected_object > 0)
 			minirt->ui->selected_object--;
-		printf("Selected : %d\n", minirt->ui->selected_object);
-		set_selected_object_str(minirt, scene);
+		set_selected_object_data(minirt, scene);
 	}
 	else if (keycode == PAV_PLUS)
 	{
@@ -89,10 +95,10 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 			minirt->ui->selected_object++;
 		else
 			minirt->ui->selected_object = 0;
-		printf("Selected : %d\n", minirt->ui->selected_object);
-		set_selected_object_str(minirt, scene);
+		set_selected_object_data(minirt, scene);
 	}
 	else if (keycode == PAV_MIDDLE)
 		switch_pav_mode(minirt);
+	printf("Selected : %d (type %d)\n", minirt->ui->selected_object, minirt->ui->selected_type);
 	start_render(minirt);
 }
