@@ -109,13 +109,12 @@ void	set_scene_buffer(t_minirt *minirt)
 {
 	int		fd;
 
-	if (open (minirt->scene->filename, __O_DIRECTORY) != -1)
-		quit(minirt, DIRECTORY_ERR);
 	fd = open(minirt->scene->filename, O_RDONLY);
-	perror("fd");
 	if (fd < 0)
 		quit(minirt, FILE_OPEN_ERR);
 	get_file_contents(fd, &minirt->scene->buffer);
+	if (errno == 21)
+		quit(minirt, DIRECTORY_ERR);
 	filter_buffer(minirt);
 	if (close(fd) == -1)
 		quit(minirt, CLOSING_FILE_ERR);

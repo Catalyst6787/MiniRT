@@ -1,5 +1,24 @@
 #include "minirt.h"
 
+void	init_thread(t_minirt *minirt, t_thread_data *th, int i)
+{
+	th->id = i;
+	th->minirt = minirt;
+	th->inter_list.inters = malloc(sizeof(t_inter)
+			* count_intersections(th->minirt->scene) + 1);
+	th->inter_list.capacity = count_intersections(th->minirt->scene);
+	th->shadow_list.inters = malloc(sizeof(t_inter)
+			* count_intersections(th->minirt->scene) + 1);
+	th->shadow_list.capacity = count_intersections(th->minirt->scene);
+	th->inter_list.count = 0;
+	th->shadow_list.count = 0;
+	if (!th->inter_list.inters || !th->shadow_list.inters)
+		quit(th->minirt, MALLOC_ERR);
+	ft_memset(th->inter_list.inters, 0, sizeof(t_inter)
+		* count_intersections(th->minirt->scene));
+	ft_memset(th->shadow_list.inters, 0, sizeof(t_inter)
+		* count_intersections(th->minirt->scene));
+}
 
 int	start_threads(t_minirt *minirt)
 {
@@ -9,9 +28,14 @@ int	start_threads(t_minirt *minirt)
 	i = 0;
 	while (i < NB_THREADS)
 	{
-		thread[i].id = i;
-		thread[i].minirt = minirt;
-		if (pthread_create(&thread[i].thread, NULL, th_render_scene, &thread[i]) == -1)
+		init_thread(minirt, &thread[i], i);
+		i++;
+	}
+	i = 0;
+	while (i < NB_THREADS)
+	{
+		if (pthread_create(&thread[i].thread, NULL, th_render_scene,
+				&thread[i]) == -1)
 			quit(minirt, TH_ERR);
 		i++;
 	}

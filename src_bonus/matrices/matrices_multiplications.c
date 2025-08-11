@@ -26,7 +26,8 @@ t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 	i = 0;
 	j = 0;
 	if (!(m1.col == m2.row))
-		return (print_err(__FILE__, LINE, "matrices have different col and rows"),
+		return (print_err(__FILE__, LINE,
+				"matrices have different col and rows"),
 			get_matrix(4, 4, 0));
 	res = get_matrix(m1.row, m2.col, 0);
 	while (i < res.row)
