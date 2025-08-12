@@ -10,7 +10,8 @@ void	print_ray(t_ray *r)
 {
 	printf("Ray Origin : (%.4f, %.4f, %.4f)\n",
 		r->origin.x, r->origin.y, r->origin.z);
-	printf("Ray Direction : (%.4f, %.4f, %.4f)\n", r->dir.x, r->dir.y, r->dir.z);
+	printf("Ray Direction : (%.4f, %.4f, %.4f)\n",
+		r->dir.x, r->dir.y, r->dir.z);
 }
 
 void	print_camera_data(t_minirt *minirt)

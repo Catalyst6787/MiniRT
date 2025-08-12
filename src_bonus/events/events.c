@@ -9,7 +9,7 @@ int	end_mlx_loop(t_mlx_data *mlx)
 void	event_render(t_minirt *minirt)
 {
 	struct timeval	start_time;
-	struct timeval	end_time; 
+	struct timeval	end_time;
 
 	ft_printf("Spacebar pressed : render asked!\n");
 	minirt->render->pixel_size = 1;
@@ -17,8 +17,8 @@ void	event_render(t_minirt *minirt)
 	start_render(minirt);
 	gettimeofday(&end_time, NULL);
 	printf("Scene rendered in %f seconds\n",
-		(end_time.tv_sec - start_time.tv_sec) +
-		(end_time.tv_usec - start_time.tv_usec) / 1e6);
+		(end_time.tv_sec - start_time.tv_sec)
+		+ (end_time.tv_usec - start_time.tv_usec) / 1e6);
 }
 
 void	event_display_command_help(t_minirt *minirt)

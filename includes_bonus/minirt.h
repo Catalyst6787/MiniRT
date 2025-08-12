@@ -54,7 +54,7 @@
 # define MULTI_THREADING 1
 # define GENERATE_SCENE 0
 
-# define REFLECTION_MAX_DEPTH 10
+# define REFLECTION_MAX_DEPTH 5
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 #  define M_PI_2 1.57079632679489661923
@@ -351,7 +351,6 @@ void		debug_print_inter_list(t_inter_list *list);
 void		debug_print_vec(t_vec3 *v, char *name);
 void		debug_print_matrice(t_matrix m, char *matrix_type);
 
-void		print_inter(t_inter *inter);
 void		print_scene(t_minirt *minirt, bool asterix);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);

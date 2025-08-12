@@ -22,7 +22,8 @@
 		"object.h": "c",
 		"limits": "c",
 		"cylinder.h": "c",
-		"types.h": "c"
+		"types.h": "c",
+		"sphere.h": "c"
 	},
 	"C_Cpp.default.compilerPath": "/usr/bin/clang"
 }

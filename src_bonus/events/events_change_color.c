@@ -25,7 +25,7 @@ static void	handle_object(t_object *object, t_move_mode color, int keycode)
 	}
 }
 
-static void	handle_lights(t_light *light, t_move_mode color, int keycode)
+static void	handle_lights(t_light *light, t_move_mode color, int keycode, int i)
 {
 	if (color == red)
 	{
@@ -33,6 +33,7 @@ static void	handle_lights(t_light *light, t_move_mode color, int keycode)
 			light->color.r += 0.02;
 		else if (keycode == PAV_DOWN && light->color.r > 0.02)
 			light->color.r -= 0.02;
+		printf("Light[%d] r : %.2f\n", i, light->color.r);
 	}
 	else if (color == green)
 	{
@@ -40,6 +41,7 @@ static void	handle_lights(t_light *light, t_move_mode color, int keycode)
 			light->color.g += 0.02;
 		else if (keycode == PAV_DOWN && light->color.g > 0.02)
 			light->color.g -= 0.02;
+		printf("Light[%d] g : %.2f\n", i, light->color.g);
 	}
 	else if (color == blue)
 	{
@@ -47,10 +49,14 @@ static void	handle_lights(t_light *light, t_move_mode color, int keycode)
 			light->color.b += 0.02;
 		else if (keycode == PAV_DOWN && light->color.b > 0.02)
 			light->color.b -= 0.02;
+		printf("Light[%d] b : %.2f\n", i, light->color.b);
 	}
 }
 
-static void	handle_ambient(t_scene *scene, t_ambient *ambient, t_move_mode color, int keycode)
+static void	handle_ambient(t_scene *scene,
+							t_ambient *ambient,
+							t_move_mode color,
+							int keycode)
 {
 	if (color == red)
 	{
@@ -58,6 +64,7 @@ static void	handle_ambient(t_scene *scene, t_ambient *ambient, t_move_mode color
 			ambient->color.r += 0.02;
 		else if (keycode == PAV_DOWN && ambient->color.r > 0.02)
 			ambient->color.r -= 0.02;
+		printf("Amb r : %.2f\n", ambient->color.r);
 	}
 	else if (color == green)
 	{
@@ -65,6 +72,7 @@ static void	handle_ambient(t_scene *scene, t_ambient *ambient, t_move_mode color
 			ambient->color.g += 0.02;
 		else if (keycode == PAV_DOWN && ambient->color.g > 0.02)
 			ambient->color.g -= 0.02;
+		printf("Amb g : %.2f\n", ambient->color.g);
 	}
 	else if (color == blue)
 	{
@@ -72,6 +80,7 @@ static void	handle_ambient(t_scene *scene, t_ambient *ambient, t_move_mode color
 			ambient->color.b += 0.02;
 		else if (keycode == PAV_DOWN && ambient->color.b > 0.02)
 			ambient->color.b -= 0.02;
+		printf("Amb b : %.2f\n", ambient->color.b);
 	}
 	set_object_ambient_light(scene);
 }
@@ -83,7 +92,9 @@ void	change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i)
 		handle_object(&minirt->scene->objects[i], ui->move_mode, keycode);
 	}
 	else if (ui->selected_type == LIGHT)
-		handle_lights(minirt->scene->lights[i - minirt->scene->nb_objects], ui->move_mode, keycode);
+		handle_lights(minirt->scene->lights[i - minirt->scene->nb_objects],
+			ui->move_mode, keycode, i);
 	else
-		handle_ambient(minirt->scene, minirt->scene->ambient, ui->move_mode, keycode);
+		handle_ambient(minirt->scene, minirt->scene->ambient,
+			ui->move_mode, keycode);
 }

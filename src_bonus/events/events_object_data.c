@@ -4,50 +4,56 @@ int	is_brightness_change_ok(t_scene *scene)
 {
 	int		i;
 	double	tot;
-	
+
 	i = 0;
-	tot = scene->ambient->brightness + 0.05;
+	tot = scene->ambient->brightness + 0.02;
 	while (i < scene->nb_light)
 	{
 		tot += scene->lights[i]->brightness;
 		i++;
 	}
 	if (tot > 1)
+	{
+		printf("Total light : max value reached\n");
 		return (0);
+	}
 	return (1);
 }
 
 void	change_light_brightness(t_scene *scene, int keycode, int i)
 {
 	i -= scene->nb_objects;
-	if (keycode == PAV_UP && scene->lights[i]->brightness < 0.95)
+	if (keycode == PAV_UP && scene->lights[i]->brightness < 0.98)
 	{
 		if (!is_brightness_change_ok(scene))
 			return ;
-		scene->lights[i]->brightness += 0.05;
+		scene->lights[i]->brightness += 0.02;
+		printf("Light[%d] : %.2f\n", i, scene->lights[i]->brightness);
 	}
-	else if (keycode == PAV_DOWN && scene->lights[i]->brightness > 0.05)
+	else if (keycode == PAV_DOWN && scene->lights[i]->brightness > 0.02)
 	{
-		scene->lights[i]->brightness -= 0.05;
+		scene->lights[i]->brightness -= 0.02;
+		printf("Light[%d] : %.2f\n", i, scene->lights[i]->brightness);
 	}
 }
 
 void	change_amb_brightness(t_scene *scene, int keycode)
 {
-	if (keycode == PAV_UP && scene->ambient->brightness < 0.95)
+	if (keycode == PAV_UP && scene->ambient->brightness < 0.98)
 	{
 		if (!is_brightness_change_ok(scene))
 			return ;
-		scene->ambient->brightness += 0.05;
+		scene->ambient->brightness += 0.02;
+		printf("Amb : %.2f\n", scene->ambient->brightness);
 		set_object_ambient_light(scene);
 	}
-	else if (keycode == PAV_DOWN && scene->ambient->brightness > 0.05)
+	else if (keycode == PAV_DOWN && scene->ambient->brightness > 0.02)
 	{
-		scene->ambient->brightness -= 0.05;
+		scene->ambient->brightness -= 0.02;
 		set_object_ambient_light(scene);
+		printf("Amb : %.2f\n", scene->ambient->brightness);
 	}
 }
-
 
 void	event_handle_pavnum(t_minirt *minirt, int keycode)
 {
@@ -59,7 +65,8 @@ void	event_handle_pavnum(t_minirt *minirt, int keycode)
 		change_element_position(minirt, minirt->ui, keycode, i);
 	else if (minirt->ui->move_mode == dir)
 		change_element_direction(minirt, minirt->ui, keycode, i);
-	else if (minirt->ui->move_mode == size && minirt->ui->selected_type == OBJ && minirt->scene->objects[i].type != PLANE)
+	else if (minirt->ui->move_mode == size && minirt->ui->selected_type == OBJ
+		&& minirt->scene->objects[i].type != PLANE)
 		change_element_size(minirt->scene, keycode, i);
 	else if (minirt->ui->move_mode == bright)
 	{

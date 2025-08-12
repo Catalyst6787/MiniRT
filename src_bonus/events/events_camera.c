@@ -21,31 +21,8 @@ void	event_reflections(t_minirt *minirt, int keycode)
 			printf("Max depth ++ [%d]\n", minirt->render->max_depth);
 			start_render(minirt);
 		}
-	}	
+	}
 }
-
-// void	event_light_pos(t_minirt *minirt, int keycode)
-// {
-// 	printf("rework light pos to move multiple lights with select like for object\n");
-// 	(void)minirt;
-// 	(void)keycode;
-// 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
-// 	if (!minirt->scene->nb_light)
-// 		return ;
-// 	if (keycode == U)
-// 		minirt->scene->lights[0]->pos.y += 0.2;
-// 	else if (keycode == H)
-// 		minirt->scene->lights[0]->pos.x -= 0.2;
-// 	else if (keycode == J)
-// 		minirt->scene->lights[0]->pos.y -= 0.2;
-// 	else if (keycode == K)
-// 		minirt->scene->lights[0]->pos.x += 0.2;
-// 	else if (keycode == I)
-// 		minirt->scene->lights[0]->pos.z -= 0.2;
-// 	else if (keycode == O)
-// 		minirt->scene->lights[0]->pos.z += 0.2;
-// 	start_render(minirt);
-// }
 
 void	print_arrows(int keycode)
 {

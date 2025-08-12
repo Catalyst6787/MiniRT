@@ -3,8 +3,8 @@
 int	select_ambient(t_minirt *minirt)
 {
 	minirt->ui->str_selected_object = ft_strdup("Selected : ambiant");
-		if (!minirt->ui->str_selected_object)
-			quit(minirt, MALLOC_ERR);
+	if (!minirt->ui->str_selected_object)
+		quit(minirt, MALLOC_ERR);
 	return (0);
 }
 
@@ -33,9 +33,9 @@ int	set_selected_object_data(t_minirt *minirt, t_scene *scene)
 {
 	char	*tmp;
 	char	*nb;
-	
+
 	if (minirt->ui->str_selected_object)
-		free_and_null((void**)&minirt->ui->str_selected_object);
+		free_and_null((void **)&minirt->ui->str_selected_object);
 	if (minirt->ui->selected_object == scene->nb_objects + scene->nb_light)
 	{
 		minirt->ui->selected_type = AMB;
@@ -57,7 +57,7 @@ int	set_selected_object_data(t_minirt *minirt, t_scene *scene)
 static void	switch_pav_mode(t_minirt *minirt)
 {
 	if (minirt->ui->str_mode)
-		free_and_null((void**)&minirt->ui->str_mode);
+		free_and_null((void **)&minirt->ui->str_mode);
 	if (minirt->ui->move_mode == 6)
 		minirt->ui->move_mode = 0;
 	else
@@ -101,6 +101,5 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 	}
 	else if (keycode == PAV_MIDDLE)
 		switch_pav_mode(minirt);
-	printf("Selected : %d (type %d)\n", minirt->ui->selected_object, minirt->ui->selected_type);
 	start_render(minirt);
 }

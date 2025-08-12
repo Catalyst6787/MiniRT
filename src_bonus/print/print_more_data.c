@@ -1,5 +1,4 @@
 #include "minirt.h"
-#include <stdio.h>
 
 void	print_cylinder_data(t_minirt *minirt)
 {
@@ -61,11 +60,6 @@ void	event_print_debug(t_minirt *minirt)
 	print_spheres_data(minirt);
 	print_plane_data(minirt);
 	print_cylinder_data(minirt);
-}
-
-void	print_inter(t_inter *inter)
-{
-	printf("inter: t=[%f], obj=[%p]\n", inter->t, (void *)inter->obj);
 }
 
 void	print_scene(t_minirt *minirt, bool asterix)
