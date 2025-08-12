@@ -5,10 +5,7 @@ Simple C ray tracer.
 
 - [ ] dev.sh 1 : problem when size of the sphere is too big and render (free() : invalid size)
 
-- [ ] Handle light brightness pavnum
-- [ ] Handle cyl/con height and radius pavnum
-- [X] do light events
-- [ ] add colour to pav mode ?
+- [ ] add value print for elements change
 - [ ] norminette
 - [ ] project finished!
 
@@ -23,6 +20,10 @@ Simple C ray tracer.
 - [ ] display % of the scene calculated
 
 
+- [X] Handle light brightness pavnum
+- [X] Handle cyl/con height and radius pavnum
+- [X] do light events
+- [X] add colour to pav mode ?
 - [X] add pav mode str
 - [X] problem with cone normals
 - [X] parsing problem if more than one zero after the coma (try also with 2 dots)

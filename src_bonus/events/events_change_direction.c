@@ -20,11 +20,7 @@ static void	handle_object(t_scene *scene, int keycode, int i)
 
 void	change_element_direction(t_minirt *minirt, t_ui *ui, int keycode, int i)
 {
-	// int	i;
-	(void) ui;
-
-	// i = ui->selected_object;
-	if (minirt->ui->selected_type == OBJ)
+	if (ui->selected_type == OBJ)
 	{
 		if (minirt->scene->objects[i].type == SPHERE)
 			return ;

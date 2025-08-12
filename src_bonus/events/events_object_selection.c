@@ -58,7 +58,7 @@ static void	switch_pav_mode(t_minirt *minirt)
 {
 	if (minirt->ui->str_mode)
 		free_and_null((void**)&minirt->ui->str_mode);
-	if (minirt->ui->move_mode == 5)
+	if (minirt->ui->move_mode == 6)
 		minirt->ui->move_mode = 0;
 	else
 		minirt->ui->move_mode ++;
@@ -68,6 +68,8 @@ static void	switch_pav_mode(t_minirt *minirt)
 		minirt->ui->str_mode = ft_strdup("Mode : position");
 	else if (minirt->ui->move_mode == size)
 		minirt->ui->str_mode = ft_strdup("Mode : size");
+	else if (minirt->ui->move_mode == bright)
+		minirt->ui->str_mode = ft_strdup("Mode : brightness");
 	else if (minirt->ui->move_mode == red)
 		minirt->ui->str_mode = ft_strdup("Mode : red");
 	else if (minirt->ui->move_mode == green)

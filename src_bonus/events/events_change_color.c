@@ -44,9 +44,9 @@ static void	handle_lights(t_light *light, t_move_mode color, int keycode)
 	else if (color == blue)
 	{
 		if (keycode == PAV_UP && light->color.b < 0.98)
-		light->color.b += 0.02;
+			light->color.b += 0.02;
 		else if (keycode == PAV_DOWN && light->color.b > 0.02)
-		light->color.b -= 0.02;
+			light->color.b -= 0.02;
 	}
 }
 

@@ -74,6 +74,7 @@ typedef enum e_move_mode
 	pos,
 	dir,
 	size,
+	bright,
 	red,
 	green,
 	blue

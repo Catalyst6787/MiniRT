@@ -32,19 +32,19 @@ static void	handle_lights(t_light *light, int keycode)
 		light->pos.z -= 0.1;
 }
 
-static void	handle_ambient(t_scene *scene, int keycode)
-{
-	if (keycode == PAV_UP && scene->ambient->brightness <= 0.9)
-	{
-		scene->ambient->brightness += 0.05;
-		set_object_ambient_light(scene);
-	}
-	else if (keycode == PAV_DOWN && scene->ambient->brightness >= 0.1)
-	{
-		scene->ambient->brightness -= 0.05;
-		set_object_ambient_light(scene);
-	}
-}
+// static void	handle_ambient(t_scene *scene, int keycode)
+// {
+// 	if (keycode == PAV_UP && scene->ambient->brightness <= 0.9)
+// 	{
+// 		scene->ambient->brightness += 0.05;
+// 		set_object_ambient_light(scene);
+// 	}
+// 	else if (keycode == PAV_DOWN && scene->ambient->brightness >= 0.1)
+// 	{
+// 		scene->ambient->brightness -= 0.05;
+// 		set_object_ambient_light(scene);
+// 	}
+// }
 
 void	change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i)
 {
@@ -58,6 +58,6 @@ void	change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i)
 	}
 	else if (ui->selected_type == LIGHT)
 		handle_lights(minirt->scene->lights[i - minirt->scene->nb_objects], keycode);
-	else
-		handle_ambient(minirt->scene, keycode);
+	// else
+	// 	handle_ambient(minirt->scene, keycode);
 }
