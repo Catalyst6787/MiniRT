@@ -161,11 +161,13 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	// printf("parsing translation. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
 	// printf("parsing rotation. buffer:\n%s\n", minirt->scene->buffer + i);
-	obj->rotation = get_rotation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(ato_vec3(minirt->scene->buffer, &i, minirt)));
 	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->scaling = get_scaling_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
 	// printf("parsing color. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material = get_default_material(vec3_double_division(ato_vec3(minirt->scene->buffer, &i, minirt), 255), minirt->scene);
+	obj->material.ambient = minirt->scene->ambient->brightness;
+	obj->material.ambient_color = minirt->scene->ambient->color;
 	// printf("parsing diffuse buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.diffuse = ato_buffer(minirt->scene->buffer + i, &i, ' ');
 	// printf("parsing specular buffer:\n%s\n", minirt->scene->buffer + i);
@@ -190,6 +192,16 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	}
 	obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
 	obj->inv = get_inversed_matrix(obj->transform);
+	if (obj->type == PLANE)
+	{
+		obj->obj_data.plane_normal = vec3_normalise(vec3_matrix_multiply(obj->transform, get_vec3(0, 1, 0)));
+	}
+	else if (obj->type == CYLINDER || obj->type == CONE) // TODO unhardcode
+	{
+		obj->obj_data.cylinder.isclosed = true;
+		obj->obj_data.cylinder.max = 100;
+		obj->obj_data.cylinder.min = -100;
+	}
 	*cursor = i;
 	return (0);
 }
