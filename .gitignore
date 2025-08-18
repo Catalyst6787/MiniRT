@@ -48,3 +48,4 @@ log/debug.csv
 compile_commands.json
 
 shell.nix
+.envrc
