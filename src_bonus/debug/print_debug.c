@@ -83,7 +83,7 @@ void	debug_print_scene_data(t_minirt *minirt)
 		else if (obj.type == CONE)
 			PRINT_DEBUG("Cone");
 		PRINT_DEBUG("\n");
-		debug_print_vec(&obj.dir, "direction");
+		// debug_print_vec(&obj.dir, "direction");
 		PRINT_DEBUG("\n");
 		debug_print_matrice(obj.translation, "translation");
 		debug_print_matrice(obj.rotation, "rotation");

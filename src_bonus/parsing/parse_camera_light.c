@@ -165,7 +165,7 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->scaling = get_scaling_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
 	// printf("parsing color. buffer:\n%s\n", minirt->scene->buffer + i);
-	obj->material = get_default_material(ato_vec3(minirt->scene->buffer, &i, minirt), minirt->scene);
+	obj->material = get_default_material(vec3_double_division(ato_vec3(minirt->scene->buffer, &i, minirt), 255), minirt->scene);
 	// printf("parsing diffuse buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.diffuse = ato_buffer(minirt->scene->buffer + i, &i, ' ');
 	// printf("parsing specular buffer:\n%s\n", minirt->scene->buffer + i);
