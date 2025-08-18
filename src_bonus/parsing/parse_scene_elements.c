@@ -1,34 +1,44 @@
+#include "libft.h"
 #include "minirt.h"
-#include "object.h"
+#include <stdio.h>
 
-static void	parse_buffer(t_minirt *minirt,
-						t_scene *scene,
+static int parse_buffer(t_minirt *minirt,
 						int *cursor,
-						t_object *obj)
+						t_parsing_helper *ph)
 {
-	if (scene->buffer[*cursor] == 'A')
-		parse_ambiant_light(minirt, scene, cursor);
-	else if (scene->buffer[*cursor] == 'C')
-		parse_camera(minirt, scene, cursor);
-	else if (scene->buffer[*cursor] == 'L')
-		parse_light(minirt, scene, minirt->scene->lights[minirt->scene->nb_light], cursor);
-	else
-		parse_object(minirt, obj, cursor);
+	while (minirt->scene->buffer[*cursor] && (ft_isspace(minirt->scene->buffer[*cursor]) || minirt->scene->buffer[*cursor] == '\n'))
+		(*cursor)++;
+	while (minirt->scene->buffer[*cursor] && minirt->scene->buffer[*cursor] == '#')
+	{
+		while (minirt->scene->buffer[*cursor] && minirt->scene->buffer[*cursor] != '\n')
+			(*cursor)++;
+		while (minirt->scene->buffer[*cursor] && (ft_isspace(minirt->scene->buffer[*cursor]) || minirt->scene->buffer[*cursor] == '\n'))
+			(*cursor)++;
+	}
+	if (!minirt->scene->buffer[*cursor])
+		return(quit(minirt, "parse_buffer reached unexpected EOF\n"), 1);
+	if (minirt->scene->buffer[*cursor] == 'A' && !ph->a)
+		return (parse_ambiant_light(minirt, minirt->scene, cursor), ph->a = true, 0);
+	else if (minirt->scene->buffer[*cursor] == 'C' && !ph->c)
+		return (parse_camera(minirt, minirt->scene, cursor), ph->c = true, 0);
+	else if (minirt->scene->buffer[*cursor] == 'L' && ph->l < minirt->scene->nb_light)
+		return(parse_light(minirt, minirt->scene, minirt->scene->lights[ph->l++], cursor), 0);
+	else if (ph->o < minirt->scene->nb_objects)
+		return(parse_object(minirt, &minirt->scene->objects[ph->o++], cursor), 0);
+	else if (minirt->scene->buffer[*cursor] != '\n')
+		return(printf("\n%s", minirt->scene->buffer + *cursor), quit(minirt, "parse_buffer: unrecognized expression"), 1);
+	return(0);
 }
 
 void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 {
 	int					cursor;
-	int					nb_obj;
+	t_parsing_helper ph;
 
 	cursor = 0;
-	nb_obj = 0;
-	while (scene->buffer[cursor])
+	ft_memset(&ph, 0, sizeof(t_parsing_helper));
+	while (scene->buffer[cursor] && (!ph.a || !ph.c || ph.l < minirt->scene->nb_light || ph.o < minirt->scene->nb_objects))
 	{
-		while (scene->buffer[cursor]
-			&& ft_isspace(scene->buffer[cursor]))
-			cursor++;
-		parse_buffer(minirt, minirt->scene, &cursor, &minirt->scene->objects[nb_obj]);
-		nb_obj++;
+		parse_buffer(minirt, &cursor, &ph);
 	}
 }

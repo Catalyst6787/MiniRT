@@ -78,10 +78,9 @@ typedef enum e_move_mode
 typedef struct s_parsing_helper
 {
 	int			l;
-	int			s;
-	int			p;
-	int			cy;
-	int			co;
+	int			o;
+	bool			a;
+	bool			c;
 }				t_parsing_helper;
 
 typedef struct s_mlx_data
@@ -147,6 +146,7 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
 double		ato_buffer(char *ptr, int *cursor, int delim);
+double	ato_buffer_correct(char *ptr, int *cursor, int delim);
 
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
@@ -281,7 +281,7 @@ int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
 char		*object_type_to_str(t_object *object, bool selected);
 t_vec3		convert_dir_to_euler(t_vec3 dir);
-t_vec3		ato_vec3(char *s, int *cursor);
+t_vec3		ato_vec3(char *s, int *cursor, t_minirt *minirt);
 /*                                 EVENTS                                  */
 
 int			end_mlx_loop(t_mlx_data *mlx);

@@ -48,7 +48,7 @@ void	parse_scene(t_minirt *minirt)
 	check_data_validity(minirt, minirt->scene);
 	// create_object_array(minirt->scene);
 	// print_scene_ok_message(minirt->scene->filename);
-	// debug_print_scene_data(minirt);
+	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);

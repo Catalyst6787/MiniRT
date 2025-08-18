@@ -1,3 +1,4 @@
+#include "libft.h"
 #include "minirt.h"
 #include "scene.h"
 
@@ -9,6 +10,8 @@ void	cam_ambiant_alloc(t_minirt *minirt)
 	minirt->scene->camera = malloc(sizeof(t_camera));
 	if (!minirt->scene->camera)
 		quit(minirt, MALLOC_ERR);
+	ft_memset(minirt->scene->ambient, 0, sizeof(t_ambient));
+	ft_memset(minirt->scene->camera, 0, sizeof(t_camera));
 }
 
 void	lights_alloc(t_minirt *minirt, t_scene *scene)

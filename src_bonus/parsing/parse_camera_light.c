@@ -125,9 +125,11 @@ int	parse_light(t_minirt *minirt, t_scene *scene, t_light *light, int *cursor)
 
 int	set_obj_type(t_object *obj, int *cursor, char *buffer)
 {
-	if (!buffer || !buffer[0] || buffer[*cursor])
+	if (!buffer || !buffer[0] || !buffer[*cursor])
 		return(1);
-	if (!ft_strncmp(buffer + *cursor, "sp", 2))
+	if (!obj)
+		return(1);
+	else if (!ft_strncmp(buffer + *cursor, "sp", 2))
 		obj->type = SPHERE;
 	else if (!ft_strncmp(buffer + *cursor, "cy", 2))
 		obj->type = CYLINDER;
@@ -135,6 +137,9 @@ int	set_obj_type(t_object *obj, int *cursor, char *buffer)
 		obj->type = PLANE;
 	else if (!ft_strncmp(buffer + *cursor, "co", 2))
 		obj->type = CONE;
+	else
+		return(1);
+	(*cursor) += 2;
 	return(0);
 }
 
@@ -144,46 +149,47 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	t_shear	shear;
 	
 	i = *cursor;
+	// printf("parsing obj. buffer:\n%s\n", minirt->scene->buffer + i);
+	if (!obj)
+		return(quit(minirt, "error in parse object, obj doesnt exist"));
 	while (ft_isspace(minirt->scene->buffer[i]))
 		i++;
-	if (set_obj_type(obj, cursor, minirt->scene->buffer))
-		return(quit(minirt, WRONG_OBJ));
-	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i));
+	if (set_obj_type(obj, &i, minirt->scene->buffer))
+		return(printf("unrecognized obj: [%s]", minirt->scene->buffer + *cursor), quit(minirt, WRONG_OBJ));
 	while (ft_isspace(minirt->scene->buffer[i]))
 		i++;
-	obj->rotation = get_rotation_matrix(ato_vec3(minirt->scene->buffer, &i));
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->rotation = get_scaling_matrix(ato_vec3(minirt->scene->buffer, &i));
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->material = get_default_material(ato_vec3(minirt->scene->buffer, &i), minirt->scene);
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->material.diffuse = ato_buffer(minirt->scene->buffer, &i, ' ');
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->material.specular = ato_buffer(minirt->scene->buffer, &i, ' ');
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->material.shininess = ato_buffer(minirt->scene->buffer, &i, ' ');
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	obj->material.reflective = ato_buffer(minirt->scene->buffer, &i, ' ');
-	// add more material here 
+	// printf("parsing translation. buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
+	// printf("parsing rotation. buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->rotation = get_rotation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
+	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->scaling = get_scaling_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
+	// printf("parsing color. buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->material = get_default_material(ato_vec3(minirt->scene->buffer, &i, minirt), minirt->scene);
+	// printf("parsing diffuse buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->material.diffuse = ato_buffer(minirt->scene->buffer + i, &i, ' ');
+	// printf("parsing specular buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->material.specular = ato_buffer(minirt->scene->buffer + i, &i, ' ');
+	// printf("parsing shininess buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->material.shininess = ato_buffer(minirt->scene->buffer + i, &i, ' ');
+	// printf("parsing reflective buffer:\n%s\n", minirt->scene->buffer + i);
+	obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, ' ');
 	obj->shearing = get_matrix(4, 4, 1);
 	while (ft_isspace(minirt->scene->buffer[i]))
 		i++;
 	if (minirt->scene->buffer[i] != '\n')
 	{
-		shear.xy = ato_buffer(minirt->scene->buffer, &i, ',');
-		shear.xz = ato_buffer(minirt->scene->buffer, &i, ',');
-		shear.yx= ato_buffer(minirt->scene->buffer, &i, ',');
-		shear.yz= ato_buffer(minirt->scene->buffer, &i, ',');
-		shear.zx= ato_buffer(minirt->scene->buffer, &i, ',');
-		shear.zy= ato_buffer(minirt->scene->buffer, &i, '\n');
+		// printf("parsing shearing buffer:\n%s\n", minirt->scene->buffer + i);
+		shear.xy = ato_buffer(minirt->scene->buffer + i, &i, ',');
+		shear.xz = ato_buffer(minirt->scene->buffer + i, &i, ',');
+		shear.yx= ato_buffer(minirt->scene->buffer + i, &i, ',');
+		shear.yz= ato_buffer(minirt->scene->buffer + i, &i, ',');
+		shear.zx= ato_buffer(minirt->scene->buffer + i, &i, ',');
+		shear.zy= ato_buffer(minirt->scene->buffer + i, &i, '\n');
 		obj->shearing = get_shearing_matrix(shear);
 	}
 	obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
+	obj->inv = get_inversed_matrix(obj->transform);
+	*cursor = i;
 	return (0);
 }

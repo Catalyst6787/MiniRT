@@ -5,6 +5,7 @@ void	objects_alloc(t_minirt *minirt, t_scene *scene)
 	scene->objects = malloc(sizeof(t_object) * (scene->nb_objects + 1));
 	if (!scene->objects && scene->nb_objects)
 		quit(minirt, MALLOC_ERR);
+	ft_memset(scene->objects, 0, sizeof(t_object) * (scene->nb_objects + 1));
 }
 
 void	move_cursor(char *buffer, int *cursor, char c)
@@ -43,6 +44,22 @@ double	ato_buffer(char *ptr, int *cursor, int delim)
 
 	i = *cursor;
 	n_str = trim_ato_ptr(ptr, delim);
+	n = ft_atof(n_str);
+	move_cursor(ptr, &i, delim);
+	if (n_str)
+		free(n_str);
+	*cursor = i;
+	return (n);
+}
+
+double	ato_buffer_correct(char *ptr, int *cursor, int delim)
+{
+	int		i;
+	double	n;
+	char	*n_str;
+
+	i = *cursor;
+	n_str = trim_ato_ptr(ptr + *cursor, delim);
 	n = ft_atof(n_str);
 	move_cursor(ptr, &i, delim);
 	if (n_str)

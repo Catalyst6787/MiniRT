@@ -1,4 +1,6 @@
+#include "debug.h"
 #include "minirt.h"
+#include "object.h"
 
 void	print_render_data(t_render *render)
 {
@@ -38,98 +40,91 @@ void	print_scene_ok_message(char *scene)
 }
 
 
-// void	debug_print_scene_data(t_minirt *minirt)
-// {
-// 	int i = -1;
-// 	PRINT_DEBUG("\n* * * * * * * * * * * * * * * * * * * * * *\n");
-// 	PRINT_DEBUG("*                  Scene                  *");
-// 	PRINT_DEBUG("\n");
-// 	PRINT_DEBUG("\n");
-// 	PRINT_DEBUG("%s", minirt->scene->buffer);
-// 	PRINT_DEBUG("\n");
-// 	PRINT_DEBUG("\n");
-// 	PRINT_DEBUG("*                                         *\n");
-// 	PRINT_DEBUG("* * * * * * * * * * * * * * * * * * * * * *\n\n");
-// 	PRINT_DEBUG("\n");
-// 	PRINT_DEBUG("Ambiant light :\n\n");
-// 	PRINT_DEBUG("	Ratio : %.4f\n", minirt->scene->ambient->brightness);
-// 	PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->ambient->color.r,minirt->scene->ambient->color.g, minirt->scene->ambient->color.b);
-// 	PRINT_DEBUG("Camera :\n\n");
-// 	PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->camera->view.from.x, minirt->scene->camera->view.from.y, minirt->scene->camera->view.from.z);
-// 	PRINT_DEBUG("	dir : %.4f %.4f %.4f\n", minirt->scene->camera->view.to.x, minirt->scene->camera->view.to.y, minirt->scene->camera->view.to.z);
-// 	PRINT_DEBUG("	FOV : %f\n\n", minirt->scene->camera->fov);
-// 	while (++i < minirt->scene->nb_light)
-// 	{
-// 		PRINT_DEBUG("Light[%d/%d] :\n\n", i + 1, minirt->scene->nb_light);
-// 		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->lights[i]->pos.x, minirt->scene->lights[i]->pos.y, minirt->scene->lights[i]->pos.z);
-// 		PRINT_DEBUG("	Ratio : %.4f\n", minirt->scene->lights[i]->brightness);
-// 		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->lights[i]->color.r, minirt->scene->lights[i]->color.g, minirt->scene->lights[i]->color.b);
-// 	}
-// 	while (++i < minirt->scene->nb_sphere)
-// 	{
-// 		PRINT_DEBUG("Sphere[%d/%d] :\n\n", i + 1, minirt->scene->nb_sphere);
-// 		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->spheres[i]->pos.x, minirt->scene->spheres[i]->pos.y, minirt->scene->spheres[i]->pos.z);
-// 		PRINT_DEBUG("	Diameter : %.4f\n", minirt->scene->spheres[i]->diameter);
-// 		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->spheres[i]->material.color.r, minirt->scene->spheres[i]->material.color.g, minirt->scene->spheres[i]->material.color.b);
-// 	}
-// 	i = -1;
-// 	while (++i < minirt->scene->nb_plane)
-// 	{
-// 		PRINT_DEBUG("Plane[%d/%d] :\n\n", i + 1, minirt->scene->nb_plane);
-// 		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->planes[i]->pos.x, minirt->scene->planes[i]->pos.y, minirt->scene->planes[i]->pos.z);
-// 		PRINT_DEBUG("	dir : %.4f %.4f %.4f\n", minirt->scene->planes[i]->dir.x, minirt->scene->planes[i]->dir.y, minirt->scene->planes[i]->dir.z);
-// 		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->planes[i]->material.color.r, minirt->scene->planes[i]->material.color.g, minirt->scene->planes[i]->material.color.b);
-// 	}
-// 	i = -1;
-// 	while (++i < minirt->scene->nb_cylinder)
-// 	{
-// 		PRINT_DEBUG("Cylinder[%d/%d] :\n\n", i + 1, minirt->scene->nb_cylinder);
-// 		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->cylinders[i]->pos.x, minirt->scene->cylinders[i]->pos.y, minirt->scene->cylinders[i]->pos.z);
-// 		PRINT_DEBUG("	dir : %.4f %.4f %.4f\n", minirt->scene->cylinders[i]->dir.x, minirt->scene->cylinders[i]->dir.y, minirt->scene->cylinders[i]->dir.z);
-// 		PRINT_DEBUG("	Diameter : %.4f\n", minirt->scene->cylinders[i]->diameter);
-// 		PRINT_DEBUG("	Height : %.4f\n", minirt->scene->cylinders[i]->height);
-// 		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->cylinders[i]->material.color.r, minirt->scene->cylinders[i]->material.color.g, minirt->scene->cylinders[i]->material.color.b);
-// 	}
-// 	i = -1;
-// 	while (++i < minirt->scene->nb_cone)
-// 	{
-// 		PRINT_DEBUG("Cone[%d/%d] :\n\n", i + 1, minirt->scene->nb_cone);
-// 		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->cones[i]->pos.x, minirt->scene->cones[i]->pos.y, minirt->scene->cones[i]->pos.z);
-// 		PRINT_DEBUG("	dir : %.4f %.4f %.4f\n", minirt->scene->cones[i]->dir.x, minirt->scene->cones[i]->dir.y, minirt->scene->cones[i]->dir.z);
-// 		PRINT_DEBUG("	Diameter : %.4f\n", minirt->scene->cones[i]->diameter);
-// 		PRINT_DEBUG("	Height : %.4f\n", minirt->scene->cones[i]->height);
-// 		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->cones[i]->material.color.r, minirt->scene->cones[i]->material.color.g, minirt->scene->cones[i]->material.color.b);
-// 	}
-// 	PRINT_DEBUG("\n");
-// }
+void	debug_print_scene_data(t_minirt *minirt)
+{
+	int i = -1;
+	t_object obj;
+	PRINT_DEBUG("\n* * * * * * * * * * * * * * * * * * * * * *\n");
+	PRINT_DEBUG("*                  Scene                  *");
+	PRINT_DEBUG("\n");
+	PRINT_DEBUG("\n");
+	PRINT_DEBUG("%s", minirt->scene->buffer);
+	PRINT_DEBUG("\n");
+	PRINT_DEBUG("\n");
+	PRINT_DEBUG("*                                         *\n");
+	PRINT_DEBUG("* * * * * * * * * * * * * * * * * * * * * *\n\n");
+	PRINT_DEBUG("\n");
+	PRINT_DEBUG("Ambiant light :\n\n");
+	PRINT_DEBUG("	Ratio : %.4f\n", minirt->scene->ambient->brightness);
+	PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->ambient->color.r,minirt->scene->ambient->color.g, minirt->scene->ambient->color.b);
+	PRINT_DEBUG("Camera :\n\n");
+	PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->camera->view.from.x, minirt->scene->camera->view.from.y, minirt->scene->camera->view.from.z);
+	PRINT_DEBUG("	dir : %.4f %.4f %.4f\n", minirt->scene->camera->view.to.x, minirt->scene->camera->view.to.y, minirt->scene->camera->view.to.z);
+	PRINT_DEBUG("	FOV : %f\n\n", minirt->scene->camera->fov);
+	while (++i < minirt->scene->nb_light)
+	{
+		PRINT_DEBUG("Light[%d/%d] :\n\n", i + 1, minirt->scene->nb_light);
+		PRINT_DEBUG("	pos : %.4f %.4f %.4f\n", minirt->scene->lights[i]->pos.x, minirt->scene->lights[i]->pos.y, minirt->scene->lights[i]->pos.z);
+		PRINT_DEBUG("	Ratio : %.4f\n", minirt->scene->lights[i]->brightness);
+		PRINT_DEBUG("	r g b : %.4f %.4f %.4f\n\n", minirt->scene->lights[i]->color.r, minirt->scene->lights[i]->color.g, minirt->scene->lights[i]->color.b);
+	}
+	i = -1;
+	while (++i < minirt->scene->nb_objects)
+	{
+		obj = minirt->scene->objects[i];
+		PRINT_DEBUG("Object[%d/%d] :\n\n", i + 1, minirt->scene->nb_objects);
+		PRINT_DEBUG("Type: ");
+		if (obj.type == SPHERE)
+			PRINT_DEBUG("Sphere");
+		else if (obj.type == PLANE)
+			PRINT_DEBUG("Plane");
+		else if (obj.type == CYLINDER)
+			PRINT_DEBUG("Cylinder");
+		else if (obj.type == CONE)
+			PRINT_DEBUG("Cone");
+		PRINT_DEBUG("\n");
+		debug_print_vec(&obj.dir, "direction");
+		PRINT_DEBUG("\n");
+		debug_print_matrice(obj.translation, "translation");
+		debug_print_matrice(obj.rotation, "rotation");
+		debug_print_matrice(obj.scaling, "scaling");
+		debug_print_matrice(obj.shearing, "shearing");
+		debug_print_matrice(obj.transform, "transform");
+		debug_print_matrice(obj.inv, "inverse transform");
+		PRINT_DEBUG("\nMaterial:\n");
+		debug_print_vec(&obj.material.color, "color");
+		PRINT_DEBUG("\n");
+		PRINT_DEBUG("ambiant brightness: %f\n", obj.material.ambient);
+		debug_print_vec(&obj.material.ambient_color, "ambiant color");
+		PRINT_DEBUG("\n");
+		PRINT_DEBUG("diffuse: %f\n", obj.material.diffuse);
+		PRINT_DEBUG("specular: %f\n", obj.material.specular);
+		PRINT_DEBUG("shininess: %f\n", obj.material.shininess);
+		PRINT_DEBUG("reflective: %f\n\n", obj.material.reflective);
+	}
+	PRINT_DEBUG("\n");
+}
 
 void	debug_print_objects_pointers(t_scene *scene)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	PRINT_DEBUG("Objects pointers :\n\n");
-	while (i < scene->nb_sphere && j < scene->nb_objects)
+	while (i < scene->nb_objects)
 	{
-		PRINT_DEBUG("Sphere[%d] : %p (object %d)\n", i, (void *)&scene->objects[j], j);
+		PRINT_DEBUG("Object[%d], ", i);
+		if (scene->objects[i].type == SPHERE)
+			PRINT_DEBUG("Sphere");
+		if (scene->objects[i].type == PLANE)
+			PRINT_DEBUG("Plane");
+		if (scene->objects[i].type == CYLINDER)
+			PRINT_DEBUG("Cylinder");
+		if (scene->objects[i].type == CONE)
+			PRINT_DEBUG("Cone");
+		PRINT_DEBUG(", ptr=[%p]", (void*)&scene->objects[i]);
+		PRINT_DEBUG("\n");
 		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_plane && j < scene->nb_objects)
-	{
-		PRINT_DEBUG("Plane[%d] : %p (object %d)\n", i,  (void *)&scene->objects[j], j);
-		i++;
-		j++;
-	}
-	i = 0;
-	while (i < scene->nb_cylinder && j < scene->nb_objects)
-	{
-		PRINT_DEBUG("Cylinder[%d] : %p (object %d)\n", i, (void *)&scene->objects[j], j);
-		i++;
-		j++;
 	}
 	PRINT_DEBUG("\n");
 }
