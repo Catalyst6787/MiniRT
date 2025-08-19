@@ -147,6 +147,7 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 {
 	int	i;
 	t_shear	shear;
+	t_vec3	scaling;
 	
 	i = *cursor;
 	// printf("parsing obj. buffer:\n%s\n", minirt->scene->buffer + i);
@@ -163,7 +164,8 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	// printf("parsing rotation. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->rotation = get_rotation_matrix(convert_dir_to_euler(ato_vec3(minirt->scene->buffer, &i, minirt)));
 	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
-	obj->scaling = get_scaling_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
+	scaling = ato_vec3(minirt->scene->buffer, &i, minirt);
+	obj->scaling = get_scaling_matrix(scaling);
 	// printf("parsing color. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material = get_default_material(vec3_double_division(ato_vec3(minirt->scene->buffer, &i, minirt), 255), minirt->scene);
 	obj->material.ambient = minirt->scene->ambient->brightness;
@@ -199,8 +201,8 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	else if (obj->type == CYLINDER || obj->type == CONE) // TODO unhardcode
 	{
 		obj->obj_data.cylinder.isclosed = true;
-		obj->obj_data.cylinder.max = 100;
-		obj->obj_data.cylinder.min = -100;
+		obj->obj_data.cylinder.max = scaling.x / 2;
+		obj->obj_data.cylinder.min = -(scaling.x) / 2;
 	}
 	*cursor = i;
 	return (0);
