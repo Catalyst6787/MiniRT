@@ -1,0 +1,25 @@
+# --SCENE.RT--
+# light brightness ratio, RGB color 0-255
+A 0.1 255,255,255
+
+# xyz coordinates, 3d dir vec, horizontal fov
+C 0,0,-5 0,0,1 70
+
+# xyz coordinates, light brightness ratio, RGB colors
+L 1,0,-5 0.3 55,255,55
+L -1,0,-5 0.3 255,55,255
+L 0,0,-5 0.3 255,255,255
+
+# obj type, translation, rotation, scaling, RGB, diffuse, specular, shininess, reflective, shearing
+pl 0,0,5 0,0,0 1,1,1 255,255,255 0.9 0.9 200 0.3 0,0,0,0,0,0
+
+co 0,0,0.001 0,0,0 2,1,2 210,95,210 0.9 0.9 200 0.3 0,0,0,0,0,0
+
+co 0,0,0 0,0,0 1,2,1 210,210,95 0.9 0.9 200 0.3 0,0,0,0,0,0
+
+# (commented objects below are skipped in conversion)
+# co 1,0,0    0,0,1   2 2 210,95,210
+# co -1,0,0    0,0,1   1 2 95,210,210
+# cy 0,0,1    0,0,-0.4   1.2 1 210,210,95
+# sp 0,0,0  10   55,51,255
+

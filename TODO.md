@@ -4,7 +4,11 @@ Simple C ray tracer.
 ### basic
 
 - [ ] problem with cone normals
+- [ ] fix camera orientation issues -> length = 0 and non-invertible matrix
+			-> might as well create a 6d movement system
 
+- [ ] fix reflection is brighter than normal
+- [ ] fix render time calculation
 
 - [ ] euler ?
 - [ ] fix a little problem in the tests (commented for now)

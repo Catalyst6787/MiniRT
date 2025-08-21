@@ -162,7 +162,7 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	// printf("parsing translation. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
 	// printf("parsing rotation. buffer:\n%s\n", minirt->scene->buffer + i);
-	obj->rotation = get_rotation_matrix(convert_dir_to_euler(ato_vec3(minirt->scene->buffer, &i, minirt)));
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(vec3_normalise(ato_vec3(minirt->scene->buffer, &i, minirt))));
 	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
 	scaling = ato_vec3(minirt->scene->buffer, &i, minirt);
 	obj->scaling = get_scaling_matrix(scaling);
@@ -192,7 +192,8 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 		shear.zy= ato_buffer(minirt->scene->buffer + i, &i, '\n');
 		obj->shearing = get_shearing_matrix(shear);
 	}
-	obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
+	// obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
+	obj->transform = get_object_transformation(obj);
 	obj->inv = get_inversed_matrix(obj->transform);
 	if (obj->type == PLANE)
 	{
