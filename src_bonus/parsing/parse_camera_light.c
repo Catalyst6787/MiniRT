@@ -192,6 +192,8 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 		shear.zy= ato_buffer(minirt->scene->buffer + i, &i, '\n');
 		obj->shearing = get_shearing_matrix(shear);
 	}
+	// else
+	// 	i++;
 	// obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
 	obj->transform = get_object_transformation(obj);
 	obj->inv = get_inversed_matrix(obj->transform);
