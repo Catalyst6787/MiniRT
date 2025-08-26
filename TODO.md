@@ -7,8 +7,8 @@ Simple C ray tracer.
 - [ ] fix camera orientation issues -> length = 0 and non-invertible matrix
 			-> might as well create a 6d movement system
 
-- [ ] fix reflection is brighter than normal
-- [ ] fix render time calculation
+- [X] fix reflection is brighter than normal
+- [X] fix render time calculation
 
 - [ ] euler ?
 - [ ] fix a little problem in the tests (commented for now)

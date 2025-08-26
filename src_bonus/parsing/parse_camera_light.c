@@ -143,12 +143,27 @@ int	set_obj_type(t_object *obj, int *cursor, char *buffer)
 	return(0);
 }
 
+static int is_shearing(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s && s[i] && s[i] != ' ' && s[i] != '\n')
+		i++;
+	while (s && s[i] && ft_isspace(s[i]))
+		i++;
+	if (ft_isdigit(s[i]))
+		return(1);
+	else
+		return(0);
+}
+
 int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 {
 	int	i;
 	t_shear	shear;
 	t_vec3	scaling;
-	
+
 	i = *cursor;
 	// printf("parsing obj. buffer:\n%s\n", minirt->scene->buffer + i);
 	if (!obj)
@@ -177,13 +192,9 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	// printf("parsing shininess buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.shininess = ato_buffer(minirt->scene->buffer + i, &i, ' ');
 	// printf("parsing reflective buffer:\n%s\n", minirt->scene->buffer + i);
-	obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, ' ');
-	obj->shearing = get_matrix(4, 4, 1);
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
-	if (minirt->scene->buffer[i] != '\n')
+	if (is_shearing(minirt->scene->buffer + i))
 	{
-		// printf("parsing shearing buffer:\n%s\n", minirt->scene->buffer + i);
+		obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, ' ');
 		shear.xy = ato_buffer(minirt->scene->buffer + i, &i, ',');
 		shear.xz = ato_buffer(minirt->scene->buffer + i, &i, ',');
 		shear.yx= ato_buffer(minirt->scene->buffer + i, &i, ',');
@@ -192,9 +203,11 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 		shear.zy= ato_buffer(minirt->scene->buffer + i, &i, '\n');
 		obj->shearing = get_shearing_matrix(shear);
 	}
-	// else
-	// 	i++;
-	// obj->transform = get_transformation(obj->translation, obj->rotation, obj->shearing, obj->scaling);
+	else
+	{
+		obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, '\n');
+		obj->shearing = get_matrix(4, 4, 1);
+	}
 	obj->transform = get_object_transformation(obj);
 	obj->inv = get_inversed_matrix(obj->transform);
 	if (obj->type == PLANE)
