@@ -48,11 +48,8 @@ log/debug.csv
 compile_commands.json
 
 shell.nix
-<<<<<<< HEAD
 .envrc
 .direnv
-=======
 
 ekho*
 sound_vizualizer.c
->>>>>>> main

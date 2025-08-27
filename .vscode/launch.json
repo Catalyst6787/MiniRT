@@ -17,13 +17,9 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT_bonus",
-<<<<<<< HEAD
 			// "args": ["assets/scenes/cylinder_debug.rt"],
 			// "args": ["random_generation.rt"],
-			"args": ["assets/newscenes/cone_debug.rt"],
-=======
-			"args": ["scenes/subject_example.rt"],
->>>>>>> main
+			"args": ["assets/newscenes/invalid/parser_test_err0.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -1,4 +1,5 @@
 #include "errors.h"
+#include "ft_printf.h"
 #include "libft.h"
 #include "matrice.h"
 #include "minirt.h"
@@ -158,6 +159,130 @@ static int is_shearing(char *s)
 		return(0);
 }
 
+static int print_until(char *s, char c)
+{
+	int i;
+
+	i = 0;
+	while (s && s[i] && s[i] != c)
+		i++;
+	if (s && s[i])
+		return(write(1, s, i));
+	return(0);
+}
+
+static int	is_valid_double(char *s, int *length)
+{
+	int i;
+
+	i = 0;
+	if (!s || !s[0])
+		return(1);
+	if (s[i] == '-')
+		i++;
+	while (s[i] && ft_isdigit(s[i]))
+		i++;
+	if (s[i] != '.')
+	{
+		if ((s[i] == ' ' || s[i] == ',' || s[i] == '\n') && i < 18)
+			return (*length += i, 1);
+		else
+			return (printf("invalid double, more than 17 significant digits: "), print_until(s, s[i]), 0);
+	}
+	i++;
+	while (s[i] && ft_isdigit(s[i]))
+		i++;
+	if (i < 18)
+		return(*length += i, 1);
+	return(printf("invalid double, more than 17 significant digits\n"), print_until(s, s[i]), 0);
+}
+
+static int	is_valid_vector(char *s, int *length)
+{
+	int i;
+	int e;
+
+	i = 0;
+	e = 0;
+	while (e < 3)
+	{
+		if (!is_valid_double(s + i, length))
+			return (0);
+		i += *length;
+		*length = 0;
+		if (e != 2 && s[i] != ',')
+			return (0);
+		if (e != 2)
+			i++;
+		e++;
+	}
+	return (*length = i, 1);
+}
+
+static int	is_valid_object(char *s)
+{
+	int	i;
+	int	e;
+	int	length;
+
+	i = 0;
+	e = 0;
+	length = 0;
+	while (s && s[i] && ft_isspace(s[i]))
+		i++;
+	if (!ft_isalpha(s[i]) || !ft_isalpha(s[i + 1]))
+		return (0);
+	i += 2;
+	if (!ft_isspace(s[i]))
+		return (0);
+	i++;
+	while (e < 4)
+	{
+		if (!is_valid_vector(s + i, &length))
+			return (0);
+		i += length;
+		length = 0;
+		if (!ft_isspace(s[i]))
+			return (0);
+		i++;
+		e++;
+	}
+	e = 0;
+	while (e < 4)
+	{
+		if (!is_valid_double(s + i, &length))
+			return (0);
+		i += length;
+		length = 0;
+		if (e != 3 && !ft_isspace(s[i]))
+			return (0);
+		if (e != 3)
+			i++;
+		e++;
+	}
+	e = 0;
+	if (s[i] == '\n' || (s[i] == ' ' && s[i + 1] == '\n'))
+		return(1);
+	else if (!ft_isspace(s[i]))
+		return (0);
+	i++;
+	while (e < 6)
+	{
+		if (!is_valid_double(s + i, &length))
+			return (0);
+		i += length;
+		length = 0;
+		if (e != 5 && s[i] != ',')
+			return (0);
+		if (e != 5)
+			i++;
+		e++;
+	}
+	if (s[i] == '\n' || (s[i] == ' ' && s[i + 1] == '\n'))
+		return (1);
+	return (0);
+}
+
 int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 {
 	int	i;
@@ -165,33 +290,24 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	t_vec3	scaling;
 
 	i = *cursor;
-	// printf("parsing obj. buffer:\n%s\n", minirt->scene->buffer + i);
 	if (!obj)
 		return(quit(minirt, "error in parse object, obj doesnt exist"));
-	while (ft_isspace(minirt->scene->buffer[i]))
-		i++;
+	if (!is_valid_object(minirt->scene->buffer + *cursor))
+		return(quit(minirt, "error in parse_object, object malformed"));
 	if (set_obj_type(obj, &i, minirt->scene->buffer))
 		return(printf("unrecognized obj: [%s]", minirt->scene->buffer + *cursor), quit(minirt, WRONG_OBJ));
 	while (ft_isspace(minirt->scene->buffer[i]))
 		i++;
-	// printf("parsing translation. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
-	// printf("parsing rotation. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->rotation = get_rotation_matrix(convert_dir_to_euler(vec3_normalise(ato_vec3(minirt->scene->buffer, &i, minirt))));
-	// printf("parsing scaling. buffer:\n%s\n", minirt->scene->buffer + i);
 	scaling = ato_vec3(minirt->scene->buffer, &i, minirt);
 	obj->scaling = get_scaling_matrix(scaling);
-	// printf("parsing color. buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material = get_default_material(vec3_double_division(ato_vec3(minirt->scene->buffer, &i, minirt), 255), minirt->scene);
 	obj->material.ambient = minirt->scene->ambient->brightness;
 	obj->material.ambient_color = minirt->scene->ambient->color;
-	// printf("parsing diffuse buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.diffuse = ato_buffer(minirt->scene->buffer + i, &i, ' ');
-	// printf("parsing specular buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.specular = ato_buffer(minirt->scene->buffer + i, &i, ' ');
-	// printf("parsing shininess buffer:\n%s\n", minirt->scene->buffer + i);
 	obj->material.shininess = ato_buffer(minirt->scene->buffer + i, &i, ' ');
-	// printf("parsing reflective buffer:\n%s\n", minirt->scene->buffer + i);
 	if (is_shearing(minirt->scene->buffer + i))
 	{
 		obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, ' ');

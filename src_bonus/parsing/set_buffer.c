@@ -1,4 +1,7 @@
+#include "errors.h"
+#include "libft.h"
 #include "minirt.h"
+#include <stdlib.h>
 
 int	get_file_contents(int fd, char **file_contents)
 {
@@ -84,14 +87,47 @@ char	*str_dup_no_tab(char *src)
 	return (nstr);
 }
 
+char	*str_dedup_sp(char *src)
+{
+	int i;
+	int j;
+	char *res;
+
+	i = 0;
+	j = 0;
+	res = malloc(sizeof(char) * (ft_strlen(src) + 1));
+	if (!res)
+		return(NULL);
+	ft_memset(res, 0, sizeof(char) * (ft_strlen(src) + 1));
+	while (src[i])
+	{
+		if (src[i] == ' ' && (src[i + 1] == ' ' || src[i + 1] == '\n'))
+			i++;
+		else
+		{
+			res[j++] = src[i++];
+		}
+	}
+	return(res);
+	for (int i = 0; res[i]; i++)
+		if (res[i] == res[i + 1] && res[i] == ' ')
+			printf("\nYOU FUCKING DUMBASS\n");
+}
+
 
 void	filter_buffer(t_minirt *minirt)
 {
 	int		len;
 	char	*tmp;
+	char	*no_dup_sp;
 
 	len = count_char_whithout_comments(minirt->scene->buffer);
 	tmp = str_dup_no_tab(minirt->scene->buffer);
+	no_dup_sp = str_dedup_sp(tmp);
+	free(tmp);
+	tmp = no_dup_sp;
+	if (!no_dup_sp)
+		quit(minirt, MALLOC_ERR);
 	if (!tmp)
 		quit(minirt, MALLOC_ERR);
 	free(minirt->scene->buffer);
