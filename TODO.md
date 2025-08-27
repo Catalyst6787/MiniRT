@@ -3,24 +3,38 @@ Simple C ray tracer.
 
 ### basic
 
+<<<<<<< HEAD
 - [ ] problem with cone normals
 - [ ] fix camera orientation issues -> length = 0 and non-invertible matrix
 			-> might as well create a 6d movement system
 
 - [X] fix reflection is brighter than normal
 - [X] fix render time calculation
+=======
+- [ ] dev.sh 1 : problem when size of the sphere is too big and render (free() : invalid size)
+
+- [ ] add value print for elements change
+- [ ] norminette
+- [ ] project finished!
+>>>>>>> main
 
 - [ ] euler ?
 - [ ] fix a little problem in the tests (commented for now)
-- [ ] if he time allow it, be able to move light (event)
 
 ### optional
 
 - [ ] add a ratio to move object faster
 - [ ] add height mode to pav num
 - [ ] display last key pressed
+- [ ] display % of the scene calculated
 
 
+- [X] Handle light brightness pavnum
+- [X] Handle cyl/con height and radius pavnum
+- [X] do light events
+- [X] add colour to pav mode ?
+- [X] add pav mode str
+- [X] problem with cone normals
 - [X] parsing problem if more than one zero after the coma (try also with 2 dots)
 - [X] vec3_basic op use pointers (actually a mess because of the functions calls as parameters)
 - [X] this shouldnt work : co 1,0,    0,0,-0.4   2 1 210,95,210

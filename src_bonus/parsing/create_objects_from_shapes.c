@@ -101,5 +101,5 @@
 // 		create_object_from_cone(&scene->objects[j], scene->cones[i], i);
 // 		i++;
 // 		j++;
-	
+
 // }

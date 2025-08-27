@@ -31,7 +31,7 @@ t_matrix	get_matrix(int row, int col, bool identity)
 
 	i = -1;
 	if (row < 1 || row > 4 || col < 1 || col > 4)
-		return (print_err(__FILE__, LINE, "matrix size must be between 1 and 4"),
+		return (print_err(__FILE__, LINE, "get_matrix : wrong matric size"),
 			get_matrix(4, 4, 0));
 	ft_memset(&new_matrix, 0, sizeof(t_matrix));
 	new_matrix.row = row;

@@ -1,6 +1,5 @@
 #include "minirt.h"
 
-
 bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 {
 	double	x;
@@ -11,7 +10,9 @@ bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 	return ((x * x + z * z) <= (y_cap * y_cap));
 }
 
-int	intersect_cone_caps(const t_object *object, const t_ray *ray, t_inter_list *list)
+int	intersect_cone_caps(const t_object *object,
+						const t_ray *ray,
+						t_inter_list *list)
 {
 	double	t;
 	int		hit_added;
@@ -68,6 +69,22 @@ static int	store_cone_inter(t_cylinder_inter *d, const t_object *object,
 	return (hits_added);
 }
 
+int	parallel_ray(const t_object *object,
+	const t_ray *ray, t_inter_list *list, t_cylinder_inter *d)
+{
+	int	hits_added;
+
+	hits_added = 0;
+	if (d->b > -(EPSILON) && d->b < EPSILON)
+		return (intersect_cone_caps(object, ray, list));
+	list->inters[list->count].t = -(d->c) / (2 * d->b);
+	list->inters[list->count].obj = object;
+	list->count++;
+	hits_added++;
+	hits_added += intersect_cone_caps(object, ray, list);
+	return (hits_added);
+}
+
 int	get_cone_inter(const t_object *object,
 	const t_ray *ray, t_inter_list *list)
 {
@@ -77,21 +94,13 @@ int	get_cone_inter(const t_object *object,
 	hits_added = 0;
 	if (list->count > list->capacity - 2)
 		return (print_err(__FILE__, LINE,
-				"get_cylinder_inter: no more space in list"), 1);
+				"cylinder_inter: no more space in list"), 1);
 	d.a = pow(ray->dir.x, 2) - pow(ray->dir.y, 2) + pow(ray->dir.z, 2);
-	d.b = 2 * ray->origin.x * ray->dir.x - 2 * ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
+	d.b = 2 * ray->origin.x * ray->dir.x - 2
+		* ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
 	d.c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
 	if (d.a > -(EPSILON) && d.a < EPSILON)
-	{
-		if (d.b > -(EPSILON) && d.b < EPSILON)
-			return (intersect_cone_caps(object, ray, list));
-		list->inters[list->count].t = -(d.c) / (2 * d.b);
-		list->inters[list->count].obj = object;
-		list->count++;
-		hits_added++;
-		hits_added += intersect_cone_caps(object, ray, list);
-		return (hits_added);
-	}
+		return (parallel_ray(object, ray, list, &d));
 	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
 	if (d.discriminant < 0)
 		return (intersect_cone_caps(object, ray, list));

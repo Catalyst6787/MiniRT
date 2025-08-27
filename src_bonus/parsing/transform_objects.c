@@ -6,7 +6,7 @@ t_matrix	get_object_transformation(t_object *obj)
 
 	result = multiply_matrix(obj->translation,
 			multiply_matrix(obj->rotation,
-				multiply_matrix(obj->shearing,obj->scaling)));
+				multiply_matrix(obj->shearing, obj->scaling)));
 	return (result);
 }
 

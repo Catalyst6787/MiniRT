@@ -64,16 +64,19 @@ static int	store_cylinder_inter(t_cylinder_inter *d, const t_object *object,
 	}
 	return (0);
 }
-int get_cylinder_inter(const t_object *object,
-	const t_ray *ray, t_inter_list *list)
+
+int	get_cylinder_inter(const t_object *object,
+						const t_ray *ray,
+						t_inter_list *list)
 {
 	t_cylinder_inter	d;
-	int					hits_added = 0;
+	int					hits_added;
 
 	d.nb_inter = 0;
 	hits_added = 0;
 	if (list->count > list->capacity - 2)
-		return (print_err(__FILE__, LINE, "get_cylinder_inter: no more space in list"), 0);
+		return (print_err(__FILE__, LINE,
+				"get_cylinder_inter: no more space in list"), 0);
 	d.a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
 	if (d.a > -(EPSILON) && d.a < EPSILON)
 	{
@@ -90,6 +93,5 @@ int get_cylinder_inter(const t_object *object,
 		hits_added += store_cylinder_inter(&d, object, ray, list);
 	}
 	hits_added += intersect_caps(object, ray, list);
-
 	return (hits_added);
 }

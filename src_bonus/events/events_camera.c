@@ -1,48 +1,53 @@
 #include "minirt.h"
 
-void	event_light_pos(t_minirt *minirt, int keycode)
+void	event_reflections(t_minirt *minirt, int keycode)
 {
-	printf("rework light pos to move multiple lights with select like for object\n");
-	(void)minirt;
-	(void)keycode;
-	// minirt->render->pixel_size = PIXEL_SIZE_MULT;
-	// if (keycode == U)
-	// 	minirt->scene->light->pos.y += 0.2;
-	// else if (keycode == H)
-	// 	minirt->scene->light->pos.x -= 0.2;
-	// else if (keycode == J)
-	// 	minirt->scene->light->pos.y -= 0.2;
-	// else if (keycode == K)
-	// 	minirt->scene->light->pos.x += 0.2;
-	// else if (keycode == I)
-	// 	minirt->scene->light->pos.z -= 0.2;
-	// else if (keycode == O)
-	// 	minirt->scene->light->pos.z += 0.2;
-	// render_scene(minirt);
+	if (keycode == L_BRACKET)
+	{
+		if (minirt->render->max_depth > 0)
+		{
+			minirt->render->pixel_size = PIXEL_SIZE_MULT;
+			minirt->render->max_depth --;
+			printf("Max depth -- [%d]\n", minirt->render->max_depth);
+			start_render(minirt);
+		}
+	}
+	if (keycode == R_BRACKET)
+	{
+		if (minirt->render->max_depth < 15)
+		{
+			minirt->render->pixel_size = PIXEL_SIZE_MULT;
+			minirt->render->max_depth ++;
+			printf("Max depth ++ [%d]\n", minirt->render->max_depth);
+			start_render(minirt);
+		}
+	}
+}
+
+void	print_arrows(int keycode)
+{
+	if (keycode == UP)
+		ft_printf("[↑] pressed\n");
+	else if (keycode == DOWN)
+		ft_printf("[↓] pressed\n");
+	else if (keycode == LEFT)
+		ft_printf("[←] pressed\n");
+	else if (keycode == RIGHT)
+		ft_printf("[→] pressed\n");
 }
 
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == UP)
-	{
-		ft_printf("[↑] pressed\n");
 		minirt->scene->camera->view.to.y += 0.5;
-	}
 	else if (keycode == DOWN)
-	{
-		ft_printf("[↓] pressed\n");
 		minirt->scene->camera->view.to.y -= 0.5;
-	}
 	else if (keycode == LEFT)
-	{
-		ft_printf("[←] pressed\n");
 		minirt->scene->camera->view.to.x -= 0.5;
-	}
 	else if (keycode == RIGHT)
-	{
-		ft_printf("[→] pressed\n");
 		minirt->scene->camera->view.to.x += 0.5;
-	}
+	print_arrows(keycode);
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
@@ -52,6 +57,7 @@ void	arrows_handle(int keycode, t_minirt *minirt)
 
 void	erzx_handle(int keycode, t_minirt *minirt)
 {
+	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == E)
 	{
 		minirt->scene->camera->view.from.y += 0.5;
@@ -62,10 +68,6 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 		minirt->scene->camera->view.from.y -= 0.5;
 		minirt->scene->camera->view.to.y -= 0.5;
 	}
-	else if (keycode == Z)
-		minirt->scene->camera->view.to.z -= 0.5;
-	else if (keycode == X)
-		minirt->scene->camera->view.to.z += 0.5;
 	ft_printf("[%c] pressed\n", keycode - 32);
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);

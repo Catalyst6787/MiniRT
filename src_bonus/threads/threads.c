@@ -1,49 +1,42 @@
 #include "minirt.h"
 
-void	th_display_image(t_minirt *minirt)
+void	init_thread(t_minirt *minirt, t_thread_data *th, int i)
 {
-	mlx_put_image_to_window(minirt->mlx->mlx,
-		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
-	if (minirt->ui->command_help)
-	{
-		display_command_help(minirt, minirt->mlx);
-		mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
-			WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
-			minirt->ui->str_selected_object);
-	}
-}
-
-void	start_thread(t_minirt *minirt, t_thread_data *thread, int i, int *count)
-{
-	int	diff;
-	int	c;
-
-	c = *count;
-	diff = WIN_W / NB_THREADS;
-	thread[i].start = c;
-	thread[i].end = c + diff - 1;
-	thread[i].minirt = minirt;
-	while (i == (NB_THREADS - 1) && thread[i].end < (WIN_W - 1))
-		thread[i].end ++;
-	c = c + diff;
-	if (pthread_create(&thread[i].thread, NULL, th_render_scene, &thread[i]) == -1)
-		quit(minirt, TH_ERR);
-	*count = c;
+	th->id = i;
+	th->minirt = minirt;
+	th->inter_list.inters = malloc(sizeof(t_inter)
+			* count_intersections(th->minirt->scene) + 1);
+	th->inter_list.capacity = count_intersections(th->minirt->scene);
+	th->shadow_list.inters = malloc(sizeof(t_inter)
+			* count_intersections(th->minirt->scene) + 1);
+	th->shadow_list.capacity = count_intersections(th->minirt->scene);
+	th->inter_list.count = 0;
+	th->shadow_list.count = 0;
+	if (!th->inter_list.inters || !th->shadow_list.inters)
+		quit(th->minirt, MALLOC_ERR);
+	ft_memset(th->inter_list.inters, 0, sizeof(t_inter)
+		* count_intersections(th->minirt->scene));
+	ft_memset(th->shadow_list.inters, 0, sizeof(t_inter)
+		* count_intersections(th->minirt->scene));
 }
 
 int	start_threads(t_minirt *minirt)
 {
 	t_thread_data	thread[NB_THREADS];
 	int				i;
-	int				count;
-	clock_t			t;
 
 	i = 0;
-	count = 0;
-	t = clock();
 	while (i < NB_THREADS)
 	{
-		start_thread(minirt, thread, i, &count);
+		init_thread(minirt, &thread[i], i);
+		i++;
+	}
+	i = 0;
+	while (i < NB_THREADS)
+	{
+		if (pthread_create(&thread[i].thread, NULL, th_render_scene,
+				&thread[i]) == -1)
+			quit(minirt, TH_ERR);
 		i++;
 	}
 	i = 0;
@@ -52,9 +45,6 @@ int	start_threads(t_minirt *minirt)
 		pthread_join(thread[i].thread, NULL);
 		i++;
 	}
-	t = clock() - t;
-	th_display_image(minirt);
-	printf("Scene rendered in %f seconds\n",
-			(((double)t) / CLOCKS_PER_SEC) / NB_THREADS);
+	display_image(minirt);
 	return (0);
 }

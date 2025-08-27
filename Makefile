@@ -21,7 +21,7 @@ LIBFT = ./libft/libft.a
 SRC_DIR = src
 BONUS_DIR = src_bonus
 SUBDIRS = parsing vec3 debug rays tests colors matrices print render
-BONUS_SUBDIRS = $(SUBDIRS) threads # add more here
+BONUS_SUBDIRS = $(SUBDIRS) threads events # add more here
 SRC =	main.c \
 		parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
 		parse_scene_elements.c \
@@ -31,7 +31,7 @@ SRC =	main.c \
 		fill_intersection_table.c \
 		debug.c \
 		double_utils.c \
-		events.c events_camera_light.c event_obj_positions.c events_fun.c events_keys.c events_select.c \
+		events.c events_camera.c events_object_data.c events_fun.c events_keys.c events_object_selection.c \
 		print_data.c print_more_data.c \
 		exit.c exit2.c \
 		get_debug_fd.c \
@@ -66,6 +66,7 @@ BONUS_SRC =	$(SRC) \
 			threads.c \
 			th_render.c th_shadow.c \
 			scene_generator.c scene_generator_print.c \
+			events_change_color.c events_change_direction.c events_change_position.c events_change_size.c \
 			tests.c tests_color.c tests_matrices.c tests_rays.c \
 			test_intersections.c test_normals.c test_reflections.c \
 			test_lighting.c test_world.c test_shadows.c test_camera.c \
@@ -152,7 +153,7 @@ valgrindbonus: bonus
 	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(BONUS_NAME)
 
 generate: bonus
-	./$(BONUS_NAME) assets/scenes/random_generation.rt
+	./$(BONUS_NAME) scenes/random_generation.rt
 
 run: all
 	@./$(NAME)

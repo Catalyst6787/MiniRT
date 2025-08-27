@@ -2,10 +2,14 @@
 #include "minirt.h"
 #include "vec3.h"
 
-void	free_and_null(void	**ptr)
+int	generate_random_int(int min, int max)
 {
-	free(*ptr);
-	ptr = NULL;
+	return (rand() % (max - min + 1) + min);
+}
+
+double	generate_random_double(double min, double max)
+{
+	return (min + (double)rand() / RAND_MAX * (max - min));
 }
 
 void	print_err(char *file, int line, char *s)

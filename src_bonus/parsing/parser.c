@@ -29,11 +29,28 @@ void	count_elements(t_scene *scene)
 		+ scene->nb_cylinder + scene->nb_cone;
 }
 
+void	test_light_sum(t_scene *scene)
+{
+	int		i;
+	double	tot;
+
+	i = 0;
+	tot = scene->ambient->brightness;
+	while (i < scene->nb_light)
+	{
+		tot += scene->lights[i]->brightness;
+		i++;
+	}
+	if (tot > 1.0)
+		printf("%sWarning, sum of lights > 1!%s\n", RED, CRESET);
+}
+
 void	parse_scene(t_minirt *minirt)
 {
 	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
-	if (!ft_strncmp(minirt->scene->filename, "assets/scenes/random_generation.rt", 21))
+	if (!ft_strncmp(minirt->scene->filename,
+			"scenes/random_generation.rt", 21))
 		generate_random_scene();
 	check_file_name(minirt);
 	set_scene_buffer(minirt);
@@ -49,9 +66,8 @@ void	parse_scene(t_minirt *minirt)
 	// create_object_array(minirt->scene);
 	// print_scene_ok_message(minirt->scene->filename);
 	debug_print_scene_data(minirt);
-	fill_intersection_table(minirt, minirt->render); // TODO remove
-	set_selected_object_str(minirt, minirt->scene);
+	fill_intersection_table(minirt, minirt->render);
+	set_selected_object_data(minirt, minirt->scene);
 	debug_print_objects_pointers(minirt->scene);
-	free(minirt->scene->buffer);
-	minirt->scene->buffer = NULL;
+	test_light_sum(minirt->scene);
 }

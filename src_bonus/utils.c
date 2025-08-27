@@ -14,7 +14,6 @@ t_vec3	convert_dir_to_euler(t_vec3 dir)
 	t_vec3	euler_angles;
 	double	len_xz;
 
-	dir = vec3_normalise(dir);
 	euler_angles.y = atan2(dir.x, dir.z);
 	len_xz = sqrt(dir.x * dir.x + dir.z * dir.z);
 	if (len_xz < EPSILON)
@@ -34,31 +33,23 @@ t_vec3	convert_dir_to_euler(t_vec3 dir)
  * is used to display "Selected : " before the type (used
  * to print object selected window)
  */
-char	*object_type_to_str(t_object *object, bool selected)
+char	*object_type_to_str(t_object *object)
 {
 	if (object->type == SPHERE)
 	{
-		if (selected)
-			return (ft_strdup("Selected : sphere "));
-		return (ft_strdup("sphere "));
+		return (ft_strdup("Selected : sphere "));
 	}
 	if (object->type == PLANE)
 	{
-		if (selected)
-			return (ft_strdup("Selected : plane "));
-		return (ft_strdup("plane "));
+		return (ft_strdup("Selected : plane "));
 	}
 	if (object->type == CYLINDER)
 	{
-		if (selected)
-			return (ft_strdup("Selected : cylinder "));
-		return (ft_strdup("cylinder "));
+		return (ft_strdup("Selected : cylinder "));
 	}
 	if (object->type == CONE)
 	{
-		if (selected)
-			return (ft_strdup("Selected : cone "));
-		return (ft_strdup("cone "));
+		return (ft_strdup("Selected : cone "));
 	}
 	return (NULL);
 }
@@ -75,13 +66,4 @@ void	my_mlx_pixel_put(t_minirt *minirt, int x, int y, int color)
 	}
 	else
 		quit(minirt, PIXEL_PUT_ERR);
-}
-
-void	free_tab(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr && arr[i])
-		free(arr[i++]);
 }

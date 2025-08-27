@@ -13,6 +13,8 @@
 # include <fcntl.h>
 # include <assert.h>
 # include <unistd.h>
+# include <dirent.h>
+#include <sys/time.h>
 
 # include "libft.h"
 # include "mlx.h"
@@ -52,14 +54,13 @@
 # define MULTI_THREADING 1
 # define GENERATE_SCENE 0
 
-# define REFLECTION_MAX_DEPTH 10
+# define REFLECTION_MAX_DEPTH 5
 # ifndef M_PI
 #  define M_PI 3.14159265358979323846
 #  define M_PI_2 1.57079632679489661923
 # endif
 # define EPSILON 1.0E-5
 
-// # define FILE __FILE__
 # define LINE __LINE__
 
 typedef struct s_img_data
@@ -70,10 +71,22 @@ typedef struct s_img_data
 
 typedef enum e_move_mode
 {
-	dir,
 	pos,
-	size
+	dir,
+	size,
+	bright,
+	red,
+	green,
+	blue
 }				t_move_mode;
+
+typedef enum e_selected
+{
+	OBJ,
+	LIGHT,
+	AMB
+}				t_selected;
+
 
 typedef struct s_parsing_helper
 {
@@ -99,7 +112,9 @@ typedef struct s_ui
 	t_vec3		string_color;
 	t_move_mode	move_mode;
 	int			selected_object;
+	t_selected	selected_type;
 	char		*str_selected_object;
+	char		*str_mode;
 	bool		command_help;
 }				t_ui;
 
@@ -123,15 +138,12 @@ typedef struct s_rand {
 
 typedef struct s_thread_data
 {
-	int				start;
-	int				end;
+	int				id;
 	pthread_t		thread;
 	t_minirt		*minirt;
 	t_inter_list inter_list;
 	t_inter_list shadow_list;
 }				t_thread_data;
-
-
 
 /*                                 INIT                                  */
 
@@ -167,6 +179,7 @@ int			parse_object(t_minirt *minirt, t_object *obj, int *cursor);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
+void		set_object_ambient_light(t_scene *scene);
 
 int			count_comas(char *buffer, int i);
 int			count_spaces_in_line(char *buffer, int i);
@@ -199,7 +212,6 @@ void		create_object_from_cylinder(t_object *object,
 				t_cylinder *cylinder, int id);
 void		create_object_from_cone(t_object *object,
 				t_cone *cone, int id);
-
 
 	
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
@@ -279,7 +291,7 @@ void		print_err(char *file, int line, char *s);
 int			get_max_int(int a, int b);
 int			get_min_int(int a, int b);
 void		swap_doubles(double *a, double *b);
-char		*object_type_to_str(t_object *object, bool selected);
+char		*object_type_to_str(t_object *object);
 t_vec3		convert_dir_to_euler(t_vec3 dir);
 t_vec3		ato_vec3(char *s, int *cursor, t_minirt *minirt);
 /*                                 EVENTS                                  */
@@ -295,26 +307,33 @@ void		print_camera_data(t_minirt *minirt);
 void		event_turn_cylinders(t_minirt *minirt);
 void		event_sphere_shearing(t_minirt *minirt);
 void		event_light_pos(t_minirt *minirt, int keycode);
+void		event_reflections(t_minirt *minirt, int keycode);
 void		arrows_handle(int keycode, t_minirt *minirt);
 int			asdw_handle(int keycode, t_minirt *minirt);
 void		erzx_handle(int keycode, t_minirt *minirt);
 
 void		event_object_selection(t_minirt *minirt,
 				t_scene *scene, int keycode);
-void		set_selected_object_str(t_minirt *minirt, t_scene *scene);
-void		event_obj_pos(t_minirt *minirt, int keycode);
+int			set_selected_object_data(t_minirt *minirt, t_scene *scene);
+void		event_handle_pavnum(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
+
+void		change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_direction(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_size(t_scene *scene, int keycode, int i);
+void		change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i);
 
 /*                              GENERATOR                                */
 
 void		generate_random_scene();
 void		gen_print_lights(FILE *file, t_rand *rand);
 void		gen_print_sphere(FILE *file);
-void		gen_print_plane(FILE *file, t_rand *rand);
+void		gen_print_plane(FILE *file, t_rand *rand, bool chaos);
 void		gen_print_cylinder_cones(FILE *file, char c);
 int			generate_random_int(int min, int max);
 double		generate_random_double(double min, double max);
 
+void		save_random_scene(t_minirt *minirt);
 
 /*                                 EXIT                                  */
 
@@ -333,7 +352,6 @@ void		debug_print_inter_list(t_inter_list *list);
 void		debug_print_vec(t_vec3 *v, char *name);
 void		debug_print_matrice(t_matrix m, char *matrix_type);
 
-void		print_inter(t_inter *inter);
 void		print_scene(t_minirt *minirt, bool asterix);
 void		print_scene_ok_message(char *scene);
 void		print_vec3(t_vec3 vec, char *vec_name);
@@ -354,13 +372,15 @@ void		print_inter_list(t_inter_list *list);
 double		double_abs(double d);
 int			double_isequal(double a, double b);
 
-///				Transformation
+/*                                TRANSFORMATIONS                          */
+
 void		set_sphere_transformation(t_sphere *s);
 void		set_plane_transformation(t_plane *pl);
 void		set_cylinder_tranformation(t_cylinder *cy);
 void		set_cone_tranformation(t_cone *co);
 
 // sort intersections
+
 void		sort_inter(t_inter_list *inter_lst);
 t_inter		*get_hit(t_inter_list *lst);
 t_ray		get_origin_direction(t_camera camera, t_vec3 pixel);
@@ -369,10 +389,12 @@ t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
 
 // reflections
+
 t_vec3		reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth);
 t_vec3		get_reflection(t_vec3 in, t_vec3 normal);
 
 //// TESTS
+
 int			start_all_tests(void);
 int			test_tuple_point(void);
 int			test_tuple_vector(void);
