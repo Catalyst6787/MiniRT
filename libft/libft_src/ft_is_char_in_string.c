@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_char_in_string.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 01:07:45 by alvan-de          #+#    #+#             */
-/*   Updated: 2025/05/14 16:39:20 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:09:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,5 @@ int	ft_is_char_in_string(const char *s, char c)
 		if (s[i] == c)
 			return (1);
 	}
-	if (s[i])
-		return (0);
-	else
-		return (1);
+	return (0);
 }

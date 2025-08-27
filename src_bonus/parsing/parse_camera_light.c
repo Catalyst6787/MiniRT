@@ -174,25 +174,31 @@ static int print_until(char *s, char c)
 static int	is_valid_double(char *s, int *length)
 {
 	int i;
+	int offset;
 
 	i = 0;
+	offset = 0;
 	if (!s || !s[0])
 		return(1);
 	if (s[i] == '-')
+	{
 		i++;
+		offset++;
+	}
 	while (s[i] && ft_isdigit(s[i]))
 		i++;
 	if (s[i] != '.')
 	{
-		if ((s[i] == ' ' || s[i] == ',' || s[i] == '\n') && i < 18)
+		if ((s[i] == ' ' || s[i] == ',' || s[i] == '\n') && i - offset < 18)
 			return (*length += i, 1);
 		else
 			return (printf("invalid double, more than 17 significant digits: "), print_until(s, s[i]), 0);
 	}
 	i++;
+	offset++;
 	while (s[i] && ft_isdigit(s[i]))
 		i++;
-	if (i < 18)
+	if (i - offset < 18)
 		return(*length += i, 1);
 	return(printf("invalid double, more than 17 significant digits\n"), print_until(s, s[i]), 0);
 }
