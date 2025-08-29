@@ -87,6 +87,14 @@ typedef enum e_selected
 	AMB
 }				t_selected;
 
+typedef enum e_data_type
+{
+	translation = 0,
+	direction,
+	scaling,
+	color,
+}				t_data_type;
+
 
 typedef struct s_parsing_helper
 {

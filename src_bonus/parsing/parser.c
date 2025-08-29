@@ -61,9 +61,7 @@ void	parse_scene(t_minirt *minirt)
 	alloc_elements(minirt, minirt->scene);
 	parse_scene_elements(minirt, minirt->scene);
 	set_camera_transformation(minirt->scene);
-	// set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
-	// create_object_array(minirt->scene);
 	// print_scene_ok_message(minirt->scene->filename);
 	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);

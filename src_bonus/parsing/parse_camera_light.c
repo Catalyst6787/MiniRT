@@ -1,11 +1,13 @@
+#include "bits/types/__FILE.h"
 #include "errors.h"
-#include "ft_printf.h"
 #include "libft.h"
+#include "material.h"
 #include "matrice.h"
 #include "minirt.h"
 #include "object.h"
 #include "scene.h"
 #include "vec3.h"
+#include <stdio.h>
 
 int	count_comas(char *buffer, int i)
 {
@@ -192,7 +194,7 @@ static int	is_valid_double(char *s, int *length)
 		if ((s[i] == ' ' || s[i] == ',' || s[i] == '\n') && i - offset < 18)
 			return (*length += i, 1);
 		else
-			return (printf("invalid double, more than 17 significant digits: "), print_until(s, s[i]), 0);
+			return (print_err(__FILE__, LINE, "invalid double, more than 17 significant digits: \n"), print_until(s, s[i]), 0);
 	}
 	i++;
 	offset++;
@@ -200,7 +202,7 @@ static int	is_valid_double(char *s, int *length)
 		i++;
 	if (i - offset < 18)
 		return(*length += i, 1);
-	return(printf("invalid double, more than 17 significant digits\n"), print_until(s, s[i]), 0);
+	return(print_err(__FILE__, LINE, "invalid double, more than 17 significant digits: \n"), print_until(s, s[i]), 0);
 }
 
 static int	is_valid_vector(char *s, int *length)
@@ -289,26 +291,85 @@ static int	is_valid_object(char *s)
 	return (0);
 }
 
+int	check_direction_validity(t_vec3 dir)
+{
+	if (double_isequal(dir.x, 0)
+			&& double_isequal(dir.y, 0)
+			&& double_isequal(dir.z, 0))
+		return (1);
+	return(0);
+}
+
+int	check_scaling_validity(t_vec3 scaling)
+{
+	if (double_isequal(scaling.x, 0)
+			|| double_isequal(scaling.y, 0)
+			|| double_isequal(scaling.z, 0))
+		return (1);
+	return(0);
+}
+
+int check_color_validity(t_vec3 color)
+{
+	if (color.r > 255 || color.r < 0)
+		return (1);
+	if (color.g > 255 || color.g < 0)
+		return (1);
+	if (color.b > 255 || color.b < 0)
+		return (1);
+	return (0);
+}
+
+
+int	check_transformation_data(t_vec3 transformations[4])
+{
+	if (check_direction_validity(transformations[direction]))
+		return (print_err(__FILE__, LINE, PARSER_WRONG_DIRECTION), direction);
+	if (check_scaling_validity(transformations[scaling]))
+		return (print_err(__FILE__, LINE, PARSER_WRONG_SCALE), scaling);
+	if (check_color_validity(transformations[color]))
+		return (print_err(__FILE__, LINE, PARSER_WRONG_COLOR), color);
+	return (0);
+}
+
+int check_material_data(t_material material)
+{
+	if (material.ambient > 1 || material.ambient < 0)
+		return (1);
+	if (check_color_validity(material.ambient_color))
+		return (1);
+	if (material.diffuse > 1 || material.diffuse < 0)
+		return (1);
+	if (material.specular > 1 || material.specular < 0)
+		return (1);
+	if (material.shininess > 500 || material.shininess < 1)
+		return (1);
+	if (material.reflective > 1 || material.reflective < 0)
+		return (1);
+	return (0);
+}
+
+
 int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 {
 	int	i;
 	t_shear	shear;
-	t_vec3	scaling;
+	t_vec3	transformations[4];
 
 	i = *cursor;
 	if (!obj)
-		return(quit(minirt, "error in parse object, obj doesnt exist"));
+		quit(minirt, "error in parse object, obj doesnt exist");
 	if (!is_valid_object(minirt->scene->buffer + *cursor))
-		return(quit(minirt, "error in parse_object, object malformed"));
+		quit(minirt, "error in parse_object, object malformed");
 	if (set_obj_type(obj, &i, minirt->scene->buffer))
 		return(printf("unrecognized obj: [%s]", minirt->scene->buffer + *cursor), quit(minirt, WRONG_OBJ));
 	while (ft_isspace(minirt->scene->buffer[i]))
 		i++;
-	obj->translation = get_translation_matrix(ato_vec3(minirt->scene->buffer, &i, minirt));
-	obj->rotation = get_rotation_matrix(convert_dir_to_euler(vec3_normalise(ato_vec3(minirt->scene->buffer, &i, minirt))));
-	scaling = ato_vec3(minirt->scene->buffer, &i, minirt);
-	obj->scaling = get_scaling_matrix(scaling);
-	obj->material = get_default_material(vec3_double_division(ato_vec3(minirt->scene->buffer, &i, minirt), 255), minirt->scene);
+	transformations[translation] = ato_vec3(minirt->scene->buffer, &i, minirt);
+	transformations[direction] = ato_vec3(minirt->scene->buffer, &i, minirt);
+	transformations[scaling] = ato_vec3(minirt->scene->buffer, &i, minirt);
+	transformations[color] = ato_vec3(minirt->scene->buffer, &i, minirt);
+	obj->material = get_default_material(vec3_double_division(transformations[color], 255), minirt->scene);
 	obj->material.ambient = minirt->scene->ambient->brightness;
 	obj->material.ambient_color = minirt->scene->ambient->color;
 	obj->material.diffuse = ato_buffer(minirt->scene->buffer + i, &i, ' ');
@@ -330,7 +391,18 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 		obj->material.reflective = ato_buffer(minirt->scene->buffer + i, &i, '\n');
 		obj->shearing = get_matrix(4, 4, 1);
 	}
+	if (check_transformation_data(transformations))
+		return(print_until(minirt->scene->buffer + *cursor, '\n'), quit(minirt, TRANSFORMATION_PARSER_ERROR));
+	if (double_isequal(0, get_determinant(obj->shearing)))
+		return(print_until(minirt->scene->buffer + *cursor, '\n'), quit(minirt, PARSER_WRONG_SHEARING));
+	if (check_material_data(obj->material))
+		return(print_until(minirt->scene->buffer + *cursor, '\n'), quit(minirt, PARSER_WRONG_MATERIAL));
+	obj->translation = get_translation_matrix(transformations[translation]);
+	obj->rotation = get_rotation_matrix(convert_dir_to_euler(vec3_normalise(transformations[direction])));
+	obj->scaling = get_scaling_matrix(transformations[scaling]);
 	obj->transform = get_object_transformation(obj);
+	if (double_isequal(get_determinant(obj->transform), 0))
+		quit(minirt, PARSER_NON_INVERTIBLE_MATRIX);
 	obj->inv = get_inversed_matrix(obj->transform);
 	if (obj->type == PLANE)
 	{
@@ -339,8 +411,8 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	else if (obj->type == CYLINDER || obj->type == CONE) // TODO unhardcode
 	{
 		obj->obj_data.cylinder.isclosed = true;
-		obj->obj_data.cylinder.max = scaling.x / 2;
-		obj->obj_data.cylinder.min = -(scaling.x) / 2;
+		obj->obj_data.cylinder.max = transformations[scaling].x / 2;
+		obj->obj_data.cylinder.min = -(transformations[scaling].x) / 2;
 	}
 	*cursor = i;
 	return (0);
