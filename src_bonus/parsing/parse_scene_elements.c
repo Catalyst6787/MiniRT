@@ -33,7 +33,7 @@ static int parse_buffer(t_minirt *minirt,
 void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 {
 	int					cursor;
-	t_parsing_helper ph;
+	t_parsing_helper	ph;
 
 	cursor = 0;
 	ft_memset(&ph, 0, sizeof(t_parsing_helper));

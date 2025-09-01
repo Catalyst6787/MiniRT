@@ -100,8 +100,8 @@ typedef struct s_parsing_helper
 {
 	int			l;
 	int			o;
-	bool			a;
-	bool			c;
+	bool		a;
+	bool		c;
 }				t_parsing_helper;
 
 typedef struct s_mlx_data
@@ -149,8 +149,8 @@ typedef struct s_thread_data
 	int				id;
 	pthread_t		thread;
 	t_minirt		*minirt;
-	t_inter_list inter_list;
-	t_inter_list shadow_list;
+	t_inter_list	inter_list;
+	t_inter_list	shadow_list;
 }				t_thread_data;
 
 /*                                 INIT                                  */
@@ -221,7 +221,6 @@ void		create_object_from_cylinder(t_object *object,
 void		create_object_from_cone(t_object *object,
 				t_cone *cone, int id);
 
-	
 void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
@@ -327,7 +326,7 @@ void		event_handle_pavnum(t_minirt *minirt, int keycode);
 void		event_activate_cylinder_cap(t_minirt *minirt);
 
 void		change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i);
-void		change_element_direction(t_minirt *minirt, t_ui *ui, int keycode, int i);
+void		change_element_rotation(t_minirt *minirt, t_ui *ui, int keycode, int i);
 void		change_element_size(t_scene *scene, int keycode, int i);
 void		change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i);
 

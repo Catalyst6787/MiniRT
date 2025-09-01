@@ -45,6 +45,34 @@ void	test_light_sum(t_scene *scene)
 		printf("%sWarning, sum of lights > 1!%s\n", RED, CRESET);
 }
 
+void	fill_obj_id(t_scene *scene)
+{
+	int	i;
+	int	sp;
+	int	pl;
+	int	cy;
+	int	co;
+
+	i = 0;
+	sp = 0;
+	pl = 0;
+	cy = 0;
+	co = 0;
+	while (i < scene->nb_objects)
+	{
+		if (scene->objects[i].type == SPHERE)
+			scene->objects[i].id = sp++;
+		else if (scene->objects[i].type == PLANE)
+			scene->objects[i].id = pl++;
+		else if (scene->objects[i].type == CYLINDER)
+			scene->objects[i].id = cy++;
+		else if (scene->objects[i].type == CONE)
+			scene->objects[i].id = co++;
+		i++;
+	}
+}
+
+
 void	parse_scene(t_minirt *minirt)
 {
 	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
@@ -62,6 +90,7 @@ void	parse_scene(t_minirt *minirt)
 	parse_scene_elements(minirt, minirt->scene);
 	set_camera_transformation(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
+	fill_obj_id(minirt->scene);
 	// print_scene_ok_message(minirt->scene->filename);
 	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);

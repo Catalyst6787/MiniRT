@@ -64,7 +64,7 @@ void	event_handle_pavnum(t_minirt *minirt, int keycode)
 	if (minirt->ui->move_mode == pos)
 		change_element_position(minirt, minirt->ui, keycode, i);
 	else if (minirt->ui->move_mode == dir)
-		change_element_direction(minirt, minirt->ui, keycode, i);
+		change_element_rotation(minirt, minirt->ui, keycode, i);
 	else if (minirt->ui->move_mode == size && minirt->ui->selected_type == OBJ
 		&& minirt->scene->objects[i].type != PLANE)
 		change_element_size(minirt->scene, keycode, i);

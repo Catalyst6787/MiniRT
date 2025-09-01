@@ -26,6 +26,7 @@ typedef struct s_object
 {
 	t_type			type;
 	t_matrix		translation;
+	t_vec3			dir;
 	t_matrix		rotation;
 	t_matrix		shearing;
 	t_matrix		scaling;

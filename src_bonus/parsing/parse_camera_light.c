@@ -398,6 +398,7 @@ int parse_object(t_minirt *minirt, t_object *obj, int *cursor)
 	if (check_material_data(obj->material))
 		return(print_until(minirt->scene->buffer + *cursor, '\n'), quit(minirt, PARSER_WRONG_MATERIAL));
 	obj->translation = get_translation_matrix(transformations[translation]);
+	obj->dir = transformations[direction]; //added for change_element_rotation
 	obj->rotation = get_rotation_matrix(convert_dir_to_euler(vec3_normalise(transformations[direction])));
 	obj->scaling = get_scaling_matrix(transformations[scaling]);
 	obj->transform = get_object_transformation(obj);
