@@ -54,3 +54,4 @@ shell.nix
 ekho*
 sound_vizualizer.c
 .ignore
+compile_commands.json
