@@ -39,19 +39,30 @@ void	change_light_brightness(t_scene *scene, int keycode, int i)
 
 void	change_amb_brightness(t_scene *scene, int keycode)
 {
+	int	i;
+
+	i = 0;
 	if (keycode == PAV_UP && scene->ambient->brightness < 0.98)
 	{
 		if (!is_brightness_change_ok(scene))
 			return ;
 		scene->ambient->brightness += 0.02;
 		printf("Amb : %.2f\n", scene->ambient->brightness);
-		// set_object_ambient_light(scene); #TODO convert to object ambient light
+		while (i < scene->nb_objects)
+		{
+			scene->objects[i].material.ambient = scene->ambient->brightness;
+			i++;
+		}
 	}
 	else if (keycode == PAV_DOWN && scene->ambient->brightness > 0.02)
 	{
 		scene->ambient->brightness -= 0.02;
-		// set_object_ambient_light(scene); #TODO convert to object ambient light
 		printf("Amb : %.2f\n", scene->ambient->brightness);
+		while (i < scene->nb_objects)
+		{
+			scene->objects[i].material.ambient = scene->ambient->brightness;
+			i++;
+		}
 	}
 }
 

@@ -45,57 +45,96 @@ void	save_random_scene(t_minirt *minirt)
 	close(fd);
 }
 
-void	gen_print_sphere(FILE *file)
+void	gen_print_plane(FILE *file, t_rand *rand)
 {
-	fprintf(file, "sp	%d,%d,%d	%.1f	%d,%d,%d\n",
-		generate_random_int(-10, 10),
-		generate_random_int(-10, 10),
-		generate_random_int(0, 10),
-		generate_random_double(0.1, 15.0),
+	rand->is_plane = 1;
+	fprintf(file, "pl 0,0,10 0,1,0 %.2f,%.2f,%.2f %d,%d,%d %2f %2f %d %d, %.2f,%.2f,%.2f,%.2f\n",
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
 		generate_random_int(0, 255),
 		generate_random_int(0, 255),
-		generate_random_int(0, 255));
+		generate_random_int(0, 255),
+		generate_random_double(0, 1),
+		generate_random_double(0, 1),
+		generate_random_int(0, 255),
+		generate_random_int(0, 1),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10));
 }
 
-void	gen_print_plane(FILE *file, t_rand *rand, bool chaos)
+void	gen_print_object(FILE *file, int type, t_rand *rand, bool chaos)
 {
-	if (!chaos)
+	if (type == 0)
+		fprintf(file, "sp ");
+	else if (type == 1 && !rand->is_plane)
 	{
-		rand->is_plane = 1;
-		fprintf(file, "pl	0,0,10	0,1,0	%d,%d,%d\n",
-			generate_random_int(0, 255),
-			generate_random_int(0, 255),
-			generate_random_int(0, 255));
-		return ;
+		if (!chaos)
+		{
+			gen_print_plane(file, rand);
+			return ;
+		}
+		fprintf(file, "pl ");
 	}
-	fprintf(file, "pl	%d,%d,%d	%.2f,%.2f,%.2f	%d,%d,%d\n",
-		generate_random_int(-10, 10),
-		generate_random_int(-10, 10),
-		generate_random_int(0, 10),
+	else if (type == 2)
+		fprintf(file, "cy ");
+	else if (type == 3)
+		fprintf(file, "co ");
+	fprintf(file, "%.2f,%.2f,%.2f %.2f,%.2f,%.2f %.2f,%.2f,%.2f %d,%d,%d %2f %2f %d %d %.2f,%.2f,%.2f,%.2f\n",
+		generate_random_double(-10, 10),
+		generate_random_double(-10, 10),
+		generate_random_double(0, 10),
 		generate_random_double(-1, 1),
 		generate_random_double(-1, 1),
 		generate_random_double(-1, 1),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
 		generate_random_int(0, 255),
 		generate_random_int(0, 255),
-		generate_random_int(0, 255));
+		generate_random_int(0, 255),
+		generate_random_double(0, 1),
+		generate_random_double(0, 1),
+		generate_random_int(0, 255),
+		generate_random_int(0, 1),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10),
+		generate_random_double(0, 10));
 }
 
-void	gen_print_cylinder_cones(FILE *file, char c)
-{
-	if (c == 'y')
-		fprintf(file, "cy	");
-	else if (c == 'o')
-		fprintf(file, "co	");
-	fprintf(file, "%d,%d,%d	%.2f,%.2f,%.2f	%.1f	%.1f	%d,%d,%d\n",
-		generate_random_int(-10, 10),
-		generate_random_int(-10, 10),
-		generate_random_int(0, 10),
-		generate_random_double(-1, 1),
-		generate_random_double(-1, 1),
-		generate_random_double(-1, 1),
-		generate_random_double(0.1, 5.0),
-		generate_random_double(0.1, 5.0),
-		generate_random_int(0, 255),
-		generate_random_int(0, 255),
-		generate_random_int(0, 255));
-}
+
+// void	gen_print_sphere(FILE *file)
+// {
+// 	fprintf(file, "sp	%d,%d,%d	%.1f	%d,%d,%d\n",
+// 		generate_random_int(-10, 10),
+// 		generate_random_int(-10, 10),
+// 		generate_random_int(0, 10),
+// 		generate_random_double(0.1, 15.0),
+// 		generate_random_int(0, 255),
+// 		generate_random_int(0, 255),
+// 		generate_random_int(0, 255));
+// }
+
+
+// void	gen_print_cylinder_cones(FILE *file, char c)
+// {
+// 	if (c == 'y')
+// 		fprintf(file, "cy	");
+// 	else if (c == 'o')
+// 		fprintf(file, "co	");
+// 	fprintf(file, "%d,%d,%d	%.2f,%.2f,%.2f	%.1f	%.1f	%d,%d,%d\n",
+// 		generate_random_int(-10, 10),
+// 		generate_random_int(-10, 10),
+// 		generate_random_int(0, 10),
+// 		generate_random_double(-1, 1),
+// 		generate_random_double(-1, 1),
+// 		generate_random_double(-1, 1),
+// 		generate_random_double(0.1, 5.0),
+// 		generate_random_double(0.1, 5.0),
+// 		generate_random_int(0, 255),
+// 		generate_random_int(0, 255),
+// 		generate_random_int(0, 255));
+// }

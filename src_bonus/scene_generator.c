@@ -4,7 +4,7 @@ void	gen_print_lights(FILE *file, t_rand *rand)
 {
 	int	i;
 
-	fprintf(file, "A	%.2f	%d,%d,%d\n",
+	fprintf(file, "A %.2f %d,%d,%d\n",
 		rand->lights_ratio[0],
 		generate_random_int(0, 255),
 		generate_random_int(0, 255),
@@ -12,7 +12,7 @@ void	gen_print_lights(FILE *file, t_rand *rand)
 	i = 1;
 	while (i < rand->nb_lights)
 	{
-		fprintf(file, "L	%d,%d,%d	%.2f %d,%d,%d\n",
+		fprintf(file, "L %d,%d,%d %.2f %d,%d,%d\n",
 			generate_random_int(-10, 10),
 			generate_random_int(-10, 10),
 			generate_random_int(-10, 10),
@@ -73,7 +73,7 @@ void	generate_random_scene(void)
 	int		obj_type;
 
 	file = fopen("scenes/random_generation.rt", "w");
-	fprintf(file, "C	0,0,-10 0,0,1 70\n");
+	fprintf(file, "C 0,0,-10 0,0,1 70\n");
 	srand(time(NULL));
 	rand.nb_obj = generate_random_int(3, 12);
 	rand.is_plane = 0;
@@ -82,14 +82,16 @@ void	generate_random_scene(void)
 	while (rand.nb_obj >= 0)
 	{
 		obj_type = generate_random_int(0, 3);
-		if (obj_type == 0)
-			gen_print_sphere(file);
-		else if (obj_type == 1 && !rand.is_plane)
-			gen_print_plane(file, &rand, false);
-		else if (obj_type == 2)
-			gen_print_cylinder_cones(file, 'y');
-		else if (obj_type == 3)
-			gen_print_cylinder_cones(file, 'o');
+		gen_print_object(file, obj_type, &rand, false);
+
+		// if (obj_type == 0)
+		// 	gen_print_sphere(file);
+		// else if (obj_type == 1 && !rand.is_plane)
+		// 	gen_print_plane(file, &rand, false);
+		// else if (obj_type == 2)
+		// 	gen_print_cylinder_cones(file, 'y');
+		// else if (obj_type == 3)
+		// 	gen_print_cylinder_cones(file, 'o');
 		rand.nb_obj--;
 	}
 	fclose(file);

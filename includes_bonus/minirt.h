@@ -334,9 +334,10 @@ void		change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i);
 
 void		generate_random_scene();
 void		gen_print_lights(FILE *file, t_rand *rand);
-void		gen_print_sphere(FILE *file);
-void		gen_print_plane(FILE *file, t_rand *rand, bool chaos);
-void		gen_print_cylinder_cones(FILE *file, char c);
+void		gen_print_object(FILE *file, int type, t_rand *rand, bool chaos);
+// void		gen_print_sphere(FILE *file);
+// void		gen_print_plane(FILE *file, t_rand *rand, bool chaos);
+// void		gen_print_cylinder_cones(FILE *file, char c);
 int			generate_random_int(int min, int max);
 double		generate_random_double(double min, double max);
 

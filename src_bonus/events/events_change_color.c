@@ -53,6 +53,18 @@ static void	handle_lights(t_light *light, t_move_mode color, int keycode, int i)
 	}
 }
 
+void	set_obj_amb_color(t_scene *scene)
+{
+	int	i;
+
+	i = 0;
+	while (i < scene->nb_objects)
+	{
+		scene->objects[i].material.ambient_color = scene->ambient->color;
+		i++;
+	}
+}
+
 static void	handle_ambient(t_scene *scene,
 							t_ambient *ambient,
 							t_move_mode color,
@@ -62,7 +74,7 @@ static void	handle_ambient(t_scene *scene,
 	{
 		if (keycode == PAV_UP && ambient->color.r < 0.98)
 			ambient->color.r += 0.02;
-		else if (keycode == PAV_DOWN && ambient->color.r > 0.02)
+		else if (keycode == PAV_DOWN && ambient->color.r >= 0.02)
 			ambient->color.r -= 0.02;
 		printf("Amb r : %.2f\n", ambient->color.r);
 	}
@@ -70,7 +82,7 @@ static void	handle_ambient(t_scene *scene,
 	{
 		if (keycode == PAV_UP && ambient->color.g < 0.98)
 			ambient->color.g += 0.02;
-		else if (keycode == PAV_DOWN && ambient->color.g > 0.02)
+		else if (keycode == PAV_DOWN && ambient->color.g >= 0.02)
 			ambient->color.g -= 0.02;
 		printf("Amb g : %.2f\n", ambient->color.g);
 	}
@@ -78,12 +90,11 @@ static void	handle_ambient(t_scene *scene,
 	{
 		if (keycode == PAV_UP && ambient->color.b < 0.98)
 			ambient->color.b += 0.02;
-		else if (keycode == PAV_DOWN && ambient->color.b > 0.02)
+		else if (keycode == PAV_DOWN && ambient->color.b >= 0.02)
 			ambient->color.b -= 0.02;
 		printf("Amb b : %.2f\n", ambient->color.b);
 	}
-	// set_object_ambient_light(scene); #TODO convert to object ambient light
-	(void)scene;
+	set_obj_amb_color(scene);
 }
 
 void	change_element_color(t_minirt *minirt, t_ui *ui, int keycode, int i)
