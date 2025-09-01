@@ -83,6 +83,5 @@ int	quit(t_minirt *minirt, char *str)
 			free_ui(minirt->ui);
 	}
 	print_exit_info(str);
-	CLOSE_DEBUG_FD;
 	exit(0);
 }

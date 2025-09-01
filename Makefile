@@ -34,9 +34,7 @@ SRC =	main.c \
 		events.c events_camera.c events_object_data.c events_fun.c events_keys.c events_object_selection.c \
 		print_data.c print_more_data.c \
 		exit.c exit2.c \
-		get_debug_fd.c \
 		init.c \
-		print_debug.c \
 		rays.c \
 		render.c hit.c \
 		display_image.c \
@@ -67,10 +65,6 @@ BONUS_SRC =	$(SRC) \
 			th_render.c th_shadow.c \
 			scene_generator.c scene_generator_print.c \
 			events_change_color.c events_change_direction.c events_change_position.c events_change_size.c \
-			tests.c tests_color.c tests_matrices.c tests_rays.c \
-			test_intersections.c test_normals.c test_reflections.c \
-			test_lighting.c test_world.c test_shadows.c test_camera.c \
-			tests_planes.c tests_cylinders.c tests_cones.c test_cubes.c \
 
 OBJ_DIR = objects
 BONUS_OBJ_DIR = objects_bonus

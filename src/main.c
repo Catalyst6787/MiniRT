@@ -64,7 +64,6 @@ int	main(int ac, char **av)
 	double time_taken = ((double)t) / CLOCKS_PER_SEC;
 	printf("Scene rendered in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
-	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);
 }

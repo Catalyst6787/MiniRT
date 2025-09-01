@@ -65,7 +65,6 @@ int	main(int ac, char **av)
 	start_render(&minirt);
 	printf("%sInitial scene rendered!%s\n\n", GREEN, CRESET);
 	mlx_loop(mlx.mlx);
-	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);
 }

@@ -32,7 +32,6 @@
 # include "render.h"
 # include "keycodes.h"
 # include "colors.h"
-# include "debug.h"
 # include "pthread.h"
 
 # define SPACE_SET " \t\n"
