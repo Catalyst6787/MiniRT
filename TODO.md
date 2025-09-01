@@ -2,14 +2,9 @@
 Simple C ray tracer.
 
 ### basic
-- [ ] make parsing more robust
-- [ ] reimplement events for object type
-
 - [ ] problem with cone normals
-- [ ] fix camera orientation issues -> length = 0 and non-invertible matrix
-			-> might as well create a 6d movement system
+- [ ] might as well create a 6d movement system
 
-- [X] fix reflection is brighter than normal
 - [X] fix render time calculation
 - [ ] dev.sh 1 : problem when size of the sphere is too big and render (free() : invalid size)
 
