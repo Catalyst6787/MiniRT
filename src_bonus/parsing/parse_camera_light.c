@@ -281,7 +281,13 @@ static int	is_valid_object(char *s)
 		i += length;
 		length = 0;
 		if (e != 5 && s[i] != ',')
+		{
+			printf("s[%d] = %c (%d)\n", i - 1, s[i - 1], s[i - 1]);
+			printf("s[%d] = %c (%d)\n", i, s[i], s[i]);
+			printf("s[%d] = %c (%d)\n", i + 1, s[i + 1], s[i + 1]);
+
 			return (0);
+		}
 		if (e != 5)
 			i++;
 		e++;

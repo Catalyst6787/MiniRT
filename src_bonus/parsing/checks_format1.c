@@ -101,7 +101,9 @@ void	check_characters_validity(t_minirt *minirt)
 				&& ft_isspace(minirt->scene->buffer[i]))
 				i++;
 			if (minirt->scene->buffer[i])
-				if (!ft_is_char_in_string(alpha_set, minirt->scene->buffer[i]))
+				if (!ft_is_char_in_string(alpha_set, minirt->scene->buffer[i])
+					&& !ft_is_char_in_string(sign_set, minirt->scene->buffer[i])
+				&& !ft_isdigit(minirt->scene->buffer[i]))
 					quit(minirt, SCENE_WRONG_CHAR_ERR);
 		}
 		if (!minirt->scene->buffer[i])
