@@ -53,3 +53,4 @@ shell.nix
 
 ekho*
 sound_vizualizer.c
+.ignore

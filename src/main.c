@@ -42,8 +42,6 @@ int	main(int ac, char **av)
 	t_img_data	img_st;
 	t_scene		scene;
 	t_render	render;
-	t_ui		ui;
-	clock_t		t;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
@@ -53,16 +51,11 @@ int	main(int ac, char **av)
 	minirt.scene->filename = ft_strdup(av[1]);
 	if (!minirt.scene->filename)
 		quit(&minirt, MALLOC_ERR);
-	minirt.ui = &ui;
-	init_ui(minirt.ui);
+	init_ui(&minirt.ui);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	init_events(&minirt);
-	t = clock();
 	render_scene(&minirt);
-	t = clock() - t;
-	double time_taken = ((double)t) / CLOCKS_PER_SEC;
-	printf("Scene rendered in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);

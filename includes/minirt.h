@@ -95,7 +95,7 @@ typedef struct s_minirt
 	t_mlx_data	*mlx;
 	t_scene		*scene;
 	t_render	*render;
-	t_ui		*ui;
+	t_ui		ui;
 }				t_minirt;
 
 

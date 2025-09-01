@@ -1,3 +1,4 @@
+#include "libft.h"
 #include "minirt.h"
 
 static void	free_extra(t_scene *scene)
@@ -79,8 +80,7 @@ int	quit(t_minirt *minirt, char *str)
 			free_scene(minirt->scene);
 		if (minirt->render)
 			free_render(minirt->render);
-		if (minirt->ui)
-			free_ui(minirt->ui);
+		free_ui(&minirt->ui);
 	}
 	print_exit_info(str);
 	exit(0);
