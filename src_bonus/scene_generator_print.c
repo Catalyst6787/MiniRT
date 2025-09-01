@@ -95,6 +95,6 @@ void	gen_print_object(FILE *file, int type, t_rand *rand, bool chaos)
 		generate_random_int(0, 255),
 		generate_random_double(0, 1),
 		generate_random_double(0, 1),
-		generate_random_int(0, 255),
+		generate_random_int(2, 500),
 		generate_random_int(0, 1));
 }
