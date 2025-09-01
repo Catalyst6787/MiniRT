@@ -1,4 +1,5 @@
 #include "minirt.h"
+#include "vec3.h"
 
 t_vec3	reflected_color(t_comp *comp, t_minirt *minirt, unsigned int depth)
 {
