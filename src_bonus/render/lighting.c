@@ -64,14 +64,15 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt, unsigned int
 		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
 	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
+	ambient = vec3_double_multiplication(ambient, 1 - comp->m.reflective);
 	if (in_shadow)
-		return (vec3_vec_addition(ambient, reflected_color(comp, minirt, depth)));
+		return (vec3_vec_addition(ambient, vec3_vec_multiplication(reflected_color(comp, minirt, depth), comp->m.color)));
 	else
 		return (vec3_vec_addition(
-			ambient,
+			vec3_vec_multiplication(reflected_color(comp, minirt, depth), comp->m.color),
 			vec3_vec_addition(
 			get_lighting_extra(comp, light_vector, effective_color),
-			vec3_vec_multiplication(reflected_color(comp, minirt, depth), comp->m.color))));
+			ambient)));
 }
 
 t_vec3	th_get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth)
@@ -85,14 +86,15 @@ t_vec3	th_get_lighting(t_comp	*comp, bool in_shadow, t_minirt *minirt, t_thread_
 		= vec3_double_multiplication(effective_color, comp->light.brightness);
 	light_vector
 		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
-	ambient = vec3_vec_multiplication(effective_color, comp->m.ambient_color);
+	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
+	ambient = vec3_double_multiplication(ambient, 1 - comp->m.reflective);
 	if (in_shadow)
-		return (vec3_vec_addition(ambient, th_reflected_color(comp, minirt, th, depth)));
+		return (vec3_vec_addition(ambient, vec3_vec_multiplication(th_reflected_color(comp, minirt, th, depth), comp->m.color)));
 	else
 		return (vec3_vec_addition(
-		  ambient,
+			vec3_vec_multiplication(th_reflected_color(comp, minirt, th, depth), comp->m.color),
 		  vec3_vec_addition(
 			get_lighting_extra(comp, light_vector, effective_color),
-			vec3_vec_multiplication(th_reflected_color(comp, minirt, th, depth), comp->m.color))));
+		  ambient)));
 }
