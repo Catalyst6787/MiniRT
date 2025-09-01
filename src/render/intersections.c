@@ -21,10 +21,10 @@ int	get_sphere_inter(const t_object *object,
 	if (list->count > list->capacity - 2)
 		return (print_err(FILE, LINE,
 				"get_sphere_inter: no more space in list"), 1);
-	list->inters[list->count].t = ((-b - sqrtf(discriminant)) / (2.0 * a));
+	list->inters[list->count].t = ((-b - sqrt(discriminant)) / (2.0 * a));
 	list->inters[list->count].obj = object;
 	list->count++;
-	list->inters[list->count].t = ((-b + sqrtf(discriminant)) / (2.0 * a));
+	list->inters[list->count].t = ((-b + sqrt(discriminant)) / (2.0 * a));
 	list->inters[list->count].obj = object;
 	list->count++;
 	return (0);

@@ -104,8 +104,8 @@ int	get_cone_inter(const t_object *object,
 	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
 	if (d.discriminant < 0)
 		return (intersect_cone_caps(object, ray, list));
-	d.t0 = (-d.b - sqrtf(d.discriminant)) / (2.0 * d.a);
-	d.t1 = (-d.b + sqrtf(d.discriminant)) / (2.0 * d.a);
+	d.t0 = (-d.b - sqrt(d.discriminant)) / (2.0 * d.a);
+	d.t1 = (-d.b + sqrt(d.discriminant)) / (2.0 * d.a);
 	hits_added += store_cone_inter(&d, object, ray, list);
 	hits_added += intersect_cone_caps(object, ray, list);
 	return (hits_added);

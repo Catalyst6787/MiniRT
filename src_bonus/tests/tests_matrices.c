@@ -454,7 +454,7 @@ int	test_rotation(void)
 	point = get_point3(0, 1, 0);
 	rotate_matrix = get_rotation_matrix_x(M_PI/4);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
-	result = get_point3(0, sqrtf(2)/2, sqrtf(2)/2);
+	result = get_point3(0, sqrt(2)/2, sqrt(2)/2);
 	assert(vec3_isequal(rotated_point, result));
 	rotate_matrix = get_rotation_matrix_x(M_PI/2);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
@@ -463,14 +463,14 @@ int	test_rotation(void)
 
 	rotate_matrix = get_rotation_matrix_x(M_PI/4);
 	inversed_matrix = get_inversed_matrix(rotate_matrix);
-	result = get_point3(0, sqrtf(2)/2, (-1) * sqrtf(2)/2);
+	result = get_point3(0, sqrt(2)/2, (-1) * sqrt(2)/2);
 	assert(vec3_isequal(vec3_matrix_multiply(inversed_matrix, point), result));
 
 
 	point = get_point3(0, 0, 1);
 	rotate_matrix = get_rotation_matrix_y(M_PI/4);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
-	result = get_point3(sqrtf(2)/2, 0,  sqrtf(2)/2);
+	result = get_point3(sqrt(2)/2, 0,  sqrt(2)/2);
 	assert(vec3_isequal(rotated_point, result));
 	rotate_matrix = get_rotation_matrix_y(M_PI/2);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
@@ -481,7 +481,7 @@ int	test_rotation(void)
 	point = get_point3(0, 1, 0);
 	rotate_matrix = get_rotation_matrix_z(M_PI/4);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
-	result = get_point3((-1) * sqrtf(2)/2, sqrtf(2)/2, 0);
+	result = get_point3((-1) * sqrt(2)/2, sqrt(2)/2, 0);
 	assert(vec3_isequal(rotated_point, result));
 	rotate_matrix = get_rotation_matrix_z(M_PI/2);
 	rotated_point = vec3_matrix_multiply(rotate_matrix, point);
