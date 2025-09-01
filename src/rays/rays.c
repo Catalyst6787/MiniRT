@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rays.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:27:12 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:27:15 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_ray	get_ray(t_vec3 org, t_vec3 dir)
@@ -8,7 +20,6 @@ t_ray	get_ray(t_vec3 org, t_vec3 dir)
 	ray.dir = dir;
 	return (ray);
 }
-
 
 t_vec3	ray_at(double t, const t_ray *ray)
 {
@@ -29,4 +40,3 @@ t_ray	ray_transform(t_ray r, t_matrix m)
 	new_ray.dir = vec3_matrix_multiply(m, r.dir);
 	return (new_ray);
 }
-

@@ -111,7 +111,8 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
-double		ato_buffer(char *ptr, int *cursor, int delim);
+void		filter_buffer(t_minirt *minirt);
+double	ato_buffer(char *ptr, int *cursor, int delim);
 
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);

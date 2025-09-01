@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:50 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:29:45 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "minirt.h"
 
@@ -53,9 +65,7 @@ void	free_mlx(t_mlx_data *mlx)
 		mlx_destroy_image(mlx->mlx, mlx->img_st->img);
 		mlx->img_st->addr = NULL;
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-		#ifndef __APPLE__
 		mlx_destroy_display(mlx->mlx);
-		#endif
 		free(mlx->mlx);
 		mlx->mlx = NULL;
 		free(mlx->img_st);

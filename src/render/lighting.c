@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lighting.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:27:50 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:27:50 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 t_light	get_light(t_vec3 pos, double brightness, t_vec3 color)
@@ -45,7 +57,9 @@ static t_vec3	get_lighting_extra(t_comp *comp,
 		if (reflect_dot_eye <= 0)
 			specular = get_color(0, 0, 0);
 		else
-			specular = vec3_double_multiplication(get_specular(reflect_dot_eye, comp), comp->light.brightness);
+			specular = vec3_double_multiplication(
+					get_specular(reflect_dot_eye, comp),
+					comp->light.brightness);
 	}
 	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
 }

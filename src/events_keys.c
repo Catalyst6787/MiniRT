@@ -1,22 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_keys.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:34 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:23:42 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	handle_arrows_mac_linux(int keycode, t_minirt *minirt)
 {
-	#ifdef __linux__
 	if ((65360.5 <= keycode && keycode <= 65364))
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
-	#endif
-	#ifdef __APPLE__
-	if ((123 <= keycode && keycode <= 126)
-		|| keycode == 24 || keycode == 27)
-	{
-		minirt->render->pixel_size = PIXEL_SIZE_MULT;
-		arrows_handle(keycode, minirt);
-	}
-	#endif
 }
 
 static void	handle_extra(int keycode, t_minirt *minirt)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:47 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:21:27 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	end_mlx_loop(t_mlx_data *mlx)
@@ -13,7 +25,7 @@ void	event_render(t_minirt *minirt)
 
 	ft_printf("Spacebar pressed : render asked!\n");
 	minirt->render->pixel_size = 1;
-	t = clock(); // REMOVE FROM NON-BONUS
+	t = clock();
 	render_scene(minirt);
 	t = clock() - t;
 	time_taken = ((double)t) / CLOCKS_PER_SEC;

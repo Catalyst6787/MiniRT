@@ -45,7 +45,6 @@ SRC =	main.c \
 		sort_inter.c \
 		render_utils.c \
 		shadows.c \
-		create_shapes.c \
 		material.c \
 		new_elements.c \
 		matrices_inversions.c matrices_multiplications.c matrices_rotations.c matrices_scaling.c \
