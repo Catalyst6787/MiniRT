@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:53:46 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/02 12:45:06 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/09/02 13:48:55 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;
-	return ((x * x + z * z) < (1));
+	return ((x * x + z * z) <= (y_cap * y_cap));
 }
 
 int	intersect_cone_caps(const t_object *object,
@@ -32,7 +32,7 @@ int	intersect_cone_caps(const t_object *object,
 
 	hit_added = 0;
 	if (!object->obj_data.cylinder.isclosed
-		|| ray->dir.y == 0)
+		|| (ray->dir.y > -(EPSILON) && ray->dir.y < EPSILON))
 		return (0);
 	t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
 	if (check_cone_cap(ray, t, object->obj_data.cylinder.min))

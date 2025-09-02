@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_change_direction.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:51:04 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:05 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 14:19:26 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	handle_object(t_scene *scene, int keycode, int i)
 	else if (keycode == PAV_BACK && scene->objects[i].dir.z >= -0.95)
 		scene->objects[i].dir.z -= 0.05;
 	scene->objects[i].rotation
-		= get_rotation_matrix(convert_dir_to_euler(vec3_normalise(scene->objects[i].dir)));
+		= get_rotation_matrix(convert_dir_to_euler
+			(vec3_normalise(scene->objects[i].dir)));
 }
 
 void	change_element_rotation(t_minirt *minirt, t_ui *ui, int keycode, int i)
