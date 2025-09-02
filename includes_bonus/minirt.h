@@ -72,6 +72,8 @@
 # endif
 # define EPSILON 1.0E-5
 
+# define PITCH_LIMIT 0.99f
+
 # define LINE __LINE__
 
 typedef struct s_img_data
