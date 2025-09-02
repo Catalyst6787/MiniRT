@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:55:44 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:45 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	free_extra(t_scene *scene)
@@ -90,6 +102,5 @@ int	quit(t_minirt *minirt, char *str)
 			free_ui(minirt->ui);
 	}
 	print_exit_info(str);
-	CLOSE_DEBUG_FD;
 	exit(0);
 }

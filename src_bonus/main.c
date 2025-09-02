@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:56:01 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:56:02 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	init_ui(t_minirt *minirt, t_ui *ui)
@@ -58,14 +70,11 @@ int	main(int ac, char **av)
 		quit(&minirt, MALLOC_ERR);
 	minirt.ui = &ui;
 	init_ui(&minirt, minirt.ui);
-	// if (start_all_tests())
-	// 	quit(&minirt, TESTS_ERR);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	start_render(&minirt);
 	printf("%sInitial scene rendered!%s\n\n", GREEN, CRESET);
 	mlx_loop(mlx.mlx);
-	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);
 }

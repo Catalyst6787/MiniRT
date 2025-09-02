@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:21:12 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:21:13 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "matrice.h"
 #include "minirt.h"
 #include "vec3.h"
@@ -42,8 +54,6 @@ int	main(int ac, char **av)
 	t_img_data	img_st;
 	t_scene		scene;
 	t_render	render;
-	t_ui		ui;
-	clock_t		t;
 
 	if (ac != 2)
 		return (ft_printf("Usage: <scene.rt>\n"), 1);
@@ -53,18 +63,12 @@ int	main(int ac, char **av)
 	minirt.scene->filename = ft_strdup(av[1]);
 	if (!minirt.scene->filename)
 		quit(&minirt, MALLOC_ERR);
-	minirt.ui = &ui;
-	init_ui(minirt.ui);
+	init_ui(&minirt.ui);
 	parse_scene(&minirt);
 	init_mlx(&minirt);
 	init_events(&minirt);
-	t = clock();
 	render_scene(&minirt);
-	t = clock() - t;
-	double time_taken = ((double)t) / CLOCKS_PER_SEC;
-	printf("Scene rendered in %f seconds\n", time_taken);
 	mlx_loop(mlx.mlx);
-	CLOSE_DEBUG_FD;
 	quit(&minirt, "\033[32mQuiting program\n");
 	return (0);
 }

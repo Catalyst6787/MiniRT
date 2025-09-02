@@ -1,22 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_keys.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:34 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:23:42 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	handle_arrows_mac_linux(int keycode, t_minirt *minirt)
 {
-	#ifdef __linux__
 	if ((65360.5 <= keycode && keycode <= 65364))
 	{
 		minirt->render->pixel_size = PIXEL_SIZE_MULT;
 		arrows_handle(keycode, minirt);
 	}
-	#endif
-	#ifdef __APPLE__
-	if ((123 <= keycode && keycode <= 126)
-		|| keycode == 24 || keycode == 27)
-	{
-		minirt->render->pixel_size = PIXEL_SIZE_MULT;
-		arrows_handle(keycode, minirt);
-	}
-	#endif
 }
 
 static void	handle_extra(int keycode, t_minirt *minirt)
@@ -40,8 +42,7 @@ static void	handle_extra(int keycode, t_minirt *minirt)
 	else if (keycode == C)
 		event_print_debug(minirt);
 	else if (keycode == Q)
-	{
-	}
+		end_mlx_loop(minirt->mlx);
 	else if (keycode == SPACE)
 		event_render(minirt);
 	else
@@ -68,7 +69,8 @@ int	handle_keypress(int keycode, t_minirt *minirt)
 		event_light_pos(minirt, keycode);
 	else if (65429.9 <= keycode && keycode <= 65435.5)
 		event_obj_pos(minirt, keycode);
-	handle_extra(keycode, minirt);
+	else
+		handle_extra(keycode, minirt);
 	return (0);
 }
 

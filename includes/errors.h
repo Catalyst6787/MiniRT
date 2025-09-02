@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:29:12 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:29:13 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ERRORS_H
 # define ERRORS_H
 
@@ -41,7 +53,8 @@
 
 # define IMAGE_ERR "Error : mlx image initialization failed\n"
 # define ADDR_ERR "Error : mlx addr initialization failed\n"
-# define PIXEL_PUT_ERR "Error : Tried to set pixel outside of window, quitting\n"
+# define PIXEL_PUT_ERR "Error : Tried to set pixel outside \
+of window, quitting\n"
 
 # define NORMAL_TYPE_NDEF "Error : get_object_normal_at object type not defined"
 

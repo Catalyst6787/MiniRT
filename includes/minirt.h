@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:29:46 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:29:47 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -27,10 +39,8 @@
 # include "render.h"
 # include "keycodes.h"
 # include "colors.h"
-# include "test.h"
-# include "debug.h"
 
-# define SPACE_SET = " \t\n"
+# define SPACE_SET " \t\n"
 
 # define WIN_W 1280
 # define WIN_H 720
@@ -96,9 +106,8 @@ typedef struct s_minirt
 	t_mlx_data	*mlx;
 	t_scene		*scene;
 	t_render	*render;
-	t_ui		*ui;
+	t_ui		ui;
 }				t_minirt;
-
 
 /*                                 INIT                                  */
 
@@ -112,6 +121,7 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
+void		filter_buffer(t_minirt *minirt);
 double		ato_buffer(char *ptr, int *cursor, int delim);
 
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
@@ -160,11 +170,11 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 /*                                 RENDER                                  */
 
-
-
 void		display_image(t_minirt *minirt);
 t_inter		get_inter(void);
-int			get_cylinder_inter(const t_object *object, const t_ray *ray, t_inter_list *list);
+int			get_cylinder_inter(const t_object *object,
+				const t_ray *ray,
+				t_inter_list *list);
 t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
@@ -189,10 +199,6 @@ t_vec3		int_to_color(int int_color);
 
 /*                                SHAPES                                */
 
-t_sphere	*new_sphere(t_vec3 pos, double diameter, t_vec3 color);
-t_plane		*new_plane(t_vec3 pos, t_vec3 dir, t_vec3 color);
-t_cylinder	*new_cylinder(t_vec3 pos, t_vec3 dir,
-				double diameter, double height, t_vec3 color);
 void		free_sphere(t_object *object);
 
 int			get_cylinder_inter(const t_object *object,
@@ -241,7 +247,7 @@ void		event_activate_cylinder_cap(t_minirt *minirt);
 /*                                 EXIT                                  */
 
 void		free_scene(t_scene *scene);
-void	print_exit_info(char *str);
+void		print_exit_info(char *str);
 int			quit(t_minirt *minirt, char *str);
 
 /*                                 DEBUG                                  */
@@ -289,7 +295,5 @@ t_ray		get_origin_direction(t_camera camera, t_vec3 pixel);
 void		put_pixel(t_minirt *minirt, int color, int x, int y);
 t_ray		ray_for_pixel(t_camera camera, double px, double py);
 void		load_special_scene(int number, t_minirt *minirt);
-
-
 
 #endif

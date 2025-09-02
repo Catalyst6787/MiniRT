@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:57:06 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:57:07 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -32,7 +44,6 @@
 # include "render.h"
 # include "keycodes.h"
 # include "colors.h"
-# include "debug.h"
 # include "pthread.h"
 
 # define SPACE_SET " \t\n"

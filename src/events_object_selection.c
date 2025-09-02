@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_object_selection.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:43 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:23:48 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	switch_pav_mode(t_minirt *minirt)
 {
-	if (minirt->ui->move_mode == pos)
+	if (minirt->ui.move_mode == pos)
 	{
-		minirt->ui->move_mode = dir;
+		minirt->ui.move_mode = dir;
 		printf("dir mode selected\n");
 	}
-	else if (minirt->ui->move_mode == dir)
+	else if (minirt->ui.move_mode == dir)
 	{
-		minirt->ui->move_mode = size;
+		minirt->ui.move_mode = size;
 		printf("size mode selected\n");
 	}
-	else if (minirt->ui->move_mode == size)
+	else if (minirt->ui.move_mode == size)
 	{
-		minirt->ui->move_mode = pos;
+		minirt->ui.move_mode = pos;
 		printf("pos mode selected\n");
 	}
 }
@@ -24,18 +36,18 @@ void	event_object_selection(t_minirt *minirt, t_scene *scene, int keycode)
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == PAV_MINUS)
 	{
-		if (minirt->ui->selected_object == 0)
-			minirt->ui->selected_object = minirt->scene->nb_objects - 1;
-		else if (minirt->ui->selected_object > 0)
-			minirt->ui->selected_object--;
+		if (minirt->ui.selected_object == 0)
+			minirt->ui.selected_object = minirt->scene->nb_objects - 1;
+		else if (minirt->ui.selected_object > 0)
+			minirt->ui.selected_object--;
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_PLUS)
 	{
-		if (minirt->ui->selected_object < minirt->scene->nb_objects - 1)
-			minirt->ui->selected_object++;
-		else if (minirt->ui->selected_object == minirt->scene->nb_objects - 1)
-			minirt->ui->selected_object = 0;
+		if (minirt->ui.selected_object < minirt->scene->nb_objects - 1)
+			minirt->ui.selected_object++;
+		else if (minirt->ui.selected_object == minirt->scene->nb_objects - 1)
+			minirt->ui.selected_object = 0;
 		set_selected_object_str(minirt, scene);
 	}
 	else if (keycode == PAV_MIDDLE)

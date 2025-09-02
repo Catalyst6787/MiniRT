@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:26:22 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:26:23 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	count_elements(t_scene *scene)
@@ -26,7 +38,6 @@ void	count_elements(t_scene *scene)
 
 void	parse_scene(t_minirt *minirt)
 {
-	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
 	check_file_name(minirt);
 	set_scene_buffer(minirt);
@@ -40,11 +51,8 @@ void	parse_scene(t_minirt *minirt)
 	set_objects_material(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	create_object_list(minirt->scene);
-	debug_print_scene_data(minirt);
-	print_scene_ok_message(minirt->scene->filename);
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_str(minirt, minirt->scene);
-	debug_print_objects_pointers(minirt->scene);
 	free(minirt->scene->buffer);
 	minirt->scene->buffer = NULL;
 }

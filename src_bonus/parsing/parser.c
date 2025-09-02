@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:52:36 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:08 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	count_elements(t_scene *scene)
@@ -75,7 +87,6 @@ void	fill_obj_id(t_scene *scene)
 
 void	parse_scene(t_minirt *minirt)
 {
-	PRINT_DEBUG("\n%s\n\n", minirt->scene->filename);
 	minirt->scene->buffer = NULL;
 	if (!ft_strncmp(minirt->scene->filename,
 			"scenes/random_generation.rt", 21))
@@ -91,10 +102,7 @@ void	parse_scene(t_minirt *minirt)
 	set_camera_transformation(minirt->scene);
 	check_data_validity(minirt, minirt->scene);
 	fill_obj_id(minirt->scene);
-	// print_scene_ok_message(minirt->scene->filename);
-	debug_print_scene_data(minirt);
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_data(minirt, minirt->scene);
-	debug_print_objects_pointers(minirt->scene);
 	test_light_sum(minirt->scene);
 }

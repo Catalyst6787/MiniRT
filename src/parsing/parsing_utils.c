@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:26:31 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:40:19 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	objects_alloc(t_minirt *minirt, t_scene *scene)
@@ -49,4 +61,21 @@ double	ato_buffer(char *ptr, int *cursor, int delim)
 		free(n_str);
 	*cursor = i;
 	return (n);
+}
+
+void	set_scene_buffer(t_minirt *minirt)
+{
+	int		fd;
+
+	fd = open(minirt->scene->filename, O_RDONLY);
+	if (fd < 0)
+		quit(minirt, FILE_OPEN_ERR);
+	get_file_contents(fd, &minirt->scene->buffer);
+	if (errno == 21)
+		quit(minirt, DIRECTORY_ERR);
+	filter_buffer(minirt);
+	if (close(fd) == -1)
+		quit(minirt, CLOSING_FILE_ERR);
+	if (!minirt->scene->buffer)
+		quit(minirt, EMPTY_FILE);
 }

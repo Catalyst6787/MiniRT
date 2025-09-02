@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events_object_data.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 17:13:39 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 17:23:45 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static void	handle_pav_up(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y++\n", i);
-	if (minirt->ui->move_mode == pos)
+	if (minirt->ui.move_mode == pos)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_translation_matrix(get_vec3(0, 0.1, 0)));
-	else if (minirt->ui->move_mode == dir)
+	else if (minirt->ui.move_mode == dir)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_rotation_matrix(get_vec3(0, 0.1, 0)));
-	else if (minirt->ui->move_mode == size)
+	else if (minirt->ui.move_mode == size)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_scaling_matrix(get_vec3(1.1, 1.1, 1.1)));
@@ -20,15 +32,15 @@ static void	handle_pav_up(t_minirt *minirt, int i)
 static void	handle_pav_down(t_minirt *minirt, int i)
 {
 	printf("Object[%d] y--\n", i);
-	if (minirt->ui->move_mode == pos)
+	if (minirt->ui.move_mode == pos)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_translation_matrix(get_vec3(0, -0.1, 0)));
-	else if (minirt->ui->move_mode == dir)
+	else if (minirt->ui.move_mode == dir)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_rotation_matrix(get_vec3(0, -0.1, 0)));
-	else if (minirt->ui->move_mode == size)
+	else if (minirt->ui.move_mode == size)
 		minirt->scene->objects[i].transform
 			= multiply_matrix(minirt->scene->objects[i].transform,
 				get_scaling_matrix(get_vec3(0.9, 0.9, 0.9)));
@@ -39,11 +51,11 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 	if (keycode == PAV_LEFT)
 	{
 		printf("Object[%d] x--\n", i);
-		if (minirt->ui->move_mode == pos)
+		if (minirt->ui.move_mode == pos)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_translation_matrix(get_vec3(-0.1, 0, 0)));
-		else if (minirt->ui->move_mode == dir)
+		else if (minirt->ui.move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(-0.1, 0, 0)));
@@ -51,11 +63,11 @@ static void	handle_pav_left_right(t_minirt *minirt, int i, int keycode)
 	else if (keycode == PAV_RIGHT)
 	{
 		printf("Object[%d] x++\n", i);
-		if (minirt->ui->move_mode == pos)
+		if (minirt->ui.move_mode == pos)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_translation_matrix(get_vec3(0.1, 0, 0)));
-		else if (minirt->ui->move_mode == dir)
+		else if (minirt->ui.move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(0.1, 0, 0)));
@@ -67,11 +79,11 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 	if (keycode == PAV_FRONT)
 	{
 		printf("Object[%d] z++\n", i);
-		if (minirt->ui->move_mode == pos)
+		if (minirt->ui.move_mode == pos)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_translation_matrix(get_vec3(0, 0, 0.1)));
-		else if (minirt->ui->move_mode == dir)
+		else if (minirt->ui.move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(0, 0, 0.1)));
@@ -79,11 +91,11 @@ static void	handle_pav_front_back(t_minirt *minirt, int i, int keycode)
 	else if (keycode == PAV_BACK)
 	{
 		printf("Object[%d] z--\n", i);
-		if (minirt->ui->move_mode == pos)
+		if (minirt->ui.move_mode == pos)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_translation_matrix(get_vec3(0, 0, -0.1)));
-		else if (minirt->ui->move_mode == dir)
+		else if (minirt->ui.move_mode == dir)
 			minirt->scene->objects[i].transform
 				= multiply_matrix(minirt->scene->objects[i].transform,
 					get_rotation_matrix(get_vec3(0, 0, -0.1)));
@@ -96,7 +108,7 @@ void	event_obj_pos(t_minirt *minirt, int keycode)
 {
 	int	i;
 
-	i = minirt->ui->selected_object;
+	i = minirt->ui.selected_object;
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == PAV_UP)
 		handle_pav_up(minirt, i);

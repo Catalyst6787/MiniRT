@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_generator.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 18:56:11 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:56:12 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	gen_print_lights(FILE *file, t_rand *rand)
@@ -83,15 +95,6 @@ void	generate_random_scene(void)
 	{
 		obj_type = generate_random_int(0, 3);
 		gen_print_object(file, obj_type, &rand, false);
-
-		// if (obj_type == 0)
-		// 	gen_print_sphere(file);
-		// else if (obj_type == 1 && !rand.is_plane)
-		// 	gen_print_plane(file, &rand, false);
-		// else if (obj_type == 2)
-		// 	gen_print_cylinder_cones(file, 'y');
-		// else if (obj_type == 3)
-		// 	gen_print_cylinder_cones(file, 'o');
 		rand.nb_obj--;
 	}
 	fclose(file);
