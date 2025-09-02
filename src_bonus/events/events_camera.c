@@ -52,7 +52,6 @@ void	print_arrows(int keycode)
 
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
-	printf("camera: yaw[%f] pitch[%f]\n", minirt->scene->camera->view.yaw, minirt->scene->camera->view.pitch);
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == UP)
 		minirt->scene->camera->view.pitch += 0.1;
@@ -78,15 +77,9 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 {
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == E)
-	{
 		minirt->scene->camera->view.from.y += 0.5;
-		minirt->scene->camera->view.to.y += 0.5;
-	}
 	else if (keycode == R)
-	{
 		minirt->scene->camera->view.from.y -= 0.5;
-		minirt->scene->camera->view.to.y -= 0.5;
-	}
 	ft_printf("[%c] pressed\n", keycode - 32);
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);
