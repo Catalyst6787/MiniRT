@@ -72,6 +72,8 @@
 # endif
 # define EPSILON 1.0E-5
 
+# define PITCH_LIMIT 0.99f
+
 # define LINE __LINE__
 
 typedef struct s_img_data
@@ -220,6 +222,8 @@ void		set_pixel_size(t_camera *camera);
 t_camera	*new_camera(t_vec3 from, t_vec3 to, t_vec3 up, double fov);
 t_camera	get_camera(int hsize, int vsize, double fov);
 void		set_camera_transformation(t_scene *scene);
+void	dir_to_yaw_pitch(t_view *view);
+t_vec3	yaw_pitch_to_dir(double yaw, double pitch);
 
 void		objects_alloc(t_minirt *minirt, t_scene *scene);
 t_matrix	get_object_transformation(t_object *obj);

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
 #include "minirt.h"
 
 void	objects_alloc(t_minirt *minirt, t_scene *scene)
@@ -73,6 +74,8 @@ void	set_scene_buffer(t_minirt *minirt)
 	get_file_contents(fd, &minirt->scene->buffer);
 	if (errno == 21)
 		quit(minirt, DIRECTORY_ERR);
+	if (!minirt->scene->buffer)
+		quit(minirt, EMPTY_FILE);
 	filter_buffer(minirt);
 	if (close(fd) == -1)
 		quit(minirt, CLOSING_FILE_ERR);

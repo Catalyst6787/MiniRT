@@ -10,10 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
 #include "minirt.h"
 
 void	check_direction_vector(t_minirt *minirt, t_vec3 *dir)
 {
+	if (dir->x > 1 || dir->x < -1
+			|| dir->y > 1 || dir->y < -1
+			|| dir->z > 1 || dir->z < -1)
+		quit(minirt, DIRECTION_ERR);
 	if (!vec3_exact_length(*dir))
 		quit(minirt, DIRECTION_ERR);
 }

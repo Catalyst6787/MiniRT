@@ -14,7 +14,7 @@
 
 void	check_direction_vector(t_minirt *minirt, t_vec3 *dir)
 {
-	if (dir->x + dir->y + dir->z == 0)
+	if (dir->x == 0 && dir->y == 0 && dir->z == 0)
 		quit(minirt, DIRECTION_ERR);
 }
 

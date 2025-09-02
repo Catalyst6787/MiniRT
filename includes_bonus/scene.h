@@ -13,6 +13,7 @@
 #ifndef SCENE_H
 # define SCENE_H
 
+#include "vec3.h"
 typedef struct s_ambient
 {
 	double		brightness;
@@ -23,7 +24,10 @@ typedef struct s_view
 {
 	t_vec3		from;
 	t_vec3		to;
+	t_vec3		dir;
 	t_vec3		up;
+	double		yaw;
+	double		pitch;
 }				t_view;
 
 typedef struct s_camera
