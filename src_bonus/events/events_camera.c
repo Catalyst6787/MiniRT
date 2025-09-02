@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "vec3.h"
+#include <stdio.h>
 
 void	event_reflections(t_minirt *minirt, int keycode)
 {
@@ -50,16 +52,21 @@ void	print_arrows(int keycode)
 
 void	arrows_handle(int keycode, t_minirt *minirt)
 {
+	printf("camera: yaw[%f] pitch[%f]\n", minirt->scene->camera->view.yaw, minirt->scene->camera->view.pitch);
 	minirt->render->pixel_size = PIXEL_SIZE_MULT;
 	if (keycode == UP)
-		minirt->scene->camera->view.to.y += 0.5;
+		minirt->scene->camera->view.pitch += 0.1;
 	else if (keycode == DOWN)
-		minirt->scene->camera->view.to.y -= 0.5;
+		minirt->scene->camera->view.pitch -= 0.1;
 	else if (keycode == LEFT)
-		minirt->scene->camera->view.to.x -= 0.5;
+		minirt->scene->camera->view.yaw += 0.1;
 	else if (keycode == RIGHT)
-		minirt->scene->camera->view.to.x += 0.5;
+		minirt->scene->camera->view.yaw -= 0.1;
 	print_arrows(keycode);
+	if (minirt->scene->camera->view.pitch > PITCH_LIMIT)
+		minirt->scene->camera->view.pitch = PITCH_LIMIT;
+	else if (minirt->scene->camera->view.pitch < -PITCH_LIMIT)
+		minirt->scene->camera->view.pitch = -PITCH_LIMIT;
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
@@ -91,25 +98,13 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 int	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == W)
-	{
 		minirt->scene->camera->view.from.z += 0.5;
-		minirt->scene->camera->view.to.z += 0.5;
-	}
 	else if (keycode == A)
-	{
 		minirt->scene->camera->view.from.x -= 0.5;
-		minirt->scene->camera->view.to.x -= 0.5;
-	}
 	else if (keycode == S)
-	{
 		minirt->scene->camera->view.from.z -= 0.5;
-		minirt->scene->camera->view.to.z -= 0.5;
-	}
 	else if (keycode == D)
-	{
 		minirt->scene->camera->view.from.x += 0.5;
-		minirt->scene->camera->view.to.x += 0.5;
-	}
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv
