@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections_cone.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:53:46 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:58:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:45:06 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 {
 	double	x;
 	double	z;
+	(void)y_cap;
 
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;
-	return ((x * x + z * z) <= (y_cap * y_cap));
+	return ((x * x + z * z) < (1));
 }
 
 int	intersect_cone_caps(const t_object *object,
@@ -31,7 +32,7 @@ int	intersect_cone_caps(const t_object *object,
 
 	hit_added = 0;
 	if (!object->obj_data.cylinder.isclosed
-		|| (ray->dir.y > -(EPSILON) && ray->dir.y < EPSILON))
+		|| ray->dir.y == 0)
 		return (0);
 	t = (object->obj_data.cylinder.min - ray->origin.y) / ray->dir.y;
 	if (check_cone_cap(ray, t, object->obj_data.cylinder.min))
@@ -87,7 +88,7 @@ int	parallel_ray(const t_object *object,
 	int	hits_added;
 
 	hits_added = 0;
-	if (d->b > -(EPSILON) && d->b < EPSILON)
+	if (d->b == 0)
 		return (intersect_cone_caps(object, ray, list));
 	list->inters[list->count].t = -(d->c) / (2 * d->b);
 	list->inters[list->count].obj = object;
@@ -111,7 +112,7 @@ int	get_cone_inter(const t_object *object,
 	d.b = 2 * ray->origin.x * ray->dir.x - 2
 		* ray->origin.y * ray->dir.y + 2 * ray->origin.z * ray->dir.z;
 	d.c = pow(ray->origin.x, 2) - pow(ray->origin.y, 2) + pow(ray->origin.z, 2);
-	if (d.a > -(EPSILON) && d.a < EPSILON)
+	if (d.a == 0)
 		return (parallel_ray(object, ray, list, &d));
 	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
 	if (d.discriminant < 0)

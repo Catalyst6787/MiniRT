@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:54:22 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:57:55 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:45:45 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray, unsigned int depth
 		minirt->render->shadow_list.count = 0;
 		i++;
 	}
+	i = -1;
 	minirt->render->inter_list.count = 0;
 	return (color);
 }

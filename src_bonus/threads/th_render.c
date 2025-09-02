@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   th_render.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:54:37 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:54:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:45:28 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ t_vec3	th_intersect_objects(t_minirt *minirt,
 	hit = get_hit(&th->inter_list);
 	if (!hit)
 		return (th->inter_list.count = 0, get_color(0, 0, 0));
-	if (th->id == 1)
-		PRINT_DEBUG("%p ", (void *)hit->obj);
 	i = 0;
 	set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
 	color = get_light_color(minirt, th, &comp, depth);
@@ -110,15 +108,11 @@ void	*th_render_scene(void *th_arg)
 		{
 			th->inter_list.count = 0;
 			th->shadow_list.count = 0;
-			if (th->id == 1)
-				PRINT_DEBUG("(%d, %d) : ", x, y);
 			ray = ray_for_pixel(*th->minirt->scene->camera, x, y);
 			put_pixel(th->minirt,
 				color_to_int(th_intersect_objects(th->minirt, &ray, th, 0)),
 				x, y);
 			x += NB_THREADS * th->minirt->render->pixel_size;
-			if (th->id == 1)
-				PRINT_DEBUG("\n");
 		}
 		y += th->minirt->render->pixel_size;
 	}

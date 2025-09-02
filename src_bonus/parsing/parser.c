@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:52:36 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:58:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:15:22 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,6 @@ void	parse_scene(t_minirt *minirt)
 	fill_intersection_table(minirt, minirt->render);
 	set_selected_object_data(minirt, minirt->scene);
 	test_light_sum(minirt->scene);
+	if (minirt->scene->nb_cone)
+		minirt->scene->cone_debug = &minirt->scene->objects[0];
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:57:24 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:57:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 11:38:44 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_scene
 	int			nb_cylinder;
 	int			nb_cone;
 	int			nb_objects;
+	t_object	*cone_debug;
 }	t_scene;
 
 #endif

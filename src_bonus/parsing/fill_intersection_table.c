@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_intersection_table.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:52:24 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:58:12 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:21:16 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

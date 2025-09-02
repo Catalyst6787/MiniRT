@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   normals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:54:07 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:57:58 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:44:46 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,10 @@ t_vec3	get_cone_normal_at(const t_object *co, const t_vec3 world_point)
 
 	object_point = vec3_matrix_multiply(co->inv, world_point);
 	dist = pow(object_point.x, 2) + pow(object_point.z, 2);
-	if (dist < pow(co->obj_data.cylinder.max, 2)
-		&& object_point.y >= (co->obj_data.cylinder.max))
+	if (dist < 1 && object_point.y >= (co->obj_data.cylinder.max - EPSILON))
 		object_normal = get_vec3(0, 1, 0);
-	else if (dist < pow(co->obj_data.cylinder.min, 2)
-		&& object_point.y <= (co->obj_data.cylinder.min))
+	else if (dist < 1
+		&& object_point.y <= (co->obj_data.cylinder.min + EPSILON))
 		object_normal = get_vec3(0, -1, 0);
 	else
 	{

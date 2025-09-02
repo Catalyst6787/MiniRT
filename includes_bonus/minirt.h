@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:57:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:57:07 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/02 12:29:19 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,7 +270,6 @@ void		*th_render_scene(void *minirt_arg);
 // 				unsigned int depth);
 t_vec3		th_get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth);
 t_vec3		th_reflected_color(t_comp *comp, t_minirt *minirt, t_thread_data *th, unsigned int depth);
-void		th_display_image(t_minirt *minirt);
 t_vec3		th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *th, unsigned int depth);
 int			th_is_shadowed(t_scene *scene, t_comp *comp, t_inter_list *shadow_list);
 
