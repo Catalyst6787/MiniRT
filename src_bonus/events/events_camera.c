@@ -91,25 +91,13 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 int	asdw_handle(int keycode, t_minirt *minirt)
 {
 	if (keycode == W)
-	{
 		minirt->scene->camera->view.from.z += 0.5;
-		minirt->scene->camera->view.to.z += 0.5;
-	}
 	else if (keycode == A)
-	{
 		minirt->scene->camera->view.from.x -= 0.5;
-		minirt->scene->camera->view.to.x -= 0.5;
-	}
 	else if (keycode == S)
-	{
 		minirt->scene->camera->view.from.z -= 0.5;
-		minirt->scene->camera->view.to.z -= 0.5;
-	}
 	else if (keycode == D)
-	{
 		minirt->scene->camera->view.from.x += 0.5;
-		minirt->scene->camera->view.to.x += 0.5;
-	}
 	minirt->scene->camera->transform
 		= get_orientation_matrix(minirt->scene->camera->view);
 	minirt->scene->camera->inv

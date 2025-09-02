@@ -26,14 +26,6 @@ static void	free_extra(t_scene *scene)
 		free(scene->filename);
 	if (scene->lights)
 		free(scene->lights);
-	// if (scene->spheres)
-	// 	free(scene->spheres);
-	// if (scene->planes)
-	// 	free(scene->planes);
-	// if (scene->cylinders)
-	// 	free(scene->cylinders);
-	// if (scene->cones)
-	// 	free(scene->cones);
 }
 
 void	free_scene(t_scene *scene)
@@ -45,21 +37,6 @@ void	free_scene(t_scene *scene)
 		while (++i <= scene->nb_light)
 			free(scene->lights[i]);
 	i = -1;
-	// if (scene->spheres)
-	// 	while (++i <= scene->nb_sphere)
-	// 		free(scene->spheres[i]);
-	// i = -1;
-	// if (scene->planes)
-	// 	while (++i <= scene->nb_plane)
-	// 		free(scene->planes[i]);
-	// i = -1;
-	// if (scene->cylinders)
-	// 	while (++i <= scene->nb_cylinder)
-	// 		free(scene->cylinders[i]);
-	// i = -1;
-	// if (scene->cones)
-	// 	while (++i <= scene->nb_cone)
-	// 		free(scene->cones[i]);
 	free_extra(scene);
 }
 

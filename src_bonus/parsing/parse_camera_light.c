@@ -100,11 +100,12 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->camera->view.from.w = 1;
-	scene->camera->view.to.x = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->view.to.y = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->camera->view.to.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	check_direction_vector(minirt, &scene->camera->view.to);
-	scene->camera->view.to.w = 1;
+	scene->camera->view.dir.x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.dir.y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->view.dir.w = 0;
+	check_direction_vector(minirt, &scene->camera->view.dir);
+	scene->camera->view.to = get_vec3(0, 0, 0);
 	scene->camera->view.up = get_vec3(0, 1, 0);
 	scene->camera->hsize = WIN_W;
 	scene->camera->vsize = WIN_H;
