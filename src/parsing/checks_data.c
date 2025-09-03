@@ -41,6 +41,13 @@ int	is_ok_ratio(double var)
 	return (1);
 }
 
+int	is_ok_scale(double scale)
+{
+	if (scale < 0.1)
+		return (0);
+	return (1);
+}
+
 void	check_data_validity(t_minirt *minirt, t_scene *scene)
 {
 	int	i;
@@ -55,16 +62,8 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		|| !is_ok_color(scene->light->color))
 		quit(minirt, WRONG_LIGHT_DATA);
 	while (++i < scene->nb_sphere)
-		if (!is_ok_color(scene->spheres[i]->color))
+		if (!is_ok_color(scene->spheres[i]->color)
+			|| !is_ok_scale(scene->spheres[i]->diameter))
 			quit(minirt, WRONG_SPH_DATA);
-	i = -1;
-	while (++i < scene->nb_plane)
-		if (!is_ok_dir(scene->planes[i]->dir)
-			|| !is_ok_color(scene->planes[i]->color))
-			quit(minirt, WRONG_PLANE_DATA);
-	i = -1;
-	while (++i < scene->nb_cylinder)
-		if (!is_ok_dir(scene->cylinders[i]->dir)
-			|| !is_ok_color(scene->cylinders[i]->color))
-			quit(minirt, WRONG_CYL_DATA);
+	check_data_validity_extra(minirt, scene);
 }

@@ -126,6 +126,8 @@ double		ato_buffer(char *ptr, int *cursor, int delim);
 
 void		parse_scene_elements(t_minirt *minirt, t_scene *scene);
 int			parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor);
+int			parse_camera_extra(t_minirt *minirt, t_scene *scene,
+				int i, int *cursor);
 int			parse_camera(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_light(t_minirt *minirt, t_scene *scene, int *cursor);
 int			parse_sphere(t_minirt *minirt,
@@ -143,6 +145,11 @@ int			count_spaces_in_line(char *buffer, int i);
 void		check_file_name(t_minirt *minirt);
 void		check_file_not_empty(t_minirt *minirt);
 void		check_data_validity(t_minirt *minirt, t_scene *scene);
+void		check_data_validity_extra(t_minirt *minirt, t_scene *scene);
+int			is_ok_color(t_vec3 v);
+int			is_ok_dir(t_vec3 v);
+int			is_ok_ratio(double var);
+int			is_ok_scale(double scale);
 void		char_error_check(t_minirt *minirt,
 				char c,
 				const char *alpha_set,
