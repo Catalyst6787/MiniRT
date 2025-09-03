@@ -22,12 +22,12 @@ void	dir_to_yaw_pitch(t_view *view)
 t_vec3	yaw_pitch_to_dir(double yaw, double pitch)
 {
 	t_vec3	dir;
+
 	dir.x = cosf(pitch) * cosf(yaw);
 	dir.y = sinf(pitch);
 	dir.z = cosf(pitch) * sinf(yaw);
 	dir.w = 0;
-	return vec3_normalise(dir);
-
+	return (vec3_normalise(dir));
 }
 
 // from view.dir
@@ -56,6 +56,3 @@ t_matrix	get_orientation_matrix(t_view view)
 					-(view.from.z))));
 	return (orientation);
 }
-
-
-

@@ -81,7 +81,8 @@ t_vec3	get_lighting(t_comp	*comp, t_minirt *minirt)
 	ambient = vec3_double_multiplication(ambient, 1 - comp->m.reflective);
 	if (comp->in_shadow)
 		return (vec3_vec_addition(ambient,
-				vec3_vec_multiplication(reflected_color(comp, minirt, comp->depth),
+				vec3_vec_multiplication(
+					reflected_color(comp, minirt, comp->depth),
 					comp->m.color)));
 	else
 		return (vec3_vec_addition(
@@ -114,7 +115,8 @@ t_vec3	th_get_lighting(t_comp	*comp, t_minirt *minirt, t_thread_data *th)
 	else
 		return (vec3_vec_addition(
 				vec3_vec_multiplication(
-					th_reflected_color(comp, minirt, th, comp->depth), comp->m.color),
+					th_reflected_color(comp, minirt, th, comp->depth),
+					comp->m.color),
 				vec3_vec_addition(
 					get_lighting_extra(comp, light_vector, effective_color),
 					ambient)));

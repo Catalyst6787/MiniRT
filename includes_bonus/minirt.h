@@ -178,6 +178,11 @@ void		alloc_elements(t_minirt *minirt, t_scene *scene);
 
 int			get_file_contents(int fd, char **file_contents);
 void		set_scene_buffer(t_minirt *minirt);
+void		filter_buffer(t_minirt *minirt);
+char		*str_dedup_sp(char *src);
+char		*str_dup_no_tab(char *src);
+int			count_char_whithout_comments(char *buffer);
+void		strcpy_filter_comments(char *s1, char *s2);
 double		ato_buffer(char *ptr, int *cursor, int delim);
 double	ato_buffer_correct(char *ptr, int *cursor, int delim);
 

@@ -24,8 +24,12 @@ t_matrix	get_object_transformation(t_object *obj)
 
 void	set_camera_transformation(t_scene *scene)
 {
-	scene->camera->view.to = vec3_vec_addition(scene->camera->view.from, scene->camera->view.dir);
-	scene->camera->view.dir = vec3_normalise(vec3_vec_substraction(scene->camera->view.to, scene->camera->view.from));
+	scene->camera->view.to = vec3_vec_addition(scene->camera->view.from,
+			scene->camera->view.dir);
+	scene->camera->view.dir = vec3_normalise(
+			vec3_vec_substraction(
+				scene->camera->view.to,
+				scene->camera->view.from));
 	dir_to_yaw_pitch(&scene->camera->view);
 	set_pixel_size(scene->camera);
 	scene->camera->transform = get_orientation_matrix(scene->camera->view);

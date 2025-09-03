@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "vec3.h"
 
 void	set_computations(t_comp *comp_out,
 		t_light *light, t_inter *hit, t_ray *r)
@@ -38,13 +37,32 @@ void	set_computations(t_comp *comp_out,
 	comp_out->reflectv = get_reflection(r->dir, comp_out->normalv);
 }
 
-t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray, unsigned int depth)
+t_vec3	color_at(t_minirt *minirt, t_comp *comp)
+{
+	int		i;
+	t_vec3	color;
+
+	i = 0;
+	color = get_vec3(0, 0, 0);
+	while (i < minirt->scene->nb_light)
+	{
+		comp->light = *minirt->scene->lights[i];
+		color = vec3_vec_addition(color, shade_hit(comp, minirt));
+		minirt->render->shadow_list.count = 0;
+		i++;
+	}
+	i = -1;
+	minirt->render->inter_list.count = 0;
+	return (color);
+}
+
+t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray,
+						unsigned int depth)
 {
 	int				i;
 	t_ray			r;
 	t_inter			*hit;
 	t_comp			comp;
-	t_vec3			color;
 
 	i = 0;
 	while (i < minirt->scene->nb_objects)
@@ -58,20 +76,9 @@ t_vec3	intersect_objects(t_minirt *minirt, t_ray *unique_ray, unsigned int depth
 	hit = get_hit(&minirt->render->inter_list);
 	if (!hit)
 		return (minirt->render->inter_list.count = 0, get_color(0, 0, 0));
-	i = 0;
-	color = get_vec3(0, 0, 0);
 	set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
 	comp.depth = depth;
-	while (i < minirt->scene->nb_light)
-	{
-		comp.light = *minirt->scene->lights[i];
-		color = vec3_vec_addition(color, shade_hit(&comp, minirt));
-		minirt->render->shadow_list.count = 0;
-		i++;
-	}
-	i = -1;
-	minirt->render->inter_list.count = 0;
-	return (color);
+	return (color_at(minirt, &comp));
 }
 
 t_ray	ray_for_pixel(t_camera camera, double px, double py)
@@ -92,45 +99,27 @@ t_ray	ray_for_pixel(t_camera camera, double px, double py)
 
 int	render_scene(t_minirt *minirt)
 {
-	int		y;
-	int		x;
-	t_ray	ray;
-	unsigned int depth;
+	int				y;
+	int				x;
+	t_ray			ray;
+	unsigned int	depth;
 
 	y = 0;
 	depth = 0;
-	minirt->render->debug_y = 0;
 	if (!minirt)
 		quit(minirt, "render_scene: NULL prt!");
 	while (y < minirt->scene->camera->vsize)
 	{
 		x = 0;
-		minirt->render->debug_x = 0;
 		while (x < minirt->scene->camera->hsize)
 		{
 			ray = ray_for_pixel(*minirt->scene->camera, x, y);
 			put_pixel(minirt,
 				color_to_int(intersect_objects(minirt, &ray, depth)), x, y);
 			x += minirt->render->pixel_size;
-			minirt->render->debug_x = x;
 		}
 		y += minirt->render->pixel_size;
-		minirt->render->debug_y = y;
 	}
 	display_image(minirt);
 	return (0);
 }
-
-int	start_render(t_minirt *minirt)
-{
-	clock_t		t;
-
-	if (MULTI_THREADING)
-		return (start_threads(minirt));
-	t = clock();
-	render_scene(minirt);
-	t = clock() - t;
-	printf("Scene rendered in %f seconds\n", ((double)t) / CLOCKS_PER_SEC);
-	return (0);
-}
-

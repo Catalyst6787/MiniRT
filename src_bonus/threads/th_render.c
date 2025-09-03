@@ -49,7 +49,8 @@ t_vec3	get_light_color(t_minirt *minirt,
 	while (i < minirt->scene->nb_light)
 	{
 		comp->light = *minirt->scene->lights[i];
-		comp->in_shadow =  th_is_shadowed(minirt->scene, comp, &th->shadow_list);
+		comp->in_shadow = th_is_shadowed(minirt->scene,
+				comp, &th->shadow_list);
 		color = vec3_vec_addition(
 				color,
 				th_get_lighting(
