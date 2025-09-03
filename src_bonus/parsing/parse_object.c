@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_object.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 22:51:53 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/03 22:51:54 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	set_obj_type(t_object *obj, int *cursor, char *buffer)
 {
 	if (!buffer || !buffer[0] || !buffer[*cursor])
-		return(1);
+		return (1);
 	if (!obj)
-		return(1);
+		return (1);
 	else if (!ft_strncmp(buffer + *cursor, "sp", 2))
 		obj->type = SPHERE;
 	else if (!ft_strncmp(buffer + *cursor, "cy", 2))
@@ -15,7 +27,7 @@ int	set_obj_type(t_object *obj, int *cursor, char *buffer)
 	else if (!ft_strncmp(buffer + *cursor, "co", 2))
 		obj->type = CONE;
 	else
-		return(1);
+		return (1);
 	(*cursor) += 2;
 	return(0);
 }

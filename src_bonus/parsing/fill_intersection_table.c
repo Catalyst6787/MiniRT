@@ -36,7 +36,7 @@ static void	fill_inter_objects(t_render *render, t_scene *scene)
 		if (scene->objects[obj_id].type == PLANE)
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
 		else if (scene->objects[obj_id].type == CYLINDER
-				|| scene->objects[obj_id].type == SPHERE)
+			|| scene->objects[obj_id].type == SPHERE)
 		{
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];

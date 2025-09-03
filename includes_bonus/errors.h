@@ -74,5 +74,6 @@
 # define PARSER_WRONG_DIRECTION "Error : object has invalid direction vector"
 # define PARSER_NON_INVERTIBLE_MATRIX "Error : object has non-invertible matrix (check direction or shearing)"
 # define UNEXPECTED_EOF "parse_buffer reached unexpected EOF\n"
+# define INVALID_DOUBLE "invalid double, more than 17 significant digits: \n"
 
 #endif

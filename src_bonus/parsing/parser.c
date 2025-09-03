@@ -95,6 +95,8 @@ void	parse_scene(t_minirt *minirt)
 	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
 	check_characters_validity(minirt);
+	check_object_format(minirt, minirt->scene->buffer);
+	check_each_lines(minirt, minirt->scene->buffer);
 	count_elements(minirt->scene);
 	single_elements_check(minirt, minirt->scene);
 	alloc_elements(minirt, minirt->scene);

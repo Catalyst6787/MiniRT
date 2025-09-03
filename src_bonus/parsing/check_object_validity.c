@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_object_validity.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/03 22:29:52 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/03 22:29:53 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 int	has_object_type(char *s, int *i, int *length)
@@ -29,7 +41,7 @@ int	has_object_type(char *s, int *i, int *length)
 
 int	is_valid_material(char *s, int *i, int *length)
 {
-	int e;
+	int	e;
 
 	e = 0;
 	while (e < 4)
@@ -49,7 +61,7 @@ int	is_valid_material(char *s, int *i, int *length)
 
 int	is_valid_shearing(char *s, int *i, int *length)
 {
-	int e;
+	int	e;
 
 	e = 0;
 	while (e < 6)
@@ -63,7 +75,6 @@ int	is_valid_shearing(char *s, int *i, int *length)
 			printf("s[%d] = %c (%d)\n", *i - 1, s[*i - 1], s[*i - 1]);
 			printf("s[%d] = %c (%d)\n", *i, s[*i], s[*i]);
 			printf("s[%d] = %c (%d)\n", *i + 1, s[*i + 1], s[*i + 1]);
-
 			return (0);
 		}
 		if (e != 5)
@@ -85,14 +96,13 @@ int	is_valid_object(char *s)
 	if (!is_valid_material(s, &i, &length))
 		return (0);
 	if (s[i] == '\n' || (s[i] == ' ' && s[i + 1] == '\n'))
-		return(1);
+		return (1);
 	else if (!ft_isspace(s[i]))
 		return (0);
 	i++;
 	if (!is_valid_shearing(s, &i, &length))
-		return(0);
+		return (0);
 	if (s[i] == '\n' || (s[i] == ' ' && s[i + 1] == '\n'))
 		return (1);
 	return (0);
 }
-

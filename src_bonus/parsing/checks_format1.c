@@ -76,7 +76,7 @@ void	check_object_format(t_minirt *minirt, char *buffer)
 			quit(minirt, CHAR_ERR);
 		if ((buffer[i] == ',' && ft_isspace(buffer[i + 1]))
 			|| (buffer[i] == '.' && buffer[i + 1] == '.'))
-				quit(minirt, FORMAT_ERR);
+			quit(minirt, FORMAT_ERR);
 		i++;
 	}
 }
@@ -115,13 +115,11 @@ void	check_characters_validity(t_minirt *minirt)
 			if (minirt->scene->buffer[i])
 				if (!ft_is_char_in_string(alpha_set, minirt->scene->buffer[i])
 					&& !ft_is_char_in_string(sign_set, minirt->scene->buffer[i])
-				&& !ft_isdigit(minirt->scene->buffer[i]))
+					&& !ft_isdigit(minirt->scene->buffer[i]))
 					quit(minirt, SCENE_WRONG_CHAR_ERR);
 		}
 		if (!minirt->scene->buffer[i])
 			break ;
 		char_error_check(minirt, minirt->scene->buffer[i], alpha_set, sign_set);
 	}
-	check_object_format(minirt, minirt->scene->buffer);
-	check_each_lines(minirt, minirt->scene->buffer);
 }
