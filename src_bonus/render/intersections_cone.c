@@ -16,7 +16,6 @@ bool	check_cone_cap(const t_ray *ray, double t, double y_cap)
 {
 	double	x;
 	double	z;
-	(void)y_cap;
 
 	x = ray->origin.x + t * ray->dir.x;
 	z = ray->origin.z + t * ray->dir.z;

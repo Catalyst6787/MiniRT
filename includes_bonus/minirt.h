@@ -242,7 +242,7 @@ void		fill_intersection_table(t_minirt *minirt, t_render *render);
 
 int			render_scene(t_minirt *minirt);
 // t_vec3		render_one_pixel_test(t_minirt *minirt, int x, int y);
-t_vec3		get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, unsigned int depth);
+t_vec3		get_lighting(t_comp *comp, t_minirt *minirt);
 int			start_render(t_minirt *minirt);
 void		display_image(t_minirt *minirt);
 int			count_intersections(t_scene *scene);
@@ -257,7 +257,7 @@ t_light		get_light(t_vec3 pos, double brightness, t_vec3 color);
 int			free_render(t_render *render);
 int			is_debug_pixel(int i, int j);
 t_matrix	get_orientation_matrix(t_view view);
-t_vec3		shade_hit(t_comp *comp, t_minirt *minirt, unsigned int depth);
+t_vec3		shade_hit(t_comp *comp, t_minirt *minirt);
 void		swap_inters(t_inter *a, t_inter *b);
 t_vec3		get_cylinder_normal_at(const t_object *cy,
 				const t_vec3 world_point);
@@ -272,7 +272,7 @@ void		*th_render_scene(void *minirt_arg);
 // 				t_comp *comp,
 // 				t_inter_list *shadow_list,
 // 				unsigned int depth);
-t_vec3		th_get_lighting(t_comp *comp, bool in_shadow, t_minirt *minirt, t_thread_data *th, unsigned int depth);
+t_vec3		th_get_lighting(t_comp *comp, t_minirt *minirt, t_thread_data *th);
 t_vec3		th_reflected_color(t_comp *comp, t_minirt *minirt, t_thread_data *th, unsigned int depth);
 t_vec3		th_intersect_objects(t_minirt *minirt, t_ray *unique_ray, t_thread_data *th, unsigned int depth);
 int			th_is_shadowed(t_scene *scene, t_comp *comp, t_inter_list *shadow_list);

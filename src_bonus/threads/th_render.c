@@ -39,8 +39,7 @@ void	th_fill_intersection_table(t_minirt *minirt,
 
 t_vec3	get_light_color(t_minirt *minirt,
 						t_thread_data *th,
-						t_comp *comp,
-						int depth)
+						t_comp *comp)
 {
 	t_vec3	color;
 	int		i;
@@ -50,12 +49,12 @@ t_vec3	get_light_color(t_minirt *minirt,
 	while (i < minirt->scene->nb_light)
 	{
 		comp->light = *minirt->scene->lights[i];
+		comp->in_shadow =  th_is_shadowed(minirt->scene, comp, &th->shadow_list);
 		color = vec3_vec_addition(
 				color,
 				th_get_lighting(
 					comp,
-					th_is_shadowed(minirt->scene, comp, &th->shadow_list),
-					th->minirt, th, depth));
+					th->minirt, th));
 		th->shadow_list.count = 0;
 		i++;
 	}
@@ -87,7 +86,8 @@ t_vec3	th_intersect_objects(t_minirt *minirt,
 		return (th->inter_list.count = 0, get_color(0, 0, 0));
 	i = 0;
 	set_computations(&comp, minirt->scene->lights[i], hit, unique_ray);
-	color = get_light_color(minirt, th, &comp, depth);
+	comp.depth = depth;
+	color = get_light_color(minirt, th, &comp);
 	th->inter_list.count = 0;
 	return (color);
 }

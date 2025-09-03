@@ -60,10 +60,8 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	return (false);
 }
 
-t_vec3	shade_hit(t_comp *comp, t_minirt *minirt, unsigned int depth)
+t_vec3	shade_hit(t_comp *comp, t_minirt *minirt)
 {
-	bool	shadowed;
-
-	shadowed = is_shadowed(minirt->render, minirt->scene, comp);
-	return (get_lighting(comp, shadowed, minirt, depth));
+	comp->in_shadow = is_shadowed(minirt->render, minirt->scene, comp);
+	return (get_lighting(comp, minirt));
 }
