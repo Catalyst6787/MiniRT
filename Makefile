@@ -24,9 +24,10 @@ SUBDIRS = parsing vec3 debug rays tests colors matrices print render
 BONUS_SUBDIRS = $(SUBDIRS) threads events # add more here
 SRC =	main.c \
 		parser.c parsing_scene_allocation.c parse_camera_light.c parse_camera_extr.c parse_shapes.c \
-		parse_scene_elements.c set_objects_material.c create_objects_from_shapes.c \
+		parse_scene_elements.c set_objects_material.c \
 		set_buffer.c \
 		checks_data.c checks_data2.c checks_format1.c checks_format2.c parsing_utils.c \
+		create_objects_from_shapes.c \
 		transform_objects.c \
 		fill_intersection_table.c \
 		debug.c \
