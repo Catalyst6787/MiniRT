@@ -201,7 +201,11 @@ int			parse_light(t_minirt *minirt,
 // 				t_scene *scene, t_cylinder *cylinder, int *cursor);
 // int			parse_cone(t_minirt *minirt,
 // 				t_scene *scene, t_cone *cone, int *cursor);
+int			is_valid_vector(char *s, int *length);
+int			is_valid_double(char *s, int *length);
+int			is_valid_object(char *s);
 int			parse_object(t_minirt *minirt, t_object *obj, int *cursor);
+int			print_until(char *s, char c);
 
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);

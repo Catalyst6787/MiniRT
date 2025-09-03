@@ -69,7 +69,9 @@ void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 
 	cursor = 0;
 	ft_memset(&ph, 0, sizeof(t_parsing_helper));
-	while (scene->buffer[cursor] && (!ph.a || !ph.c || ph.l < minirt->scene->nb_light || ph.o < minirt->scene->nb_objects))
+	while (scene->buffer[cursor]
+		&& (!ph.a || !ph.c || ph.l < minirt->scene->nb_light
+			|| ph.o < minirt->scene->nb_objects))
 	{
 		parse_buffer(minirt, &cursor, &ph);
 	}
