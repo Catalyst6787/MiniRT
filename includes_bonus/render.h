@@ -19,18 +19,18 @@
 
 typedef struct s_comp
 {
-	t_object	*object;
-	double		t;
-	t_vec3		point;
-	t_vec3		eyev;
-	t_vec3		normalv;
-	bool		inside;
-	t_material	m;
-	t_light		light;
-	t_vec3		over_point;
-	t_vec3		reflectv;
-	bool			in_shadow;
-	unsigned int	depth;
+	t_object			*object;
+	double				t;
+	t_vec3				point;
+	t_vec3				eyev;
+	t_vec3				normalv;
+	bool				inside;
+	t_material			m;
+	t_light				light;
+	t_vec3				over_point;
+	t_vec3				reflectv;
+	bool				in_shadow;
+	unsigned int		depth;
 }				t_comp;
 
 typedef struct s_inter

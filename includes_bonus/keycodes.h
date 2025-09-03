@@ -40,7 +40,6 @@
 #  define L_BRACKET 91
 #  define R_BRACKET 93
 
-
 #  define A 97
 #  define B 98
 #  define C 99
@@ -65,7 +64,6 @@
 #  define X 120
 #  define Z 122
 # endif
-
 
 # define COMMAND_HELP_1 "ASWDER : Cam position"
 # define COMMAND_HELP_2 "Arrows : Cam direction"

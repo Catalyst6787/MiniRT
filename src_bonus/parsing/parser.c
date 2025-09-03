@@ -84,7 +84,6 @@ void	fill_obj_id(t_scene *scene)
 	}
 }
 
-
 void	parse_scene(t_minirt *minirt)
 {
 	minirt->scene->buffer = NULL;

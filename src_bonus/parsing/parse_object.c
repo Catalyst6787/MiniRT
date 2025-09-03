@@ -33,7 +33,7 @@ void	get_transform_vec(t_minirt *minirt, t_object *obj,
 
 void	get_shearing(t_minirt *minirt, t_object *obj, int *i)
 {
-	t_shear shear;
+	t_shear	shear;
 
 	if (is_shearing(minirt->scene->buffer + *i))
 	{
@@ -55,7 +55,8 @@ void	get_shearing(t_minirt *minirt, t_object *obj, int *i)
 	}
 }
 
-int	check_parsed_data(t_minirt *minirt, t_vec3 transformations[4], t_object *obj, int *cursor)
+int	check_parsed_data(t_minirt *minirt, t_vec3 transformations[4],
+			t_object *obj, int *cursor)
 {
 	if (check_transformation_data(transformations))
 		return (print_until(minirt->scene->buffer + *cursor, '\n'),
@@ -69,7 +70,8 @@ int	check_parsed_data(t_minirt *minirt, t_vec3 transformations[4], t_object *obj
 	return (0);
 }
 
-int	set_object_parameters(t_minirt *minirt, t_object *obj, t_vec3 transformations[4])
+int	set_object_parameters(t_minirt *minirt, t_object *obj,
+			t_vec3 transformations[4])
 {
 	obj->translation = get_translation_matrix(transformations[translation]);
 	obj->dir = transformations[direction];

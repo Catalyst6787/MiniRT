@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "scene.h"
 #include "vec3.h"
 #include <stdio.h>
 
@@ -90,21 +91,28 @@ void	erzx_handle(int keycode, t_minirt *minirt)
 
 int	asdw_handle(int keycode, t_minirt *minirt)
 {
-	t_vec3	right;
+	t_vec3		right;
+	t_camera	*cam;
 
-	minirt->scene->camera->view.dir = yaw_pitch_to_dir(minirt->scene->camera->view.yaw, minirt->scene->camera->view.pitch);
-	right = vec3_normalise(vec3_cross(get_vec3(0, 1, 0), minirt->scene->camera->view.dir));
+	cam = minirt->scene->camera;
+	cam->view.dir = yaw_pitch_to_dir(cam->view.yaw, cam->view.pitch);
+	right = vec3_normalise(vec3_cross(get_vec3(0, 1, 0),
+				cam->view.dir));
 	if (keycode == W)
-		minirt->scene->camera->view.from = vec3_vec_addition(minirt->scene->camera->view.from, vec3_double_multiplication(minirt->scene->camera->view.dir, 0.1));
+		cam->view.from = vec3_vec_addition(
+				cam->view.from, vec3_double_multiplication(cam->view.dir, 0.1));
 	else if (keycode == A)
-		minirt->scene->camera->view.from = vec3_vec_substraction(minirt->scene->camera->view.from, vec3_double_multiplication(right, 0.1));
+		cam->view.from = vec3_vec_substraction(cam->view.from,
+				vec3_double_multiplication(right, 0.1));
 	else if (keycode == S)
-		minirt->scene->camera->view.from = vec3_vec_substraction(minirt->scene->camera->view.from, vec3_double_multiplication(minirt->scene->camera->view.dir, 0.1));
+		cam->view.from = vec3_vec_substraction(cam->view.from,
+				vec3_double_multiplication(cam->view.dir, 0.1));
 	else if (keycode == D)
-		minirt->scene->camera->view.from = vec3_vec_addition(minirt->scene->camera->view.from, vec3_double_multiplication(right, 0.1));
-	minirt->scene->camera->transform
-		= get_orientation_matrix(minirt->scene->camera->view);
-	minirt->scene->camera->inv
-		= get_inversed_matrix(minirt->scene->camera->transform);
+		cam->view.from = vec3_vec_addition(cam->view.from,
+				vec3_double_multiplication(right, 0.1));
+	cam->transform
+		= get_orientation_matrix(cam->view);
+	cam->inv
+		= get_inversed_matrix(cam->transform);
 	return (ft_printf("[%c] pressed\n", keycode - 32), start_render(minirt));
 }
