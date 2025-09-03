@@ -60,11 +60,11 @@ SRC =	main.c \
 
 BONUS_SRC =	main.c \
 			parser.c parsing_scene_allocation.c parse_camera_light.c parse_shapes.c \
-			parse_scene_elements.c parse_object.c \
+			parse_scene_elements.c parse_object.c parse_object_utils.c \
 			check_vector_validity.c check_object_validity.c \
 			set_buffer.c set_buffer2.c \
 			checks_data.c checks_format1.c checks_format2.c parsing_utils.c parsing_utils2.c \
-			transform_objects.c \
+			check_material_transform.c transform_objects.c \
 			fill_intersection_table.c \
 			debug.c \
 			double_utils.c \

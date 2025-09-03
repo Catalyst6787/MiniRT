@@ -207,6 +207,17 @@ int			is_valid_object(char *s);
 int			parse_object(t_minirt *minirt, t_object *obj, int *cursor);
 int			print_until(char *s, char c);
 
+int			check_color_validity(t_vec3 color);
+int			check_transformation_data(t_vec3 transformations[4]);
+int			check_material_data(t_material material);
+
+int			set_obj_type(t_object *obj, int *cursor, char *buffer);
+int			is_shearing(char *s);
+int			is_shearing(char *s);
+int			print_until(char *s, char c);
+int			check_direction_validity(t_vec3 dir);
+int			check_scaling_validity(t_vec3 scaling);
+
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
 void		set_object_ambient_light(t_scene *scene);
