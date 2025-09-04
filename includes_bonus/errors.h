@@ -85,6 +85,6 @@ non-invertible matrix (check direction or shearing)"
 # define UNEXPECTED_EOF "parse_buffer reached \
 unexpected EOF\n"
 # define INVALID_DOUBLE "invalid double, more \
-than 17 significant digits: \n"
+than 17 or less than 1 significant digits:  \n"
 
 #endif
