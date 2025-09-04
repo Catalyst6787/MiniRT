@@ -91,6 +91,7 @@ void	parse_scene(t_minirt *minirt)
 			"scenes/random_generation.rt", 21))
 		generate_random_scene(minirt);
 	check_file_name(minirt);
+	printf("file : %s\n", minirt->scene->filename);
 	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
 	check_characters_validity(minirt);

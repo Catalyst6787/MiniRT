@@ -1,4 +1,4 @@
 #!/bin/bash
 
 make
-./bash_validity.sh scenes/invalid/*
+./bash_validity.sh scenes/*

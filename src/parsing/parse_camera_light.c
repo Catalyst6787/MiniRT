@@ -14,7 +14,7 @@
 #include "minirt.h"
 #include "vec3.h"
 
-int	count_comas(char *buffer, int i)
+int	count_comas(t_minirt *minirt, char *buffer, int i)
 {
 	int	count;
 
@@ -22,7 +22,11 @@ int	count_comas(char *buffer, int i)
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		if (buffer[i] == ',')
+		{
+			if (i && !ft_isdigit(buffer[i - 1]) && !ft_isdigit(buffer[i + 1]))
+				quit(minirt, FORMAT_ERR);
 			count++;
+		}
 		i++;
 	}
 	return (count);
@@ -61,7 +65,7 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 2
+	if (count_comas(minirt, scene->buffer, i) != 2
 		|| count_spaces_in_line(scene->buffer, i) != 1)
 	{
 		printf("d = %d\n", count_spaces_in_line(scene->buffer, i));
@@ -83,7 +87,7 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	int		i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 4
+	if (count_comas(minirt, scene->buffer, i) != 4
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_CAM_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
@@ -101,7 +105,7 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	int	i;
 
 	i = *cursor + 1;
-	if (count_comas(scene->buffer, i) != 4
+	if (count_comas(minirt, scene->buffer, i) != 4
 		|| count_spaces_in_line(scene->buffer, i) != 2)
 		quit(minirt, WRONG_LIGHT_DATA);
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
