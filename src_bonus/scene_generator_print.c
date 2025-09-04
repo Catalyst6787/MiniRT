@@ -60,7 +60,7 @@ void	save_random_scene(t_minirt *minirt)
 void	gen_print_plane(FILE *file, t_rand *rand)
 {
 	rand->is_plane = 1;
-	fprintf(file, "pl 0,0,10 0,1,0 %.2f,%.2f,%.2f %d,%d,%d %.2f %.2f %d %d \
+	fprintf(file, "pl 0,0,10 0,1,1 %.2f,%.2f,%.2f %d,%d,%d %.2f %.2f %d %d \
 		0,0,0,0,0,0\n",
 		generate_random_double(0, 10),
 		generate_random_double(0, 10),
@@ -92,7 +92,7 @@ void	gen_print_data(FILE *file)
 		generate_random_int(0, 255),
 		generate_random_double(0, 1),
 		generate_random_double(0, 1),
-		generate_random_int(2, 500),
+		generate_random_int(3, 500),
 		generate_random_int(0, 1));
 }
 

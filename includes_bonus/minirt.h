@@ -368,7 +368,7 @@ void		change_element_color(t_minirt *minirt,
 
 /*                              GENERATOR                                */
 
-void		generate_random_scene(void);
+void		generate_random_scene(t_minirt *minirt);
 void		gen_print_lights(FILE *file, t_rand *rand);
 void		gen_print_object(FILE *file, int type, t_rand *rand, bool chaos);
 // void		gen_print_sphere(FILE *file);

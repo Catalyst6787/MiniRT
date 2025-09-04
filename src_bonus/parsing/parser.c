@@ -89,7 +89,7 @@ void	parse_scene(t_minirt *minirt)
 	minirt->scene->buffer = NULL;
 	if (!ft_strncmp(minirt->scene->filename,
 			"scenes/random_generation.rt", 21))
-		generate_random_scene();
+		generate_random_scene(minirt);
 	check_file_name(minirt);
 	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);

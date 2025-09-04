@@ -78,17 +78,19 @@ void	fill_lights_ratio(t_rand *rand)
 	normalize_lights(rand);
 }
 
-void	generate_random_scene(void)
+void	generate_random_scene(t_minirt *minirt)
 {
 	FILE	*file;
 	t_rand	rand;
 	int		obj_type;
 
 	file = fopen("scenes/random_generation.rt", "w");
+	if (!file)
+		quit(minirt, FILE_OPEN_ERR);
 	fprintf(file, "C 0,0,-10 0,0,1 70\n");
 	srand(time(NULL));
 	rand.nb_obj = generate_random_int(3, 12);
-	rand.is_plane = 0;
+	rand.is_plane = 1;
 	fill_lights_ratio(&rand);
 	gen_print_lights(file, &rand);
 	while (rand.nb_obj >= 0)
