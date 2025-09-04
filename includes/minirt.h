@@ -140,7 +140,7 @@ int			parse_cylinder(t_minirt *minirt,
 void		set_objects_transformation(t_scene *scene);
 void		set_objects_material(t_scene *scene);
 
-int			count_comas(char *buffer, int i);
+int			count_comas(t_minirt *minirt, char *buffer, int i);
 int			count_spaces_in_line(char *buffer, int i);
 void		check_file_name(t_minirt *minirt);
 void		check_file_not_empty(t_minirt *minirt);
