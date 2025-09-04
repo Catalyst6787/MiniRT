@@ -32,8 +32,8 @@ int	count_comas(t_minirt *minirt, char *buffer, int i)
 		{
 			if (i && !ft_isdigit(buffer[i - 1]) && !ft_isdigit(buffer[i + 1]))
 				quit(minirt, FORMAT_ERR);
-		}
 			count++;
+		}
 		i++;
 	}
 	return (count);
