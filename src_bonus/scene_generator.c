@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_generator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:56:11 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:56:12 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/09/05 19:37:30 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	generate_random_scene(t_minirt *minirt)
 	gen_print_lights(file, &rand);
 	while (rand.nb_obj >= 0)
 	{
-		obj_type = generate_random_int(0, 3);
+		// obj_type = generate_random_int(0, 3);
+		obj_type = 0;
 		gen_print_object(file, obj_type, &rand, false);
 		rand.nb_obj--;
 	}

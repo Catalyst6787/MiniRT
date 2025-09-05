@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:52:36 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/02 12:15:22 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:31:22 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	parse_scene(t_minirt *minirt)
 			"scenes/random_generation.rt", 21))
 		generate_random_scene(minirt);
 	check_file_name(minirt);
-	printf("file : %s\n", minirt->scene->filename);
 	set_scene_buffer(minirt);
 	check_file_not_empty(minirt);
 	check_characters_validity(minirt);

@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:56:09 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/02 14:18:48 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/09/05 19:45:01 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,21 @@ void	gen_print_plane(FILE *file, t_rand *rand)
 
 void	gen_print_data(FILE *file)
 {
+	double	size = generate_random_double(0.1, 10);
 	fprintf(file, "%.2f,%.2f,%.2f %.2f,%.2f,%.2f %.2f,%.2f,%.2f %d,%d,%d \
-		%.2f %.2f %d %d 0,0,0,0,0,0\n",
+		1 1 500 1 0,0,0,0,0,0\n",
 		generate_random_double(-10, 10),
 		generate_random_double(-10, 10),
 		generate_random_double(0, 10),
 		generate_random_double(-1, 1),
 		generate_random_double(-1, 1),
 		generate_random_double(-1, 1),
-		generate_random_double(0.1, 10),
-		generate_random_double(0.1, 10),
-		generate_random_double(0.1, 10),
+		size,
+		size,
+		size,
 		generate_random_int(0, 255),
 		generate_random_int(0, 255),
-		generate_random_int(0, 255),
-		generate_random_double(0, 1),
-		generate_random_double(0, 1),
-		generate_random_int(3, 500),
-		generate_random_int(0, 1));
+		generate_random_int(0, 255));
 }
 
 void	gen_print_object(FILE *file, int type, t_rand *rand, bool chaos)
