@@ -94,4 +94,5 @@ int	quit(t_minirt *minirt, char *str)
 	}
 	print_exit_info(str);
 	exit(0);
+	return 0;
 }

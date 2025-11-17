@@ -2,10 +2,10 @@ NAME = miniRT
 BONUS_NAME = miniRT_bonus
 UNAME = $(shell uname -s)
 
-CC = gcc
+CC = tcc
 
 ifeq ($(UNAME), Linux)
-	CFLAGS = -Wall -Wextra -Werror -Wpedantic -pedantic-errors -I ./libft/includes -I ./minilibx-linux -g -Og
+	CFLAGS = -Wall -Wextra -Werror -Wpedantic -I ./libft/includes -I ./minilibx-linux -g -Og
 	LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 	MLX = ./minilibx-linux/libmlx.a
 endif
