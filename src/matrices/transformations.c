@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:25:14 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:25:15 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:11 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:18 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ void	set_cylinder_tranformation(t_cylinder *cy)
 			get_matrix(4, 4, 1),
 			get_scaling_matrix(get_vec3(cy->radius, cy->height, cy->radius)));
 	cy->inv = get_inversed_matrix(cy->transform);
+}
+
+void	set_cone_tranformation(t_cone *co)
+{
+	co->transform = get_transformation(
+			get_translation_matrix(co->pos),
+			get_rotation_matrix(convert_dir_to_euler(co->dir)),
+			get_matrix(4, 4, 1),
+			get_scaling_matrix(get_vec3(co->radius, co->height, co->radius)));
+	co->inv = get_inversed_matrix(co->transform);
 }

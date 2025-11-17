@@ -5,61 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:26:48 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:26:49 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:53:07 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:04 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	set_spheres_transformation(t_scene *scene)
+t_matrix	get_object_transformation(t_object *obj)
 {
-	int	i;
+	t_matrix	result;
 
-	i = 0;
-	while (i < scene->nb_sphere)
-	{
-		set_sphere_transformation(scene->spheres[i]);
-		i++;
-	}
+	result = multiply_matrix(obj->translation,
+			multiply_matrix(obj->rotation,
+				multiply_matrix(obj->shearing, obj->scaling)));
+	return (result);
 }
 
-static void	set_planes_transformation(t_scene *scene)
+void	set_camera_transformation(t_scene *scene)
 {
-	int	i;
-
-	i = 0;
-	while (i < scene->nb_plane)
-	{
-		set_plane_transformation(scene->planes[i]);
-		i++;
-	}
-}
-
-// shearing not implemented
-static void	set_cylinders_transformation(t_scene *scene)
-{
-	int	i;
-
-	i = 0;
-	while (i < scene->nb_cylinder)
-	{
-		set_cylinder_tranformation(scene->cylinders[i]);
-		i++;
-	}
-}
-
-static void	set_camera_transformation(t_scene *scene)
-{
+	scene->camera->view.to = vec3_vec_addition(scene->camera->view.from,
+			scene->camera->view.dir);
+	scene->camera->view.dir = vec3_normalise(
+			vec3_vec_substraction(
+				scene->camera->view.to,
+				scene->camera->view.from));
+	dir_to_yaw_pitch(&scene->camera->view);
 	set_pixel_size(scene->camera);
 	scene->camera->transform = get_orientation_matrix(scene->camera->view);
 	scene->camera->inv = get_inversed_matrix(scene->camera->transform);
-}
-
-void	set_objects_transformation(t_scene *scene)
-{
-	set_camera_transformation(scene);
-	set_spheres_transformation(scene);
-	set_planes_transformation(scene);
-	set_cylinders_transformation(scene);
 }

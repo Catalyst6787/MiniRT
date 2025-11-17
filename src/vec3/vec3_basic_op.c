@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:28:29 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:28:30 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:55:00 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:00 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_vec3	vec3_vec_addition(t_vec3 v1, t_vec3 v2)
 	t_vec3	v;
 
 	if (v1.w && v2.w)
-		print_err(FILE, LINE, "vec3_vec_addition, trying to add two points");
+		print_err(__FILE__, LINE, "vec_addition, trying to add two points");
 	v.x = v1.x + v2.x;
 	v.y = v1.y + v2.y;
 	v.z = v1.z + v2.z;
@@ -31,8 +31,8 @@ t_vec3	vec3_vec_substraction(const t_vec3 v1, const t_vec3 v2)
 	t_vec3	v;
 
 	if (!v1.w && v2.w)
-		print_err(FILE, LINE,
-			"vec3_vec_substraction, trying to substract a point from a vec");
+		print_err(__FILE__, LINE,
+			"vec_substraction, trying to substract a point from a vec");
 	v.x = v1.x - v2.x;
 	v.y = v1.y - v2.y;
 	v.z = v1.z - v2.z;
@@ -45,8 +45,8 @@ t_vec3	vec3_vec_multiplication(t_vec3 v1, t_vec3 v2)
 	t_vec3	v;
 
 	if (v1.w || v2.w)
-		print_err(FILE, LINE,
-			"vec3_vec_multiplication, trying to multiply a point");
+		print_err(__FILE__, LINE,
+			"vec_multiplication, trying to multiply a point");
 	v.x = v1.x * v2.x;
 	v.y = v1.y * v2.y;
 	v.z = v1.z * v2.z;
@@ -59,7 +59,8 @@ t_vec3	vec3_vec_division(t_vec3 v1, t_vec3 v2)
 	t_vec3	v;
 
 	if (v1.w || v1.w)
-		print_err(FILE, LINE, "vec3_vec_division, trying to multiply a point");
+		print_err(__FILE__, LINE,
+			"vec_division, trying to multiply a point");
 	v.x = v1.x / v2.x;
 	v.y = v1.y / v2.y;
 	v.z = v1.z / v2.z;

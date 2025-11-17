@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:27:54 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:27:54 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:53:58 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:54:04 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_material	get_default_material(t_vec3 color, t_scene *scene)
 	material.diffuse = 0.9;
 	material.specular = 0.9;
 	material.shininess = 200.0;
+	material.reflective = 1;
 	return (material);
 }

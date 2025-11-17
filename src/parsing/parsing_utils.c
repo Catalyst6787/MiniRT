@@ -5,12 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:26:31 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:40:19 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:45 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:05 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "errors.h"
 #include "minirt.h"
 
 void	objects_alloc(t_minirt *minirt, t_scene *scene)
@@ -18,17 +17,18 @@ void	objects_alloc(t_minirt *minirt, t_scene *scene)
 	scene->objects = malloc(sizeof(t_object) * (scene->nb_objects + 1));
 	if (!scene->objects && scene->nb_objects)
 		quit(minirt, MALLOC_ERR);
+	ft_memset(scene->objects, 0, sizeof(t_object) * (scene->nb_objects + 1));
 }
 
-void	move_cursor(char *str, int *cursor, char c)
+void	move_cursor(char *buffer, int *cursor, char c)
 {
 	int	i;
 
 	i = *cursor;
-	while (*str && *str != c && ++i)
-		str++;
-	while (*str && *str == c && ++i)
-		str++;
+	while (*buffer && *buffer != c && ++i)
+		buffer++;
+	while (*buffer && *buffer == c && ++i)
+		buffer++;
 	*cursor = i;
 }
 
@@ -64,21 +64,18 @@ double	ato_buffer(char *ptr, int *cursor, int delim)
 	return (n);
 }
 
-void	set_scene_buffer(t_minirt *minirt)
+double	ato_buffer_correct(char *ptr, int *cursor, int delim)
 {
-	int		fd;
+	int		i;
+	double	n;
+	char	*n_str;
 
-	fd = open(minirt->scene->filename, O_RDONLY);
-	if (fd < 0)
-		quit(minirt, FILE_OPEN_ERR);
-	get_file_contents(fd, &minirt->scene->buffer);
-	if (errno == 21)
-		quit(minirt, DIRECTORY_ERR);
-	if (!minirt->scene->buffer)
-		quit(minirt, EMPTY_FILE);
-	filter_buffer(minirt);
-	if (close(fd) == -1)
-		quit(minirt, CLOSING_FILE_ERR);
-	if (!minirt->scene->buffer)
-		quit(minirt, EMPTY_FILE);
+	i = *cursor;
+	n_str = trim_ato_ptr(ptr + *cursor, delim);
+	n = ft_atof(n_str);
+	move_cursor(ptr, &i, delim);
+	if (n_str)
+		free(n_str);
+	*cursor = i;
+	return (n);
 }

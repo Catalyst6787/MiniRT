@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:27:32 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:27:33 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:53:49 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:00 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,32 @@ static int	store_cylinder_inter(t_cylinder_inter *d, const t_object *object,
 }
 
 int	get_cylinder_inter(const t_object *object,
-	const t_ray *ray, t_inter_list *list)
+						const t_ray *ray,
+						t_inter_list *list)
 {
 	t_cylinder_inter	d;
+	int					hits_added;
 
 	d.nb_inter = 0;
+	hits_added = 0;
 	if (list->count > list->capacity - 2)
 		return (print_err(__FILE__, LINE,
-				"get_cylinder_inter: no more space in list"), 1);
+				"get_cylinder_inter: no more space in list"), 0);
 	d.a = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
-	if ((d.a > -(EPSILON) && d.a < EPSILON))
-		return (intersect_caps(object, ray, list));
+	if (d.a > -(EPSILON) && d.a < EPSILON)
+	{
+		hits_added += intersect_caps(object, ray, list);
+		return (hits_added);
+	}
 	d.b = 2 * ray->origin.x * ray->dir.x + 2 * ray->origin.z * ray->dir.z;
 	d.c = pow(ray->origin.x, 2) + pow(ray->origin.z, 2) - 1;
 	d.discriminant = (d.b * d.b) - (4 * d.a * d.c);
-	if (d.discriminant < 0)
-		return (intersect_caps(object, ray, list));
-	d.nb_inter = intersect_caps(object, ray, list);
-	if (d.nb_inter == 2)
-		return (0);
-	d.t0 = (-d.b - sqrtf(d.discriminant)) / (2.0 * d.a);
-	d.t1 = (-d.b + sqrtf(d.discriminant)) / (2.0 * d.a);
-	return (store_cylinder_inter(&d, object, ray, list));
+	if (d.discriminant >= 0)
+	{
+		d.t0 = (-d.b - sqrt(d.discriminant)) / (2.0 * d.a);
+		d.t1 = (-d.b + sqrt(d.discriminant)) / (2.0 * d.a);
+		hits_added += store_cylinder_inter(&d, object, ray, list);
+	}
+	hits_added += intersect_caps(object, ray, list);
+	return (hits_added);
 }

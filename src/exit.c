@@ -5,20 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:13:50 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:29:45 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:55:44 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:45 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "minirt.h"
 
 static void	free_extra(t_scene *scene)
 {
 	if (scene->objects)
 		free(scene->objects);
-	if (scene->light)
-		free(scene->light);
 	if (scene->ambient)
 		free(scene->ambient);
 	if (scene->camera)
@@ -27,6 +24,8 @@ static void	free_extra(t_scene *scene)
 		free(scene->buffer);
 	if (scene->filename)
 		free(scene->filename);
+	if (scene->lights)
+		free(scene->lights);
 }
 
 void	free_scene(t_scene *scene)
@@ -34,26 +33,10 @@ void	free_scene(t_scene *scene)
 	int	i;
 
 	i = -1;
-	if (scene->spheres)
-	{
-		while (++i <= scene->nb_sphere)
-			free(scene->spheres[i]);
-		free(scene->spheres);
-	}
+	if (scene->lights)
+		while (++i <= scene->nb_light)
+			free(scene->lights[i]);
 	i = -1;
-	if (scene->planes)
-	{
-		while (++i <= scene->nb_plane)
-			free(scene->planes[i]);
-		free(scene->planes);
-	}
-	i = -1;
-	if (scene->cylinders)
-	{
-		while (++i <= scene->nb_cylinder)
-			free(scene->cylinders[i]);
-		free(scene->cylinders);
-	}
 	free_extra(scene);
 }
 
@@ -77,6 +60,8 @@ void	free_ui(t_ui *ui)
 {
 	if (ui->str_selected_object)
 		free(ui->str_selected_object);
+	if (ui->str_mode)
+		free(ui->str_mode);
 }
 
 int	quit(t_minirt *minirt, char *str)
@@ -90,7 +75,8 @@ int	quit(t_minirt *minirt, char *str)
 			free_scene(minirt->scene);
 		if (minirt->render)
 			free_render(minirt->render);
-		free_ui(&minirt->ui);
+		if (minirt->ui)
+			free_ui(minirt->ui);
 	}
 	print_exit_info(str);
 	exit(0);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:24:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:24:20 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:51:34 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:51:34 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ double	get_determinant_of_3x3_matrice(t_matrix m)
 	double	cofactor3;
 
 	if (m.col != 3 || m.row != 3)
-		return (print_err(FILE, LINE,
+		return (print_err(__FILE__, LINE,
 				"Error : wrong size to get 3x3 determinant"),
 			get_matrix(4, 4, 0), 0);
 	cofactor1 = get_determinant(get_submatrice(m, 0, 0));
@@ -67,7 +67,7 @@ double	get_determinant_of_4x4_matrice(t_matrix m)
 	double	cofactor4;
 
 	if (m.col != 4 || m.row != 4)
-		return (print_err(FILE, LINE,
+		return (print_err(__FILE__, LINE,
 				"Error : wrong size to get 4x4 determinant"),
 			get_matrix(4, 4, 0), 0);
 	cofactor1 = get_determinant(get_submatrice(m, 0, 0));
@@ -89,7 +89,7 @@ double	get_determinant(t_matrix m)
 		return (get_determinant_of_3x3_matrice(m));
 	else if (m.col == 4 && m.row == 4)
 		return (get_determinant_of_4x4_matrice(m));
-	return (print_err(FILE, LINE,
+	return (print_err(__FILE__, LINE,
 			"Error : wrong size to get determinant"), 0);
 }
 
@@ -101,7 +101,7 @@ t_matrix	get_inversed_matrix(t_matrix m)
 	int			j;
 
 	if (double_isequal(get_determinant(m), 0))
-		return (print_err(FILE, LINE, "non-invertible matrix"), m);
+		return (print_err(__FILE__, LINE, "non-invertible matrix"), m);
 	inversed_matrix = get_matrix(m.row, m.col, 0);
 	determinant = get_determinant(m);
 	i = 0;

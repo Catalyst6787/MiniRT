@@ -5,13 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 18:29:28 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:29:29 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:56:46 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:56:46 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYCODES_H
 # define KEYCODES_H
+
+
 
 # ifdef __linux__
 #  define SPACE 32
@@ -37,6 +39,9 @@
 #  define PAV_MINUS 65453
 #  define PAV_MIDDLE 65437
 
+#  define L_BRACKET 91
+#  define R_BRACKET 93
+
 #  define A 97
 #  define B 98
 #  define C 99
@@ -60,55 +65,6 @@
 #  define W 119
 #  define X 120
 #  define Z 122
-# endif
-
-# ifdef __APPLE__
-
-#  define SPACE 49
-#  define ESC 53
-
-#  define UP 126
-#  define DOWN 125
-#  define LEFT 123
-#  define RIGHT 124
-
-#  define PLUS 24
-#  define MINUS 27
-
-#  define PAV_UP 65431
-#  define PAV_DOWN 65433
-#  define PAV_LEFT 65430
-#  define PAV_RIGHT 65432
-
-#  define PAV_FRONT 65434
-#  define PAV_BACK 65435
-
-#  define PAV_PLUS 65451
-#  define PAV_MINUS 65453
-#  define PAV_MIDDLE 65437
-
-#  define A 0
-#  define B 11
-#  define C 99
-#  define D 2
-#  define E 14
-#  define H 4
-#  define I 34
-#  define J 38
-#  define K 40
-#  define L 37
-#  define N 45
-#  define O 31
-#  define P 35
-#  define Q 113
-#  define R 15
-#  define S 1
-#  define U 32
-#  define V 9
-#  define W 13
-#  define X 7
-#  define Z 6
-
 # endif
 
 # define COMMAND_HELP_1 "ASWDER : Cam position"

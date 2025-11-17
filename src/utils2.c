@@ -5,17 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:19:54 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:21:02 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:56:18 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:56:19 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minirt.h"
+#include "vec3.h"
 
-void	free_and_null(void	**ptr)
+int	generate_random_int(int min, int max)
 {
-	free(*ptr);
-	ptr = NULL;
+	return (rand() % (max - min + 1) + min);
+}
+
+double	generate_random_double(double min, double max)
+{
+	return (min + (double)rand() / RAND_MAX * (max - min));
 }
 
 void	print_err(char *file, int line, char *s)

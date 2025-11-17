@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 18:29:51 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:29:52 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:57:09 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:57:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ typedef enum s_type
 {
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	CONE
 }	t_type;
 
 typedef struct s_cylinder_limits
@@ -36,6 +37,11 @@ typedef union u_original_obj
 typedef struct s_object
 {
 	t_type			type;
+	t_matrix		translation;
+	t_vec3			dir;
+	t_matrix		rotation;
+	t_matrix		shearing;
+	t_matrix		scaling;
 	t_matrix		transform;
 	t_matrix		inv;
 	t_material		material;

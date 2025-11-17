@@ -5,16 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:25:34 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:40:25 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:21 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:13 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
 #include "minirt.h"
 
 void	check_direction_vector(t_minirt *minirt, t_vec3 *dir)
 {
-	if (dir->x == 0 && dir->y == 0 && dir->z == 0)
+	if (dir->x > 1 || dir->x < -1
+		|| dir->y > 1 || dir->y < -1
+		|| dir->z > 1 || dir->z < -1)
+		quit(minirt, DIRECTION_ERR);
+	if (!vec3_exact_length(*dir))
 		quit(minirt, DIRECTION_ERR);
 }
 
@@ -47,6 +52,4 @@ void	single_elements_check(t_minirt *minirt, t_scene *scene)
 		quit(minirt, TOO_MANY_CAM_ERR);
 	else if (scene->nb_light == 0)
 		quit(minirt, MISSING_LIGHT_ERR);
-	else if (scene->nb_light > 1)
-		quit(minirt, TOO_MANY_LIGHT_ERR);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:25:22 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:25:23 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:15 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:15 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,7 @@ int	is_ok_ratio(double var)
 	return (1);
 }
 
-int	is_ok_scale(double scale)
-{
-	if (scale < 0.1)
-		return (0);
-	return (1);
-}
-
-void	check_data_validity(t_minirt *minirt, t_scene *scene)
+static void	check_elements(t_minirt *minirt, t_scene *scene)
 {
 	int	i;
 
@@ -58,12 +51,19 @@ void	check_data_validity(t_minirt *minirt, t_scene *scene)
 		quit(minirt, WRONG_AMB_DATA);
 	if (scene->camera->fov < 0.0 || 180.0 < scene->camera->fov)
 		quit(minirt, WRONG_CAM_DATA);
-	if (!is_ok_ratio(scene->light->brightness)
-		|| !is_ok_color(scene->light->color))
-		quit(minirt, WRONG_LIGHT_DATA);
-	while (++i < scene->nb_sphere)
-		if (!is_ok_color(scene->spheres[i]->color)
-			|| !is_ok_scale(scene->spheres[i]->diameter))
+	while (++i < scene->nb_light)
+		if (!is_ok_ratio(scene->lights[i]->brightness)
+			|| !is_ok_color(scene->lights[i]->color))
+			quit(minirt, WRONG_LIGHT_DATA);
+}
+
+void	check_data_validity(t_minirt *minirt, t_scene *scene)
+{
+	int	i;
+
+	check_elements(minirt, scene);
+	i = -1;
+	while (++i < scene->nb_objects)
+		if (!is_ok_color(scene->objects[i].material.color))
 			quit(minirt, WRONG_SPH_DATA);
-	check_data_validity_extra(minirt, scene);
 }

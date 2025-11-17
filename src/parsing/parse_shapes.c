@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:26:15 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:40:21 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:32 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:08 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,38 @@ int	parse_cylinder(t_minirt *minirt,
 	cylinder->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	cylinder->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
 	cylinder->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	*cursor = i;
+	return (1);
+}
+
+int	parse_cone(t_minirt *minirt,
+					t_scene *scene,
+					t_cone *cone,
+					int *cursor)
+{
+	int	i;
+
+	i = *cursor + 1;
+	if (count_comas(minirt, scene->buffer, i) != 6
+		|| count_spaces_in_line(scene->buffer, i) != 4)
+		quit(minirt, WRONG_CONE_DATA);
+	while (!ft_isalnum(scene->buffer[i]) && scene->buffer[i] != '-')
+		i++;
+	cone->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
+	cone->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
+	cone->pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	cone->pos.w = 1;
+	cone->dir.x = ato_buffer(&scene->buffer[i], &i, ',');
+	cone->dir.y = ato_buffer(&scene->buffer[i], &i, ',');
+	cone->dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	check_direction_vector(minirt, &cone->dir);
+	cone->dir.w = 0;
+	cone->diameter = ato_buffer(&scene->buffer[i], &i, ' ');
+	cone->radius = cone->diameter / 2;
+	cone->height = ato_buffer(&scene->buffer[i], &i, ' ');
+	cone->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cone->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	cone->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
 	*cursor = i;
 	return (1);
 }

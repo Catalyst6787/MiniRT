@@ -35,42 +35,42 @@ fi
 
 
 if [ $scene == 1 ]; then
-	./miniRT_bonus scenes/subject_example.rt
+	./miniRT scenes_bonus/subject_example.rt
 elif [ $scene == 2 ]; then
-	./miniRT_bonus scenes/subject_disorder.rt
+	./miniRT scenes_bonus/subject_disorder.rt
 elif [ $scene == 3 ]; then
-	./miniRT_bonus scenes/one_sphere.rt
+	./miniRT scenes_bonus/one_sphere.rt
 elif [ $scene == 4 ]; then
-	./miniRT_bonus scenes/several_cylinders.rt
+	./miniRT scenes_bonus/several_cylinders.rt
 elif [ $scene == 5 ]; then
-	./miniRT_bonus scenes/scene_3spheres.rt
+	./miniRT scenes_bonus/scene_3spheres.rt
 elif [ $scene == 6 ]; then
-	./miniRT_bonus scenes/ten_spheres.rt
+	./miniRT scenes_bonus/ten_spheres.rt
 elif [ $scene == 7 ]; then
-	./miniRT_bonus scenes/shadows.rt
+	./miniRT scenes_bonus/shadows.rt
 elif [ $scene == 8 ]; then
-	./miniRT_bonus scenes/shadows_2.rt
+	./miniRT scenes_bonus/shadows_2.rt
 elif [ $scene == 9 ]; then
-	./miniRT_bonus scenes/plane_debug.rt
+	./miniRT scenes_bonus/plane_debug.rt
 elif [ $scene == 10 ]; then
-	./miniRT_bonus scenes/plane_inter_shadow.rt
+	./miniRT scenes_bonus/plane_inter_shadow.rt
 elif [ $scene == 11 ]; then
-	./miniRT_bonus scenes/cylinder_debug.rt
+	./miniRT scenes_bonus/cylinder_debug.rt
 elif [ $scene == 12 ]; then
-	./miniRT_bonus scenes/cylinder_debug_2.rt
+	./miniRT scenes_bonus/cylinder_debug_2.rt
 elif [ $scene == 13 ]; then
-	./miniRT_bonus scenes/cylinder_debug_3.rt
+	./miniRT scenes_bonus/cylinder_debug_3.rt
 elif [ $scene == 14 ]; then
-	./miniRT_bonus scenes/cylinder_turn_animation.rt
+	./miniRT scenes_bonus/cylinder_turn_animation.rt
 elif [ $scene == 15 ]; then
-	./miniRT_bonus scenes/sphere_animation.rt
+	./miniRT scenes_bonus/sphere_animation.rt
 elif [ $scene == 16 ]; then
-	./miniRT_bonus scenes/plane_debug_2.rt
+	./miniRT scenes_bonus/plane_debug_2.rt
 elif [ $scene == 17 ]; then
-	./miniRT_bonus scenes/cone_debug.rt
+	./miniRT scenes_bonus/cone_debug.rt
 elif [ $scene == 18 ]; then
-	./miniRT_bonus scenes/several_planes.rt
+	./miniRT scenes_bonus/several_planes.rt
 elif [ $scene == 19 ]; then
-	./miniRT_bonus scenes/snooker.rt
+	./miniRT scenes_bonus/snooker.rt
 fi
 

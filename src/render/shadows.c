@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:28:19 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:28:19 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:54:25 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:57:54 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	double			distance;
 	t_inter			*hit;
 
-	v = vec3_vec_substraction(scene->light->pos, comp->over_point);
+	v = vec3_vec_substraction(comp->light.pos, comp->over_point);
 	distance = vec3_exact_length(v);
 	check_each_object(render, scene, comp, vec3_normalise(v));
 	sort_inter(&render->shadow_list);
@@ -60,10 +60,8 @@ int	is_shadowed(t_render *render, t_scene *scene, t_comp *comp)
 	return (false);
 }
 
-t_vec3	shade_hit(t_render *render, t_scene *scene, t_comp *comp)
+t_vec3	shade_hit(t_comp *comp, t_minirt *minirt)
 {
-	bool	shadowed;
-
-	shadowed = is_shadowed(render, scene, comp);
-	return (get_lighting(comp, shadowed));
+	comp->in_shadow = is_shadowed(minirt->render, minirt->scene, comp);
+	return (get_lighting(comp, minirt));
 }

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   lighting.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:27:50 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:27:50 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:53:55 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/02 11:46:32 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "vec3.h"
 
 t_light	get_light(t_vec3 pos, double brightness, t_vec3 color)
 {
@@ -35,7 +36,7 @@ static t_vec3	get_specular(double reflect_dot_eye, t_comp *comp)
 }
 
 static t_vec3	get_lighting_extra(t_comp *comp,
-					t_vec3 light_vector, t_vec3 effective_color, t_vec3 ambient)
+					t_vec3 light_vector, t_vec3 effective_color)
 {
 	double	light_dot_normal;
 	double	reflect_dot_eye;
@@ -61,10 +62,10 @@ static t_vec3	get_lighting_extra(t_comp *comp,
 					get_specular(reflect_dot_eye, comp),
 					comp->light.brightness);
 	}
-	return (vec3_vec_addition(ambient, vec3_vec_addition(diffuse, specular)));
+	return (vec3_vec_addition(diffuse, specular));
 }
 
-t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
+t_vec3	get_lighting(t_comp	*comp, t_minirt *minirt)
 {
 	t_vec3	effective_color;
 	t_vec3	light_vector;
@@ -77,9 +78,46 @@ t_vec3	get_lighting(t_comp	*comp, bool in_shadow)
 		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
 	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
 	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
-	if (in_shadow)
-		return (ambient);
+	ambient = vec3_double_multiplication(ambient, 1 - comp->m.reflective);
+	if (comp->in_shadow)
+		return (vec3_vec_addition(ambient,
+				vec3_vec_multiplication(
+					reflected_color(comp, minirt, comp->depth),
+					comp->m.color)));
 	else
-		return (
-			get_lighting_extra(comp, light_vector, effective_color, ambient));
+		return (vec3_vec_addition(
+				vec3_vec_multiplication(
+					reflected_color(comp, minirt, comp->depth), comp->m.color),
+				vec3_vec_addition(
+					get_lighting_extra(comp, light_vector, effective_color),
+					ambient)));
+}
+
+t_vec3	th_get_lighting(t_comp	*comp, t_minirt *minirt, t_thread_data *th)
+{
+	t_vec3	effective_color;
+	t_vec3	light_vector;
+	t_vec3	ambient;
+
+	effective_color = vec3_vec_multiplication(comp->m.color, comp->light.color);
+	effective_color
+		= vec3_double_multiplication(effective_color, comp->light.brightness);
+	light_vector
+		= vec3_normalise(vec3_vec_substraction(comp->light.pos, comp->point));
+	ambient = vec3_vec_multiplication(comp->m.color, comp->m.ambient_color);
+	ambient = vec3_double_multiplication(ambient, comp->m.ambient);
+	ambient = vec3_double_multiplication(ambient, 1 - comp->m.reflective);
+	if (comp->in_shadow)
+		return (vec3_vec_addition(ambient,
+				vec3_vec_multiplication(
+					th_reflected_color(comp, minirt, th, comp->depth),
+					comp->m.color)));
+	else
+		return (vec3_vec_addition(
+				vec3_vec_multiplication(
+					th_reflected_color(comp, minirt, th, comp->depth),
+					comp->m.color),
+				vec3_vec_addition(
+					get_lighting_extra(comp, light_vector, effective_color),
+					ambient)));
 }

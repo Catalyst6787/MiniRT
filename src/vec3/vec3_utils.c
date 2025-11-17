@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:28:42 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:28:43 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:55:18 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:19 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_vec3	vec3_double_multiplication(t_vec3 src, double n)
 	t_vec3	v;
 
 	if (src.w)
-		print_err(FILE, LINE,
+		print_err(__FILE__, LINE,
 			"vec3_double_multiplication, trying to multiply a point");
 	v.x = src.x * n;
 	v.y = src.y * n;
@@ -41,7 +41,7 @@ t_vec3	vec3_double_division(t_vec3 src, double n)
 	t_vec3	v;
 
 	if (src.w)
-		print_err(FILE, LINE,
+		print_err(__FILE__, LINE,
 			"vec3_double_division, trying to multiply a point");
 	v.x = src.x / n;
 	v.y = src.y / n;
@@ -53,7 +53,7 @@ t_vec3	vec3_double_division(t_vec3 src, double n)
 t_vec3	vec3_reverse(t_vec3 vec)
 {
 	if (vec.w)
-		print_err(FILE, LINE, "vec3_reverse, trying to reverse a point");
+		print_err(__FILE__, LINE, "vec3_reverse, trying to reverse a point");
 	return (get_vec3(-vec.x, -vec.y, -vec.z));
 }
 

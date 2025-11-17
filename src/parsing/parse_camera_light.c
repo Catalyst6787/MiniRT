@@ -5,14 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:26:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:26:01 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:27 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:11 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "bits/types/__FILE.h"
+#include "errors.h"
+#include "libft.h"
+#include "material.h"
 #include "matrice.h"
 #include "minirt.h"
+#include "object.h"
+#include "scene.h"
 #include "vec3.h"
+#include <stdio.h>
 
 int	count_comas(t_minirt *minirt, char *buffer, int i)
 {
@@ -37,9 +44,9 @@ int	count_spaces_in_line(char *buffer, int i)
 	int	count;
 
 	count = 0;
-	while (!ft_isspace(buffer[i]))
+	while (buffer [i] && !ft_isspace(buffer[i]))
 		i++;
-	while (ft_isspace(buffer[i]))
+	while (buffer [i] && ft_isspace(buffer[i]))
 		i++;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -51,7 +58,7 @@ int	count_spaces_in_line(char *buffer, int i)
 				i++;
 			count++;
 		}
-		if (buffer[i] == '\n')
+		if (!buffer[i] || buffer[i] == '\n')
 			break ;
 		i++;
 	}
@@ -84,7 +91,7 @@ int	parse_ambiant_light(t_minirt *minirt, t_scene *scene, int *cursor)
 
 int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 {
-	int		i;
+	int	i;
 
 	i = *cursor + 1;
 	if (count_comas(minirt, scene->buffer, i) != 4
@@ -97,10 +104,21 @@ int	parse_camera(t_minirt *minirt, t_scene *scene, int *cursor)
 	scene->camera->view.from.y = ato_buffer(&scene->buffer[i], &i, ',');
 	scene->camera->view.from.z = ato_buffer(&scene->buffer[i], &i, ' ');
 	scene->camera->view.from.w = 1;
-	return (parse_camera_extra(minirt, scene, i, cursor));
+	scene->camera->view.dir.x = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.dir.y = ato_buffer(&scene->buffer[i], &i, ',');
+	scene->camera->view.dir.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	scene->camera->view.dir.w = 0;
+	check_direction_vector(minirt, &scene->camera->view.dir);
+	scene->camera->view.to = get_vec3(0, 0, 0);
+	scene->camera->view.up = get_vec3(0, 1, 0);
+	scene->camera->hsize = WIN_W;
+	scene->camera->vsize = WIN_H;
+	scene->camera->fov = (int)ato_buffer(&scene->buffer[i], &i, '\n')
+		* M_PI / 180;
+	return (*cursor = i, 1);
 }
 
-int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
+int	parse_light(t_minirt *minirt, t_scene *scene, t_light *light, int *cursor)
 {
 	int	i;
 
@@ -111,15 +129,15 @@ int	parse_light(t_minirt *minirt, t_scene *scene, int *cursor)
 	while (scene->buffer[i] && !ft_isalnum(scene->buffer[i])
 		&& scene->buffer[i] != '-')
 		i++;
-	scene->light->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->light->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
-	scene->light->pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
-	scene->light->pos.w = 1;
-	scene->light->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
-	scene->light->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	scene->light->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
-	scene->light->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
-	scene->light->color.w = 0;
+	light->pos.x = ato_buffer(&scene->buffer[i], &i, ',');
+	light->pos.y = ato_buffer(&scene->buffer[i], &i, ',');
+	light->pos.z = ato_buffer(&scene->buffer[i], &i, ' ');
+	light->pos.w = 1;
+	light->brightness = ato_buffer(&scene->buffer[i], &i, ' ');
+	light->color.r = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	light->color.g = ato_buffer(&scene->buffer[i], &i, ',') / 255;
+	light->color.b = ato_buffer(&scene->buffer[i], &i, '\n') / 255;
+	light->color.w = 0;
 	*cursor = i;
 	return (1);
 }

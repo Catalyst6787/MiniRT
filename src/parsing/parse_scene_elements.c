@@ -5,53 +5,74 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:26:05 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:26:10 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:30 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "errors.h"
+#include "libft.h"
 #include "minirt.h"
+#include <stdio.h>
 
-static void	parse_buffer(t_minirt *minirt,
-						t_scene *scene,
+static int	parse_buffer2(t_minirt *minirt,
 						int *cursor,
-						t_parsing_helper *s)
+						t_parsing_helper *ph)
 {
-	int	i;
+	if (!minirt->scene->buffer[*cursor])
+		return (quit(minirt, UNEXPECTED_EOF), 1);
+	if (minirt->scene->buffer[*cursor] == 'A' && !ph->a)
+		return (parse_ambiant_light(minirt, minirt->scene, cursor),
+			ph->a = true, 0);
+	else if (minirt->scene->buffer[*cursor] == 'C' && !ph->c)
+		return (parse_camera(minirt, minirt->scene, cursor),
+			ph->c = true, 0);
+	else if (minirt->scene->buffer[*cursor] == 'L'
+		&& ph->l < minirt->scene->nb_light)
+		return (parse_light(minirt, minirt->scene,
+				minirt->scene->lights[ph->l++], cursor), 0);
+	else if (ph->o < minirt->scene->nb_objects)
+		return (parse_object(minirt,
+				&minirt->scene->objects[ph->o++], cursor), 0);
+	else if (minirt->scene->buffer[*cursor] != '\n')
+		return (printf("\n%s", minirt->scene->buffer + *cursor),
+			quit(minirt, "parse_buffer: unrecognized expression"), 1);
+	return (0);
+}
 
-	i = *cursor;
-	if (scene->buffer[i] == 'A')
-		parse_ambiant_light(minirt, scene, &i);
-	if (scene->buffer[i] == 'C')
-		parse_camera(minirt, scene, &i);
-	if (scene->buffer[i] == 'L')
-		parse_light(minirt, scene, &i);
-	if (scene->buffer[i] == 's')
-		if (scene->buffer[++i] == 'p')
-			s->s += parse_sphere(minirt, scene, scene->spheres[s->s], &i);
-	if (scene->buffer[i] == 'p')
-		if (scene->buffer[++i] == 'l')
-			s->p += parse_plane(minirt, scene, scene->planes[s->p], &i);
-	if (scene->buffer[i] == 'c')
-		if (scene->buffer[++i] == 'y')
-			s->c += parse_cylinder(minirt, scene, scene->cylinders[s->c], &i);
-	*cursor = i;
+static int	parse_buffer(t_minirt *minirt,
+						int *cursor,
+						t_parsing_helper *ph)
+{
+	while (minirt->scene->buffer[*cursor]
+		&& (ft_isspace(minirt->scene->buffer[*cursor])
+			|| minirt->scene->buffer[*cursor] == '\n'))
+		(*cursor)++;
+	while (minirt->scene->buffer[*cursor]
+		&& minirt->scene->buffer[*cursor] == '#')
+	{
+		while (minirt->scene->buffer[*cursor]
+			&& minirt->scene->buffer[*cursor] != '\n')
+			(*cursor)++;
+		while (minirt->scene->buffer[*cursor]
+			&& (ft_isspace(minirt->scene->buffer[*cursor])
+				|| minirt->scene->buffer[*cursor] == '\n'))
+			(*cursor)++;
+	}
+	return (parse_buffer2(minirt, cursor, ph));
 }
 
 void	parse_scene_elements(t_minirt *minirt, t_scene *scene)
 {
 	int					cursor;
-	t_parsing_helper	shape;
+	t_parsing_helper	ph;
 
-	shape.s = 0;
-	shape.c = 0;
-	shape.p = 0;
 	cursor = 0;
-	while (scene->buffer[cursor])
+	ft_memset(&ph, 0, sizeof(t_parsing_helper));
+	while (scene->buffer[cursor]
+		&& (!ph.a || !ph.c || ph.l < minirt->scene->nb_light
+			|| ph.o < minirt->scene->nb_objects))
 	{
-		while (scene->buffer[cursor]
-			&& ft_isspace(scene->buffer[cursor]))
-			cursor++;
-		parse_buffer(minirt, minirt->scene, &cursor, &shape);
+		parse_buffer(minirt, &cursor, &ph);
 	}
 }

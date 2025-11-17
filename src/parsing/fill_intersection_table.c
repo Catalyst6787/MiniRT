@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_intersection_table.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:25:46 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:25:55 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:24 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/02 12:21:16 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	count_intersections(t_scene *scene)
 	count += (scene->nb_sphere * 2);
 	count += scene->nb_plane;
 	count += (scene->nb_cylinder * 2);
+	count += (scene->nb_cone * 4);
 	return (count);
 }
 
@@ -34,8 +35,16 @@ static void	fill_inter_objects(t_render *render, t_scene *scene)
 	{
 		if (scene->objects[obj_id].type == PLANE)
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
-		else
+		else if (scene->objects[obj_id].type == CYLINDER
+			|| scene->objects[obj_id].type == SPHERE)
 		{
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
+		}
+		else if (scene->objects[obj_id].type == CONE)
+		{
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
+			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id];
 			render->inter_list.inters[i++].obj = &scene->objects[obj_id++];
 		}

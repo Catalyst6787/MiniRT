@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 18:29:12 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:29:13 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:56:40 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:56:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # define WRONG_SPH_DATA "Error : wrong sphere data\n"
 # define WRONG_PLANE_DATA "Error : wrong plane data\n"
 # define WRONG_CYL_DATA "Error : wrong cylinder data\n"
+# define WRONG_CONE_DATA "Error : wrong cylinder data\n"
 
 # define MISSING_AMB_ERR "Error : scene missing ambiant light\n"
 # define MISSING_CAM_ERR "Error : scene missing camera\n"
@@ -56,8 +57,34 @@
 # define PIXEL_PUT_ERR "Error : Tried to set pixel outside \
 of window, quitting\n"
 
+# define TH_ERR "Error : problem creating thread\n"
+
 # define NORMAL_TYPE_NDEF "Error : get_object_normal_at object type not defined"
 
 # define TESTS_ERR "Error : Test(s) failed\n"
+
+# define NO_OBJ_DETAILS "Error : must define object data"
+# define WRONG_OBJ "Error : obj doesnt exist"
+
+# define TRANSFORMATION_PARSER_ERROR "Error : object has invalid \
+transformation data"
+# define PARSER_WRONG_SHEARING "Error : object has invalid \
+shearing parameters (determinant = 0)"
+# define PARSER_WRONG_MATERIAL "Error : object has invalid \
+material data"
+# define PARSER_WRONG_DIRECTION "Error : object has invalid \
+direction vector"
+# define PARSER_WRONG_SCALE "Error : object has invalid \
+scaling data"
+# define PARSER_WRONG_COLOR "Error : object has invalid \
+color data"
+# define PARSER_WRONG_DIRECTION "Error : object has invalid \
+direction vector"
+# define PARSER_NON_INVERTIBLE_MATRIX "Error : object has \
+non-invertible matrix (check direction or shearing)"
+# define UNEXPECTED_EOF "parse_buffer reached \
+unexpected EOF\n"
+# define INVALID_DOUBLE "invalid double, more \
+than 17 or less than 1 significant digits:  \n"
 
 #endif

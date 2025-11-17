@@ -5,35 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:27:04 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:40:11 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:53:30 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:53:31 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	print_cylinder_data(t_minirt *minirt)
+void	print_light_data(t_minirt *minirt)
 {
 	int	i;
 
 	i = -1;
-	while (++i < minirt->scene->nb_cylinder)
+	while (++i < minirt->scene->nb_light)
 	{
-		printf("Cylinder[%d/%d] :\n\n", i + 1, minirt->scene->nb_cylinder);
+		printf("Light[%d/%d] :\n\n", i + 1, minirt->scene->nb_light);
 		printf("	x y z : %.2f %.2f %.2f\n",
-			minirt->scene->cylinders[i]->pos.x,
-			minirt->scene->cylinders[i]->pos.y,
-			minirt->scene->cylinders[i]->pos.z);
-		printf("	vectors x y z : %.2f %.2f %.2f\n",
-			minirt->scene->cylinders[i]->dir.x,
-			minirt->scene->cylinders[i]->dir.y,
-			minirt->scene->cylinders[i]->dir.z);
-		printf("	Diameter : %.2f\n", minirt->scene->cylinders[i]->diameter);
-		printf("	Height : %.2f\n", minirt->scene->cylinders[i]->height);
-		printf("	r g b : %.2f %.2f %.2f\n\n",
-			minirt->scene->cylinders[i]->color.r,
-			minirt->scene->cylinders[i]->color.g,
-			minirt->scene->cylinders[i]->color.b);
+			minirt->scene->lights[i]->pos.x,
+			minirt->scene->lights[i]->pos.y,
+			minirt->scene->lights[i]->pos.z);
+		printf("	r g b : %f %f %f\n",
+			minirt->scene->lights[i]->color.r,
+			minirt->scene->lights[i]->color.g,
+			minirt->scene->lights[i]->color.b);
+		printf("	brightness: %f\n\n", minirt->scene->lights[i]->brightness);
 	}
 }
 
@@ -48,21 +43,7 @@ void	event_print_debug(t_minirt *minirt)
 		minirt->scene->ambient->color.b);
 	print_camera_data(minirt);
 	printf("Light(s) :\n\n");
-	printf("	x y z : %.2f %.2f %.2f\n",
-		minirt->scene->light->pos.x,
-		minirt->scene->light->pos.y,
-		minirt->scene->light->pos.z);
-	printf("	Ratio : %.2f\n", minirt->scene->light->brightness);
-	printf("	r g b : %.2f %.2f %.2f\n\n", minirt->scene->light->color.r,
-		minirt->scene->light->color.g, minirt->scene->light->color.b);
-	print_spheres_data(minirt);
-	print_plane_data(minirt);
-	print_cylinder_data(minirt);
-}
-
-void	print_inter(t_inter *inter)
-{
-	printf("inter: t=[%f], obj=[%p]\n", inter->t, (void *)inter->obj);
+	print_light_data(minirt);
 }
 
 void	print_scene(t_minirt *minirt, bool asterix)

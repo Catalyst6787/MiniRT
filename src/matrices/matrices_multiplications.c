@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:24:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:24:24 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:51:37 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:51:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static double	get_dot(t_matrix m1, t_matrix m2, int row, int col)
 	i = 0;
 	sum = 0;
 	if (row >= m1.row || col >= m2.col || m1.col != m2.row)
-		return (print_err(FILE, LINE, "invalid point outside matrices"), 0);
+		return (print_err(__FILE__, LINE, "invalid point outside matrices"), 0);
 	while (i < m1.col)
 	{
 		sum += (m1.matrix[row][i] * m2.matrix[i][col]);
@@ -38,7 +38,8 @@ t_matrix	multiply_matrix(t_matrix m1, t_matrix m2)
 	i = 0;
 	j = 0;
 	if (!(m1.col == m2.row))
-		return (print_err(FILE, LINE, "matrices have different col and rows"),
+		return (print_err(__FILE__, LINE,
+				"matrices have different col and rows"),
 			get_matrix(4, 4, 0));
 	res = get_matrix(m1.row, m2.col, 0);
 	while (i < res.row)

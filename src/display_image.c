@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:22:20 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:23:14 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:55:36 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	print_borders(t_mlx_data *mlx, int color)
+void	print_borders(t_mlx_data *mlx, int color)
 {
 	int	x;
 	int	y;
@@ -29,7 +29,7 @@ void	display_command_help(t_minirt *minirt, t_mlx_data *mlx)
 {
 	int	color;
 
-	color = color_to_int(minirt->ui.string_color);
+	color = color_to_int(minirt->ui->string_color);
 	mlx_string_put(mlx->mlx, mlx->mlx_win,
 		WIN_W / 2 - (WIN_W / 25), 18, color, minirt->scene->filename);
 	mlx_string_put(mlx->mlx, mlx->mlx_win, 5, 18, color, COMMAND_HELP_1);
@@ -52,11 +52,14 @@ void	display_image(t_minirt *minirt)
 {
 	mlx_put_image_to_window(minirt->mlx->mlx,
 		minirt->mlx->mlx_win, minirt->mlx->img_st->img, 0, 0);
-	if (minirt->ui.command_help)
+	if (minirt->ui->command_help)
 	{
 		display_command_help(minirt, minirt->mlx);
 		mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
-			WIN_W - 140, 18, color_to_int(minirt->ui.string_color),
-			minirt->ui.str_selected_object);
+			WIN_W - 140, 18, color_to_int(minirt->ui->string_color),
+			minirt->ui->str_selected_object);
+		mlx_string_put(minirt->mlx->mlx, minirt->mlx->mlx_win,
+			WIN_W - 140, 36, color_to_int(minirt->ui->string_color),
+			minirt->ui->str_mode);
 	}
 }

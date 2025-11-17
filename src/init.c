@@ -5,12 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:14:02 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:21:17 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:55:58 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:55:58 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	init_events(t_minirt *minirt)
+{
+	mlx_hook(minirt->mlx->mlx_win, 2, 1L << 0, handle_keypress, minirt);
+	mlx_hook(minirt->mlx->mlx_win, 17, 1L << 0, end_mlx_loop, minirt->mlx);
+	mlx_hook(minirt->mlx->mlx_win, 4, 1L << 2, handle_mouseclick, minirt);
+	return (0);
+}
 
 int	init_mlx(t_minirt *minirt)
 {
@@ -28,13 +36,6 @@ int	init_mlx(t_minirt *minirt)
 	img_st->addr = mlx_get_data_addr(img_st->img, &mlx->bits_per_pixel,
 			&mlx->line_length, &mlx->endian);
 	mlx->img_st = img_st;
-	return (0);
-}
-
-int	init_events(t_minirt *minirt)
-{
-	mlx_hook(minirt->mlx->mlx_win, 2, 1L << 0, handle_keypress, minirt);
-	mlx_hook(minirt->mlx->mlx_win, 17, 1L << 0, end_mlx_loop, minirt->mlx);
-	mlx_hook(minirt->mlx->mlx_win, 4, 1L << 2, handle_mouseclick, minirt);
+	init_events(minirt);
 	return (0);
 }

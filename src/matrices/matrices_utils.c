@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 17:25:07 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 17:25:09 by lfaure           ###   ########.fr       */
+/*   Created: 2025/09/01 18:52:09 by lfaure            #+#    #+#             */
+/*   Updated: 2025/09/01 18:58:20 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_matrix	get_matrix(int row, int col, bool identity)
 
 	i = -1;
 	if (row < 1 || row > 4 || col < 1 || col > 4)
-		return (print_err(FILE, LINE, "matrix size must be between 1 and 4"),
+		return (print_err(__FILE__, LINE, "get_matrix : wrong matric size"),
 			get_matrix(4, 4, 0));
 	ft_memset(&new_matrix, 0, sizeof(t_matrix));
 	new_matrix.row = row;
@@ -91,7 +91,7 @@ void	matrix_set_elem(t_matrix *m, int i, int j, double elem)
 {
 	if (i >= m->row || j >= m->col)
 	{
-		print_err(FILE, LINE,
+		print_err(__FILE__, LINE,
 			"matrix_set_elem,tried to set element outside of matrix");
 		return ;
 	}
