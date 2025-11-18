@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:57:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/02 12:29:19 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:07:39 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@
 
 // # define WIN_W 3840
 // # define WIN_H 2160
+# define WIN_W 2560
+# define WIN_H 1440
 //# define WIN_W 1820
 //# define WIN_H 1200
 //# define WIN_H 1080
- # define WIN_W 1280
- # define WIN_H 720
+//  # define WIN_W 1280
+//  # define WIN_H 720
 
 # define VIEWPORT_H 2.0
 # define DEBUG_PIXEL_I 10

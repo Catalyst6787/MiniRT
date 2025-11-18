@@ -2,7 +2,9 @@ NAME = miniRT
 BONUS_NAME = miniRT_bonus
 UNAME = $(shell uname -s)
 
-CC = tcc
+# CC = tcc
+CC = gcc
+
 
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -I ./libft/includes -I ./minilibx-linux -g -Og
 LDFLAGS = -L ./libft -lft -L ./minilibx-linux -lmlx -lXext -lX11 -lm
