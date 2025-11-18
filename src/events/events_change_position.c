@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_change_position.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:51:07 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/11/18 16:38:40 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static void	handle_object(t_object *object, int keycode)
 		object->translation.matrix[2][3] += 0.1;
 	else if (keycode == PAV_BACK)
 		object->translation.matrix[2][3] -= 0.1;
+	printf("Object translation %.2f %.2f %.2f\n",
+			object->translation.matrix[0][3],
+			object->translation.matrix[1][3],
+			object->translation.matrix[2][3]);
 }
 
 static void	handle_lights(t_light *light, int keycode)
@@ -42,6 +46,7 @@ static void	handle_lights(t_light *light, int keycode)
 		light->pos.z += 0.1;
 	else if (keycode == PAV_BACK)
 		light->pos.z -= 0.1;
+	printf("Light position : %.2f %.2f %.2f\n", light->pos.x, light->pos.y, light->pos.z);
 }
 
 void	change_element_position(t_minirt *minirt, t_ui *ui, int keycode, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_change_color.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:51:00 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/11/18 16:41:11 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	handle_object(t_object *object, t_move_mode color, int keycode)
 		else if (keycode == PAV_DOWN && object->material.color.b > 0.02)
 			object->material.color.b -= 0.02;
 	}
+	printf("Object color : %.2f %.2f %.2f\n", object->material.color.r, object->material.color.g, object->material.color.b);
 }
 
 static void	handle_lights(t_light *light, t_move_mode color, int keycode, int i)

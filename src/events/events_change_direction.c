@@ -6,7 +6,7 @@
 /*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:51:04 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/02 14:19:26 by alvan-de         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:39:51 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ static void	handle_object(t_scene *scene, int keycode, int i)
 	scene->objects[i].rotation
 		= get_rotation_matrix(convert_dir_to_euler
 			(vec3_normalise(scene->objects[i].dir)));
+	printf("Object rotation : %.2f %.2f %.2f\n",
+			scene->objects[i].dir.x,
+			scene->objects[i].dir.y,
+			scene->objects[i].dir.z);
 }
 
 void	change_element_rotation(t_minirt *minirt, t_ui *ui, int keycode, int i)

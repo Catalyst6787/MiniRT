@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:56:01 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:56:02 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/11/18 17:09:59 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_ui(t_minirt *minirt, t_ui *ui)
 		quit(minirt, MALLOC_ERR);
 	ui->selected_object = 0;
 	ui->selected_type = OBJ;
-	ui->command_help = 1;
+	ui->command_help = false;
 	ui->move_mode = pos;
 	ui->color_id = 0;
 	ui->string_color = get_color(1, 1, 1);

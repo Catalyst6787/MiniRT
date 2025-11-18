@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:55:36 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:55:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/11/18 16:26:25 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	display_image(t_minirt *minirt)
 			WIN_W - 140, 36, color_to_int(minirt->ui->string_color),
 			minirt->ui->str_mode);
 	}
-	ft_printf("Image displayed %d\n", rand());
 }

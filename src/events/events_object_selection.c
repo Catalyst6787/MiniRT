@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_object_selection.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: alvan-de <alvan-de@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 18:51:25 by lfaure            #+#    #+#             */
-/*   Updated: 2025/09/01 18:51:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/11/18 16:29:51 by alvan-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
