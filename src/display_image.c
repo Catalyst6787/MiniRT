@@ -19,10 +19,10 @@ void	print_borders(t_mlx_data *mlx, int color)
 
 	x = -1;
 	y = -1;
-	while (++x < 320)
+	while (++x < 400)
 		mlx_pixel_put(mlx->mlx, mlx->mlx_win, x, 210, color);
 	while (++y < 210)
-		mlx_pixel_put(mlx->mlx, mlx->mlx_win, 320, y, color);
+		mlx_pixel_put(mlx->mlx, mlx->mlx_win, 400, y, color);
 }
 
 void	display_command_help(t_minirt *minirt, t_mlx_data *mlx)
@@ -44,7 +44,6 @@ void	display_command_help(t_minirt *minirt, t_mlx_data *mlx)
 	mlx_string_put(mlx->mlx, mlx->mlx_win, 5, 153, color, COMMAND_HELP_10);
 	mlx_string_put(mlx->mlx, mlx->mlx_win, 5, 168, color, COMMAND_HELP_11);
 	mlx_string_put(mlx->mlx, mlx->mlx_win, 5, 183, color, COMMAND_HELP_12);
-	mlx_string_put(mlx->mlx, mlx->mlx_win, 5, 198, color, COMMAND_HELP_13);
 	print_borders(mlx, color);
 }
 
@@ -62,4 +61,5 @@ void	display_image(t_minirt *minirt)
 			WIN_W - 140, 36, color_to_int(minirt->ui->string_color),
 			minirt->ui->str_mode);
 	}
+	ft_printf("Image displayed %d\n", rand());
 }

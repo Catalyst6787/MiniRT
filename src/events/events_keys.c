@@ -34,7 +34,6 @@ static void	handle_extra(int keycode, t_minirt *minirt)
 
 int	handle_keypress(int keycode, t_minirt *minirt)
 {
-	ft_printf("Keycode [%d]\n", keycode);
 	if (keycode == ESC)
 		end_mlx_loop(minirt->mlx);
 	else if (keycode == SPACE)

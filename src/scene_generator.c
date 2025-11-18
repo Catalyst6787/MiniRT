@@ -25,9 +25,9 @@ void	gen_print_lights(FILE *file, t_rand *rand)
 	while (i < rand->nb_lights)
 	{
 		fprintf(file, "L %d,%d,%d %.2f %d,%d,%d\n",
-			generate_random_int(-10, 10),
-			generate_random_int(-10, 10),
-			generate_random_int(-10, 10),
+			generate_random_int(-10, 0),
+			generate_random_int(-10, 0),
+			generate_random_int(-10, 0),
 			rand->lights_ratio[i],
 			generate_random_int(100, 255),
 			generate_random_int(100, 255),
@@ -48,7 +48,7 @@ void	normalize_lights(t_rand *rand)
 	while (total > 1)
 	{
 		total = 0;
-		ratio -= 0.1;
+		ratio -= 0.05;
 		i = 0;
 		while (i < rand->nb_lights)
 		{
@@ -89,14 +89,13 @@ void	generate_random_scene(t_minirt *minirt)
 		quit(minirt, FILE_OPEN_ERR);
 	fprintf(file, "C 0,0,-10 0,0,1 70\n");
 	srand(time(NULL));
-	rand.nb_obj = generate_random_int(3, 12);
-	rand.is_plane = 1;
+	rand.nb_obj = generate_random_int(3, 15);
+	rand.is_plane = 0;
 	fill_lights_ratio(&rand);
 	gen_print_lights(file, &rand);
 	while (rand.nb_obj >= 0)
 	{
-		// obj_type = generate_random_int(0, 3);
-		obj_type = 0;
+		obj_type = generate_random_int(0, 1);
 		gen_print_object(file, obj_type, &rand, false);
 		rand.nb_obj--;
 	}

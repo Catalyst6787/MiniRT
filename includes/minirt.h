@@ -50,7 +50,8 @@
 
 // # define WIN_W 3840
 // # define WIN_H 2160
-//# define WIN_W 1920
+//# define WIN_W 1820
+//# define WIN_H 1200
 //# define WIN_H 1080
  # define WIN_W 1280
  # define WIN_H 720
@@ -60,7 +61,7 @@
 # define DEBUG_PIXEL_J 10
 # define DEBUG 0
 
-# define PIXEL_SIZE_MULT 10 // size of pixels, 1 is normal
+# define PIXEL_SIZE_MULT 12 // size of pixels, 1 is normal
 # define NB_THREADS 16
 # define MULTI_THREADING 1
 # define GENERATE_SCENE 0
@@ -192,14 +193,6 @@ int			parse_light(t_minirt *minirt,
 				t_scene *scene,
 				t_light *light,
 				int *cursor);
-// int			parse_sphere(t_minirt *minirt,
-// 				t_scene *scene, t_sphere *sphere, int *cursor);
-// int			parse_plane(t_minirt *minirt,
-// 				t_scene *scene, t_plane *plane, int *cursor);
-// int			parse_cylinder(t_minirt *minirt,
-// 				t_scene *scene, t_cylinder *cylinder, int *cursor);
-// int			parse_cone(t_minirt *minirt,
-// 				t_scene *scene, t_cone *cone, int *cursor);
 int			is_valid_vector(char *s, int *length);
 int			is_valid_double(char *s, int *length);
 int			is_valid_object(char *s);
@@ -290,10 +283,6 @@ void		display_command_help(t_minirt *minirt, t_mlx_data *mlx);
 
 int			start_threads(t_minirt *minirt);
 void		*th_render_scene(void *minirt_arg);
-// t_vec3		th_shade_hit(t_minirt *minirt,
-// 				t_comp *comp,
-// 				t_inter_list *shadow_list,
-// 				unsigned int depth);
 t_vec3		th_get_lighting(t_comp *comp, t_minirt *minirt, t_thread_data *th);
 t_vec3		th_reflected_color(t_comp *comp, t_minirt *minirt,
 				t_thread_data *th, unsigned int depth);
@@ -371,9 +360,6 @@ void		change_element_color(t_minirt *minirt,
 void		generate_random_scene(t_minirt *minirt);
 void		gen_print_lights(FILE *file, t_rand *rand);
 void		gen_print_object(FILE *file, int type, t_rand *rand, bool chaos);
-// void		gen_print_sphere(FILE *file);
-// void		gen_print_plane(FILE *file, t_rand *rand, bool chaos);
-// void		gen_print_cylinder_cones(FILE *file, char c);
 int			generate_random_int(int min, int max);
 double		generate_random_double(double min, double max);
 
