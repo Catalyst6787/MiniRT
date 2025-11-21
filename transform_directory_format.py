@@ -18,7 +18,7 @@ def process_single_file(input_filepath, output_filepath):
         with open(input_filepath, 'r') as infile, open(output_filepath, 'w') as outfile:
             # Write the header line first
             outfile.write("# --SCENE.RT--\n")
-            
+
             for line in infile:
                 # Remove any leading spaces or tabs from the line
                 clean_line = line.lstrip(' \t')
@@ -30,16 +30,16 @@ def process_single_file(input_filepath, output_filepath):
                 elif clean_line.startswith('sp'):
                     # 'sp' lines require a special transformation
                     parts = clean_line.split()
-                    
+
                     # Check if the line has enough parts before trying to access them
                     if len(parts) >= 4:
                         # Extract the first group of 3 numbers (parts[1])
                         first_group = parts[1]
-                        
+
                         # Extract and divide the next number by two (parts[2])
                         number_to_half = float(parts[2])
                         new_number = number_to_half / 2
-                        
+
                         # Format the new number as a comma-separated string
                         new_number_string = f"{new_number},{new_number},{new_number}"
 
@@ -55,16 +55,16 @@ def process_single_file(input_filepath, output_filepath):
                 elif clean_line.startswith('cy'):
                     # 'cy' lines require a special transformation
                     parts = clean_line.split()
-                    
+
                     if len(parts) >= 6:
                         first_part = parts[1]
                         second_part = parts[2]
-                        
+
                         # Extract and divide the next number by two (parts[3])
                         number_to_half = float(parts[3])
                         new_number = number_to_half / 2
                         new_number_string = f"{new_number},{new_number},{new_number}"
-                        
+
                         # The last part is at index 5
                         last_part = parts[5]
 
@@ -77,14 +77,14 @@ def process_single_file(input_filepath, output_filepath):
                 elif clean_line.startswith('pl'):
                     # 'pl' lines require a special transformation
                     parts = clean_line.split()
-                    
-                    if len(parts) >= 5:
+
+                    if len(parts) >= 4:
                         first_part = parts[1]
                         second_part = parts[2]
-                        
+
                         # The color is the next part (parts[3])
                         color_part = parts[3]
-                        
+
                         # Construct the new line with all the required parts
                         # Based on the example, a hardcoded '1,1,1' is inserted
                         # and then the color part is appended.
@@ -99,7 +99,7 @@ def process_single_file(input_filepath, output_filepath):
                 else:
                     # For all other lines, just write them as is
                     outfile.write(clean_line)
-        
+
         print(f"File successfully processed: '{os.path.basename(input_filepath)}'")
 
     except Exception as e:
@@ -122,7 +122,7 @@ def main():
     if not os.path.isdir(source_dir):
         print(f"Error: Source directory '{source_dir}' not found.")
         sys.exit(1)
-    
+
     # Create the destination directory if it doesn't exist
     os.makedirs(dest_dir, exist_ok=True)
 
@@ -131,12 +131,12 @@ def main():
         # Check if the file has the .rt extension
         if filename.endswith(".rt"):
             input_filepath = os.path.join(source_dir, filename)
-            
+
             # Construct the output filename
             file_base, file_ext = os.path.splitext(filename)
             output_filename = f"{file_base}_bonus{file_ext}"
             output_filepath = os.path.join(dest_dir, output_filename)
-            
+
             # Process the file
             process_single_file(input_filepath, output_filepath)
 

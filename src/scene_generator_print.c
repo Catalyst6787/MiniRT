@@ -71,7 +71,7 @@ void	gen_print_plane(FILE *file, t_rand *rand)
 		generate_random_double(0, 1),
 		generate_random_double(0, 1),
 		generate_random_int(0, 255),
-		generate_random_int(0, 1));
+		1);
 }
 
 void	gen_print_data(FILE *file)
