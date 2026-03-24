@@ -9,10 +9,12 @@ objects/
 objects_bonus/
 libft/libft.a
 libft/obj/
-minilibx-linux/obj
-mlx_macos/*.o
-minilibx-linux/libmlx.a
-mlx_macos/libmlx.a
+minilibx-linux/
+# minilibx-linux/obj
+mlx_macos/
+# mlx_macos/*.o
+# minilibx-linux/libmlx.a
+# mlx_macos/libmlx.a
 
 # Executable
 miniRT
@@ -55,3 +57,9 @@ ekho*
 sound_vizualizer.c
 .ignore
 compile_commands.json
+
+
+.vscode
+TOTO.md
+
+

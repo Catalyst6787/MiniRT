@@ -3,13 +3,10 @@
 i=1
 n=$#
 
-# printf "\n"
-
 while [ $i -le $n ];
 do
 	printf "TEST $i\n\n\n"
 	./miniRT ${!i}
-	# ./miniRT_bonus ${!i}
 	(( i++ ))
 done
 
